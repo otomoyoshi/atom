@@ -216,3 +216,8 @@ body {
     width: 60%;
   }
 }
+
+.akihiro_main_div{
+background-color: rgba(255,255,255,0.6);
+box-shadow: 10px 10px 5px rgba( 0 , 0 , 0 , 0.3 );
+}
