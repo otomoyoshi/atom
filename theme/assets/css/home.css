@@ -25,6 +25,11 @@ body {
   box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
 }
 
+.background_dark {
+  background-color: rgba(3,98,158,0.7);
+  transform: rotate(-50deg);
+
+}
 
 .both_contents{
   width: 30%;

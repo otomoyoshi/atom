@@ -28,13 +28,13 @@
             <div class='container'>
               <div class='single-item'>
                 <div>
-                  <img src="../assets/img/p01.png" class="center-block">
+                  <img src="../assets/img/p01.png" class="center-block img-responsive">
                 </div>
                 <div>
-                  <img src="../assets/img/p02.png" class="center-block">
+                  <img src="../assets/img/p02.png" class="center-block img-responsive">
                 </div>
                 <div>
-                  <img src="../assets/img/p03.png" class="center-block">
+                  <img src="../assets/img/p03.png" class="center-block img-responsive">
                 </div>
 
               </div>
@@ -54,7 +54,7 @@
 
               <div class="col-lg-6">
 
-                  <img src="../assets/img/beach.jpg"　width="500" height="320">
+                  <img src="../assets/img/beach.jpg"　width="500" height="320" class="img-responsive">
 
               </div>
 
@@ -142,7 +142,7 @@
         
               </div>
               <div class="col-lg-6">
-                <img src="../assets/img/beach.jpg"　width="700" height="320">
+                <img src="../assets/img/beach.jpg"　width="700" height="320" class="img-responsive">
               </div>
 
             </div>
@@ -150,7 +150,7 @@
             <div class="row">
 
               <div class="col-lg-6">
-                <img src="../assets/img/beach.jpg"　width="500" height="320">
+                <img src="../assets/img/beach.jpg"　width="500" height="320" class="img-responsive">
               </div>
 
               <div class="col-lg-6">
