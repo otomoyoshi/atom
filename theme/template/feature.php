@@ -11,6 +11,7 @@
     
     <title>旅にもつ</title>
     <?php require('load_css.php'); ?>
+    <link rel="stylesheet" type="text/css" href="../assets/css/feature.css">
 
   </head>
 
@@ -51,7 +52,7 @@
     </div>
 
       
-    <div id="headerwrap">
+    <!-- <div id="headerwrap"> -->
       <div class="container">
         <!-- <div class="row"> -->
           <!-- <div class="col-lg-12"> -->
@@ -198,7 +199,7 @@
             </div>
           <!-- </div> -->
       </div>
-    </div>
+    <!-- </div> -->
 
 
 
