@@ -41,7 +41,7 @@
         <div class="row">
           <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center">
             <form action="" method="">
-              <input type="text" id="searchs" class="form-control search" placeholder="「リストを追加してね！」">
+              <input type="text" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」">
               <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索">
             </form>
           </div>
