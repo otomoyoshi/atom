@@ -19,14 +19,31 @@
 
     <div id="headerwrap">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+      <!-- 薄い白で囲まれてるメインのディブ -->
       <div class="col-md-8 col-sm-8 col-xs-10 col-md-offset-2 col-sm-offset-2 col-xs-offset-1 akihiro_main_div">
         <div class="container-fluid">
 
           <div class="row">
-            <div>
-              <input type="text" name="">
-            </div>
+              
+             <!-- ユーザー情報 -->
+              <div class="col-md-6 col-md-offset-3" style="padding-top: 20px">
+                <div class="media">
+                  <a class="pull-left" href="#">
+                    <img class="media-object dp img-circle" src="https://pbs.twimg.com/profile_images/1653420268/DSC00234_bigger.JPG" style="width: 100px;height:100px;">
+                  </a>
+                  <div class="media-body">
+                    <h2 class="mypage_username">User Nameくん</h2>
+                  </div>
+                </div>
+              </div>
+
           </div>
+
+          <div>
+            <hr>
+          </div>
+
+        </div>
 
         <!-- リスト全体 -->
           <div class="row">
