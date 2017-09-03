@@ -32,7 +32,33 @@ body {
 	color: white;
 }
 
-div#border-space {
-    padding: 5%;
-    margin: auto;
-  }
+
+
+@media (min-width: 1200px) {
+
+	div#border-space {
+	    padding: 5%;
+	    /*margin: 5%;*/
+	    /*width: 100%;*/
+	}
+
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 768px) and (max-width: 1199px) {
+	div#border-space {
+    	padding: 5%;
+    	/*margin: 5%;*/
+    	/*width: 100%;*/
+  	}
+
+}
+
+@media (max-width: 767px){
+	div#border-space {
+    	padding: 5%;
+    	margin: 5%;
+    	/*width: 100%;*/
+  	}
+
+}

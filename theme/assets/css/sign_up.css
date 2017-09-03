@@ -1,5 +1,62 @@
+
 body {
   background: url(../img/dark_beach1.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.font_title {
+	color: #FFFFFF; 
+	text-shadow: 0px 0px 10px rgba(255,255,255,1);
+	font-size: 60px;
+}
+
+.font_content {
+	color: #FFFFFF; 
+	text-shadow: 0px 0px 10px rgba(255,255,255,1);
+	font-size: 30px;
+
+}
+
+#headerwrap{
+	min-height :0px ;
+	padding-top: 20px ;
+	padding-bottom: 50px;
+}
+
+
+.background_white {
+  /*background-color: rgba(81,168,255,0.7);*/
+  background-color: rgba(255,255,255,0.7);
+  /*background-color: rgba(0,0,0,0.7);*/
+  /*border-radius: 8px;*/
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+}
+
+@media (min-width: 1200px) {
+
+	div#space {
+	    padding: 5%;
+	    /*margin: 5%;*/
+	    /*width: 100%;*/
+	}
+
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 768px) and (max-width: 1199px) {
+	div#space {
+    	padding: 5%;
+    	/*margin: 5%;*/
+    	/*width: 100%;*/
+  	}
+
+}
+
+@media (max-width: 767px){
+	div#space {
+    	padding: 5%;
+    	margin: 5%;
+    	/*width: 100%;*/
+  	}
 }
