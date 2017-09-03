@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +10,7 @@
 
     <title>旅にもつ</title>
     <?php require('load_css.php'); ?>
+    <link rel="stylesheet" type="text/css" href="../assets/css/akihiro_setting.css">
 
   </head>
 
