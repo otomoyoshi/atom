@@ -8,7 +8,12 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../assets/img/favicon.png">
 
-    <title>旅にもつ</title>
+
+     <div class="pull-left">
+
+      <title>旅にもつ
+      </title>
+    </div>
     <?php require('load_css.php'); ?>
 
   </head>
@@ -40,7 +45,7 @@
               <div class="col-lg-12">
                 
                  <div class="text-center">
-                  <label>アカウント名</label><br> 
+                  <label>アカウント名 ※</label><br> 
 
                   <input type="acountname" name="acountname">
                   <?php if (isset($errors['acountname']) && $errors['acountname'] == 'blank') {?>
@@ -52,7 +57,7 @@
             <div class="row">
               <div class="col-lg-12">
                <div class="text-center">
-                  <label>メールアドレス</label><br>
+                  <label>メールアドレス ※</label><br>
                   <input type="email" name="email"><br>
                   <?php if (isset($errors['login'])){ 
                     # code...
@@ -67,7 +72,7 @@
             <div class="row">
               <div class="col-lg-12">
                <div class="text-center">
-                    <label>パスワード</label><br>
+                    <label>パスワード ※</label><br>
                   <input type="password" name="password">
                   <?php if (isset($errors['password']) && $errors['password'] == 'blank') {?>
                   <div class="alert alert-danger">パスワードを入力してください</div>
@@ -82,7 +87,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="text-center">
-                  <label>パスワード確認用</label><br>
+                  <label>パスワード確認用 ※</label><br>
                   <input type="password" name="password">
                   <?php if (isset($errors['password']) && $errors['password'] == 'blank') {?>
                   <div class="alert alert-danger">パスワードを入力してください</div>
@@ -98,6 +103,17 @@
               <div class="col-lg-12">
                 <br>
                 <br>
+
+              <div class="row">
+                 <div class="text-center">
+
+                ※は必須項目です
+                  </div>
+              </div>
+
+
+              <br>
+
                 <div class="text-center">
                  <input type="submit" value="新規作成" class="btn btn-info" >
                 </div>
