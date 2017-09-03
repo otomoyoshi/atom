@@ -60,7 +60,7 @@
 
               <div class="col-lg-6">
 
-                  <img src="../assets/img/beach.jpg"　width="500" height="320" class="img-responsive">
+                  <img src="../assets/img/beach.jpg" width="500" height="320" class="img-responsive visible-sm visible-md visible-lg">
 
               </div>
 
@@ -110,8 +110,8 @@
               <div class="col-lg-6" style="background-color: rgba(255,255,255,0.5)">
 
                 <div class="row">
-                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">   
-                    <h2>hoge</h2>
+                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">
+                    <h2 class="text-center">hoge</h2>
 
                   </div>
                 </div>
@@ -148,7 +148,7 @@
         
               </div>
               <div class="col-lg-6">
-                <img src="../assets/img/beach.jpg"　width="700" height="320" class="img-responsive">
+                <img src="../assets/img/beach.jpg"　width="700" height="320" class="img-responsive visible-sm visible-md visible-lg">
               </div>
 
             </div>
@@ -156,7 +156,7 @@
             <div class="row">
 
               <div class="col-lg-6">
-                <img src="../assets/img/beach.jpg"　width="500" height="320" class="img-responsive">
+                <img src="../assets/img/beach.jpg"　width="500" height="320" class="img-responsive visible-sm visible-md visible-lg">
               </div>
 
               <div class="col-lg-6">
