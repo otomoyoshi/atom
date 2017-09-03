@@ -1,0 +1,209 @@
+/*h2 {
+  font-size: 12px;
+}*/
+
+body {
+  background: url(http://localhost/tabinimotsu/theme/assets/img/beach_blur.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  /*color: #FFFFFF;*/
+  color: black;
+  /*background-color: #51a8ff;*/
+}
+
+#headerwrap h1 {
+  margin-top: 0px;
+  padding: 15px;
+}
+#footer {
+  width: 100%;
+  background-color: #51a8ff;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+}
+
+.background_blue {
+  /*background-color: rgba(81,168,255,0.7);*/
+  background-color: rgba(255,255,255,0.7);
+  /*background-color: rgba(0,0,0,0.7);*/
+  /*border-radius: 8px;*/
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+}
+
+/*p:hover {
+    transition: .3s box-shadow,.3s transform,.3s background,.3s border-radius;
+    transition-property: box-shadow, transform, background, border-radius;
+    transition-duration: 0.3s, 0.3s, 0.3s, 0.3s;
+    transition-timing-function: initial, initial, initial, initial;
+    transition-delay: initial, initial, initial, initial;
+}*/
+
+
+
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+  .header {
+    /*width: 130px;*/
+    text-align: center;
+    /*border: solid 1px red;*/
+    /*background-color: rgba(200,200,200,0.5);*/
+  }
+
+  #sel1 {
+    width: 100%;
+  }
+
+  div#border-space {
+    padding: 59px;
+
+    /*margin: 20px;*/
+  }
+
+  #adjustment {
+    position: relative;
+    margin: auto;
+  }
+
+  h1 {
+    /*font-family: 'Baloo Bhaijaan', cursive;*/
+    /*color: #FFFFFF;*/
+    color: black;
+    /*font-weight: bold;*/
+  }
+
+  h2 {
+    width: 100%;
+    color: #FFFFFF;
+    color: black;
+    /*font-weight: bold;*/
+    /*color: navy;*/
+  }
+
+  #search {
+    position: relative;
+    width: 750px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+  }
+
+  #search-btn {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+/*  #footer {
+    background-color: #51a8ff;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+  }*/
+
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+ #sel1 {
+    width: 80%;
+  }
+
+  h2 {
+    width: 80%;
+    color: white;
+  }
+
+  #search {
+    position: relative;
+    width: 80%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+  }
+
+  #search-btn {
+    position: relative;
+    width: 80%;
+    margin-bottom: 20px;
+  }
+
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+
+  #sel1 {
+    width: 100%;
+  }
+
+  h2 {
+    color: yellow;
+    font-size: 17px;
+
+  }
+  #search {
+    position: relative;
+    width: 100%;
+  }
+
+  #search-btn {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+
+  #sel1 {
+    width: 100%;
+  }
+
+  h2 {
+    color: blue;
+    font-size: 27px;
+  }
+
+  #search {
+    position: relative;
+    width: 100%;
+  }
+
+  #search-btn {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .img-responsive {
+    margin: auto;
+  }
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+  #sel1 {
+    width: 100%;
+  }
+
+  h2 {
+    color: red;
+    font-size: 17px;
+
+  }
+  #search {
+    position: relative;
+    width: 100%;
+  }
+
+  #search-btn {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
