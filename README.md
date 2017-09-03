@@ -1,5 +1,5 @@
 # atom
-# Taikik
+# Taikichi
 # maho
 # Aki
 # ono
