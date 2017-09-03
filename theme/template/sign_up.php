@@ -12,7 +12,6 @@
     <?php require('load_css.php'); ?>
 
   </head>
-
   <body>
   <?php require('header.php'); ?>
   <!-- ここから変更する -->
@@ -29,13 +28,13 @@
       <div class="col-xs-offset-1 col-lg-5" style=" font-size: 100px;">旅にもつ</div>
     </div>
     <div class="row">
-      <div class="col-xs-offset-1 col-lg-5" style="border: double 1px red; font-size: 30px;">
+      <div class="col-xs-offset-1 col-lg-5" style="font-size: 30px;">
 
       いろいろなスライダー・カルーセルjQueryプラグインを利用してみて、一番簡単でカスタマイズ性に富んだものがこのslickです。非常に便利な分、注意しなければならないこともあるので、その点も含めて紹介したいと思います。
       まとめまとめまとめ。
       </div>
       <div class="col-lg-offset-7">
-        <div style="border: solid 1px blue; background-color: rgba(200,223,200,0.7); padding: 50px" class="row">
+        <div style=" background-color: rgba(200,223,200,0.7); padding: 50px" class="row">
           <div class="col-lg-12">
             <div class="row">
               <div class="col-lg-12">

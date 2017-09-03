@@ -45,7 +45,7 @@
       </div>
     </div>
 
-    <input type="text" name="アカウント名">
+    <!-- <input type="text" name="アカウント名"> -->
     <div id="headerwrap">
       <div class="container">
         <!-- <div class="row"> -->
