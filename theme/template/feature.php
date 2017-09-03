@@ -17,12 +17,12 @@
 
   <body>
      
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col-md-9">Content</div>
     <div class="col-md-3">Sidebar</div>
   </div>
-</div>
+</div> -->
 
   <?php require('header.php'); ?>
 
@@ -60,20 +60,20 @@
 
               <div class="col-lg-6">
 
-                  <img src="../assets/img/beach.jpg" width="500" height="320" class="img-responsive visible-sm visible-md visible-lg">
+                  <img src="../assets/img/beach.jpg" width="500" height="320" class="center-block img-responsive visible-sm visible-md visible-lg">
 
               </div>
 
               <div class="col-lg-6">
 
                 <div class="row">
-                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">   
-                    <h2>hoge</h2>
+                  <div class="col-lg-12" >   
+                    <h2 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" >hoge</h2>
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">   
+                  <div class="col-lg-12" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" >   
                     Call your friends and family as often as you want,
                     for as long as you want!
                     Free international voice and video calls make it easy
@@ -107,11 +107,11 @@
 
 
             <div class="row">
-              <div class="col-lg-6" style="background-color: rgba(255,255,255,0.5)">
+              <div class="col-lg-6" >
 
                 <div class="row">
-                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">
-                    <h2 class="text-center">hoge</h2>
+                  <div class="col-lg-12" >
+                    <h2 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)">hoge</h2>
 
                   </div>
                 </div>
@@ -148,7 +148,7 @@
         
               </div>
               <div class="col-lg-6">
-                <img src="../assets/img/beach.jpg"　width="700" height="320" class="img-responsive visible-sm visible-md visible-lg">
+                <img src="../assets/img/beach.jpg"　width="500" height="320" class="center-block img-responsive visible-sm visible-md visible-lg">
               </div>
 
             </div>
@@ -156,14 +156,14 @@
             <div class="row">
 
               <div class="col-lg-6">
-                <img src="../assets/img/beach.jpg"　width="500" height="320" class="img-responsive visible-sm visible-md visible-lg">
+                <img src="../assets/img/beach.jpg"　width="500" height="320" class="center-block img-responsive visible-sm visible-md visible-lg">
               </div>
 
               <div class="col-lg-6">
 
                 <div class="row">
                   <div class="col-lg-12" ">   
-                    <h2 class="text-center">hoge</h2>
+                    <h2 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" >hoge</h2>
                   </div>
                 </div>
 
