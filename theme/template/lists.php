@@ -34,7 +34,7 @@
         </div>
         <div class="row">
           <div class="col-sm-12 col-md-12 col-xs-12">
-            <hr>
+            <hr class="under_line1">
           </div>
         </div>
         <!-- リストの大枠を作って行く -->
