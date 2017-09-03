@@ -1,0 +1,32 @@
+.background_blue {
+  /*background-color: rgba(81,168,255,0.7);*/
+  background-color: rgba(255,255,255,0.7);
+  /*background-color: rgba(0,0,0,0.7);*/
+  /*border-radius: 8px;*/
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+}
+
+.background_dark {
+  background-color: rgba(3,98,158,0.7);
+  transform: rotate(-50deg);
+
+}
+
+#headerwrap h1 {
+	margin-top: 0px;
+	color: white;
+}
+
+.your_name {
+	color: white;
+	text-shadow: 0px 0px 30px rgba(255,255,255,1);
+	margin: auto;
+}
+.your_name h2 {
+	color: white;
+}
+
+div#border-space {
+    padding: 5%;
+    margin: auto;
+  }

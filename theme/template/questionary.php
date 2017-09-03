@@ -10,6 +10,7 @@
 
     <title>旅にもつ</title>
     <?php require('load_css.php'); ?>
+    <link rel="stylesheet" type="text/css" href="../assets/css/contact.css">
 
   </head>
 
@@ -25,7 +26,7 @@
             <div class="row">
               <!-- <div class="col-lg-6" style="border: solid 1px black;"> -->
 
-              <div class="col-lg-5">
+              <div class="col-md-12 col-lg-5">
                 <!-- <h1 style="border: solid 1px black;">阪急電車</h1> -->
 
 <!--                 <figure class="imghvr-push-up">
@@ -36,31 +37,30 @@
                   </figcaption>
                 </figure> -->
 
-                <h1 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)">阪急電車</h1>
-                <h2 class="text-center" style="color: color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1);
- ">電車の乗客の人間関係にスポットを当てて進行していくストーリー。電車のように何度も会う関係ではないからこそ、悩みを話せたりアドバイスを言えたりできるのかもしれないと感じた。とても心が温かくなる話。</h2>
+                <h1 class="text-center your_name">阪急電車</h1>
+                <h2 class="text-center your_name">電車の乗客の人間関係にスポットを当てて進行していくストーリー。電車のように何度も会う関係ではないからこそ、悩みを話せたりアドバイスを言えたりできるのかもしれないと感じた。とても心が温かくなる話。</h2>
               </div>
 
-                <div class="col-lg-offset-1 col-lg-6 background_blue"  id="border-space">
+                <div class="col-md-offset-1 col-md-11 col-lg-offset-1 col-lg-6 background_blue block-center"  id="border-space">
                 <!-- <div class="col-lg-6 background_blue"  id="border-space" style="border: solid 1px black;"> -->
                   <section id="contact" class="content-section text-center">
                     <div class="contact-section">
-                          <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
+                         <!--  <div class="row">
+                            <div class="col-lg-8 col-md-offset-2"> -->
                               <form class="form-horizontal">
 
                                 <div class="form-group">
                                   <label for="exampleInputEmail2"><i class="fa fa-envelope-o"></i>メールアドレス</label>
                                   <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
-                                </div>
-                                <div class="form-group ">
+                                <!-- </div>
+                                <div class="form-group "> -->
                                   <label for="exampleInputText">お問い合わせ内容</label>
                                  <textarea  class="form-control" placeholder="メッセージをご記入ください"></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-success">送信</button>
                               </form>
-                            </div>
-                          </div>
+                            <!-- </div>
+                          </div> -->
                         <!-- </div> -->
                     </div>
                   </section>

@@ -51,29 +51,27 @@
       </div>
     </div>
 
-      
+
     <!-- <div id="headerwrap"> -->
-      <div class="container">
+    <div class="container">
         <!-- <div class="row"> -->
           <!-- <div class="col-lg-12"> -->
             <div class="row">
 
               <div class="col-lg-6">
-
-                  <img src="../assets/img/beach.jpg" width="500" height="320" class="img-responsive visible-sm visible-md visible-lg">
-
+                  <img src="../assets/img/beach.jpg" width="500" height="320" class="center-block img-responsive visible-sm visible-md visible-lg img_size">
               </div>
 
               <div class="col-lg-6">
 
                 <div class="row">
-                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">   
+                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">
                     <h2>hoge</h2>
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">   
+                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">
                     Call your friends and family as often as you want,
                     for as long as you want!
                     Free international voice and video calls make it easy
@@ -144,11 +142,11 @@
                 <!--   <div class="col-lg-6">
                    hoge
                   </div>
-                             -->   
-        
+                             -->
+
               </div>
               <div class="col-lg-6">
-                <img src="../assets/img/beach.jpg"　width="700" height="320" class="img-responsive visible-sm visible-md visible-lg">
+                <img src="../assets/img/beach.jpg" width="500" height="320" class="center-block img-responsive visible-sm visible-md visible-lg img_size">
               </div>
 
             </div>
@@ -156,19 +154,19 @@
             <div class="row">
 
               <div class="col-lg-6">
-                <img src="../assets/img/beach.jpg"　width="500" height="320" class="img-responsive visible-sm visible-md visible-lg">
+                <img src="../assets/img/beach.jpg" width="500" height="320" class="center-block img-responsive visible-sm visible-md visible-lg img_size">
               </div>
 
               <div class="col-lg-6">
 
                 <div class="row">
-                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">   
+                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">
                     <h2>hoge</h2>
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">   
+                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">
                    Call your friends and family as often as you want,
                     for as long as you want!
                     Free international voice and video calls make it easy
@@ -198,7 +196,7 @@
 
             </div>
           <!-- </div> -->
-      </div>
+    </div>
     <!-- </div> -->
 
 
@@ -206,7 +204,6 @@
 
   <?php require('footer.php'); ?>
   <?php require('load_js.php'); ?>
-  
 
 
   </body>
