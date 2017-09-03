@@ -26,7 +26,7 @@
             <div class="row">
               <!-- <div class="col-lg-6" style="border: solid 1px black;"> -->
 
-              <div class="col-md-12 col-lg-5">
+              <div class="col-md-12 col-lg-6 center-block">
                 <!-- <h1 style="border: solid 1px black;">阪急電車</h1> -->
 
 <!--                 <figure class="imghvr-push-up">
@@ -41,7 +41,7 @@
                 <h2 class="text-center your_name">電車の乗客の人間関係にスポットを当てて進行していくストーリー。電車のように何度も会う関係ではないからこそ、悩みを話せたりアドバイスを言えたりできるのかもしれないと感じた。とても心が温かくなる話。</h2>
               </div>
 
-                <div class="col-md-offset-1 col-md-11 col-lg-offset-1 col-lg-6 background_blue block-center"  id="border-space">
+                <div class="col-md-12 col-lg-offset-1 col-lg-6 background_blue center-block"  id="border-space">
                 <!-- <div class="col-lg-6 background_blue"  id="border-space" style="border: solid 1px black;"> -->
                   <section id="contact" class="content-section text-center">
                     <div class="contact-section">
