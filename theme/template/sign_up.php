@@ -48,7 +48,6 @@
                 
                  <div class="text-center">
                   <label>アカウント名 ※</label><br> 
-
                   <input type="acountname" name="acountname" placeholder="アカウント名">
                   <?php if (isset($errors['acountname']) && $errors['acountname'] == 'blank') {?>
                   <div class="alert alert-danger">アカウント名を入力してください</div>
@@ -75,7 +74,7 @@
               <div class="col-lg-12">
                <div class="text-center">
                     <label>パスワード ※</label><br>
-                  <input type="password" name="password">
+                  <input type="password" name="password" >
                   <?php if (isset($errors['password']) && $errors['password'] == 'blank') {?>
                   <div class="alert alert-danger">パスワードを入力してください</div>
                   <?php } ?>
