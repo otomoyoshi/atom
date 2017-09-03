@@ -7,7 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="../assets/img/favicon.png">
-
+    <?php require('load_css.php'); ?>
+    <link rel="stylesheet" type="text/css" href="../assets/css/sign_up.css">
 
 
       <!-- <div class="center-block"> -->
@@ -17,7 +18,6 @@
         </div> -->
         
     </div>
-    <?php require('load_css.php'); ?>
 
   </head>
   <body>

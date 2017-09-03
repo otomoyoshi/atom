@@ -6,6 +6,12 @@
   box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
 }
 
+body {
+  background: url(../img/dark_beach1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .background_dark {
   background-color: rgba(3,98,158,0.7);
   transform: rotate(-50deg);

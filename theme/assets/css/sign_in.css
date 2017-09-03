@@ -1,0 +1,26 @@
+.btn_location{
+	margin-top: 20px;
+}
+
+.explain{
+	color: #FFFFFF;
+	text-shadow: 0px 0px 10px rgba(255,255,255,1);  
+}
+
+.title_show{
+	color: #FFFFFF;
+	text-shadow: 0px 0px 10px rgba(255,255,255,1);
+}
+
+.flame{
+	background-color: rgba(255,255,255,0.5); 
+	padding: 50px
+}
+
+.text_loc{
+	margin-bottom: 20px;
+}
+
+body { 
+background: url(../img/dark_beach1.jpg) 
+}
