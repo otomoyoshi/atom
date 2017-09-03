@@ -117,7 +117,7 @@
                 </div>
                   
                 <div class="row">
-                  <div class="col-lg-12">   
+                  <div class="col-lg-12" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)">   
                     Call your friends and family as often as you want,
                     for as long as you want!
                     Free international voice and video calls make it easy
@@ -162,13 +162,13 @@
               <div class="col-lg-6">
 
                 <div class="row">
-                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">   
-                    <h2>hoge</h2>
+                  <div class="col-lg-12" ">   
+                    <h2 class="text-center">hoge</h2>
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">   
+                  <div class="col-lg-12" style="color: #ffffff;text-shadow: 0px 0px 30px rgba(255,255,255,1)">   
                    Call your friends and family as often as you want,
                     for as long as you want!
                     Free international voice and video calls make it easy
