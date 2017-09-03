@@ -17,53 +17,51 @@
   <body>
   <?php require('login_header.php'); ?>
 
-    <div id="headerwrap">
+    <div id="headerwrap" style="padding-top: 100px">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
       <!-- 薄い白で囲まれてるメインのディブ -->
-      <div class="col-md-8 col-sm-8 col-xs-10 col-md-offset-2 col-sm-offset-2 col-xs-offset-1 akihiro_main_div">
+      <div class="col-md-8 col-sm-8 col-xs-10 col-md-offset-2 col-sm-offset-2 col-xs-offset-1 akihiro_main_div" style="margin-bottom: 50px">
         <div class="container-fluid">
 
           <div class="row">
-              
-             <!-- ユーザー情報 -->
-              <div class="col-md-6 col-md-offset-3" style="padding-top: 20px">
+            <div class="col-md-4"></div>
+            <div class="col-md-8" style="padding-top: 20px">
                 <div class="media">
                   <a class="pull-left" href="#">
-                    <img class="media-object dp img-circle" src="https://pbs.twimg.com/profile_images/1653420268/DSC00234_bigger.JPG" style="width: 100px;height:100px;">
+                    <img class="media-object dp img-circle" src="https://pbs.twimg.com/profile_images/1653420268/DSC00234_bigger.JPG" style="width: 80px;height:80px;">
                   </a>
                   <div class="media-body">
-                    <h2 class="mypage_username">User Nameくん</h2>
+                    <h3 class="mypage_username">User Nameくん</h3>
                   </div>
                 </div>
-              </div>
+              </div> 
 
           </div>
 
           <div>
-            <hr>
+            <hr color="blue">
           </div>
 
         </div>
 
         <!-- リスト全体 -->
           <div class="row">
-            <div class="col-md-4 col-sm-4">
 
                 <!-- 追加ボタン -->
+              <div class="col-md-4 col-sm-4">
                 <div class="wrimagecard wrimagecard-topimage lists_margin">
                   <a href="#">
-                  <div class="wrimagecard-topimage_header" style="background-color:rgba(255, 135, 0, 0.2); ">
-                    <center><i class="fa fa-plus-square-o" style="color:rgba(255, 135, 0, 0.4);"></i></center>
-                  </div>
-                  <div class="wrimagecard-topimage_title_add">
-                    <h4>新しく追加してね！</h4>
-                  </div>
-                </a>
+                    <div class="wrimagecard-topimage_header" style="background-color:rgba(255, 135, 0, 0.2); ">
+                      <center><i class="fa fa-plus-square-o" style="color:rgba(255, 135, 0, 0.4);"></i></center>
+                    </div>
+                    <div class="wrimagecard-topimage_title_add">
+                      <h4>新しく追加してね！</h4>
+                    </div>
+                  </a>
+                </div>
               </div>
 
-            </div>
-
-          <!-- ここのリスト -->
+          <!-- 個々のリスト -->
           <?php for($i = 0;$i <= 4;$i++): ?>
             <div class="col-md-4 col-sm-4">
               <div class="wrimagecard wrimagecard-topimage lists_margin">
@@ -96,8 +94,16 @@
                 </div>
               </div>
             <?php endfor; ?>
-
             </div>
+
+          <div>
+            <hr color="blue">
+          </div>
+
+          <div style="padding-bottom: 6px">
+            <h5 style="text-align: right;">使い方がわからくなった方は<input type="button" name="how_to_use" class="fa fa-info" value="こちら">へ</h5>
+          </div>
+
           </div>
         </div>
       </div>
