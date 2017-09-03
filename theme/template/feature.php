@@ -6,16 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../assets/img/favicon.png">
 
-
+    
+    
     <title>旅にもつ</title>
     <?php require('load_css.php'); ?>
 
   </head>
 
   <body>
+     
+
+
   <?php require('header.php'); ?>
+
 
     <div id="headerwrap">
       <div class="container">
@@ -41,9 +45,163 @@
       </div>
     </div>
 
+    <input type="text" name="アカウント名">
+    <div id="headerwrap">
+      <div class="container">
+        <!-- <div class="row"> -->
+          <!-- <div class="col-lg-12"> -->
+            <div class="row">
+
+              <div class="col-lg-6">
+
+                  <img src="../assets/img/beach.jpg"　width="500" height="320">
+
+              </div>
+
+              <div class="col-lg-6">
+
+                <div class="row">
+                  <div class="col-lg-12" style="background-color: rgba(500,320,150,0.7)">   
+                    <h2>hoge</h2>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-12" style="background-color: rgba(280,220,300,0.7)">   
+                    Call your friends and family as often as you want,
+                    for as long as you want!
+                    Free international voice and video calls make it easy
+                    to stay connected with your loved ones.
+                    Call your friends and family as often as you want,
+                    for as long as you want!
+                    Free international voice and video calls make it easy
+                    to stay connected with your loved ones.
+                    all your friends and family as often as you want,
+                    for as long as you want!
+                    Free international voice and video calls make it easy
+                    to stay connected with your loved ones.
+                    all your friends and family as often as you want,
+                    for as long as you want!
+                    Free international voice and video calls make it easy
+                    to stay connected with your loved ones.
+                    Free international voice and video calls make it easy
+                    to stay connected with your loved ones.
+                    to stay connected with your loved ones.
+                    to stay connected with your loved ones.
+
+
+                  </div>                  
+
+
+                </div> 
+
+              </div>
+
+            </div>
+
+
+            <div class="row">
+              <div class="col-lg-6" style="background-color: rgba(280,220,300,0.7)">
+
+                <div class="row">
+                  <div class="col-lg-12" style="background-color: rgba(500,320,150,0.7)">   
+                    <h2>hoge</h2>
+
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-12">   
+                    Call your friends and family as often as you want,
+                    for as long as you want!
+                    Free international voice and video calls make it easy
+                    to stay connected with your loved ones.
+                    Call your friends and family as often as you want,
+                    for as long as you want!
+                    Free international voice and video calls make it easy
+                    to stay connected with your loved ones.
+                    all your friends and family as often as you want,
+                    for as long as you want!
+                    Free international voice and video calls make it easy
+                    to stay connected with your loved ones.
+                    all your friends and family as often as you want,
+                    for as long as you want!
+                    Free international voice and video calls make it easy
+                    to stay connected with your loved ones.
+                    Free international voice and video calls make it easy
+                    to stay connected with your loved ones.
+                    to stay connected with your loved ones.
+                    to stay connected with your loved ones.
+                  </div>                  
+                </div> 
+
+                <!--   <div class="col-lg-6">
+                   hoge
+                  </div>
+                             -->   
+        
+              </div>
+              <div class="col-lg-6">
+                <img src="../assets/img/beach.jpg"　width="700" height="320">
+              </div>
+
+            </div>
+
+            <div class="row">
+
+              <div class="col-lg-6">
+                <img src="../assets/img/beach.jpg"　width="500" height="320">
+              </div>
+
+              <div class="col-lg-6">
+
+                <div class="row">
+                  <div class="col-lg-12" style="background-color: rgba(500,320,150,0.7)">   
+                    <h2>hoge</h2>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-12" style="background-color: rgba(280,220,300,0.7)">   
+                   Call your friends and family as often as you want,
+                    for as long as you want!
+                    Free international voice and video calls make it easy
+                    to stay connected with your loved ones.
+                    Call your friends and family as often as you want,
+                    for as long as you want!
+                    Free international voice and video calls make it easy
+                    to stay connected with your loved ones.
+                    all your friends and family as often as you want,
+                    for as long as you want!
+                    Free international voice and video calls make it easy
+                    to stay connected with your loved ones.
+                    all your friends and family as often as you want,
+                    for as long as you want!
+                    Free international voice and video calls make it easy
+                    to stay connected with your loved ones.
+                    Free international voice and video calls make it easy
+                    to stay connected with your loved ones.
+                    to stay connected with your loved ones.
+                    to stay connected with your loved ones.
+                  </div>                  
+
+
+                </div> 
+
+              </div>
+
+            </div>
+          <!-- </div> -->
+      </div>
+    </div>
+
+
+
 
   <?php require('footer.php'); ?>
   <?php require('load_js.php'); ?>
+  
+
 
   </body>
 </html>
