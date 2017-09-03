@@ -17,6 +17,18 @@ body {
   text-align: center;
 }
 
+.background_blue {
+  /*background-color: rgba(81,168,255,0.7);*/
+  background-color: rgba(255,255,255,0.7);
+  /*background-color: rgba(0,0,0,0.7);*/
+  /*border-radius: 8px;*/
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+}
+
+  .both_contents{
+    width: 30%;
+  }
+
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
   .header {
@@ -55,6 +67,10 @@ body {
     bottom: 0;
     text-align: center;
   }*/
+  .both_contents{
+    width: 30%;
+  }
+
 
 }
 
@@ -84,6 +100,13 @@ body {
     margin-bottom: 20px;
   }
 
+  .both_contents{
+    width: 100%;
+  }
+
+  .text_center{
+    width: 80%;
+  }
 }
 
 /* Portrait tablets and small desktops */
@@ -108,6 +131,15 @@ body {
     width: 100%;
     margin-bottom: 20px;
   }
+
+  .both_contents{
+    width: 100%;
+  }
+
+  .list_name_location{
+    width: 90%;
+  }
+
 }
 
 /* Landscape phones and portrait tablets */
@@ -136,6 +168,14 @@ body {
   .img-responsive {
     margin: auto;
   }
+
+  .both_contents{
+    width: 100%;
+  }
+
+  .list_name_location{
+    width: 80%;
+  }
 }
 
 /* Portrait phones and smaller */
@@ -158,6 +198,15 @@ body {
     position: relative;
     width: 100%;
     margin-bottom: 20px;
+  }
+  .both_contents{
+    width: 100%;
+  }
+  .list_name_location{
+    width: 60%;
+  }
+   .search{
+    width: 60%;
   }
 }
 
