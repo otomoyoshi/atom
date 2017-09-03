@@ -3,7 +3,7 @@
 }*/
 
 body {
-  background: url(http://localhost/tabinimotsu/theme/assets/img/beach_blur.jpg);
+  background: url(../img/beach_blur.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   /*color: #FFFFFF;*/
