@@ -9,10 +9,12 @@
     <link rel="shortcut icon" href="../assets/img/favicon.png">
 
 
-     <div class="pull-left">
-
-      <title>旅にもつ
-      </title>
+      <!-- <div class="center-block"> -->
+ 
+        <title>
+          旅にもつ
+        </title>
+        
     </div>
     <?php require('load_css.php'); ?>
 
@@ -39,7 +41,7 @@
       まとめまとめまとめ。
       </div>
       <div class="col-lg-offset-7">
-        <div style=" background-color: rgba(200,223,200,0.7); padding: 50px" class="row">
+        <div style=" background-color: rgba(255,255,255,0.5); padding: 50px" class="row">
           <div class="col-lg-12">
             <div class="row">
               <div class="col-lg-12">
@@ -47,7 +49,7 @@
                  <div class="text-center">
                   <label>アカウント名 ※</label><br> 
 
-                  <input type="acountname" name="acountname">
+                  <input type="acountname" name="acountname" placeholder="アカウント名">
                   <?php if (isset($errors['acountname']) && $errors['acountname'] == 'blank') {?>
                   <div class="alert alert-danger">アカウント名を入力してください</div>
                   <?php } ?>
@@ -58,7 +60,7 @@
               <div class="col-lg-12">
                <div class="text-center">
                   <label>メールアドレス ※</label><br>
-                  <input type="email" name="email"><br>
+                  <input type="email" name="email"　placeholder="アカウント名">
                   <?php if (isset($errors['login'])){ 
                     # code...
                    ?>

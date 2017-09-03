@@ -17,7 +17,12 @@
 
   <body>
      
-
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">Content</div>
+    <div class="col-md-3">Sidebar</div>
+  </div>
+</div>
 
   <?php require('header.php'); ?>
 
@@ -62,13 +67,13 @@
               <div class="col-lg-6">
 
                 <div class="row">
-                  <div class="col-lg-12" style="background-color: rgba(500,320,150,0.7)">   
+                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">   
                     <h2>hoge</h2>
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="col-lg-12" style="background-color: rgba(280,220,300,0.7)">   
+                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">   
                     Call your friends and family as often as you want,
                     for as long as you want!
                     Free international voice and video calls make it easy
@@ -102,10 +107,10 @@
 
 
             <div class="row">
-              <div class="col-lg-6" style="background-color: rgba(280,220,300,0.7)">
+              <div class="col-lg-6" style="background-color: rgba(255,255,255,0.5)">
 
                 <div class="row">
-                  <div class="col-lg-12" style="background-color: rgba(500,320,150,0.7)">   
+                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">   
                     <h2>hoge</h2>
 
                   </div>
@@ -157,13 +162,13 @@
               <div class="col-lg-6">
 
                 <div class="row">
-                  <div class="col-lg-12" style="background-color: rgba(500,320,150,0.7)">   
+                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">   
                     <h2>hoge</h2>
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="col-lg-12" style="background-color: rgba(280,220,300,0.7)">   
+                  <div class="col-lg-12" style="background-color: rgba(255,255,255,0.5)">   
                    Call your friends and family as often as you want,
                     for as long as you want!
                     Free international voice and video calls make it easy
