@@ -33,114 +33,108 @@
 
 <div id="headerwrap">
   <div class="container">
-  <div class="row" id="adjustment">
-  
-    <div class="row">
-        <div class="col-xs-offset-1 col-lg-5 font_title">旅にもつ  </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-offset-1 col-lg-5 font_content">
+    <div class="row" id="adjustment">
 
-      いろいろなスライダー・カルーセルjQueryプラグインを利用してみて、一番簡単でカスタマイズ性に富んだものがこのslickです。非常に便利な分、注意しなければならないこともあるので、その点も含めて紹介したいと思います。
-      まとめまとめまとめ。
-      </div>
-      <div class="col-lg-offset-7">
-        <div style=" background-color: rgba(255,255,255,0.5); padding: 50px" class="row">
-          <div class="col-lg-12">
-            <div class="row">
-              <div class="col-lg-12">
-                
-                 <div class="text-center">
-                  <label>アカウント名 ※</label><br> 
-                  <input type="acountname" name="acountname" placeholder="アカウント名">
-                  <?php if (isset($errors['acountname']) && $errors['acountname'] == 'blank') {?>
-                  <div class="alert alert-danger">アカウント名を入力してください</div>
-                  <?php } ?>
-                </div>
-              </div>
-            </div>
+      <div class="col-lg-6">
+         <div class="row">
+            <div class="col-lg-12 font_title">旅にもつ</div>
+        </div>
 
-
-            <br>
-            <div class="row">
-              <div class="col-lg-12">
-               <div class="text-center">
-                  <label>メールアドレス ※</label><br>
-                    <input type="mail" name="mail" placeholder="tabi@example.com">
-
-                  <?php if (isset($errors['login'])){ 
-                    # code...
-                   ?>
-                  <span style="color:red:">メールアドレスとパスワードを入力してください</span>
-
-
-                  <?php } ?>
-                </div>
-              </div>
-            </div>
-
-
-            <br>
-            <div class="row">
-              <div class="col-lg-12">
-               <div class="text-center">
-                    <label>パスワード ※</label><br>
-                  <input type="password" name="password" >
-                  <?php if (isset($errors['password']) && $errors['password'] == 'blank') {?>
-                  <div class="alert alert-danger">パスワードを入力してください</div>
-                  <?php } ?>
-
-                  <?php if (isset($errors['password']) && $errors['password'] == 'length') {?>
-                    <div class="alert alert-danger">パスワードは4文字以上で入力してください</div>
-                  <?php } ?>
-                </div>
-              </div>
-            </div>
-
-
-            <br>
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="text-center">
-                  <label>パスワード確認用 ※</label><br>
-                  <input type="password" name="password">
-                  <?php if (isset($errors['password']) && $errors['password'] == 'blank') {?>
-                  <div class="alert alert-danger">パスワードを入力してください</div>
-                  <?php } ?>
-
-                  <?php if (isset($errors['password']) && $errors['password'] == 'length') {?>
-                    <div class="alert alert-danger">パスワードは4文字以上で入力してください</div>
-                  <?php } ?>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-12">
-                <br>
-                <br>
-
-              <div class="row">
-                 <div class="text-center">
-
-                ※は必須項目です
-                  </div>
-              </div>
-
-
-              <br>
-
-                <div class="text-center">
-                 <input type="submit" value="新規作成" class="btn btn-info" >
-                </div>
-              </div>
-            </div>         
+        <div class="row">
+          <div class="col-lg-12 font_content">
+          いろいろなスライダー・カルーセルjQueryプラグインを利用してみて、一番簡単でカスタマイズ性に富んだものがこのslickです。非常に便利な分、注意しなければならないこともあるので、その点も含めて紹介したいと思います。
+          まとめまとめまとめ。
           </div>
-        </div>    
+        </div>
+
       </div>
-    </div>
- 
 
 
+      <div class="col-lg-6 background_white" id="space"> 
+        <div class="row">
+          <div class="col-lg-12">
+            
+             <div class="text-center">
+              <label>アカウント名 ※</label><br> 
+              <input type="acountname" name="acountname" placeholder="アカウント名">
+              <?php if (isset($errors['acountname']) && $errors['acountname'] == 'blank') {?>
+              <div class="alert alert-danger">アカウント名を入力してください</div>
+              <?php } ?>
+            </div>
+          </div>
+        </div>
+
+
+        <br>
+        <div class="row">
+          <div class="col-lg-12">
+           <div class="text-center">
+              <label>メールアドレス ※</label><br>
+                <input type="mail" name="mail" placeholder="tabi@example.com">
+
+              <?php if (isset($errors['login'])){ 
+                # code...
+               ?>
+              <span style="color:red:">メールアドレスとパスワードを入力してください</span>
+
+
+              <?php } ?>
+            </div>
+          </div>
+        </div>
+
+
+        <br>
+        <div class="row">
+          <div class="col-lg-12">
+           <div class="text-center">
+                <label>パスワード ※</label><br>
+              <input type="password" name="password" >
+              <?php if (isset($errors['password']) && $errors['password'] == 'blank') {?>
+              <div class="alert alert-danger">パスワードを入力してください</div>
+              <?php } ?>
+
+              <?php if (isset($errors['password']) && $errors['password'] == 'length') {?>
+                <div class="alert alert-danger">パスワードは4文字以上で入力してください</div>
+              <?php } ?>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="text-center">
+              <label>パスワード確認用 ※</label><br>
+              <input type="password" name="password">
+              <?php if (isset($errors['password']) && $errors['password'] == 'blank') {?>
+              <div class="alert alert-danger">パスワードを入力してください</div>
+              <?php } ?>
+
+              <?php if (isset($errors['password']) && $errors['password'] == 'length') {?>
+                <div class="alert alert-danger">パスワードは4文字以上で入力してください</div>
+              <?php } ?>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            ※は必須項目です
+          </div>
+        </div>
+          <br>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="text-center">
+             <input type="submit" value="新規作成" class="btn btn-info" >
+            </div>
+          </div>      
+        </div>
+
+      </div>
+    </div>         
   </div>
 </div>
 
