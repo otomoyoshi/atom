@@ -1,3 +1,3 @@
 # atom
-# Taiki
+# Taikik
 # maho
