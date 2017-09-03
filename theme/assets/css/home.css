@@ -25,9 +25,11 @@ body {
   box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
 }
 
-  .both_contents{
-    width: 30%;
-  }
+
+.both_contents{
+  width: 30%;
+}
+
 
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
@@ -40,6 +42,11 @@ body {
 
   #sel1 {
     width: 100%;
+  }
+
+  div#border-space {
+    padding: 59px;
+    /*margin: 20px;*/
   }
 
   h2 {
@@ -208,9 +215,4 @@ body {
    .search{
     width: 60%;
   }
-}
-
-.main_div{
-background-color: rgba(255,255,255,0.6);
-box-shadow: 10px 10px 5px rgba( 0 , 0 , 0 , 0.3 );
 }
