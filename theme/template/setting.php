@@ -32,6 +32,8 @@
                         <input type="text" name="acount_name" id="first_name" class="form-control input-lg" placeholder="アカウント名" tabindex="1">
           </div>
         </div>
+      </div>
+      <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6">
           <div class="form-group">
             <label style="font-size: 18px">メールアドレス入力　※</label>

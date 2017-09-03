@@ -25,6 +25,11 @@ body {
   box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
 }
 
+.background_dark {
+  background-color: rgba(3,98,158,0.7);
+  transform: rotate(-50deg);
+
+}
 
 .both_contents{
   width: 30%;
@@ -215,4 +220,9 @@ body {
    .search{
     width: 60%;
   }
+}
+
+.akihiro_main_div{
+background-color: rgba(255,255,255,0.6);
+box-shadow: 10px 10px 5px rgba( 0 , 0 , 0 , 0.3 );
 }
