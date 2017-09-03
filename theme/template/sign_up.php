@@ -9,11 +9,12 @@
     <link rel="shortcut icon" href="../assets/img/favicon.png">
 
 
+
       <!-- <div class="center-block"> -->
  
-        <title>
+       <!--  <div  style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" >
           旅にもつ
-        </title>
+        </div> -->
         
     </div>
     <?php require('load_css.php'); ?>
@@ -32,10 +33,10 @@
 <div id="headerwrap">
   <div class="container">
     <div class="row">
-      <div class="col-xs-offset-1 col-lg-5" style=" font-size: 100px;">旅にもつ</div>
+      <div class="col-xs-offset-1 col-lg-5"  style="color: #FFFFFF;text-shadow: 0px 0px 10px rgba(255,255,255,1)"  >旅にもつ</div>
     </div>
     <div class="row">
-      <div class="col-xs-offset-1 col-lg-5" style="font-size: 30px;">
+      <div class="col-xs-offset-1 col-lg-5" style="color: #FFFFFF;text-shadow: 0px 0px 10px rgba(255,255,255,1)"  >
 
       いろいろなスライダー・カルーセルjQueryプラグインを利用してみて、一番簡単でカスタマイズ性に富んだものがこのslickです。非常に便利な分、注意しなければならないこともあるので、その点も含めて紹介したいと思います。
       まとめまとめまとめ。
