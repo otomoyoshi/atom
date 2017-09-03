@@ -168,7 +168,7 @@
                   </div>
                 </div>
 
-                <div class="row">
+                <div class="row"> 
                   <div class="col-lg-12" style="color: #ffffff;text-shadow: 0px 0px 30px rgba(255,255,255,1)">   
 
                    Call your friends and family as often as you want,

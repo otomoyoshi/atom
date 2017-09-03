@@ -18,6 +18,7 @@
         
     </div>
     <?php require('load_css.php'); ?>
+    <link rel="stylesheet" type="text/css" href="../assets/css/sign_up.css">
 
   </head>
   <body>
@@ -32,11 +33,13 @@
 
 <div id="headerwrap">
   <div class="container">
+  <div class="row" id="adjustment">
+  
     <div class="row">
-      <div class="col-xs-offset-1 col-lg-5"  style="color: #FFFFFF;text-shadow: 0px 0px 10px rgba(255,255,255,1)"  >旅にもつ</div>
+        <div class="col-xs-offset-1 col-lg-5 font_title">旅にもつ  </div>
     </div>
     <div class="row">
-      <div class="col-xs-offset-1 col-lg-5" style="color: #FFFFFF;text-shadow: 0px 0px 10px rgba(255,255,255,1)"  >
+      <div class="col-xs-offset-1 col-lg-5 font_content">
 
       いろいろなスライダー・カルーセルjQueryプラグインを利用してみて、一番簡単でカスタマイズ性に富んだものがこのslickです。非常に便利な分、注意しなければならないこともあるので、その点も含めて紹介したいと思います。
       まとめまとめまとめ。
@@ -56,11 +59,15 @@
                 </div>
               </div>
             </div>
+
+
+            <br>
             <div class="row">
               <div class="col-lg-12">
                <div class="text-center">
                   <label>メールアドレス ※</label><br>
-                  <input type="email" name="email"　placeholder="アカウント名">
+                    <input type="mail" name="mail" placeholder="tabi@example.com">
+
                   <?php if (isset($errors['login'])){ 
                     # code...
                    ?>
@@ -71,6 +78,9 @@
                 </div>
               </div>
             </div>
+
+
+            <br>
             <div class="row">
               <div class="col-lg-12">
                <div class="text-center">
@@ -86,6 +96,9 @@
                 </div>
               </div>
             </div>
+
+
+            <br>
             <div class="row">
               <div class="col-lg-12">
                 <div class="text-center">
@@ -125,6 +138,7 @@
         </div>    
       </div>
     </div>
+ 
 
 
   </div>
