@@ -17,6 +17,15 @@ body {
   text-align: center;
 }
 
+.background_blue {
+  /*background-color: rgba(81,168,255,0.7);*/
+  background-color: rgba(255,255,255,0.7);
+  /*background-color: rgba(0,0,0,0.7);*/
+  /*border-radius: 8px;*/
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+}
+
+
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
   .header {
@@ -28,6 +37,11 @@ body {
 
   #sel1 {
     width: 100%;
+  }
+
+  div#border-space {
+    padding: 59px;
+    /*margin: 20px;*/
   }
 
   h2 {
