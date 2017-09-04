@@ -1,3 +1,56 @@
+<?php
+  session_start();
+  require('../../developer/dbconnect.php');
+
+  // if (!isset($_SESSION[''])) {
+  //   header('Location: sign_in.php');
+  //   exit();
+  // }
+
+  // この中に各種ボタンが押された時の条件を書き込んでいく
+  if (!empty($_POST)) {
+
+    //検索ボタンが押された時
+    if (!empty($_POST['list_search'])) {
+        $sql= 'INSERT INTO `searched_words` SET `word` = ?,
+                                          `created` = NOW();';
+        $data = array($_POST['list_search']);
+        $stmt = $dbh->prepare($sql);
+        $stmt ->execute($data);
+    }
+
+    // 一時保存ボタンが押された時
+    if (!empty($_POST['tmp_btn'])) {
+      
+    }
+
+    //キャンセルボタンが押された時
+    if (!empty($_POST['can_btn'])) {
+      
+    }
+
+    // 保存ボタンが押された時
+    if (!empty($_POST['keep_btn'])) {
+        $sql = 'INSERT `lists` SET `members_id` = ?,
+                                   `name` = ?, 
+                                   `list_image_path` = ?,
+                                   `created` = NOW()';
+        // $data = array(,$_POST['list_name'],$_FILES['']);
+        // $stmt = $dbh->prepare();
+        // $stmt ->execute();
+    }
+  }
+    // $sql= '' ;
+    // $data = array();
+    // $stmt = $dbh->prepare();
+    // $stmt ->execute();
+
+    // $sql= '';
+    // $data = array();
+    // $stmt = $dbh->prepare();
+    // $stmt ->execute();
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -28,8 +81,10 @@
             </form>
           </div>
           <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
-            <img src="../assets/img/pic1.jpg" class="img-circle" width="150px" class="padding_img"><br>
-            <p class="set_profile">user nameくん</p>
+            <?php  ?>
+              <img src="../assets/img/pic1.jpg" class="img-circle" width="150px" class="padding_img"><br>
+              <p class="set_profile">user nameくん</p>
+            <?php  ?>
           </div>
         </div>
         <div class="row">
@@ -40,8 +95,8 @@
         <!-- リストの大枠を作って行く -->
         <div class="row">
           <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center">
-            <form action="" method="">
-              <input type="text" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」">
+            <form action="" method="POST">
+              <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」">
               <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索">
             </form>
           </div>
@@ -101,14 +156,16 @@
         
       <!-- リストの保存機能たち -->
         <div class="list_contents text-center">
-          <div class="tmp_keep">
-            <a class="btn btn-info tmp_btn">一時保存</a>
-          </div>
+          <form>
+            <div class="tmp_keep">
+              <input class="btn btn-info tmp_btn" value="一時保存" type="submit" name="tmp_btn">
+            </div>
+          </form>
           <div class="cansel">
-            <a class="btn btn-warning can_btn">キャンセル</a>
+            <input value="キャンセル"" class="btn btn-warning can_btn" type="submit" name="can_btn">
           </div>
           <div class="keep">
-            <a class="btn btn-success keep_btn">マイページへ移動</a>
+            <input class="btn btn-success keep_btn" value="マイページへ移動" type="submit" name="keep_btn">
           </div>  
         </div>
       </div>
