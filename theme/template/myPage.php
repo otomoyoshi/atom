@@ -10,7 +10,7 @@
     
     <title>旅にもつ</title>
   <?php require('load_css.php'); ?>
-  <link rel="stylesheet" type="text/css" href="../assets/css/akihiro_mypage.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/mypage.css">
 
   </head>
 

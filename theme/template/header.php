@@ -10,7 +10,7 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="questionary.php" class="header">お問い合わせ</a></li>
+        <li><a href="contact.php" class="header">お問い合わせ</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="sign_up.php" class="header">新規登録</a></li>
