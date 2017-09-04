@@ -13,7 +13,7 @@
     //検索ボタンが押された時
     if (!empty($_POST['list_search'])) {
         $sql= 'INSERT INTO `searched_words` SET `word` = ?,
-                                          `created` = NOW();';
+                                          `created` = NOW()';
         $data = array($_POST['list_search']);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
@@ -21,34 +21,40 @@
 
     // 一時保存ボタンが押された時
     if (!empty($_POST['tmp_btn'])) {
-      
+        // $sql = 'INSERT `lists` SET `members_id` = ?,
+        //                    `name` = ?, 
+        //                    `list_image_path` = ?,
+        //                    `created` = NOW()';
+        // $data = array();
+        // $stmt = $dbh->prepare();
+        // $stmt ->execute();
     }
 
     //キャンセルボタンが押された時
     if (!empty($_POST['can_btn'])) {
-      
+        
     }
 
     // 保存ボタンが押された時
     if (!empty($_POST['keep_btn'])) {
-        $sql = 'INSERT `lists` SET `members_id` = ?,
-                                   `name` = ?, 
-                                   `list_image_path` = ?,
-                                   `created` = NOW()';
+      // 一時保存されてない場合
+      // if () {
+      //   $sql = 'INSERT `lists` SET `members_id` = ?,
+      //                      `name` = ?, 
+      //                      `list_image_path` = ?,
+      //                      `created` = NOW()';
+      //   $data = array(,$_POST['list_name'],$_FILES['']);
+      //   $stmt = $dbh->prepare();
+      //   $stmt ->execute();
+      } else {
+        // $sql = '';
         // $data = array(,$_POST['list_name'],$_FILES['']);
         // $stmt = $dbh->prepare();
         // $stmt ->execute();
+      }
     }
-  }
-    // $sql= '' ;
-    // $data = array();
-    // $stmt = $dbh->prepare();
-    // $stmt ->execute();
 
-    // $sql= '';
-    // $data = array();
-    // $stmt = $dbh->prepare();
-    // $stmt ->execute();
+
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +72,6 @@
     <?php require('load_css.php'); ?>
  
   </head>
-
   <body>
     <?php require('login_header.php'); ?>
      <div id="img"> 
@@ -102,58 +107,69 @@
           </div>
         </div>
         <div class="list_category margin_top row">
-          <div class="both_contents well col-lg-4">             
-
+          <div class="both_contents well col-lg-4">
             <!-- BOTHの欄を作る -->
-            <strong><p class="sub_title fa fa-fighter-jet">持ち込み・預け入れ</p></strong>
+            <strong>
+              <p class="sub_title fa fa-fighter-jet">
+                持ち込み・預け入れ
+              </p>
+            </strong>
             <div>
               <ul class="list-group" id="list_design">
                 <?php for ($i=0; $i <5 ; $i++) { ?>
                   <label class="width">
-                  <li class="list-group-item list_float">
-                    <input type="checkbox" name="che" class="left checkbox">
-                    <span class="checkbox-icon"></span>
-                    リスト1
-                  </li>
+                    <li class="list-group-item list_float">
+                      <input type="checkbox" name="che" class="left checkbox">
+                      <span class="checkbox-icon"></span>
+                      リスト1
+                    </li>
                   </label>
-                <?php  }?>
+                <?php }?>
               </ul>
             </div>
           </div>
-                <!-- 持ち込みの欄を作る -->
+          <!-- 持ち込みの欄を作る -->
           <div class="carry_in well col-lg-4">
-            <strong><p class="sub_title fa fa-hand-o-right">持ち込み</p></strong>
+            <strong>
+              <p class="sub_title fa fa-hand-o-right">
+                持ち込み
+              </p>
+            </strong>
             <div>
               <ul class="list-group">
                 <?php for ($i=0; $i <5 ; $i++) { ?>
                   <label class="width">
-                  <li class="list-group-item list_float">
-                    <input type="checkbox" name="che" class="left checkbox">
-                    <span class="checkbox-icon"></span>
-                    リスト1
-                  </li>
+                    <li class="list-group-item list_float">
+                      <input type="checkbox" name="che" class="left checkbox">
+                      <span class="checkbox-icon"></span>
+                      リスト1
+                    </li>
                   </label>
                 <?php  }?>
               </ul>
             </div>  
           </div>
+
           <div class="azukeire well col-lg-4">
-                <!-- 持ち込みの欄を作る -->
-            <strong><p class="sub_title fa fa-suitcase ">預け入れ</p></strong>
-              <ul class="list-group">
-                <?php for ($i=0; $i <5 ; $i++) { ?>
-                  <label class="width">
-                  <li class="list-group-item list_float">
-                    <input type="checkbox" name="che" class="left checkbox">
-                    <span class="checkbox-icon"></span>
-                    リスト1
-                  </li>
-                  </label>
-                <?php  }?>
-              </ul>
+            <!-- 持ち込みの欄を作る -->
+            <strong>
+              <p class="sub_title fa fa-suitcase ">
+                預け入れ
+              </p>
+            </strong>
+            <ul class="list-group">
+              <?php for ($i=0; $i <5 ; $i++) { ?>
+                <label class="width">
+                <li class="list-group-item list_float">
+                  <input type="checkbox" name="che" class="left checkbox">
+                  <span class="checkbox-icon"></span>
+                  リスト1
+                </li>
+                </label>
+              <?php  }?>
+            </ul>
           </div>
-        </div>                  
-        
+        </div>
       <!-- リストの保存機能たち -->
         <div class="list_contents text-center">
           <form>
@@ -171,8 +187,25 @@
       </div>
     </div>
   </div>
-    <?php require('footer.php'); ?>
-    <?php require('load_js.php'); ?>
-
-  </body>
+  <?php require('footer.php'); ?>
+  <?php require('load_js.php'); ?>
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
