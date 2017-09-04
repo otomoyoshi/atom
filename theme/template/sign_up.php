@@ -9,7 +9,6 @@
     <link rel="shortcut icon" href="../assets/img/favicon.png">
 
 
-
       <!-- <div class="center-block"> -->
  
        <!--  <div  style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" >
@@ -19,6 +18,7 @@
     </div>
     <?php require('load_css.php'); ?>
     <link rel="stylesheet" type="text/css" href="../assets/css/sign_up.css">
+
 
   </head>
   <body>

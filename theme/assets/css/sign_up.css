@@ -1,3 +1,10 @@
+
+body {
+  background: url(../img/dark_beach1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .font_title {
 	color: #FFFFFF; 
 	text-shadow: 0px 0px 10px rgba(255,255,255,1);
@@ -52,5 +59,4 @@
     	margin: 5%;
     	/*width: 100%;*/
   	}
-
 }
