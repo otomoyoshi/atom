@@ -50,12 +50,14 @@
 
       </div>
 
-
+  <form method="POST" action="">
       <div class="col-lg-5 background_white" id="space"> 
         <div class="row">
           <div class="col-lg-12">
             
              <div class="text-center">
+
+
               <label><i class="fa fa-user" aria-hidden="true"></i>アカウント名 </label><br> 
               <input type="acountname" name="acountname" placeholder="アカウント名">
               <?php if (isset($errors['acountname']) && $errors['acountname'] == 'blank') {?>
@@ -73,9 +75,7 @@
               <label><i class="fa fa-envelope-o"></i>メールアドレス </label><br>
                 <input type="mail" name="mail" placeholder="tabi@example.com">
 
-              <?php if (isset($errors['login'])){ 
-                # code...
-               ?>
+              <?php if (isset($errors['login'])){ ?>
               <span style="color:red:">メールアドレスとパスワードを入力してください</span>
 
 
@@ -108,11 +108,11 @@
             <div class="text-center">
               <label><i class="fa fa-unlock-alt" aria-hidden="true"></i>パスワード確認用 </label><br>
               <input type="password" name="password">
-              <?php if (isset($errors['password']) && $errors['password'] == 'blank') {?>
+              <?php if (isset($errors['comfirmpassword']) && $errors['comfirmpassword'] == 'blank') {?>
               <div class="alert alert-danger">パスワードを入力してください</div>
               <?php } ?>
 
-              <?php if (isset($errors['password']) && $errors['password'] == 'length') {?>
+              <?php if (isset($errors['comfirmpassword']) && $errors['comfirmpassword'] == 'length') {?>
                 <div class="alert alert-danger">パスワードは4文字以上で入力してください</div>
               <?php } ?>
             </div>
@@ -135,12 +135,13 @@
           </div>      
         </div>
 
-      </div>
+       </div>
+      </form>
     </div>         
   </div>
 </div>
 
-
+</form>
 <!-- ここまで変更する -->
 
   <?php require('footer.php'); ?>
