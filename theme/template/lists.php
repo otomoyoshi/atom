@@ -12,22 +12,55 @@
 
     //検索ボタンが押された時
     if (!empty($_POST['list_search'])) {
+        //検索情報かつSESSEIONあるかどうか
+
+
+        //検索ワード収集データベースにインサート
         $sql= 'INSERT INTO `searched_words` SET `word` = ?,
                                           `created` = NOW()';
         $data = array($_POST['list_search']);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
+        // 検索結果表示データベースから情報をとってリストに入れる
+
+        // $sql= 'SELECT * FROM `searchs` WHERE 1';
+        // $data = array();
+        // $stmt = $dbh->prepare();
+        // $stmt ->execute();
+
+          // //①データがある場合
+          // if () {
+            
+          // }
+          // // データがない場合： カテゴリー表示
+          // else{
+
+          // }
+
+     
+        // // BOTHの場合
+        // if () {
+        //   # code...
+        // }
+        // // 持ち込みの場合
+        // if () {
+        //   # code...
+        // }
+        // //預け入れの場合
+        // if () {
+        //   # code...
+        // }
     }
 
     // 一時保存ボタンが押された時
     if (!empty($_POST['tmp_btn'])) {
-        // $sql = 'INSERT `lists` SET `members_id` = ?,
-        //                    `name` = ?, 
-        //                    `list_image_path` = ?,
-        //                    `created` = NOW()';
-        // $data = array();
-        // $stmt = $dbh->prepare();
-        // $stmt ->execute();
+        $sql = 'INSERT `lists` SET `members_id` = ?,
+                           `name` = ?, 
+                           `list_image_path` = ?,
+                           `created` = NOW()';
+        $data = array();
+        $stmt = $dbh->prepare();
+        $stmt ->execute();
     }
 
     //キャンセルボタンが押された時
@@ -53,7 +86,6 @@
         // $stmt ->execute();
       }
     }
-
 
 ?>
 
@@ -86,10 +118,12 @@
             </form>
           </div>
           <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
-            <?php  ?>
+            <?php if (!isset($hoge)) {?>
               <img src="../assets/img/pic1.jpg" class="img-circle" width="150px" class="padding_img"><br>
               <p class="set_profile">user nameくん</p>
-            <?php  ?>
+            <?php } else {?>
+
+            <?php } ?>
           </div>
         </div>
         <div class="row">
@@ -122,6 +156,7 @@
                       <input type="checkbox" name="che" class="left checkbox">
                       <span class="checkbox-icon"></span>
                       リスト1
+                      <i class="fa fa-trash"></i>
                     </li>
                   </label>
                 <?php }?>
@@ -143,6 +178,7 @@
                       <input type="checkbox" name="che" class="left checkbox">
                       <span class="checkbox-icon"></span>
                       リスト1
+                      <i class="fa fa-trash"></i>
                     </li>
                   </label>
                 <?php  }?>
@@ -160,11 +196,12 @@
             <ul class="list-group">
               <?php for ($i=0; $i <5 ; $i++) { ?>
                 <label class="width">
-                <li class="list-group-item list_float">
-                  <input type="checkbox" name="che" class="left checkbox">
-                  <span class="checkbox-icon"></span>
-                  リスト1
-                </li>
+                    <li class="list-group-item list_float">
+                      <input type="checkbox" name="che" class="left checkbox">
+                      <span class="checkbox-icon"></span>
+                      リスト1
+                      <i class="fa fa-trash"></i>
+                    </li>
                 </label>
               <?php  }?>
             </ul>
