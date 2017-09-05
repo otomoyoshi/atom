@@ -1,3 +1,33 @@
+<?php 
+session_start();
+require(login_home.php);
+
+
+
+
+ ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -76,10 +106,14 @@
                 <input type="mail" name="mail" placeholder="tabi@example.com">
 
               <?php if (isset($errors['login'])){ ?>
-              <span style="color:red:">メールアドレスとパスワードを入力してください</span>
-
-
+                <span style="color:red:">メールアドレスを入力してください</span>
               <?php } ?>
+
+              <?php if (isset($errors['email']) && $errors['email'] == 'duplicate') {?>
+                <div class="alert alert-danger">入力したメールアドレスは既に登録されています</div>
+              <?php } ?>
+
+
             </div>
           </div>
         </div>
@@ -96,7 +130,7 @@
               <?php } ?>
 
               <?php if (isset($errors['password']) && $errors['password'] == 'length') {?>
-                <div class="alert alert-danger">パスワードは4文字以上で入力してください</div>
+                <div class="alert alert-danger">パスワードは8文字以上で入力してください</div>
               <?php } ?>
             </div>
           </div>
