@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- <link rel="shortcut icon" href="../..assets/img/favicon.png"> -->
-    <link rel="shortcut icon" href="../assets/img/tabinimotsu_v1.png">
+    <!-- <link rel="shortcut icon" href="../assets/img/tabinimotsu_v1.png"> -->
 
     <title>旅にもつ</title>
 
