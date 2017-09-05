@@ -20,15 +20,15 @@
     //     $_SESSION["visited"] = $visited;
     // }
 
-
+      // echo $_SESSION['encourage'];
       if(!empty($_SESSION['blank'])) {
-            $_SESSION['blank'] = '';
-            header('Location: raise_up_search.php');
-            exit();
+        echo $_SESSION['encourage'];
+        $_SESSION['encourage'] = '';
+        header('Location: raise_up_search.php');
+        exit();
       }
 
     $errors = array();
-    $isJudge = array();
     $image_paths = array();
     $image_len = 0;
 
