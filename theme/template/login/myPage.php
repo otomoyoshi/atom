@@ -13,7 +13,6 @@
   <?php require('../child_load_css.php'); ?>
   <link rel="stylesheet" type="text/css" href="../../assets/css/akihiro_mypage.css">
 
-
   </head>
 
   <body>
