@@ -6,16 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../assets/img/favicon.png">
+    <link rel="shortcut icon" href="../../assets/img/favicon.png">
 
     <title>旅にもつ</title>
-    <?php require('load_css.php'); ?>
-    <link rel="stylesheet" type="text/css" href="../assets/css/setting.css">
+
+    <?php require('../child_load_css.php'); ?>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/akihiro_setting.css">
 
   </head>
 
   <body>
-  <?php require('header.php'); ?>
+  <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
+  <?php
+    $ini = parse_ini_file("../config.ini");
+    $is_login = $ini['is_login'];
+    // $is_login = 1; //ログインしてるときを１とする（仮）
+    if ($is_login) { //ログインしてるとき
+      // echo "login success";
+      require('../child_login_header.php');
+    } else {// ログインしてないとき
+      // echo "login fail";
+      require('../child_header.php');
+    }
+  ?>
 
     <div class="container">
 
@@ -122,7 +135,7 @@
 </div><!-- container ends-->
     
 
-      <?php require('footer.php'); ?>
-      <?php require('load_js.php'); ?>
+      <?php require('../footer.php'); ?>
+      <?php require('../child_load_js.php'); ?>
   </body>
 </html>

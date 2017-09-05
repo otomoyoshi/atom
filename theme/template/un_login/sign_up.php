@@ -36,24 +36,31 @@ require(login_home.php);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../assets/img/favicon.png">
+    <link rel="shortcut icon" href="../../assets/img/favicon.png">
 
-
-      <!-- <div class="center-block"> -->
- 
-       <!--  <div  style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" >
-          旅にもつ
-        </div> -->
-        
     </div>
-    <?php require('load_css.php'); ?>
-    <link rel="stylesheet" type="text/css" href="../assets/css/sign_up.css">
+    <?php require('../child_load_css.php'); ?>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/sign_up.css">
 
 
   </head>
   <body>
-  <?php require('header.php'); ?>
-  <!-- ここから変更する -->
+    <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
+
+  <?php
+    $ini = parse_ini_file("../config.ini");
+    $is_login = $ini['is_login'];
+    // echo "is_login : " . $is_login;
+    // $is_login = 0; //ログインしてるときを１とする（仮）
+    if ($is_login == 1) { //ログインしてるとき1
+      // echo "login success";
+      require('../child_login_header.php');
+    } else {// ログインしてないとき0
+      // echo "login fail";
+      require('../child_header.php');
+    }
+  ?>
+
 <br>
 <br>
 <br>
@@ -178,8 +185,8 @@ require(login_home.php);
 </form>
 <!-- ここまで変更する -->
 
-  <?php require('footer.php'); ?>
-  <?php require('load_js.php'); ?>
+  <?php require('../footer.php'); ?>
+  <?php require('../child_load_js.php'); ?>
 
   </body>
 </html>

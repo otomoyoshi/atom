@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 2017 年 9 月 04 日 06:31
+-- Generation Time: 2017 年 9 月 04 日 15:00
 -- サーバのバージョン： 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -133,6 +133,17 @@ CREATE TABLE `searched_words` (
   `searchs_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- テーブルのデータのダンプ `searched_words`
+--
+
+INSERT INTO `searched_words` (`id`, `word`, `judge`, `word_condition`, `classify`, `created`, `repaired`, `searchs_id`) VALUES
+(1, 'ホゲホゲ', 0, NULL, '', '0000-00-00 00:00:00', '2017-09-04 10:56:55', 0),
+(2, 'ホゲホゲ', 0, NULL, '', '0000-00-00 00:00:00', '2017-09-04 10:58:21', 0),
+(3, 'ピカピカ', 0, NULL, '', '2017-09-04 19:42:33', '2017-09-04 11:42:33', 0),
+(4, 'ピカピカ', 0, NULL, '', '2017-09-04 20:38:13', '2017-09-04 12:38:13', 0),
+(5, 'ピカピカ', 0, NULL, '', '2017-09-04 20:38:58', '2017-09-04 12:38:58', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -252,7 +263,7 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT for table `searched_words`
 --
 ALTER TABLE `searched_words`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `searchs`
 --

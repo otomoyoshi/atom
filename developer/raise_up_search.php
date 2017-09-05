@@ -1,6 +1,6 @@
 <?php
     require('dbconnect.php');
-    // session_start();
+    session_start();
 
 
     // if (!isset($_SESSION["visited"])){
@@ -21,12 +21,18 @@
     // }
 
 
+      if(!empty($_SESSION['blank'])) {
+            $_SESSION['blank'] = '';
+            header('Location: raise_up_search.php');
+            exit();
+      }
+
     $errors = array();
     $isJudge = array();
     $image_paths = array();
     $image_len = 0;
 
-    foreach (glob('assets/img/*') as $file) {
+    foreach (glob('../theme/assets/img/*') as $file) {
       if(is_file($file)){
       $image_paths[] = $file;
       }
@@ -38,10 +44,7 @@
 
     $word = '';
     $conditions = '';
-    $judgeTT = '';
-    $judgeTF = '';
-    $judgeFT = '';
-    $judgeFF = '';
+    $judge = '';
     $classify = '';
     $encourage = '';
     $encourages = array('頑張ろう',
@@ -52,23 +55,24 @@
                         '打つまで寝るな',
                         '自分自身を信じてみるだけでいい。きっと、生きる道が見えてくる。-ゲーテ-',
                         );
+    $category = array('両方可能',
+                      '機内持ち込み可能',
+                      'お預け可能',
+                      '持ち込みできない');
 
 
     if(!empty($_POST)){
-
-      // if($count() >= 2) {
-      //   header('Location: raise_up_search.php');
-      //   exit();
-      // }
-
       // 入力欄の値が空か判定
       $word = $_POST['word'];
       $conditions = $_POST['conditions'];
-      $judgeTT = $_POST['judgeTT']; //機内 ◯　預入荷物 ×
-      $judgeTF = $_POST['judgeTF'];
-      $judgeFT = $_POST['judgeFT'];
-      $judgeFF = $_POST['judgeFF'];
-      $classify = $_POST['classify'];
+
+      if(isset($_POST['judge'])){
+        $judge = $_POST['judge'];
+      }
+
+      if(isset($_POST['classify'])){
+        $classify = $_POST['classify'];
+      }
 
       if($word == '') {
         $errors['word'] = 'blank';
@@ -76,32 +80,24 @@
       if($conditions == '') {
         $errors['conditions'] = 'blank';
       }
-      if($judgeTT == '') {
-        $isJudge['judgeTT'] = 'blank';
-      }
-      if($judgeTF == '') {
-        $isJudge['judgeTF'] = 'blank';
-      }
-      if($judgeFT == '') {
-        $isJudge['judgeFT'] = 'blank';
-      }
-      if($judgeFF == '') {
-        $isJudge['judgeFF'] = 'blank';
+      if($judge == '') {
+        $errors['judge'] = 'blank';
       }
       if($classify == '') {
         $errors['classify'] = 'blank';
       }
 
-      if(empty($errors) && empty($isJudge)){
-          if($encourage == ''){
-            $encourage = 'blank';
-          }
+      if(empty($errors)){
 
+          $result = '<script type="text/javascript">document.write(confirm("本当に登録しても良いですか？ もう一度確認よろしく"));</script>';
+          // echo $result;
+          if($result == true) {
+              $encourage = 'blank';
+              $_SESSION['encourage'] = 'blank';
+          }
+        }
 
       }
-
-
-    }
 
 
 ?>
@@ -116,25 +112,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="assets/img/favicon.png">
-
     <title>検索エンジンを育てよう</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="assets/css/main.css" rel="stylesheet">
-
-    <!-- Fonts from Google Fonts -->
+    <link rel="stylesheet" type="text/css" href="../theme/assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../theme/assets/css/main.css">
 	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
-	<!-- 追加css -->
 
-    
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
   </head>
 
   <body>
@@ -166,50 +149,20 @@
               <p class="alert alert-danger">入力してください</p><br>
             <?php } ?>
 
-          <div class="input-group col-lg-6 col-lg-offset-3">
-            <span class="input-group-addon"> True  : ◯<br>False : ✖️</span>
-            <input type="text" class="form-control" name="judgeTT" value="<?php echo $judgeTT ?>">
-          </div>
-            <!-- True or False：<br><input type="text" name="judge" value="<?php echo $judge ?>"><br> -->
-
-            <?php if(isset($isJudge['judgeTT'])){ ?>
-              <p class="alert alert-info">入力してください</p><br>
+          <div class="input-group col-lg-6 col-lg-offset-3 text-left">
+          <?php for($i=0; $i < 4; $i++) { ?>
+            <label class="radio-inline"><? echo $category[$i]; ?><input type="radio" name="judge" value="<?php echo $category[$i];?>"></label>
             <?php } ?>
-
-          <div class="input-group col-lg-6 col-lg-offset-3">
-            <span class="input-group-addon"> True  : ◯<br>False : ✖️</span>
-            <input type="text" class="form-control" name="judgeTF" value="<?php echo $judgeTF ?>">
           </div>
-            <!-- True or False：<br><input type="text" name="judge" value="<?php echo $judge ?>"><br> -->
 
-            <?php if(isset($isJudge['judgeTF'])){ ?>
-              <p class="alert alert-info">入力してください</p><br>
+          <?php if(isset($errors['judge'])){ ?>
+            <p class="alert alert-danger">入力してください</p><br>
+          <?php } ?>
+
+          <div class="input-group col-lg-6 col-lg-offset-3 text-left">
+            <?php for($i=0; $i < 8; $i++) { ?>
+            <label class="radio-inline">分類<?php echo $i ?><input type="radio" name="classify" value="<?php echo $i;?>"></label>
             <?php } ?>
-
-          <div class="input-group col-lg-6 col-lg-offset-3">
-            <span class="input-group-addon"> True  : ◯<br>False : ✖️</span>
-            <input type="text" class="form-control" name="judgeFT" value="<?php echo $judgeFT ?>">
-          </div>
-            <!-- True or False：<br><input type="text" name="judge" value="<?php echo $judge ?>"><br> -->
-
-            <?php if(isset($isJudge['judgeFT'])){ ?>
-              <p class="alert alert-info">入力してください</p><br>
-            <?php } ?>
-
-          <div class="input-group col-lg-6 col-lg-offset-3">
-            <span class="input-group-addon"> True  : ◯<br>False : ✖️</span>
-            <input type="text" class="form-control" name="judgeFF" value="<?php echo $judgeFF ?>">
-          </div>
-            <!-- True or False：<br><input type="text" name="judge" value="<?php echo $judge ?>"><br> -->
-
-            <?php if(isset($isJudge['judgeFF'])){ ?>
-              <p class="alert alert-info">入力してください</p><br>
-            <?php } ?> 
-
-            <!-- 分類：<br><input type="text" name="classify" value="<?php echo $classify ?>"><br> -->
-          <div class="input-group col-lg-6 col-lg-offset-3">
-            <span class="input-group-addon">分類</span>
-            <input type="text" class="form-control" name="classify" value="<?php echo $classify ?>">
           </div>
 
             <?php if(isset($errors['classify'])){ ?>
@@ -218,19 +171,14 @@
 
             <input type="submit" class="btn btn-info" value="気力を注入">
 
-            <?php if(!empty($encourage)) { ?>
-              <p class="alert alert-danger">ファイナルアンサー</p><br>
-              <input type="submit" class="btn btn-danger" value="送信">
-            <?php } ?>
           </form>
 
           <?php if(!empty($encourage)) { ?>
             <div class="row">
               <div class="col-lg-12 text-center">
-
                 <h2><?php echo $encourages[rand(0, count($encourages)-1)]; ?></h2>
                 <!-- <?php echo rand(0, $image_len); ?> -->
-                <img src="<?php echo $image_paths[rand(0, $image_len)]; ?>" class="img-circle">
+                <img src="<?php echo $image_paths[rand(0, $image_len)]; ?>" class="img-circle" style="width:auto; height: 320px;">
               </div>
             </div>
           <?php } ?>
@@ -249,6 +197,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="../theme/assets/js/bootstrap.min.js"></script>
   </body>
 </html>
