@@ -2,10 +2,23 @@
   session_start();
   require('../../developer/dbconnect.php');
 
+  // ユーザーとリストのリンク
+  $sql= 'SELECT `l`.*,`m`.`account_name`
+           FROM `lists`AS`l`
+           LEFT JOIN `members` AS `m`
+           ON `l`.`members_id`=`m`.`id`
+           WHERE 1';
+  $data = array();
+  $stmt = $dbh->prepare($sql);
+  $stmt ->execute($data);
+  $record = $stmt->fetch(PDO::FETCH_ASSOC);
   // if (!isset($_SESSION[''])) {
   //   header('Location: sign_in.php');
   //   exit();
   // }
+  $item_both = '';
+  $item_azukeire = '';
+  $item_carry_in = '';
 
   // この中に各種ボタンが押された時の条件を書き込んでいく
   if (!empty($_POST)) {
@@ -14,71 +27,74 @@
     if (!empty($_POST['list_search'])) {
         //検索情報かつSESSEIONあるかどうか
 
-
         //検索ワード収集データベースにインサート
         $sql= 'INSERT INTO `searched_words` SET `word` = ?,
                                           `created` = NOW()';
         $data = array($_POST['list_search']);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
-        // 検索結果表示データベースから情報をとってリストに入れる
-
-        // $sql= 'SELECT * FROM `searchs` WHERE 1';
-        // $data = array();
-        // $stmt = $dbh->prepare();
-        // $stmt ->execute();
-
+        // 検索結果表示データベースから情報をとる
+        $sql= 'SELECT * FROM `searchs` WHERE `word` = ?';
+        $data = array($_POST['list_search']);
+        $stmt = $dbh->prepare($sql);
+        $stmt ->execute($data);
+        $list_record = $stmt->fetch(PDO::FETCH_ASSOC);
           // //①データがある場合
-          // if () {
-            
-          // }
+        if ($list_record != '') {
+          $sql= 'INSERT INTO `items` SET `content` = ?';
+          $data = array($_POST['list_search']);
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute($data);
+        }
           // // データがない場合： カテゴリー表示
           // else{
-
+            // カテゴリーわけに飛ぶ
           // }
-
-     
         // // BOTHの場合
-        // if () {
-        //   # code...
-        // }
-        // // 持ち込みの場合
-        // if () {
-        //   # code...
-        // }
+        if ($list_record['categoryies_l2_id'] != 2 && $list_record['categoryies_l2_id'] != 3) {
+          
+          $item_both = $list_record['word'];
+        }
+
+        // 持ち込みの場合
+        if ($list_record['categoryies_l2_id'] != 1 && $list_record['categoryies_l2_id'] != 3) {
+          $item_carry_in = $list_record['word'];
+        }
+
         // //預け入れの場合
-        // if () {
-        //   # code...
-        // }
+        if ($list_record['categoryies_l2_id'] != 1 && $list_record['categoryies_l2_id'] != 2) {
+          $item_azukeire = $list_record['word'];
+        }
     }
 
     // 一時保存ボタンが押された時
     if (!empty($_POST['tmp_btn'])) {
-        $sql = 'INSERT `lists` SET `members_id` = ?,
-                           `name` = ?, 
-                           `list_image_path` = ?,
-                           `created` = NOW()';
-        $data = array();
-        $stmt = $dbh->prepare();
-        $stmt ->execute();
+        $sql = 'INSERT `lists` SET `members_id` = 1 ,
+                                   `name` = ?, 
+                                   -- `list_image_path` = ,
+                                   `created` = NOW()';
+        $data = array($_POST['list_name']);
+        echo $_POST['list_name'];
+        $stmt = $dbh->prepare($sql);
+        $stmt ->execute($data);
     }
 
     //キャンセルボタンが押された時
     if (!empty($_POST['can_btn'])) {
-        
+          header('Location:lists.php');
     }
 
     // 保存ボタンが押された時
     if (!empty($_POST['keep_btn'])) {
-      // 一時保存されてない場合
-      // if () {
-      //   $sql = 'INSERT `lists` SET `members_id` = ?,
-      //                      `name` = ?, 
-      //                      `list_image_path` = ?,
-      //                      `created` = NOW()';
-      //   $data = array(,$_POST['list_name'],$_FILES['']);
-      //   $stmt = $dbh->prepare();
-      //   $stmt ->execute();
+        $sql = 'INSERT `lists` SET 
+                           `members_id` = 1 ,
+                           `name` = ?, 
+                           -- `list_image_path` = ,
+                           `created` = NOW()';
+        $data = array($_POST['list_name']);
+        echo $_POST['list_name'];
+        $stmt = $dbh->prepare($sql);
+        $stmt ->execute($data);
       } else {
         // $sql = '';
         // $data = array(,$_POST['list_name'],$_FILES['']);
@@ -128,115 +144,129 @@
             <form action="" method="POST">
               <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location">
               <input type="text" name="created" placeholder="作成日時" class="form-control created_location">
-            </form>
-          </div>
-          <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
-            <?php if (!isset($hoge)) {?>
-              <img src="../assets/img/pic1.jpg" class="img-circle" width="150px" class="padding_img"><br>
-              <p class="set_profile">user nameくん</p>
-            <?php } else {?>
+            
+            </div>
+            <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
+              <?php if (!isset($hoge)) {?>
+                <img src="../assets/img/pic1.jpg" class="img-circle" width="150px" class="padding_img"><br>
+                <p class="set_profile">
+                  <?php echo $record['account_name']?>
+                </p>
+              <?php } else {?>
 
-            <?php } ?>
+              <?php } ?>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 col-md-12 col-xs-12">
-            <hr class="under_line1">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-xs-12">
+              <hr class="under_line1">
+            </div>
           </div>
-        </div>
-        <!-- リストの大枠を作って行く -->
-        <div class="row">
-          <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center">
-            <form action="" method="POST">
+          <!-- リストの大枠を作って行く -->
+          <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center"> 
               <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」">
               <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索">
-            </form>
-          </div>
-        </div>
-        <div class="list_category margin_top row">
-          <div class="both_contents well col-lg-4">
-
-            <!-- BOTHの欄を作る -->
-            <strong>
-              <p class="sub_title fa fa-fighter-jet">
-                持ち込み・預け入れ
-              </p>
-            </strong>
-            <div>
-              <ul class="list-group" id="list_design">
-                <?php for ($i=0; $i <5 ; $i++) { ?>
-                  <label class="width">
-                    <li class="list-group-item list_float">
-                      <input type="checkbox" name="che" class="left checkbox">
-                      <span class="checkbox-icon"></span>
-                      リスト1
-                      <i class="fa fa-trash"></i>
-                    </li>
-                  </label>
-                <?php }?>
-              </ul>
             </div>
           </div>
-          <!-- 持ち込みの欄を作る -->
-          <div class="carry_in well col-lg-4">
-            <strong>
-              <p class="sub_title fa fa-hand-o-right">
-                持ち込み
-              </p>
-            </strong>
-            <div>
-              <ul class="list-group">
-                <?php for ($i=0; $i <5 ; $i++) { ?>
-                  <label class="width">
-                    <li class="list-group-item list_float">
-                      <input type="checkbox" name="che" class="left checkbox">
-                      <span class="checkbox-icon"></span>
-                      リスト1
-                      <i class="fa fa-trash"></i>
-                    </li>
-                  </label>
-                <?php  }?>
-              </ul>
-            </div>  
-          </div>
+          <div class="list_category margin_top row">
+            <div class="both_contents well col-lg-4">
 
-          <div class="azukeire well col-lg-4">
+              <!-- BOTHの欄を作る -->
+              <strong>
+                <p class="sub_title fa fa-fighter-jet">
+                  持ち込み・預け入れ
+                </p>
+              </strong>
+              <div>
+                <ul class="list-group" id="list_design">
+                  <?php for ($i=0; $i <4 ; $i++) { ?>
+                    <label class="width">
+                      <li class="list-group-item list_float">
+                        <input type="checkbox" name="che" class="left checkbox">
+                        <span class="checkbox-icon"></span>
+                           <?php echo $item_both;?> 
+                           
+                      <!-- 削除処理を書いていく -->
+                      <?php  ?>
+                        <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
+                          <i class="fa fa-trash"></i>
+                        </a>
+                      <?php  ?>
+
+                      </li>
+                    </label>
+                  <?php }?>
+                </ul>
+              </div>
+            </div>
             <!-- 持ち込みの欄を作る -->
-            <strong>
-              <p class="sub_title fa fa-suitcase ">
-                預け入れ
-              </p>
-            </strong>
-            <ul class="list-group">
-              <?php for ($i=0; $i <5 ; $i++) { ?>
-                <label class="width">
-                    <li class="list-group-item list_float">
-                      <input type="checkbox" name="che" class="left checkbox">
-                      <span class="checkbox-icon"></span>
-                      リスト1
-                      <i class="fa fa-trash"></i>
-                    </li>
-                </label>
-              <?php  }?>
-            </ul>
-          </div>
-        </div>
+            <div class="carry_in well col-lg-4">
+              <strong>
+                <p class="sub_title fa fa-hand-o-right">
+                  持ち込み
+                </p>
+              </strong>
+              <div>
+                <ul class="list-group">
 
-      <!-- リストの保存機能たち -->
-        <div class="list_contents text-center">
-          <form>
-            <div class="tmp_keep">
-              <input class="btn btn-info tmp_btn" value="一時保存" type="submit" name="tmp_btn">
+                  <?php for ($i=0; $i < 4 ; $i++) { ?>
+                    <label class="width">
+                      <li class="list-group-item list_float">
+                        <input type="checkbox" name="che" class="left checkbox">
+                        <span class="checkbox-icon"></span>
+                        <?php echo $item_carry_in; ?>
+                        <!-- 削除処理を書いていく -->
+                        <?php  ?>
+                          <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
+                            <i class="fa fa-trash"></i>
+                          </a>
+                        <?php  ?>
+                      </li>
+                    </label>
+                  <?php  }?>
+                </ul>
+              </div>  
             </div>
-          </form>
-          <div class="cansel">
-            <input value="キャンセル"" class="btn btn-warning can_btn" type="submit" name="can_btn">
+
+            <div class="azukeire well col-lg-4">
+              <!-- 持ち込みの欄を作る -->
+              <strong>
+                <p class="sub_title fa fa-suitcase ">
+                  預け入れ
+                </p>
+              </strong>
+              <ul class="list-group">
+                <?php for ($i=0; $i < 4 ; $i++) { ?>
+                  <label class="width">
+                      <li class="list-group-item list_float">
+                        <input type="checkbox" name="che" class="left checkbox">
+                        <span class="checkbox-icon"></span>
+                        <?php echo $item_azukeire; ?>
+                        <!-- 削除処理を書いていく -->
+                      <?php  ?>
+                        <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
+                          <i class="fa fa-trash"></i>
+                        </a>
+                      <?php  ?>
+                      </li>
+                  </label>
+                <?php } ?>
+              </ul>
+            </div>
           </div>
-          <div class="keep">
-
-            <input class="btn btn-success keep_btn" value="マイページへ登録" type="submit" name="keep_btn">
-          </div>  
-
+        <!-- リストの保存機能たち -->
+          <div class="list_contents text-center">
+              <div class="tmp_keep">
+                <input class="btn btn-info tmp_btn" value="一時保存" type="submit" name="tmp_btn">
+              </div>
+            <div class="cansel">
+              <input value="キャンセル" class="btn btn-warning can_btn" type="submit" name="can_btn">
+            </div>
+            <div class="keep">
+              <input class="btn btn-success keep_btn" value="マイページへ登録" type="submit" name="keep_btn">
+            </div>  
+          </form>
         </div>
       </div>
     </div>
@@ -245,6 +275,23 @@
   <?php require('load_js.php'); ?>
 </body>
 </html>
+
+
+<?php 
+// 条件用
+      // INSERT INTO `searchs` SET `word` = 'まさき',
+      //                           `judge` = 1,
+      //                           `condition` = 'pこhuskdjbf',
+      //                           `classify` = 'lsajおkdb.kjf',
+      //                           `aviation_id` = 0,
+      //                           `categoryies_l2_id` =3, 
+      //                           `created` = NOW()
+                                // aviation_id  categoryies_l2_id 
+ ?>
+
+
+
+
 
 
 
