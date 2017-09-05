@@ -37,13 +37,13 @@
             <div class='container'>
               <div class='single-item'>
                 <div>
-                  <img src="../assets/img/p01.png" class="center-block img-responsive">
+                  <img src="../assets/img/suitcase1 fixed.jpg" class="center-block img-responsive">
                 </div>
                 <div>
-                  <img src="../assets/img/p02.png" class="center-block img-responsive">
+                  <img src="../assets/img/flower1 fixed.jpg" class="center-block img-responsive">
                 </div>
                 <div>
-                  <img src="../assets/img/p03.png" class="center-block img-responsive">
+                  <img src="../assets/img/flower2 fixed.jpg" class="center-block img-responsive">
                 </div>
 
               </div>

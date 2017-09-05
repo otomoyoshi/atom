@@ -87,8 +87,6 @@
         $errors['classify'] = 'blank';
       }
 
-
-
       if(empty($errors)){
 
           $result = '<script type="text/javascript">document.write(confirm("本当に登録しても良いですか？ もう一度確認よろしく"));</script>';

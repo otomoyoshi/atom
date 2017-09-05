@@ -59,18 +59,35 @@
                     <div class="contact-section">
                          <!--  <div class="row">
                             <div class="col-lg-8 col-md-offset-2"> -->
-                              <form class="form-horizontal">
+                            <form class="form-horizontal">
+                              <form method="POST" action="">
 
                                 <div class="form-group">
                                   <label for="exampleInputEmail2"><i class="fa fa-envelope-o"></i>メールアドレス</label>
                                   <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
-                                <!-- </div>
+
+                                    <?php if (isset($errors['email']) && $errors['email'] == 'blank') {?>
+                                      <div class="alert alert-danger">メールアドレスを入力してください</div>
+                                    <?php } ?>
+                                                        <!-- </div>
                                 <div class="form-group "> -->
                                   <label for="exampleInputText">お問い合わせ内容</label>
                                  <textarea  class="form-control" placeholder="メッセージをご記入ください"></textarea>
+
+                                    <?php if (isset($errors['content']) && $errors['content'] == 'blank') { ?>
+                                      <div class="alert alert-danger">お問い合わせ内容をご記入してください</div>
+
+                                    <?php } ?>
+
+                                    <?php if (isset($errors['content']) && $errors['content'] == 'length') { ?>
+                                      <div class="alert alert-danger">お問い合わせ内容は5文字以上で入力してください</div>
+                                    <?php } ?>
+
+
                                 </div>
-                                <button type="submit" class="btn btn-success">送信</button>
+                                <button type="subm9it" class="btn btn-success">送信</button>
                               </form>
+                            </form>
                             <!-- </div>
                           </div> -->
                         <!-- </div> -->

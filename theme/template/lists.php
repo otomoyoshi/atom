@@ -1,3 +1,94 @@
+<?php
+  session_start();
+  require('../../developer/dbconnect.php');
+
+  // if (!isset($_SESSION[''])) {
+  //   header('Location: sign_in.php');
+  //   exit();
+  // }
+
+  // この中に各種ボタンが押された時の条件を書き込んでいく
+  if (!empty($_POST)) {
+
+    //検索ボタンが押された時
+    if (!empty($_POST['list_search'])) {
+        //検索情報かつSESSEIONあるかどうか
+
+
+        //検索ワード収集データベースにインサート
+        $sql= 'INSERT INTO `searched_words` SET `word` = ?,
+                                          `created` = NOW()';
+        $data = array($_POST['list_search']);
+        $stmt = $dbh->prepare($sql);
+        $stmt ->execute($data);
+        // 検索結果表示データベースから情報をとってリストに入れる
+
+        // $sql= 'SELECT * FROM `searchs` WHERE 1';
+        // $data = array();
+        // $stmt = $dbh->prepare();
+        // $stmt ->execute();
+
+          // //①データがある場合
+          // if () {
+            
+          // }
+          // // データがない場合： カテゴリー表示
+          // else{
+
+          // }
+
+     
+        // // BOTHの場合
+        // if () {
+        //   # code...
+        // }
+        // // 持ち込みの場合
+        // if () {
+        //   # code...
+        // }
+        // //預け入れの場合
+        // if () {
+        //   # code...
+        // }
+    }
+
+    // 一時保存ボタンが押された時
+    if (!empty($_POST['tmp_btn'])) {
+        $sql = 'INSERT `lists` SET `members_id` = ?,
+                           `name` = ?, 
+                           `list_image_path` = ?,
+                           `created` = NOW()';
+        $data = array();
+        $stmt = $dbh->prepare();
+        $stmt ->execute();
+    }
+
+    //キャンセルボタンが押された時
+    if (!empty($_POST['can_btn'])) {
+        
+    }
+
+    // 保存ボタンが押された時
+    if (!empty($_POST['keep_btn'])) {
+      // 一時保存されてない場合
+      // if () {
+      //   $sql = 'INSERT `lists` SET `members_id` = ?,
+      //                      `name` = ?, 
+      //                      `list_image_path` = ?,
+      //                      `created` = NOW()';
+      //   $data = array(,$_POST['list_name'],$_FILES['']);
+      //   $stmt = $dbh->prepare();
+      //   $stmt ->execute();
+      } else {
+        // $sql = '';
+        // $data = array(,$_POST['list_name'],$_FILES['']);
+        // $stmt = $dbh->prepare();
+        // $stmt ->execute();
+      }
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -13,7 +104,6 @@
     <?php require('load_css.php'); ?>
  
   </head>
-
   <body>
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
   <?php
@@ -41,8 +131,12 @@
             </form>
           </div>
           <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
-            <img src="../assets/img/pic1.jpg" class="img-circle" width="150px" class="padding_img"><br>
-            <p class="set_profile">user nameくん</p>
+            <?php if (!isset($hoge)) {?>
+              <img src="../assets/img/pic1.jpg" class="img-circle" width="150px" class="padding_img"><br>
+              <p class="set_profile">user nameくん</p>
+            <?php } else {?>
+
+            <?php } ?>
           </div>
         </div>
         <div class="row">
@@ -53,8 +147,8 @@
         <!-- リストの大枠を作って行く -->
         <div class="row">
           <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center">
-            <form action="" method="">
-              <input type="text" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」">
+            <form action="" method="POST">
+              <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」">
               <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索">
             </form>
           </div>
@@ -63,72 +157,109 @@
           <div class="both_contents well col-lg-4">
 
             <!-- BOTHの欄を作る -->
-            <strong><p class="sub_title fa fa-fighter-jet">持ち込み・預け入れ</p></strong>
+            <strong>
+              <p class="sub_title fa fa-fighter-jet">
+                持ち込み・預け入れ
+              </p>
+            </strong>
             <div>
               <ul class="list-group" id="list_design">
                 <?php for ($i=0; $i <5 ; $i++) { ?>
                   <label class="width">
-                  <li class="list-group-item list_float">
-                    <input type="checkbox" name="che" class="left checkbox">
-                    <span class="checkbox-icon"></span>
-                    リスト1
-                  </li>
+                    <li class="list-group-item list_float">
+                      <input type="checkbox" name="che" class="left checkbox">
+                      <span class="checkbox-icon"></span>
+                      リスト1
+                      <i class="fa fa-trash"></i>
+                    </li>
                   </label>
-                <?php  }?>
+                <?php }?>
               </ul>
             </div>
           </div>
-                <!-- 持ち込みの欄を作る -->
+          <!-- 持ち込みの欄を作る -->
           <div class="carry_in well col-lg-4">
-            <strong><p class="sub_title fa fa-hand-o-right">持ち込み</p></strong>
+            <strong>
+              <p class="sub_title fa fa-hand-o-right">
+                持ち込み
+              </p>
+            </strong>
             <div>
               <ul class="list-group">
                 <?php for ($i=0; $i <5 ; $i++) { ?>
                   <label class="width">
-                  <li class="list-group-item list_float">
-                    <input type="checkbox" name="che" class="left checkbox">
-                    <span class="checkbox-icon"></span>
-                    リスト1
-                  </li>
+                    <li class="list-group-item list_float">
+                      <input type="checkbox" name="che" class="left checkbox">
+                      <span class="checkbox-icon"></span>
+                      リスト1
+                      <i class="fa fa-trash"></i>
+                    </li>
                   </label>
                 <?php  }?>
               </ul>
             </div>  
           </div>
+
           <div class="azukeire well col-lg-4">
-                <!-- 持ち込みの欄を作る -->
-            <strong><p class="sub_title fa fa-suitcase ">預け入れ</p></strong>
-              <ul class="list-group">
-                <?php for ($i=0; $i <5 ; $i++) { ?>
-                  <label class="width">
-                  <li class="list-group-item list_float">
-                    <input type="checkbox" name="che" class="left checkbox">
-                    <span class="checkbox-icon"></span>
-                    リスト1
-                  </li>
-                  </label>
-                <?php  }?>
-              </ul>
+            <!-- 持ち込みの欄を作る -->
+            <strong>
+              <p class="sub_title fa fa-suitcase ">
+                預け入れ
+              </p>
+            </strong>
+            <ul class="list-group">
+              <?php for ($i=0; $i <5 ; $i++) { ?>
+                <label class="width">
+                    <li class="list-group-item list_float">
+                      <input type="checkbox" name="che" class="left checkbox">
+                      <span class="checkbox-icon"></span>
+                      リスト1
+                      <i class="fa fa-trash"></i>
+                    </li>
+                </label>
+              <?php  }?>
+            </ul>
           </div>
         </div>
 
       <!-- リストの保存機能たち -->
         <div class="list_contents text-center">
-          <div class="tmp_keep">
-            <a class="btn btn-info tmp_btn">一時保存</a>
-          </div>
+          <form>
+            <div class="tmp_keep">
+              <input class="btn btn-info tmp_btn" value="一時保存" type="submit" name="tmp_btn">
+            </div>
+          </form>
           <div class="cansel">
-            <a class="btn btn-warning can_btn">キャンセル</a>
+            <input value="キャンセル"" class="btn btn-warning can_btn" type="submit" name="can_btn">
           </div>
           <div class="keep">
-            <a class="btn btn-success keep_btn">マイページへ移動</a>
-          </div>
+
+            <input class="btn btn-success keep_btn" value="マイページへ登録" type="submit" name="keep_btn">
+          </div>  
+
         </div>
       </div>
     </div>
   </div>
-    <?php require('footer.php'); ?>
-    <?php require('load_js.php'); ?>
-
-  </body>
+  <?php require('footer.php'); ?>
+  <?php require('load_js.php'); ?>
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

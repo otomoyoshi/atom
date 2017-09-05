@@ -9,8 +9,10 @@
     <link rel="shortcut icon" href="../../assets/img/favicon.png">
     
     <title>旅にもつ</title>
+
   <?php require('../child_load_css.php'); ?>
   <link rel="stylesheet" type="text/css" href="../../assets/css/akihiro_mypage.css">
+
 
   </head>
 
@@ -32,7 +34,7 @@
     <div id="headerwrap" style="padding-top: 100px">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
       <!-- 薄い白で囲まれてるメインのディブ -->
-      <div class="col-md-8 col-sm-8 col-xs-10 col-md-offset-2 col-sm-offset-2 col-xs-offset-1 akihiro_main_div" style="margin-bottom: 50px">
+      <div class="col-md-8 col-sm-8 col-xs-10 col-md-offset-2 col-sm-offset-2 col-xs-offset-1 tabinimotsu_main_div" style="margin-bottom: 50px">
         <div class="container-fluid">
 
           <div class="row">
