@@ -1,32 +1,8 @@
 <?php 
 session_start();
-require(login_home.php);
-
-
-
+require('../../../developer/dbconnect.php');
 
  ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="ja">
