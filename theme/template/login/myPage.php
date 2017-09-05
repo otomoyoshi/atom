@@ -11,7 +11,7 @@
     <title>旅にもつ</title>
 
   <?php require('../child_load_css.php'); ?>
-  <link rel="stylesheet" type="text/css" href="../../assets/css/akihiro_mypage.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/mypage.css">
 
   </head>
 
