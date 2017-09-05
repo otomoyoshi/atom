@@ -1,3 +1,55 @@
+<?php 
+require('../../../developer/dbconnect.php');
+session_start();
+$errors = array();
+
+// 新規登録ボタンが押された時
+if (!empty($_POST)) {
+
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+
+  if ($email == '') {
+    $errors['email'] = 'blank';
+  }
+  if ($password == '') {
+    $errors['password'] = 'blank';
+  } 
+
+  if (empty($errors)) {
+    
+    $sql = 'SELECT * FROM `members` WHERE `email`=? AND `password`=?';
+    // $data = array($email,sha1($password));
+    $data = array($email,$password);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+
+    $user_info = $stmt->fetch(PDO::FETCH_ASSOC);
+    var_dump($user_info);
+
+    if ($user_info) {
+      $_SESSION['user_info']['id'] = $user_info['id'];
+      $_SESSION['user_info'] = $user_info;
+
+      header('Location: ../login/myPage.php');
+      exit();
+
+    }else{
+      $errors['password'] = 'mistake';
+    }
+
+  
+  }else{
+
+  }
+
+
+}else{
+
+}
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -43,12 +95,21 @@
               </div>
             </div>
           </div>
+
+        <form method="POST" action="">
           <div class="col-lg-6 flame">
             <div class="row email_input">
               <div class="col-lg-12">
                 <div class="text-center text_loc">
                   <label>メールアドレス ※</label><br>
                   <input type="email" name="email"　placeholder="アカウント名">
+                  <!-- メールアドレスが入力されていない時 -->
+                  <?php if (isset($errors['email']) && $errors['email'] == 'blank'): ?>
+                    <br>
+                    <div class="alert alert-danger">
+                      メールアドレスを入力してください
+                    </div>
+                  <?php endif; ?>
                 </div>
               </div>
             </div>
@@ -57,22 +118,31 @@
               <div class="col-lg-12">
                 <div class="text-center text_loc">
                   <label>パスワード ※</label><br>
-                  <input type="password" name="password" >
-                  <?php if (isset($errors['password']) && $errors['password'] == 'mistake') {?>
-                    <div class="alert alert-danger">
+                  <input type="password" name="password">
+                  <!-- アドレス、パスワードのいずれかが間違っている時 -->
+                  <?php if (isset($errors['password']) && $errors['password'] == 'mistake'): ?>
+                    <br><br><span class="alert alert-danger">
                       メールアドレス・もしくはパスワードが間違っています
+                    </span>
+                  <!-- パスワードが入力されていない時 -->
+                  <?php elseif(isset($errors['password']) && $errors['password'] == 'blank'): ?>
+                    <div class="alert alert-danger">
+                      パスワードを入力してください
                     </div>
-                  <?php } ?>
+                  <?php endif; ?>
                 </div>
               </div>
             </div>
+          </form>
+
             <div class="row">
               <div class="col-lg-12">
                 <div class="text-center">
                   <a href="" class="forget_passwprd"><u>パスワードを忘れた場合</u></a>
                 </div>
               </div>
-            </div> 
+            </div>
+
             <div class="row">
               <div class="col-lg-12">
                 <div class="text-center btn_location">
