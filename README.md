@@ -1,5 +1,6 @@
 # atom
-# Taikik
+# Taikichi
 # maho
-# Aki
+# Aki read_me
 # ono
+# hoge

@@ -1,3 +1,6 @@
+<!-- アイコン画像 -->
+<link rel="shortcut icon" href="../assets/img/tabinimotsu_v1.png">
+
 <!-- Bootstrap core CSS -->
 <link href="../assets/css/bootstrap.css" rel="stylesheet">
 
@@ -22,3 +25,6 @@
 <!-- slick -->
 <link rel="stylesheet" type="text/css" href="../assets/js/slick-1.6.0/slick/slick-theme.css">
 <link rel="stylesheet" type="text/css" href="../assets/js/slick-1.6.0/slick/slick.css">
+
+<link rel="stylesheet" type="text/css" href="../assets/css/lists.css">
+

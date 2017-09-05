@@ -3,18 +3,11 @@
 }*/
 
 body {
-  background: url(http://localhost/tabinimotsu/theme/assets/img/beach_blur.jpg);
+  background: url(../img/beach_blur.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  /*color: #FFFFFF;*/
-  color: black;
-  /*background-color: #51a8ff;*/
 }
 
-#headerwrap h1 {
-  margin-top: 0px;
-  padding: 15px;
-}
 #footer {
   width: 100%;
   background-color: #51a8ff;
@@ -23,23 +16,10 @@ body {
   text-align: center;
 }
 
-.background_blue {
-  /*background-color: rgba(81,168,255,0.7);*/
-  background-color: rgba(255,255,255,0.7);
-  /*background-color: rgba(0,0,0,0.7);*/
-  /*border-radius: 8px;*/
-  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+
+.both_contents{
+  width: 30%;
 }
-
-/*p:hover {
-    transition: .3s box-shadow,.3s transform,.3s background,.3s border-radius;
-    transition-property: box-shadow, transform, background, border-radius;
-    transition-duration: 0.3s, 0.3s, 0.3s, 0.3s;
-    transition-timing-function: initial, initial, initial, initial;
-    transition-delay: initial, initial, initial, initial;
-}*/
-
-
 
 
 /* Large desktops and laptops */
@@ -55,31 +35,13 @@ body {
     width: 100%;
   }
 
-  div#border-space {
-    padding: 59px;
 
-    /*margin: 20px;*/
-  }
-
-  #adjustment {
-    position: relative;
-    margin: auto;
-  }
-
-  h1 {
-    /*font-family: 'Baloo Bhaijaan', cursive;*/
-    /*color: #FFFFFF;*/
-    color: black;
-    /*font-weight: bold;*/
-  }
 
   h2 {
     width: 100%;
-    color: #FFFFFF;
-    color: black;
-    /*font-weight: bold;*/
-    /*color: navy;*/
+    color: navy;
   }
+
 
   #search {
     position: relative;
@@ -95,12 +57,11 @@ body {
     margin-bottom: 20px;
   }
 
-/*  #footer {
-    background-color: #51a8ff;
-    position: absolute;
-    bottom: 0;
-    text-align: center;
-  }*/
+
+  .both_contents{
+    width: 30%;
+  }
+
 
 }
 
@@ -130,6 +91,13 @@ body {
     margin-bottom: 20px;
   }
 
+  .both_contents{
+    width: 100%;
+  }
+
+  .text_center{
+    width: 80%;
+  }
 }
 
 /* Portrait tablets and small desktops */
@@ -154,6 +122,15 @@ body {
     width: 100%;
     margin-bottom: 20px;
   }
+
+  .both_contents{
+    width: 100%;
+  }
+
+  .list_name_location{
+    width: 90%;
+  }
+
 }
 
 /* Landscape phones and portrait tablets */
@@ -182,6 +159,14 @@ body {
   .img-responsive {
     margin: auto;
   }
+
+  .both_contents{
+    width: 100%;
+  }
+
+  .list_name_location{
+    width: 80%;
+  }
 }
 
 /* Portrait phones and smaller */
@@ -205,5 +190,18 @@ body {
     width: 100%;
     margin-bottom: 20px;
   }
+  .both_contents{
+    width: 100%;
+  }
+  .list_name_location{
+    width: 60%;
+  }
+   .search{
+    width: 60%;
+  }
 }
 
+.tabinimotsu_main_div{
+background-color: rgba(255,255,255,0.6);
+box-shadow: 10px 10px 5px rgba( 0 , 0 , 0 , 0.3 );
+}
