@@ -16,9 +16,9 @@
   //   header('Location: sign_in.php');
   //   exit();
   // }
-  $item_both = '';
-  $item_azukeire = '';
-  $item_carry_in = '';
+  $item_boths = array();
+  $item_azukeires = array();
+  $item_carry_ins = array();
 
   // この中に各種ボタンが押された時の条件を書き込んでいく
   if (!empty($_POST)) {
@@ -32,45 +32,57 @@
         $data = array($_POST['list_search']);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
-        // 検索結果表示データベースから情報をとり、リストテーブルと繋げる
-        $sql= 'SELECT `i`.*,`s`.`word`
-         FROM `item`AS`i`
+
+        //上とは別処理
+        $sql = 'INSERT INTO `items` SET `content` = ?';
+        $data = array($_POST['list_search']);
+        $stmt = $dbh->prepare($sql);
+        $stmt ->execute($data);
+        //検索結果表示データベースから情報をとり、リストテーブルと繋げる
+        $sql = 'SELECT `i`.*,`s`.`word`,`s`.`categoryies_l2_id`
+         FROM `items`AS`i`
          LEFT JOIN `searchs` AS `s`
          ON `i`.`content`=`s`.`word`
          WHERE 1';
         $data = array();
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
-        $list_record = $stmt->fetch(PDO::FETCH_ASSOC);
-        var_dump($list_record);
-          // //①データがある場合
-        // if ($list_record) {
-        //   $sql= 'INSERT INTO `items` SET `content` = ?,
-        //                                  `categories_id` =?';
-        //   $data = array($_POST['list_search'] list_record['']);
-        //   $stmt = $dbh->prepare($sql);
-        //   $stmt ->execute($data);
-        // }
-          // // データがない場合： カテゴリー表示
+
+        //while回して配列にデータを取ってくる。
+        while (true) {
+          $search = $stmt->fetch(PDO::FETCH_ASSOC);
+
+          if ($search == false) {
+            break;
+          }
+
+          if ($search['categoryies_l2_id'] == 1) {
+            $item_boths[] = $search['word'];
+          }
+
+          // 持ち込みの場合
+          if ($search['categoryies_l2_id'] == 2) {
+            $item_carry_ins[] = $search['word'];
+          }
+
+          // //預け入れの場合
+          if ($search['categoryies_l2_id'] == 3) {
+            $item_azukeires[] = $search['word'];
+          }
+        }
+
+        //①データがある場合
+        if ($search) {
+          $sql= 'INSERT INTO `items` SET `categories_id` =?';
+          $data = array($search['categoryies_l2_id']);
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute($data);
+        } // // データがない場合： カテゴリー表示
           // else{
             // カテゴリーわけに飛ぶ
           // }
         // // BOTHの場合
-        if ($list_record['categoryies_l2_id'] != 2 && $list_record['categoryies_l2_id'] != 3) {
-
-          $item_both = $list_record['word'];
-        }
-
-        // 持ち込みの場合
-        if ($list_record['categoryies_l2_id'] != 1 && $list_record['categoryies_l2_id'] != 3) {
-          $item_carry_in = $list_record['word'];
-        }
-
-        // //預け入れの場合
-        if ($list_record['categoryies_l2_id'] != 1 && $list_record['categoryies_l2_id'] != 2) {
-          $item_azukeire = $list_record['word'];
-        }
-    }
+  }
 
     // 一時保存ボタンが押された時
     if (!empty($_POST['tmp_btn'])) {
@@ -128,16 +140,16 @@
   <body>
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
   <?php
-    $ini = parse_ini_file("config.ini");
-    $is_login = $ini['is_login'];
-    // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($is_login) { //ログインしてるとき
-      // echo "login success";
-      require('login_header.php');
-    } else {// ログインしてないとき
-      // echo "login fail";
-      require('header.php');
-    }
+    // $ini = parse_ini_file("config.ini");
+    // $is_login = $ini['is_login'];
+    // // $is_login = 0; //ログインしてるときを１とする（仮）
+    // if ($is_login) { //ログインしてるとき
+    //   // echo "login success";
+    //   require('login_header.php');
+    // } else {// ログインしてないとき
+    //   // echo "login fail";
+    //   require('header.php');
+    // }
   ?>
 
  <div id="img"> 
@@ -185,13 +197,12 @@
               </strong>
               <div>
                 <ul class="list-group" id="list_design">
-                  <?php for ($i=0; $i <4 ; $i++) { ?>
+                  <?php foreach ($item_boths as $item_both) {?>
                     <label class="width">
                       <li class="list-group-item list_float">
                         <input type="checkbox" name="che" class="left checkbox">
                         <span class="checkbox-icon"></span>
                            <?php echo $item_both;?> 
-                           
                       <!-- 削除処理を書いていく -->
                       <?php  ?>
                         <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
@@ -214,13 +225,12 @@
               </strong>
               <div>
                 <ul class="list-group">
-
-                  <?php for ($i=0; $i < 4 ; $i++) { ?>
+                  <?php foreach ($item_carry_ins as $item_carry_in){ ?>
                     <label class="width">
                       <li class="list-group-item list_float">
                         <input type="checkbox" name="che" class="left checkbox">
                         <span class="checkbox-icon"></span>
-                        <?php echo $item_carry_in; ?>
+                        <?php  echo $item_carry_in; ?>
                         <!-- 削除処理を書いていく -->
                         <?php  ?>
                           <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
@@ -242,7 +252,7 @@
                 </p>
               </strong>
               <ul class="list-group">
-                <?php for ($i=0; $i < 4 ; $i++) { ?>
+                <?php foreach ($item_azukeires as $item_azukeire) { ?>
                   <label class="width">
                       <li class="list-group-item list_float">
                         <input type="checkbox" name="che" class="left checkbox">
