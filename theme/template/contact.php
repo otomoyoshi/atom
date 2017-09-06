@@ -20,8 +20,12 @@ if (!empty($_POST)) {
   if ($content == '') {
       $errors['content'] = 'blank';
       # code...
+    }elseif (strlen($content) < 5 ) {
+      $errors['content'] = 'length';
+      # code...
     }
-echo 'ほげ';
+
+
   
 }
  ?>
@@ -93,7 +97,7 @@ echo 'ほげ';
 
                                 <div class="form-group">
                                   <label for="exampleInputEmail2"><i class="fa fa-envelope-o"></i>メールアドレス</label>
-                                  <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+                                  <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com" maxlength="30" autofocus>
 
                                     <?php if (isset($errors['email']) && $errors['email'] == 'blank') {?>
                                       <div class="alert alert-danger">メールアドレスを入力してください</div>

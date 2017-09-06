@@ -102,7 +102,7 @@ if (!empty($_POST)) {
               <div class="col-lg-12">
                 <div class="text-center text_loc">
                   <label>メールアドレス ※</label><br>
-                  <input type="email" name="email"　placeholder="アカウント名">
+                  <input type="email" name="email"　placeholder="アカウント名" autofocus>
                   <!-- メールアドレスが入力されていない時 -->
                   <?php if (isset($errors['email']) && $errors['email'] == 'blank'): ?>
                     <br>

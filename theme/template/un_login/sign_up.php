@@ -166,7 +166,7 @@ if (empty($errors)) {
 
 
               <label><i class="fa fa-user" aria-hidden="true"></i>アカウント名 </label><br> 
-              <input type="text" name="acount_name" placeholder="アカウント名">
+              <input type="text" name="acount_name" placeholder="アカウント名" autofocus>
 
               <?php if (isset($errors['acount_name']) && $errors['acount_name'] == 'blank') {?>
               <div class="alert alert-danger">アカウント名を入力してください</div>
