@@ -16,56 +16,72 @@
   //   header('Location: sign_in.php');
   //   exit();
   // }
-  $item_both = '';
-  $item_azukeire = '';
-  $item_carry_in = '';
+  $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
+         FROM `items` AS `i`
+         LEFT JOIN `lists`AS`l`
+         ON `i`.`lists_id`=`l`.`id`
+         WHERE 1';
+  $data = array();
+  $stmt = $dbh->prepare($sql);
+  $stmt ->execute($data);
+  $members_data = $stmt->fetch(PDO::FETCH_ASSOC);
+  var_dump($members_data);
 
   // この中に各種ボタンが押された時の条件を書き込んでいく
-  if (!empty($_POST)) {
 
     //検索ボタンが押された時
-    if (!empty($_POST['list_search'])) {
-        //検索情報かつSESSEIONあるかどうか
-
+    if (!empty($_POST['list_search']) && $_POST['list_search'] != ''){
         //検索ワード収集データベースにインサート
-        $sql= 'INSERT INTO `searched_words` SET `word` = ?,
-                                          `created` = NOW()';
+        $sql = 'SELECT * FROM `searchs` WHERE `word`= ?';
         $data = array($_POST['list_search']);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
-        // 検索結果表示データベースから情報をとる
-        $sql= 'SELECT * FROM `searchs` WHERE `word` = ?';
-        $data = array($_POST['list_search']);
-        $stmt = $dbh->prepare($sql);
-        $stmt ->execute($data);
-        $list_record = $stmt->fetch(PDO::FETCH_ASSOC);
-          // //①データがある場合
-        if ($list_record != '') {
-          $sql= 'INSERT INTO `items` SET `content` = ?';
-          $data = array($_POST['list_search']);
-          $stmt = $dbh->prepare($sql);
-          $stmt ->execute($data);
-        }
-          // // データがない場合： カテゴリー表示
-          // else{
+        //while回して配列にデータを取ってくる。
+        $item_boths = array();
+        $item_azukeires = array();
+        $item_carry_ins = array();
+        while (true) {
+          $search = $stmt->fetch(PDO::FETCH_ASSOC);
+          if ($search == false) {
+            break;
+          }
+          //①データがある場合
+            $sql= 'INSERT INTO `items` SET `categories_id` =?,
+                                           `content` = ?,
+                                           `lists_id` = ?';
+            $data = array($search['categoryies_l2_id'], $_POST['list_search'], $members_data['id']);
+            $stmt = $dbh->prepare($sql);
+            $stmt ->execute($data);
+            // データがない場合： カテゴリー表示
+            // else{
             // カテゴリーわけに飛ぶ
-          // }
-        // // BOTHの場合
-        if ($list_record['categoryies_l2_id'] != 2 && $list_record['categoryies_l2_id'] != 3) {
-          
-          $item_both = $list_record['word'];
-        }
+            // }
+            $sql = 'SELECT * FROM `item` WHERE `content`= ?';
+            $data = array($_POST['list_search']);
+            $stmt = $dbh->prepare($sql);
+            $stmt ->execute($data);
+            $items = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // 持ち込みの場合
-        if ($list_record['categoryies_l2_id'] != 1 && $list_record['categoryies_l2_id'] != 3) {
-          $item_carry_in = $list_record['word'];
-        }
+            //両方持ち込みの場合 
+            if ($items['categories_id'] == 1) {
+              $item_boths[] = $items['content'];
+            }
+            // 持ち込みの場合
+            if ($items['categories_id'] == 2) {
+              $item_carry_ins[] = $items['content'];
+            }
 
-        // //預け入れの場合
-        if ($list_record['categoryies_l2_id'] != 1 && $list_record['categoryies_l2_id'] != 2) {
-          $item_azukeire = $list_record['word'];
-        }
-    }
+            // //預け入れの場合
+            if ($items['categories_id'] == 3) {
+              $item_azukeires[] = $items['content'];    
+            }
+          }    
+        $sql= 'INSERT INTO `searched_words` SET `word` = ?,
+                                        `created` = NOW()';
+        $data = array($_POST['list_search']);
+        $stmt = $dbh->prepare($sql);
+        $stmt ->execute($data);
+      }
 
     // 一時保存ボタンが押された時
     if (!empty($_POST['tmp_btn'])) {
@@ -74,7 +90,6 @@
                                    -- `list_image_path` = ,
                                    `created` = NOW()';
         $data = array($_POST['list_name']);
-        echo $_POST['list_name'];
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
     }
@@ -92,7 +107,6 @@
                            -- `list_image_path` = ,
                            `created` = NOW()';
         $data = array($_POST['list_name']);
-        echo $_POST['list_name'];
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
       } else {
@@ -100,8 +114,12 @@
         // $data = array(,$_POST['list_name'],$_FILES['']);
         // $stmt = $dbh->prepare();
         // $stmt ->execute();
+       
       }
-    }
+       
+                // var_dump($item_boths); 
+                // var_dump($item_azukeires);
+                // var_dump($item_carry_ins);
 
 ?>
 
@@ -123,16 +141,16 @@
   <body>
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
   <?php
-    $ini = parse_ini_file("config.ini");
-    $is_login = $ini['is_login'];
-    // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($is_login) { //ログインしてるとき
-      // echo "login success";
-      require('login_header.php');
-    } else {// ログインしてないとき
-      // echo "login fail";
-      require('header.php');
-    }
+    // $ini = parse_ini_file("config.ini");
+    // $is_login = $ini['is_login'];
+    // // $is_login = 0; //ログインしてるときを１とする（仮）
+    // if ($is_login) { //ログインしてるとき
+    //   // echo "login success";
+    //   require('login_header.php');
+    // } else {// ログインしてないとき
+    //   // echo "login fail";
+    //   require('header.php');
+    // }
   ?>
 
  <div id="img"> 
@@ -165,7 +183,7 @@
           <!-- リストの大枠を作って行く -->
           <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center"> 
-              <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」">
+              <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" autofocus>
               <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索">
             </div>
           </div>
@@ -180,20 +198,18 @@
               </strong>
               <div>
                 <ul class="list-group" id="list_design">
-                  <?php for ($i=0; $i <4 ; $i++) { ?>
+                  <?php foreach ($item_boths as $item_both) { ?>
                     <label class="width">
                       <li class="list-group-item list_float">
                         <input type="checkbox" name="che" class="left checkbox">
                         <span class="checkbox-icon"></span>
-                           <?php echo $item_both;?> 
-                           
-                      <!-- 削除処理を書いていく -->
-                      <?php  ?>
-                        <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
-                          <i class="fa fa-trash"></i>
-                        </a>
-                      <?php  ?>
-
+                         <?php echo $item_both;?> 
+                          <!-- 削除処理を書いていく -->
+                         <?php  ?>
+                           <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
+                             <i class="fa fa-trash"></i>
+                           </a>
+                         <?php  ?>
                       </li>
                     </label>
                   <?php }?>
@@ -209,13 +225,12 @@
               </strong>
               <div>
                 <ul class="list-group">
-
-                  <?php for ($i=0; $i < 4 ; $i++) { ?>
+                  <?php foreach ($item_carry_ins as $item_carry_in){ ?>
                     <label class="width">
                       <li class="list-group-item list_float">
                         <input type="checkbox" name="che" class="left checkbox">
                         <span class="checkbox-icon"></span>
-                        <?php echo $item_carry_in; ?>
+                        <?php  echo $item_carry_in; ?>
                         <!-- 削除処理を書いていく -->
                         <?php  ?>
                           <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
@@ -237,18 +252,18 @@
                 </p>
               </strong>
               <ul class="list-group">
-                <?php for ($i=0; $i < 4 ; $i++) { ?>
+                <?php foreach ($item_azukeires as $item_azukeire) { ?>
                   <label class="width">
                       <li class="list-group-item list_float">
                         <input type="checkbox" name="che" class="left checkbox">
                         <span class="checkbox-icon"></span>
                         <?php echo $item_azukeire; ?>
                         <!-- 削除処理を書いていく -->
-                      <?php  ?>
-                        <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
-                          <i class="fa fa-trash"></i>
-                        </a>
-                      <?php  ?>
+                        <?php  ?>
+                          <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
+                            <i class="fa fa-trash"></i>
+                          </a>
+                        <?php  ?>
                       </li>
                   </label>
                 <?php } ?>
