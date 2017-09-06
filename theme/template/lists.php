@@ -182,7 +182,7 @@
           <!-- リストの大枠を作って行く -->
           <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center"> 
-              <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」">
+              <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" autofocus>
               <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索">
             </div>
           </div>
