@@ -28,8 +28,8 @@ if (!empty($_POST)) {
     var_dump($user_info);
 
     if ($user_info) {
-      $_SESSION['user_info']['id'] = $user_info['id'];
-      $_SESSION['user_info'] = $user_info;
+      $_SESSION['login_user']['id'] = $user_info['id'];
+      $_SESSION['login_user'] = $user_info;
 
       header('Location: ../login/myPage.php');
       exit();
@@ -146,7 +146,7 @@ if (!empty($_POST)) {
             <div class="row">
               <div class="col-lg-12">
                 <div class="text-center btn_location">
-                 <input type="submit" value="新規作成" class="btn btn-success" >
+                 <input type="submit" value="ログイン" class="btn btn-success" >
                 </div>
               </div>
             </div>         
