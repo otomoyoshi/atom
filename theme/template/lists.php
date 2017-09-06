@@ -22,7 +22,6 @@
 
   // この中に各種ボタンが押された時の条件を書き込んでいく
   if (!empty($_POST)) {
-
     //検索ボタンが押された時
     if (!empty($_POST['list_search'])) {
         //検索情報かつSESSEIONあるかどうか
@@ -33,26 +32,32 @@
         $data = array($_POST['list_search']);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
-        // 検索結果表示データベースから情報をとる
-        $sql= 'SELECT * FROM `searchs` WHERE `word` = ?';
-        $data = array($_POST['list_search']);
+        // 検索結果表示データベースから情報をとり、リストテーブルと繋げる
+        $sql= 'SELECT `i`.*,`s`.`word`
+         FROM `item`AS`i`
+         LEFT JOIN `searchs` AS `s`
+         ON `i`.`content`=`s`.`word`
+         WHERE 1';
+        $data = array();
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
         $list_record = $stmt->fetch(PDO::FETCH_ASSOC);
+        var_dump($list_record);
           // //①データがある場合
-        if ($list_record != '') {
-          $sql= 'INSERT INTO `items` SET `content` = ?';
-          $data = array($_POST['list_search']);
-          $stmt = $dbh->prepare($sql);
-          $stmt ->execute($data);
-        }
+        // if ($list_record) {
+        //   $sql= 'INSERT INTO `items` SET `content` = ?,
+        //                                  `categories_id` =?';
+        //   $data = array($_POST['list_search'] list_record['']);
+        //   $stmt = $dbh->prepare($sql);
+        //   $stmt ->execute($data);
+        // }
           // // データがない場合： カテゴリー表示
           // else{
             // カテゴリーわけに飛ぶ
           // }
         // // BOTHの場合
         if ($list_record['categoryies_l2_id'] != 2 && $list_record['categoryies_l2_id'] != 3) {
-          
+
           $item_both = $list_record['word'];
         }
 
