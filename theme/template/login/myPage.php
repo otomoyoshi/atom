@@ -1,3 +1,14 @@
+<?php 
+session_start();
+
+// var_dump($_SESSION['user_info']);
+
+
+
+ ?>
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -41,10 +52,12 @@
             <div class="col-md-8" style="padding-top: 20px">
                 <div class="media">
                   <a class="pull-left" href="#">
-                    <img class="media-object dp img-circle" src="https://pbs.twimg.com/profile_images/1653420268/DSC00234_bigger.JPG" style="width: 80px;height:80px;">
+                    <img class="media-object dp img-circle" src="../../../user_profile_image/<?php echo $_SESSION['user_info']['profile_image_path']; ?>" style="width: 80px;height:80px;">
                   </a>
                   <div class="media-body">
-                    <h3 class="mypage_username">User Nameくん</h3>
+                    <h3 class="mypage_username">
+                      <?php echo $_SESSION['user_info']['account_name']; ?>くん
+                    </h3>
                   </div>
                 </div>
               </div> 
