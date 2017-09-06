@@ -11,7 +11,7 @@
     <title>旅にもつ</title>
 
     <?php require('../child_load_css.php'); ?>
-    <link rel="stylesheet" type="text/css" href="../../assets/css/akihiro_setting.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/setting.css">
 
   </head>
 
@@ -33,8 +33,7 @@
     <div class="container">
 
 <div class="row">
-    <div class="col-xs-10 col-sm-8 col-md-8 col-xs-offset-1 col-sm-offset-2 col-md-offset-2 tabinimotsu_main_div" style="padding:0px 60px 30px 60px; margin-bottom: 50px;/* background-color: rgba(255,255,255,0.6)*/;
-    ">
+    <div class="col-xs-10 col-sm-8 col-md-8 col-xs-offset-1 col-sm-offset-2 col-md-offset-2 tabinimotsu_main_div" style="padding:0px 60px 30px 60px; margin-bottom: 50px; margin-top: 50px">
 
       <h2>会員情報設定<span style="font-size: 15px" font-color="white">※印の欄は必須項目です</span></h2>
       <hr color="blue">
