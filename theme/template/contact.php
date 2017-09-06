@@ -1,3 +1,32 @@
+<?php 
+
+$email ='';
+$content='';
+$errors = array ();
+
+
+//送信ボタンが押されたとき
+if (!empty($_POST)) {
+
+  $email = $_POST['email'];
+  $content = $_POST['content'];
+
+
+  if ($email == '') {
+    $errors['email'] = 'blank';
+    # code...
+  }
+
+  if ($content == '') {
+      $errors['content'] = 'blank';
+      # code...
+    }
+echo 'ほげ';
+  
+}
+ ?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -59,12 +88,12 @@
                     <div class="contact-section">
                          <!--  <div class="row">
                             <div class="col-lg-8 col-md-offset-2"> -->
-                            <form class="form-horizontal">
+                            <!-- <form class="form-horizontal"> -->
                               <form method="POST" action="">
 
                                 <div class="form-group">
                                   <label for="exampleInputEmail2"><i class="fa fa-envelope-o"></i>メールアドレス</label>
-                                  <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+                                  <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
 
                                     <?php if (isset($errors['email']) && $errors['email'] == 'blank') {?>
                                       <div class="alert alert-danger">メールアドレスを入力してください</div>
@@ -72,11 +101,10 @@
                                                         <!-- </div>
                                 <div class="form-group "> -->
                                   <label for="exampleInputText">お問い合わせ内容</label>
-                                 <textarea  class="form-control" placeholder="メッセージをご記入ください"></textarea>
+                                 <textarea name="content" class="form-control" placeholder="メッセージをご記入ください"></textarea>
 
                                     <?php if (isset($errors['content']) && $errors['content'] == 'blank') { ?>
                                       <div class="alert alert-danger">お問い合わせ内容をご記入してください</div>
-
                                     <?php } ?>
 
                                     <?php if (isset($errors['content']) && $errors['content'] == 'length') { ?>
@@ -87,7 +115,7 @@
                                 </div>
                                 <button type="subm9it" class="btn btn-success">送信</button>
                               </form>
-                            </form>
+                            <!-- </form> -->
                             <!-- </div>
                           </div> -->
                         <!-- </div> -->

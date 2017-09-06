@@ -1,5 +1,28 @@
+<?php 
+require('../../developer/dbconnect.php');
+
+$word = '';
+$errors = array ();
+
+//検索ボタンが押されたとき
+if (!empty($_POST)) {
+
+    $word = $_POST['search'];
+
+    if ($word == '') {
+    $errors['word'] = 'blank';
+    }
+
+}
+
+ ?>
+
+
+
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,7 +61,8 @@
       <div class="row">
         <div class="col-xs-12 col-lg-8">
           <h2>「荷造りの悩み」ここに置いて行きませんか？</h2>
-          <form>
+         
+        <form method="POST" action="">
             <div class="form-group">
               <!-- <label for="sel1"></label> -->
               <select class="form-control" id="sel1">
@@ -47,7 +71,10 @@
             </div>
 
             <div class="form-group">
-              <input type="text" id="search" class="form-control" placeholder="例：液体物" maxlength=10>
+              <input type="text" name="search" class="form-control" placeholder="例：液体物" maxlength=10>
+               <?php if (isset($errors['word'])  == 'blank') {?>
+                  <div class="alert alert-danger">検索ワードを入力してください</div>
+                <?php } ?>
             </div>
             <button id="search-btn" type="submit" class="btn btn-warning btn-lg ">検索</button>
           </form>
