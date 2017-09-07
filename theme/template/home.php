@@ -65,18 +65,20 @@ if (!empty($_POST)) {
         <form method="POST" action="">
             <div class="form-group">
               <!-- <label for="sel1"></label> -->
-              <select class="form-control" id="sel1">
+              <select class="form-control" id="sel1" data-intro="航空会社をお選びください" data-step="1">
                 <option>JetStar</option>
               </select>
             </div>
 
             <div class="form-group">
-              <input type="text" name="search" class="form-control" placeholder="例：液体物" maxlength=10 autofocus>
+              <input type="text" id="search" class="form-control" placeholder="例：液体物" maxlength=10 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
+
                <?php if (isset($errors['word'])  == 'blank') {?>
                   <div class="alert alert-danger">検索ワードを入力してください</div>
                 <?php } ?>
+
             </div>
-            <button id="search-btn" type="submit" class="btn btn-warning btn-lg ">検索</button>
+            <button id="search-btn" type="submit" class="btn btn-warning btn-lg">検索</button>
           </form>
         </div><!-- /col-lg-6 -->
         <div class="col-xs-12 col-lg-4">
@@ -87,9 +89,13 @@ if (!empty($_POST)) {
   </div><!-- /headerwrap -->
 
 
+
   <?php require('footer.php'); ?>
 
   <?php require('load_js.php'); ?>
+  <script type="text/javascript">
+  introJs().start();
+  </script>
 
   </body>
 </html>

@@ -94,7 +94,7 @@ while(1){
           <div class="row">
 
                 <!-- 追加ボタン -->
-              <div class="col-md-4 col-sm-4">
+              <div class="col-md-4 col-sm-4" data-intro="新しい持ち物リストを作成できるよ" data-step="1">
                 <div class="wrimagecard wrimagecard-topimage lists_margin">
 
                     <a href="../lists.php">
@@ -135,19 +135,29 @@ while(1){
                   </div>
                 </a>
                   <div class="wrimagecard-topimage_title">
-                    <div>
-              
+<!-- <<<<<<< HEAD
+                  <div>
+
                     <div class="container col-md-12">
                       <div class="row">
+                        <button type="button" class="col-md-4 col-xs-4" data-intro="持ち物リストを複製できるよ" data-step="2"><i class="glyphicon glyphicon-file"></i></button>
+                        <button type="button" class="col-md-4 col-xs-4" data-intro="メールで持ち物リストを送信できるよ" data-step="3"><i class="glyphicon glyphicon-envelope"></i></button>
+                        <button type="button" class="col-md-4 col-xs-4" data-intro="削除はここで" data-step="4"><i class="glyphicon glyphicon-trash"></i></button>
+======= -->
+                    <div>
+              
+                    <!-- <div class="container col-md-12"> -->
+                      <div class="row">
                         <a href="../myPage_function/list_copy.php?id=<?php echo $list['id']; ?>">
-                          <button name="list_copy" type="button" class="col-md-4 col-xs-4"><i class="glyphicon glyphicon-file"></i></button>
+                          <button name="list_copy" type="button" class="col-md-4 col-xs-4" data-intro="持ち物リストを複製できるよ" data-step="2"><i class="glyphicon glyphicon-file"></i></button>
                         </a>
                         <!-- <a href="../function/list_delete.php"> -->
-                          <button name="list_email" type="button" class="col-md-4 col-xs-4"><i class="glyphicon glyphicon-envelope"></i></button>
+                          <button name="list_email" type="button" class="col-md-4 col-xs-4" data-intro="メールで持ち物リストを送信できるよ" data-step="3"><i class="glyphicon glyphicon-envelope"></i></button>
                         </a>
                         <a href="../myPage_function/list_delete.php?id=<?php echo $list['id']; ?>" onClick="return confirm('削除します。\nよろしいですか？');">
-                          <button name="list_delete" type="button" class="col-md-4 col-xs-4"><i class="glyphicon glyphicon-trash"></i></button>
+                          <button name="list_delete" type="button" class="col-md-4 col-xs-4" data-intro="削除はここで" data-step="4"><i class="glyphicon glyphicon-trash"></i></button>
                         </a>
+
                       </div>
                     </div>
                   </div>
@@ -171,6 +181,8 @@ while(1){
 
   <?php require('../footer.php'); ?>
   <?php require('../child_load_js.php'); ?>
-
+  <script type="text/javascript">
+  introJs().start();
+  </script>
   </body>
 </html>

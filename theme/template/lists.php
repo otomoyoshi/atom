@@ -183,13 +183,13 @@
         <div class="row height">
           <div class="col-lg-offset-2 col-lg-5 col-md-12 col-sm-12 col-xs-12">
             <form action="" method="POST">
-              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location">
+              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" data-intro="リスト名を入力してね" data-step="1">
               <input type="text" name="created" placeholder="作成日時" class="form-control created_location">
-            
+
             </div>
             <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
               <?php if (!isset($hoge)) {?>
-                <img src="../assets/img/pic1.jpg" class="img-circle" width="150px" class="padding_img"><br>
+                <img src="../assets/img/pic1.jpg" class="img-circle" width="150px" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
                 <p class="set_profile">
                   <?php echo $record['account_name']?>
                 </p>
@@ -205,12 +205,13 @@
           </div>
           <!-- リストの大枠を作って行く -->
           <div class="row">
-            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center"> 
-              <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" autofocus>
-              <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索"><br>
-            </div>            
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center">
+              <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
+
+              <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索">
+            </div>
           </div>
-          <div class="list_category margin_top row">
+          <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
             <div class="both_contents well col-lg-4">
 
               <!-- BOTHの欄を作る -->
@@ -296,13 +297,13 @@
         <!-- リストの保存機能たち -->
           <div class="list_contents text-center">
               <div class="tmp_keep">
-                <input class="btn btn-info tmp_btn" value="一時保存" type="submit" name="tmp_btn">
+                <input class="btn btn-info tmp_btn" value="一時保存" type="submit" name="tmp_btn" data-intro="作成の続きからリストが作れるよ" data-step="4">
               </div>
             <div class="cansel">
               <input value="キャンセル" class="btn btn-warning can_btn" type="submit" name="can_btn">
             </div>
             <div class="keep">
-              <input class="btn btn-success keep_btn" value="マイページへ登録" type="submit" name="keep_btn">
+              <input class="btn btn-success keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの履歴やメールに送信できるよ" data-step="5">
             </div>  
           </form>
         </div>
@@ -311,6 +312,9 @@
   </div>
   <?php require('footer.php'); ?>
   <?php require('load_js.php'); ?>
+  <script type="text/javascript">
+  introJs().start();
+  </script>
 </body>
 </html>
 
