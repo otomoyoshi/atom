@@ -68,7 +68,11 @@ while(1){
               <div class="col-md-8" style="padding-top: 20px">
                 <div class="media">
                   <a class="pull-left" href="#">
+                  <?php if($_SESSION['login_user']['profile_image_path']): ?>
                     <img class="media-object dp img-circle" src="../../../profile_image_path/<?php echo $_SESSION['login_user']['profile_image_path']; ?>" style="width: 80px;height:80px;">
+                  <?php else: ?>
+                    <img class="media-object dp img-circle" src="../../../profile_image_path/masaki.png" style="width: 80px;height:80px;">
+                  <?php endif; ?>
                   </a>
                   <div class="media-body">
                     <h3 class="mypage_username">

@@ -3,7 +3,7 @@ session_start();
 require('../../../developer/dbconnect.php');
 
 
-$acount_name = '';
+$account_name = '';
 $email = '';
 $password = '';
 $comfirm_password = '';
@@ -13,14 +13,15 @@ $errors = array ();
 // 新規登録ボタンが押されたとき
 if (!empty($_POST)) {
 
-    $acount_name = $_POST['acount_name'];
+    $account_name = $_POST['account_name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $comfirm_password = $_POST['comfirm_password'];
 
 
-    if ($acount_name == '') {
-    $errors['acount_name'] = 'blank';
+
+    if ($account_name == '') {
+    $errors['account_name'] = 'blank';
 
     }
     if ($email == '') {
@@ -45,13 +46,15 @@ if (!empty($_POST)) {
 
 
   //バリデーション(すべての値の入力チェックのみ)
-if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acount_name']) && !empty($_POST['comfirm_password'])) {
+if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['account_name']) && !empty($_POST['comfirm_password'])) {
   if (empty($errors)) {
   $sql = 'SELECT COUNT(*) FROM `members` WHERE `email` = ?' ;
   //COUNT集計関数は、取得したデータの個数を計算する関数
   //カラム名はCOUNT(*)になる
   //$record['COUNT(*)']として個数を取得できる
 
+  
+  // メールアドレスの重複チェック！！
   $data = array($email);
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
@@ -68,17 +71,19 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acou
 
   }
 
-  // if (empty($errors)) {
-    
-  //   $sql = 'INSERT INTO `members` SET `account_name`=?,
-  //                                     `email`=?,
-  //                                     `password`=?,
-  //                                     `created`=NOW()';
-  //   $data = array();
-  //   $stmt = $dbh->prepare($sql);
-  //   $stmt->execute($data);
+  if (empty($errors)) {   
+    $sql = 'INSERT INTO `members` SET `account_name`=?,
+                                      `email`=?,
+                                      `password`=?,
+                                      `created`=NOW()';
+    $data = array($account_name,$email,sha1($password));
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
 
-  // }
+    header('Location: sign_in.php');
+    exit();
+
+  }
 }
 
  ?>
@@ -152,10 +157,10 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acou
              <div class="text-center">
 
 
-              <label><i class="fa fa-user" aria-hidden="true"></i>アカウント名 </label><br> 
-              <input type="text" name="acount_name" placeholder="アカウント名" autofocus>
+              <label><i class="fa fa-user" aria-hidden="true"></i>アカウント名 </label><br>
+                <input type="text" name="account_name" placeholder="アカウント名" autofocus value="<?php echo $account_name; ?>">
 
-              <?php if (isset($errors['acount_name']) && $errors['acount_name'] == 'blank') {?>
+              <?php if (isset($errors['account_name']) && $errors['account_name'] == 'blank') {?>
               <div class="alert alert-danger">アカウント名を入力してください</div>
               <?php } ?>
             </div>
@@ -168,7 +173,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acou
           <div class="col-lg-12">
            <div class="text-center">
               <label><i class="fa fa-envelope-o"></i>メールアドレス </label><br>
-                <input type="email" name="email" placeholder="tabi@example.com">
+                <input type="email" name="email" placeholder="tabi@example.com" value="<?php echo $email; ?>">
 
               <?php if (isset($errors['email']) && $errors['email'] == 'blank'): ?>
                <!--  <span style="color:red:">メールアドレスを入力してください</span> -->
@@ -178,10 +183,6 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acou
                 <div class="alert alert-danger">入力したメールアドレスは既に登録されています</div>
               <?php endif; ?>
               
-
-
-
-
 
 
 
