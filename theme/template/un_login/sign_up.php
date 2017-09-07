@@ -44,39 +44,9 @@ if (!empty($_POST)) {
     }
 
 
-
-// //メールアドレスの重複チェック
-//  if (empty($errors)) {
-//   $sql = 'SELECT COUNT(*) FROM `users` WHERE `email` = ?' ;
-//   //COUNT集計関数は、取得したデータの個数を計算する関数
-//   //カラム名はCOUNT(*)になる
-//   //$record['COUNT(*)']として個数を取得できる
-
-//   $data = array($email);
-//   $stmt = $dbh->prepare($sql);
-//   $stmt ->execute($data);
-//   $record = $stmt->fetch(PDO::FETCH_ASSOC);
-//   if ($record['COUNT(*)']>0) {
-//     $errors['email'] = 'duplicate';// duplicate → 重複
-    
-//   }
- 
-
-if (empty($errors)) {
-  $_SESSION['user_info']['account_name'] = $acount_name;
-  $_SESSION['user_info']['email'] = $email;
-  $_SESSION['user_info']['password'] = $password;
-  $_SESSION['user_info']['comfirm_password'] = $comfirm_password;
-  header('Location: sign_in.php');
-  exit();//POST送信は破棄される
-
-}
-
-
-
   //バリデーション(すべての値の入力チェックのみ)
-  if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acount_name']) && !empty($_POST['comfirm_password'])) {
- if (empty($errors)) {
+if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acount_name']) && !empty($_POST['comfirm_password'])) {
+  if (empty($errors)) {
   $sql = 'SELECT COUNT(*) FROM `members` WHERE `email` = ?' ;
   //COUNT集計関数は、取得したデータの個数を計算する関数
   //カラム名はCOUNT(*)になる
@@ -89,9 +59,26 @@ if (empty($errors)) {
   if ($record['COUNT(*)']>0) {
     $errors['email'] = 'duplicate';// duplicate → 重複
   }
- }
+  }
 
-}
+  // パスワードと確認用パスワードが一致しているかの確認
+  if ($password != $comfirm_password) {
+    $errors['comfirm'] = 'mismatch';
+  }
+
+  }
+
+  // if (empty($errors)) {
+    
+  //   $sql = 'INSERT INTO `members` SET `account_name`=?,
+  //                                     `email`=?,
+  //                                     `password`=?,
+  //                                     `created`=NOW()';
+  //   $data = array();
+  //   $stmt = $dbh->prepare($sql);
+  //   $stmt->execute($data);
+
+  // }
 }
 
  ?>
@@ -233,6 +220,11 @@ if (empty($errors)) {
               <?php if (isset($errors['comfirm_password']) && $errors['comfirm_password'] == 'length') {?>
                 <div class="alert alert-danger">確認用パスワードは8文字以上で入力してください</div>
               <?php } ?>
+
+              <?php if(isset($errors['comfirm']) && $errors['comfirm'] == 'mismatch'): ?>
+                <div class="alert alert-danger">確認用パスワードが一致しません</div>
+              <?php endif; ?>
+
             </div>
           </div>
         </div>
