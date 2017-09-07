@@ -74,7 +74,7 @@ session_start();
           <div class="row">
 
                 <!-- 追加ボタン -->
-              <div class="col-md-4 col-sm-4">
+              <div class="col-md-4 col-sm-4" data-intro="新しい持ち物リストを作成できるよ" data-step="1">
                 <div class="wrimagecard wrimagecard-topimage lists_margin">
                   <a href="#">
                     <div class="wrimagecard-topimage_header" style="background-color:rgba(255, 135, 0, 0.2); ">
@@ -106,12 +106,12 @@ session_start();
                   </div>
                   <div class="wrimagecard-topimage_title">
                   <div>
-              
+
                     <div class="container col-md-12">
                       <div class="row">
-                        <button type="button" class="col-md-4 col-xs-4"><i class="glyphicon glyphicon-file"></i></button>
-                        <button type="button" class="col-md-4 col-xs-4"><i class="glyphicon glyphicon-envelope"></i></button>
-                        <button type="button" class="col-md-4 col-xs-4"><i class="glyphicon glyphicon-trash"></i></button>
+                        <button type="button" class="col-md-4 col-xs-4" data-intro="持ち物リストを複製できるよ" data-step="2"><i class="glyphicon glyphicon-file"></i></button>
+                        <button type="button" class="col-md-4 col-xs-4" data-intro="メールで持ち物リストを送信できるよ" data-step="3"><i class="glyphicon glyphicon-envelope"></i></button>
+                        <button type="button" class="col-md-4 col-xs-4" data-intro="削除はここで" data-step="4"><i class="glyphicon glyphicon-trash"></i></button>
                       </div>
                     </div>
                   </div>
@@ -136,6 +136,8 @@ session_start();
 
   <?php require('../footer.php'); ?>
   <?php require('../child_load_js.php'); ?>
-
+  <script type="text/javascript">
+  introJs().start();
+  </script>
   </body>
 </html>

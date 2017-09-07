@@ -41,15 +41,15 @@
           <form>
             <div class="form-group">
               <!-- <label for="sel1"></label> -->
-              <select class="form-control" id="sel1">
+              <select class="form-control" id="sel1" data-intro="航空会社をお選びください" data-step="1">
                 <option>JetStar</option>
               </select>
             </div>
 
             <div class="form-group">
-              <input type="text" id="search" class="form-control" placeholder="例：液体物" maxlength=10>
+              <input type="text" id="search" class="form-control" placeholder="例：液体物" maxlength=10 data-intro="調べたい荷物名を入力してください" data-step="2">
             </div>
-            <button id="search-btn" type="submit" class="btn btn-warning btn-lg ">検索</button>
+            <button id="search-btn" type="submit" class="btn btn-warning btn-lg">検索</button>
           </form>
         </div><!-- /col-lg-6 -->
         <div class="col-xs-12 col-lg-4">
@@ -60,9 +60,13 @@
   </div><!-- /headerwrap -->
 
 
+
   <?php require('footer.php'); ?>
 
   <?php require('load_js.php'); ?>
+  <script type="text/javascript">
+  introJs().start();
+  </script>
 
   </body>
 </html>
