@@ -1,8 +1,12 @@
 <?php
   session_start();
   require('../../developer/dbconnect.php');
-
-  // ユーザーとリストのリンク
+  $items = array();
+  $item_boths = array();
+  $item_azukeires = array();
+  $item_carry_ins = array();
+  //$banned_baggage = '';
+// ユーザーとリストのリンク
   $sql= 'SELECT `l`.*,`m`.`account_name`
            FROM `lists`AS`l`
            LEFT JOIN `members` AS `m`
@@ -30,9 +34,6 @@
         $stmt ->execute($data);
         $search = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
         
-        $item_boths = array();
-        $item_azukeires = array();
-        $item_carry_ins = array();
           
 
           //①ユーザの検索と一致した場合 ：
@@ -51,23 +52,7 @@
             $stmt = $dbh->prepare($sql);
             $stmt ->execute($data);
             $items = $stmt->fetch(PDO::FETCH_ASSOC);
-            var_dump($items);
           }   
-            // searchsにデータがない場合： カテゴリー表示
-            // else{
-            // カテゴリーわけに飛ぶ
-            // }
-
-          // リストとアイテムを結合
-          $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
-                 FROM `items` AS `i`
-                 LEFT JOIN `lists` AS `l`
-                 ON `i`.`lists_id` = `l`.`id`
-                 WHERE 1';
-          $data = array();
-          $stmt = $dbh->prepare($sql);
-          $stmt ->execute();
-          $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
           //アイテムにデータがあるとき
           if (isset($items)) {
             if ($items['categories_id'] == 1) {
@@ -78,14 +63,32 @@
             elseif ($items['categories_id'] == 2) {
                 $item_carry_ins[] = $items['content'];
             }
-              // //預け入れの場合
+              //預け入れの場合
             elseif ($items['categories_id'] == 3) {
                 $item_azukeires[] = $items['content'];    
-            } else{
-            $banned_baggage = '禁止です';
-          }
-         }
-        //検索収集用テーブルに登
+            } 
+              //持ち込めない場合
+            else {
+              $banned_baggage = 'その荷物は持ち込めません！！';
+            } 
+          }  //アイテムにデータがない時
+            else {
+              //カテゴリー表示
+            }
+          // リストとアイテムを結合
+          $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
+                 FROM `items` AS `i`
+                 LEFT JOIN `lists` AS `l`
+                 ON `i`.`lists_id` = `l`.`id`
+                 WHERE 1';
+          $data = array();
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute();
+          $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
+          var_dump($list_data);
+          
+         
+        //検索収集用テーブルに登録
         $sql= 'INSERT INTO `searched_words` SET `word` = ?,
                                         `created` = NOW()';
         $data = array($_POST['list_search']);
@@ -120,16 +123,16 @@
         $data = array($_POST['list_name']);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
-      } else {
-        // $sql = '';
-        // $data = array(,$_POST['list_name'],$_FILES['']);
-        // $stmt = $dbh->prepare();
-        // $stmt ->execute();
-     }
+    } else {
+      // $sql = '';
+      // $data = array(,$_POST['list_name'],$_FILES['']);
+      // $stmt = $dbh->prepare();
+      // $stmt ->execute();
+    }
        
-                // var_dump($item_boths); 
-                // var_dump($item_azukeires);
-                // var_dump($item_carry_ins);
+  // var_dump($item_boths); 
+  // var_dump($item_azukeires);
+  // var_dump($item_carry_ins);
 
 ?>
 
@@ -194,8 +197,8 @@
           <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center"> 
               <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" autofocus>
-              <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索">
-            </div>
+              <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索"><br>
+            </div>            
           </div>
           <div class="list_category margin_top row">
             <div class="both_contents well col-lg-4">
@@ -312,18 +315,6 @@
 //                                 `created` = NOW()
 //                                 // aviation_id  categoryies_l2_id 
  ?>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
