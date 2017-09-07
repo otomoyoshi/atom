@@ -6,16 +6,7 @@
   $item_azukeires = array();
   $item_carry_ins = array();
   //$banned_baggage = '';
-// ユーザーとリストのリンク
-  $sql= 'SELECT `l`.*,`m`.`account_name`
-           FROM `lists`AS`l`
-           LEFT JOIN `members` AS `m`
-           ON `l`.`members_id`=`m`.`id`
-           WHERE 1';
-  $data = array();
-  $stmt = $dbh->prepare($sql);
-  $stmt ->execute($data);
-  $record = $stmt->fetch(PDO::FETCH_ASSOC);
+
 
   // if (!isset($_SESSION[''])) {
   //   header('Location: sign_in.php');
@@ -27,13 +18,42 @@
 
     //検索ボタンが押された時
     if (!empty($_POST['list_search']) && $_POST['list_search'] != ''){
-        //検索ワード収集データベースにインサート
-        $sql = 'SELECT * FROM `searchs` WHERE `word`= ?';
-        $data = array($_POST['list_search']);
-        $stmt = $dbh->prepare($sql);
-        $stmt ->execute($data);
-        $search = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
-        
+          // リストに追加
+          $sql = 'INSERT `lists` SET `members_id` = 1 ,
+                                     `name` = ?, 
+                                     -- `list_image_path` = ,
+                                     `created` = NOW()';
+          $data = array($_POST['list_name']);
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute($data);
+          // リストとアイテムを結合
+          $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
+                 FROM `items` AS `i`
+                 LEFT JOIN `lists` AS `l`
+                 ON `i`.`lists_id` = `l`.`id`
+                 WHERE 1';
+          $data = array();
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute();
+          $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+          // ユーザーとリストのリンク
+          $sql= 'SELECT `l`.*,`m`.`account_name`
+                   FROM `lists`AS`l`
+                   LEFT JOIN `members` AS `m`
+                   ON `l`.`members_id`=`m`.`id`
+                   WHERE 1';
+          $data = array();
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute($data);
+          $record = $stmt->fetch(PDO::FETCH_ASSOC);
+
+          $sql = 'SELECT * FROM `searchs` WHERE `word`= ?';
+          $data = array($_POST['list_search']);
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute($data);
+          $search = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
+          
           
 
           //①ユーザの検索と一致した場合 ：
@@ -47,46 +67,40 @@
             $stmt ->execute($data);
           
             // 一致したアイテムの結果を取得
-            $sql = 'SELECT * FROM `items` WHERE `content`= ?';
+            $sql = 'SELECT * FROM `items` WHERE 1';
             $data = array($_POST['list_search']);
             $stmt = $dbh->prepare($sql);
             $stmt ->execute($data);
-            $items = $stmt->fetch(PDO::FETCH_ASSOC);
           }   
-          //アイテムにデータがあるとき
-          if (isset($items)) {
-            if ($items['categories_id'] == 1) {
-                //両方持ち込みの場合 
-                $item_boths[] = $items['content'];
+          while(true){
+            $items = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($items == false) {
+              break;
             }
-              // 持ち込みの場合
-            elseif ($items['categories_id'] == 2) {
-                $item_carry_ins[] = $items['content'];
-            }
-              //預け入れの場合
-            elseif ($items['categories_id'] == 3) {
-                $item_azukeires[] = $items['content'];    
-            } 
-              //持ち込めない場合
-            else {
-              $banned_baggage = 'その荷物は持ち込めません！！';
-            } 
-          }  //アイテムにデータがない時
-            else {
-              //カテゴリー表示
-            }
-          // リストとアイテムを結合
-          $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
-                 FROM `items` AS `i`
-                 LEFT JOIN `lists` AS `l`
-                 ON `i`.`lists_id` = `l`.`id`
-                 WHERE 1';
-          $data = array();
-          $stmt = $dbh->prepare($sql);
-          $stmt ->execute();
-          $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
-          var_dump($list_data);
-          
+            //アイテムにデータがあるとき
+            if (isset($items)) {
+              if ($items['categories_id'] == '1') {
+                  //両方持ち込みの場合 
+                  $item_boths[] = $items['content'];
+              }
+                // 持ち込みの場合
+              elseif ($items['categories_id'] == '2') {
+                  $item_carry_ins[] = $items['content'];
+              }
+                //預け入れの場合
+              elseif ($items['categories_id'] == '3') {
+                  $item_azukeires[] = $items['content'];    
+              } 
+                //持ち込めない場合
+              else {
+                $banned_baggage = 'その荷物は持ち込めません！！';
+              } 
+            }  
+          }
+          // //アイテムにデータがない時
+          //   else {
+          //     //カテゴリー表示
+          //   }
          
         //検索収集用テーブルに登録
         $sql= 'INSERT INTO `searched_words` SET `word` = ?,
@@ -129,10 +143,6 @@
       // $stmt = $dbh->prepare();
       // $stmt ->execute();
     }
-       
-  // var_dump($item_boths); 
-  // var_dump($item_azukeires);
-  // var_dump($item_carry_ins);
 
 ?>
 
