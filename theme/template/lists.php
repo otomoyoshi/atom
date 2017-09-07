@@ -12,21 +12,13 @@
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
   $record = $stmt->fetch(PDO::FETCH_ASSOC);
+
   // if (!isset($_SESSION[''])) {
   //   header('Location: sign_in.php');
   //   exit();
   // }
-  $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
-         FROM `items` AS `i`
-         LEFT JOIN `lists`AS`l`
-         ON `i`.`lists_id`=`l`.`id`
-         WHERE 1';
-  $data = array();
-  $stmt = $dbh->prepare($sql);
-  $stmt ->execute($data);
-  $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
-  var_dump($list_data);
 
+  
   // この中に各種ボタンが押された時の条件を書き込んでいく
 
     //検索ボタンが押された時
@@ -36,46 +28,61 @@
         $data = array($_POST['list_search']);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
-        //while回して配列にデータを取ってくる。
+        $search = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
+        
         $item_boths = array();
         $item_azukeires = array();
         $item_carry_ins = array();
-        while (true) {
-          $search = $stmt->fetch(PDO::FETCH_ASSOC);
-          if ($search == false) {
-            break;
-          }
-          //①searchsにデータがある場合 ：リストに追加
+          
+
+        var_dump($list_data);
+          //①ユーザの検索と一致した場合 ：
+          if ($search['word'] == $_POST['list_search']) {
+            // アイテムに追加
             $sql= 'INSERT INTO `items` SET `categories_id` =?,
                                            `content` = ?,
                                            `lists_id` = ?';
-            $data = array($search['categoryies_l2_id'], $_POST['list_search'], $list_data['id']);
+            $data = array($search['baggage_classify'], $_POST['list_search'], 3);
             $stmt = $dbh->prepare($sql);
             $stmt ->execute($data);
-            // searchsにデータがない場合： カテゴリー表示
-            // else{
-            // カテゴリーわけに飛ぶ
-            // }
-            $sql = 'SELECT * FROM `item` WHERE `content`= ?';
+          
+            // 一致したアイテムの結果を取得
+            $sql = 'SELECT * FROM `items` WHERE `content`= ?';
             $data = array($_POST['list_search']);
             $stmt = $dbh->prepare($sql);
             $stmt ->execute($data);
             $items = $stmt->fetch(PDO::FETCH_ASSOC);
+          }   
+            // searchsにデータがない場合： カテゴリー表示
+            // else{
+            // カテゴリーわけに飛ぶ
+            // }
 
+          // リストとアイテムを結合
+          $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
+                 FROM `items` AS `i`
+                 LEFT JOIN `lists` AS `l`
+                 ON `i`.`lists_id` = `l`.`id`
+                 WHERE 1';
+          $data = array();
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute();
+          $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
             //両方持ち込みの場合 
-            if ($items['categories_id'] == 1) {
-              $item_boths[] = $items['content'];
-            }
-            // 持ち込みの場合
-            if ($items['categories_id'] == 2) {
-              $item_carry_ins[] = $items['content'];
-            }
+          if ($items['baggage_classify'] == 1) {
+            $item_boths[] = $items['content'];
+          }
+          // 持ち込みの場合
+          if ($items['baggage_classify'] == 2) {
+            $item_carry_ins[] = $items['content'];
+          }
 
-            // //預け入れの場合
-            if ($items['categories_id'] == 3) {
-              $item_azukeires[] = $items['content'];    
-            }
-          }    
+          // //預け入れの場合
+          if ($items['baggage_classify'] == 3) {
+            $item_azukeires[] = $items['content'];    
+          }
+         
+        //検索収集用テーブルに登録
         $sql= 'INSERT INTO `searched_words` SET `word` = ?,
                                         `created` = NOW()';
         $data = array($_POST['list_search']);
@@ -92,6 +99,7 @@
         $data = array($_POST['list_name']);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
+
     }
 
     //キャンセルボタンが押された時
@@ -292,15 +300,14 @@
 
 
 <?php 
-// 条件用
-      // INSERT INTO `searchs` SET `word` = 'まさき',
-      //                           `judge` = 1,
-      //                           `condition` = 'pこhuskdjbf',
-      //                           `classify` = 'lsajおkdb.kjf',
-      //                           `aviation_id` = 0,
-      //                           `categoryies_l2_id` =3, 
-      //                           `created` = NOW()
-                                // aviation_id  categoryies_l2_id 
+// // 条件用
+//       INSERT INTO `searchs` SET `word` = 'まさきっき',
+//                                 `condition` = 'ほげ',
+//                                 `baggage_classify` = 2, // 1:両方 2:機内 3:預け 4:不可
+//                                 `aviation_id` = 1,
+//                                 `categoryies_l2_id` =3, 
+//                                 `created` = NOW()
+//                                 // aviation_id  categoryies_l2_id 
  ?>
 
 
