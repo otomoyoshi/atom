@@ -24,8 +24,8 @@
   $data = array();
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
-  $members_data = $stmt->fetch(PDO::FETCH_ASSOC);
-  var_dump($members_data);
+  $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
+  var_dump($list_data);
 
   // この中に各種ボタンが押された時の条件を書き込んでいく
 
@@ -45,14 +45,14 @@
           if ($search == false) {
             break;
           }
-          //①データがある場合
+          //①searchsにデータがある場合 ：リストに追加
             $sql= 'INSERT INTO `items` SET `categories_id` =?,
                                            `content` = ?,
                                            `lists_id` = ?';
-            $data = array($search['categoryies_l2_id'], $_POST['list_search'], $members_data['id']);
+            $data = array($search['categoryies_l2_id'], $_POST['list_search'], $list_data['id']);
             $stmt = $dbh->prepare($sql);
             $stmt ->execute($data);
-            // データがない場合： カテゴリー表示
+            // searchsにデータがない場合： カテゴリー表示
             // else{
             // カテゴリーわけに飛ぶ
             // }
@@ -114,8 +114,7 @@
         // $data = array(,$_POST['list_name'],$_FILES['']);
         // $stmt = $dbh->prepare();
         // $stmt ->execute();
-       
-      }
+     }
        
                 // var_dump($item_boths); 
                 // var_dump($item_azukeires);
