@@ -35,7 +35,6 @@
         $item_carry_ins = array();
           
 
-        var_dump($list_data);
           //①ユーザの検索と一致した場合 ：
           if ($search['word'] == $_POST['list_search']) {
             // アイテムに追加
@@ -52,6 +51,7 @@
             $stmt = $dbh->prepare($sql);
             $stmt ->execute($data);
             $items = $stmt->fetch(PDO::FETCH_ASSOC);
+            var_dump($items);
           }   
             // searchsにデータがない場合： カテゴリー表示
             // else{
@@ -68,21 +68,24 @@
           $stmt = $dbh->prepare($sql);
           $stmt ->execute();
           $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
-            //両方持ち込みの場合 
-          if ($items['baggage_classify'] == 1) {
-            $item_boths[] = $items['content'];
+          //アイテムにデータがあるとき
+          if (isset($items)) {
+            if ($items['categories_id'] == 1) {
+                //両方持ち込みの場合 
+                $item_boths[] = $items['content'];
+            }
+              // 持ち込みの場合
+            elseif ($items['categories_id'] == 2) {
+                $item_carry_ins[] = $items['content'];
+            }
+              // //預け入れの場合
+            elseif ($items['categories_id'] == 3) {
+                $item_azukeires[] = $items['content'];    
+            } else{
+            $banned_baggage = '禁止です';
           }
-          // 持ち込みの場合
-          if ($items['baggage_classify'] == 2) {
-            $item_carry_ins[] = $items['content'];
-          }
-
-          // //預け入れの場合
-          if ($items['baggage_classify'] == 3) {
-            $item_azukeires[] = $items['content'];    
-          }
-         
-        //検索収集用テーブルに登録
+         }
+        //検索収集用テーブルに登
         $sql= 'INSERT INTO `searched_words` SET `word` = ?,
                                         `created` = NOW()';
         $data = array($_POST['list_search']);
