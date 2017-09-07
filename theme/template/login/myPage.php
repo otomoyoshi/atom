@@ -135,13 +135,13 @@ while(1){
               
                     <div class="container col-md-12">
                       <div class="row">
-                        <a href="../function/list_copy.php?id=<?php echo $list['id']; ?>">
+                        <a href="../myPage_function/list_copy.php?id=<?php echo $list['id']; ?>">
                           <button name="list_copy" type="button" class="col-md-4 col-xs-4"><i class="glyphicon glyphicon-file"></i></button>
                         </a>
                         <!-- <a href="../function/list_delete.php"> -->
                           <button name="list_email" type="button" class="col-md-4 col-xs-4"><i class="glyphicon glyphicon-envelope"></i></button>
                         </a>
-                        <a href="../function/list_delete.php?id=<?php echo $list['id']; ?>" onClick="return confirm('削除します。\nよろしいですか？');">
+                        <a href="../myPage_function/list_delete.php?id=<?php echo $list['id']; ?>" onClick="return confirm('削除します。\nよろしいですか？');">
                           <button name="list_delete" type="button" class="col-md-4 col-xs-4"><i class="glyphicon glyphicon-trash"></i></button>
                         </a>
                       </div>
