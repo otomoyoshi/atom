@@ -48,13 +48,9 @@ if (!empty($_POST)) {
   //バリデーション(すべての値の入力チェックのみ)
 if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['account_name']) && !empty($_POST['comfirm_password'])) {
   if (empty($errors)) {
-  $sql = 'SELECT COUNT(*) FROM `members` WHERE `email` = ?' ;
-  //COUNT集計関数は、取得したデータの個数を計算する関数
-  //カラム名はCOUNT(*)になる
-  //$record['COUNT(*)']として個数を取得できる
-
   
   // メールアドレスの重複チェック！！
+  $sql = 'SELECT COUNT(*) FROM `members` WHERE `email` = ?' ;
   $data = array($email);
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
