@@ -1,8 +1,24 @@
 <?php 
 session_start();
+require('../../../developer/dbconnect.php');
 
 // var_dump($_SESSION['user_info']);
 
+$sql = 'SELECT * FROM `lists` WHERE `members_id`=?';
+$data = array($_SESSION['login_user']['id']);
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);
+
+$lists = array();
+while(1){
+  $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+  if ($rec == false) {
+    break;
+  }
+  $lists[] = $rec;
+}
+
+// var_dump($lists);
 
 
  ?>
@@ -49,14 +65,14 @@ session_start();
 
           <div class="row">
             <div class="col-md-4"></div>
-            <div class="col-md-8" style="padding-top: 20px">
+              <div class="col-md-8" style="padding-top: 20px">
                 <div class="media">
                   <a class="pull-left" href="#">
-                    <img class="media-object dp img-circle" src="../../../user_profile_image/<?php echo $_SESSION['user_info']['profile_image_path']; ?>" style="width: 80px;height:80px;">
+                    <img class="media-object dp img-circle" src="../../../profile_image_path/<?php echo $_SESSION['login_user']['profile_image_path']; ?>" style="width: 80px;height:80px;">
                   </a>
                   <div class="media-body">
                     <h3 class="mypage_username">
-                      <?php echo $_SESSION['user_info']['account_name']; ?>くん
+                      <?php echo $_SESSION['login_user']['account_name']; ?>くん
                     </h3>
                   </div>
                 </div>
@@ -76,35 +92,46 @@ session_start();
                 <!-- 追加ボタン -->
               <div class="col-md-4 col-sm-4" data-intro="新しい持ち物リストを作成できるよ" data-step="1">
                 <div class="wrimagecard wrimagecard-topimage lists_margin">
-                  <a href="#">
-                    <div class="wrimagecard-topimage_header" style="background-color:rgba(255, 135, 0, 0.2); ">
-                      <center><i class="fa fa-plus-square-o" style="color:rgba(255, 135, 0, 0.4);"></i></center>
-                    </div>
-                    <div class="wrimagecard-topimage_title_add">
-                      <h4>新しく追加してね！</h4>
-                    </div>
-                  </a>
+
+                    <a href="../lists.php">
+                      <div class="wrimagecard-topimage_header" style="background-color:rgba(255, 135, 0, 0.2); ">
+                        <div style="text-align: center"><i class="fa fa-plus-square-o" style="color:rgba(255, 135, 0, 0.4);"></i></div>
+                      </div>
+                      <div class="wrimagecard-topimage_title_add">
+                        <h4>新しく追加してね！</h4>
+                      </div>
+                    </a>
+
                 </div>
               </div>
 
           <!-- 個々のリスト -->
-          <?php for($i = 0;$i <= 4;$i++): ?>
+          <?php foreach($lists as $list): ?>
             <div class="col-md-4 col-sm-4">
               <div class="wrimagecard wrimagecard-topimage lists_margin">
-                  <a href="#">
+                <a href="../lists.php">
                   <div class="wrimagecard-topimage_header" style="background-color: rgba(60, 216, 255, 0.2)">
                     <div class="row">
 
-                      <div class="col-xs-7 col-md-7">
-                        <h4 style="text-align: center; padding: 22px 0px 0px 20px">リスト <?php echo $i + 1; ?> </h4>
+                      <div class="col-xs-6 col-lg-7">
+                        <h4 style="text-align: right; padding-top: 10px">LIST NAME</h4>
+                        <h5 style="text-align: center; padding: 0px 0px 0px 20px">
+                          <?php echo $list['name']; ?>
+                        </h5>
                       </div>
-                      <div class="col-xs-3 col-md-3">
-                        <i class = "fa fa-suitcase" style="color:rgba(0, 152, 255, 0.6)"></i>
+                      <div class="col-xs-3 col-mlg-3">
+                        <?php if(!empty($list['list_image_path'])): ?>
+                          <img src="../../../list_image_path/<?php echo $list['list_image_path'] ?>" class="img-circle" style="width: 70px; height:70px; margin: 8px">
+                        <?php else: ?>
+                          <i class = "fa fa-suitcase" style="color:rgba(0, 152, 255, 0.6)"></i>
+                        <?php endif; ?>
                       </div>
 
                     </div>
                   </div>
+                </a>
                   <div class="wrimagecard-topimage_title">
+<!-- <<<<<<< HEAD
                   <div>
 
                     <div class="container col-md-12">
@@ -112,14 +139,28 @@ session_start();
                         <button type="button" class="col-md-4 col-xs-4" data-intro="持ち物リストを複製できるよ" data-step="2"><i class="glyphicon glyphicon-file"></i></button>
                         <button type="button" class="col-md-4 col-xs-4" data-intro="メールで持ち物リストを送信できるよ" data-step="3"><i class="glyphicon glyphicon-envelope"></i></button>
                         <button type="button" class="col-md-4 col-xs-4" data-intro="削除はここで" data-step="4"><i class="glyphicon glyphicon-trash"></i></button>
+======= -->
+                    <div>
+              
+                    <!-- <div class="container col-md-12"> -->
+                      <div class="row">
+                        <a href="../myPage_function/list_copy.php?id=<?php echo $list['id']; ?>">
+                          <button name="list_copy" type="button" class="col-md-4 col-xs-4" data-intro="持ち物リストを複製できるよ" data-step="2"><i class="glyphicon glyphicon-file"></i></button>
+                        </a>
+                        <!-- <a href="../function/list_delete.php"> -->
+                          <button name="list_email" type="button" class="col-md-4 col-xs-4" data-intro="メールで持ち物リストを送信できるよ" data-step="3"><i class="glyphicon glyphicon-envelope"></i></button>
+                        </a>
+                        <a href="../myPage_function/list_delete.php?id=<?php echo $list['id']; ?>" onClick="return confirm('削除します。\nよろしいですか？');">
+                          <button name="list_delete" type="button" class="col-md-4 col-xs-4" data-intro="削除はここで" data-step="4"><i class="glyphicon glyphicon-trash"></i></button>
+                        </a>
+
                       </div>
                     </div>
                   </div>
                  </div>
-                </a>
                 </div>
               </div>
-            <?php endfor; ?>
+            <?php endforeach; ?>
             </div>
 
           <div>

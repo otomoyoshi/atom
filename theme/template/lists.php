@@ -12,77 +12,86 @@
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
   $record = $stmt->fetch(PDO::FETCH_ASSOC);
+
   // if (!isset($_SESSION[''])) {
   //   header('Location: sign_in.php');
   //   exit();
   // }
-  $item_boths = array();
-  $item_azukeires = array();
-  $item_carry_ins = array();
 
+  
   // この中に各種ボタンが押された時の条件を書き込んでいく
-  if (!empty($_POST)) {
+
     //検索ボタンが押された時
-    if (!empty($_POST['list_search'])) {
-        //検索情報かつSESSEIONあるかどうか
-
+    if (!empty($_POST['list_search']) && $_POST['list_search'] != ''){
         //検索ワード収集データベースにインサート
-        $sql= 'INSERT INTO `searched_words` SET `word` = ?,
-                                          `created` = NOW()';
+        $sql = 'SELECT * FROM `searchs` WHERE `word`= ?';
         $data = array($_POST['list_search']);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
+        $search = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
+        
+        $item_boths = array();
+        $item_azukeires = array();
+        $item_carry_ins = array();
+          
 
-        //上とは別処理
-        $sql = 'INSERT INTO `items` SET `content` = ?';
-        $data = array($_POST['list_search']);
-        $stmt = $dbh->prepare($sql);
-        $stmt ->execute($data);
-        //検索結果表示データベースから情報をとり、リストテーブルと繋げる
-        $sql = 'SELECT `i`.*,`s`.`word`,`s`.`categoryies_l2_id`
-         FROM `items`AS`i`
-         LEFT JOIN `searchs` AS `s`
-         ON `i`.`content`=`s`.`word`
-         WHERE 1';
-        $data = array();
-        $stmt = $dbh->prepare($sql);
-        $stmt ->execute($data);
-
-        //while回して配列にデータを取ってくる。
-        while (true) {
-          $search = $stmt->fetch(PDO::FETCH_ASSOC);
-
-          if ($search == false) {
-            break;
-          }
-
-          if ($search['categoryies_l2_id'] == 1) {
-            $item_boths[] = $search['word'];
-          }
-
-          // 持ち込みの場合
-          if ($search['categoryies_l2_id'] == 2) {
-            $item_carry_ins[] = $search['word'];
-          }
-
-          // //預け入れの場合
-          if ($search['categoryies_l2_id'] == 3) {
-            $item_azukeires[] = $search['word'];
-          }
-        }
-
-        //①データがある場合
-        if ($search) {
-          $sql= 'INSERT INTO `items` SET `categories_id` =?';
-          $data = array($search['categoryies_l2_id']);
-          $stmt = $dbh->prepare($sql);
-          $stmt ->execute($data);
-        } // // データがない場合： カテゴリー表示
-          // else{
+          //①ユーザの検索と一致した場合 ：
+          if ($search['word'] == $_POST['list_search']) {
+            // アイテムに追加
+            $sql= 'INSERT INTO `items` SET `categories_id` =?,
+                                           `content` = ?,
+                                           `lists_id` = ?';
+            $data = array($search['baggage_classify'], $_POST['list_search'], 3);
+            $stmt = $dbh->prepare($sql);
+            $stmt ->execute($data);
+          
+            // 一致したアイテムの結果を取得
+            $sql = 'SELECT * FROM `items` WHERE `content`= ?';
+            $data = array($_POST['list_search']);
+            $stmt = $dbh->prepare($sql);
+            $stmt ->execute($data);
+            $items = $stmt->fetch(PDO::FETCH_ASSOC);
+            var_dump($items);
+          }   
+            // searchsにデータがない場合： カテゴリー表示
+            // else{
             // カテゴリーわけに飛ぶ
-          // }
-        // // BOTHの場合
-  }
+            // }
+
+          // リストとアイテムを結合
+          $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
+                 FROM `items` AS `i`
+                 LEFT JOIN `lists` AS `l`
+                 ON `i`.`lists_id` = `l`.`id`
+                 WHERE 1';
+          $data = array();
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute();
+          $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
+          //アイテムにデータがあるとき
+          if (isset($items)) {
+            if ($items['categories_id'] == 1) {
+                //両方持ち込みの場合 
+                $item_boths[] = $items['content'];
+            }
+              // 持ち込みの場合
+            elseif ($items['categories_id'] == 2) {
+                $item_carry_ins[] = $items['content'];
+            }
+              // //預け入れの場合
+            elseif ($items['categories_id'] == 3) {
+                $item_azukeires[] = $items['content'];    
+            } else{
+            $banned_baggage = '禁止です';
+          }
+         }
+        //検索収集用テーブルに登
+        $sql= 'INSERT INTO `searched_words` SET `word` = ?,
+                                        `created` = NOW()';
+        $data = array($_POST['list_search']);
+        $stmt = $dbh->prepare($sql);
+        $stmt ->execute($data);
+      }
 
     // 一時保存ボタンが押された時
     if (!empty($_POST['tmp_btn'])) {
@@ -91,9 +100,9 @@
                                    -- `list_image_path` = ,
                                    `created` = NOW()';
         $data = array($_POST['list_name']);
-        echo $_POST['list_name'];
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
+
     }
 
     //キャンセルボタンが押された時
@@ -109,7 +118,6 @@
                            -- `list_image_path` = ,
                            `created` = NOW()';
         $data = array($_POST['list_name']);
-        echo $_POST['list_name'];
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
       } else {
@@ -117,8 +125,11 @@
         // $data = array(,$_POST['list_name'],$_FILES['']);
         // $stmt = $dbh->prepare();
         // $stmt ->execute();
-      }
-    }
+     }
+       
+                // var_dump($item_boths); 
+                // var_dump($item_azukeires);
+                // var_dump($item_carry_ins);
 
 ?>
 
@@ -182,7 +193,8 @@
           <!-- リストの大枠を作って行く -->
           <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center"> 
-              <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3">
+              <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
+
               <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索">
             </div>
           </div>
@@ -197,19 +209,18 @@
               </strong>
               <div>
                 <ul class="list-group" id="list_design">
-                  <?php foreach ($item_boths as $item_both) {?>
+                  <?php foreach ($item_boths as $item_both) { ?>
                     <label class="width">
                       <li class="list-group-item list_float">
                         <input type="checkbox" name="che" class="left checkbox">
                         <span class="checkbox-icon"></span>
-                           <?php echo $item_both;?> 
-                      <!-- 削除処理を書いていく -->
-                      <?php  ?>
-                        <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
-                          <i class="fa fa-trash"></i>
-                        </a>
-                      <?php  ?>
-
+                         <?php echo $item_both;?> 
+                          <!-- 削除処理を書いていく -->
+                         <?php  ?>
+                           <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
+                             <i class="fa fa-trash"></i>
+                           </a>
+                         <?php  ?>
                       </li>
                     </label>
                   <?php }?>
@@ -259,11 +270,11 @@
                         <span class="checkbox-icon"></span>
                         <?php echo $item_azukeire; ?>
                         <!-- 削除処理を書いていく -->
-                      <?php  ?>
-                        <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
-                          <i class="fa fa-trash"></i>
-                        </a>
-                      <?php  ?>
+                        <?php  ?>
+                          <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
+                            <i class="fa fa-trash"></i>
+                          </a>
+                        <?php  ?>
                       </li>
                   </label>
                 <?php } ?>
@@ -296,15 +307,14 @@
 
 
 <?php 
-// 条件用
-      // INSERT INTO `searchs` SET `word` = 'まさき',
-      //                           `judge` = 1,
-      //                           `condition` = 'pこhuskdjbf',
-      //                           `classify` = 'lsajおkdb.kjf',
-      //                           `aviation_id` = 0,
-      //                           `categoryies_l2_id` =3, 
-      //                           `created` = NOW()
-                                // aviation_id  categoryies_l2_id 
+// // 条件用
+//       INSERT INTO `searchs` SET `word` = 'まさきっき',
+//                                 `condition` = 'ほげ',
+//                                 `baggage_classify` = 2, // 1:両方 2:機内 3:預け 4:不可
+//                                 `aviation_id` = 1,
+//                                 `categoryies_l2_id` =3, 
+//                                 `created` = NOW()
+//                                 // aviation_id  categoryies_l2_id 
  ?>
 
 
