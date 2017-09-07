@@ -1,3 +1,5 @@
+<!-- マイページのリストを削除するためのページ -->
+
 <?php 
 require('../../../developer/dbconnect.php');
 session_start();

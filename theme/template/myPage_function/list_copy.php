@@ -1,3 +1,5 @@
+<!-- マイページのリストをコピーするためのページ -->
+
 <?php 
 require('../../../developer/dbconnect.php');
 session_start();
