@@ -45,32 +45,6 @@ if (!empty($_POST)) {
 
 
 
-// //メールアドレスの重複チェック
-//  if (empty($errors)) {
-//   $sql = 'SELECT COUNT(*) FROM `users` WHERE `email` = ?' ;
-//   //COUNT集計関数は、取得したデータの個数を計算する関数
-//   //カラム名はCOUNT(*)になる
-//   //$record['COUNT(*)']として個数を取得できる
-
-//   $data = array($email);
-//   $stmt = $dbh->prepare($sql);
-//   $stmt ->execute($data);
-//   $record = $stmt->fetch(PDO::FETCH_ASSOC);
-//   if ($record['COUNT(*)']>0) {
-//     $errors['email'] = 'duplicate';// duplicate → 重複
-    
-//   }
- 
-
-if (empty($errors)) {
-  $_SESSION['user_info']['account_name'] = $acount_name;
-  $_SESSION['user_info']['email'] = $email;
-  $_SESSION['user_info']['password'] = $password;
-  $_SESSION['user_info']['comfirm_password'] = $comfirm_password;
-  header('Location: sign_in.php');
-  exit();//POST送信は破棄される
-
-}
 
 
 
@@ -140,18 +114,17 @@ if (empty($errors)) {
 <div id="headerwrap">
   <div class="container">
     <div class="row" id="adjustment">
-
       <div class="col-lg-6">
          <div class="row">
-            <div class="text-center font_title">旅にもつ</div>
+            <br>
+            <div class="text-center font_title">新規登録</div>
             <!-- <div class="col-lg-12 font_title">旅にもつ</div> -->
         </div>
 
         <div class="row">
           <div class="col-lg-12 font_content">
-          この荷物持っていける？重さは？そんな旅の疑問をスマートに解決します！空港を利用して旅行を予定している人の荷造りの悩みを解決します！
-
-
+          <br>
+          旅にもつ会員になって、あなたの旅行をもっと便利にもっと快適に
           </div>
         </div>
 
@@ -166,7 +139,7 @@ if (empty($errors)) {
 
 
               <label><i class="fa fa-user" aria-hidden="true"></i>アカウント名 </label><br> 
-              <input type="text" name="acount_name" placeholder="アカウント名" autofocus>
+              <input type="text" name="acount_name" placeholder="アカウント名" maxlength="15"autofocus>
 
               <?php if (isset($errors['acount_name']) && $errors['acount_name'] == 'blank') {?>
               <div class="alert alert-danger">アカウント名を入力してください</div>
@@ -181,7 +154,7 @@ if (empty($errors)) {
           <div class="col-lg-12">
            <div class="text-center">
               <label><i class="fa fa-envelope-o"></i>メールアドレス </label><br>
-                <input type="email" name="email" placeholder="tabi@example.com">
+                <input type="email" name="email" placeholder="tabi@example.com" maxlength="50">
 
               <?php if (isset($errors['email']) && $errors['email'] == 'blank'): ?>
                <!--  <span style="color:red:">メールアドレスを入力してください</span> -->
@@ -208,7 +181,7 @@ if (empty($errors)) {
           <div class="col-lg-12">
            <div class="text-center">
                 <label><i class="fa fa-unlock-alt" aria-hidden="true"></i>パスワード </label><br>
-              <input type="password" name="password" >
+              <input type="password" name="password" maxlength="8">
               <?php if (isset($errors['password']) && $errors['password'] == 'blank') {?>
               <div class="alert alert-danger">パスワードを入力してください</div>
               <?php } ?>
@@ -225,7 +198,7 @@ if (empty($errors)) {
           <div class="col-lg-12">
             <div class="text-center">
               <label><i class="fa fa-unlock-alt" aria-hidden="true"></i>確認用パスワード </label><br>
-              <input type="password" name="comfirm_password">
+              <input type="password" name="comfirm_password" maxlength="8">
               <?php if (isset($errors['comfirm_password']) && $errors['comfirm_password'] == 'blank') {?>
               <div class="alert alert-danger">確認用パスワードを入力してください</div>
               <?php } ?>
@@ -248,7 +221,7 @@ if (empty($errors)) {
         <div class="row">
           <div class="col-lg-12">
             <div class="text-center">
-             <input type="submit" value="新規作成" class="btn btn-info" >
+             <input type="submit" value="新規登録" class="btn btn-info" >
             </div>
           </div>      
         </div>

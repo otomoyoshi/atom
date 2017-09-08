@@ -28,8 +28,9 @@ body {
 	text-shadow: 0px 0px 30px rgba(255,255,255,1);
 	margin: auto;
 }
-.your_name h2 {
+.your_name  {
 	color: white;
+  font-size: 30px;
 }
 
 

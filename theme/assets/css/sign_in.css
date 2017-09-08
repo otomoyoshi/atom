@@ -5,7 +5,7 @@
 .explain{
 	color: #FFFFFF;
 	text-shadow: 0px 0px 10px rgba(255,255,255,1);  
-	font-size:30px;
+	font-size:40px;
 }
 
 .title_show{
@@ -21,6 +21,13 @@
 
 .text_loc{
 	margin-bottom: 20px;
+}
+
+.font_content {
+	color: #FFFFFF; 
+	text-shadow: 0px 0px 10px rgba(255,255,255,1);
+	font-size: 40px;
+
 }
 
 body { 
