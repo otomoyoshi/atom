@@ -9,39 +9,39 @@
 
 
   // if (!isset($_SESSION['login_user']['id'])) {
-  //   header('Location: ../un_login/sign_in.php');
-  //   exit();
+    //   header('Location: ../un_login/sign_in.php');
+    //   exit();
   // }
 
-  
+   
   // この中に各種ボタンが押された時の条件を書き込んでいく
 
     //検索ボタンが押された時
     if (!empty($_POST['list_search']) && $_POST['list_search'] != ''){
           // リストに追加
-          $sql = 'INSERT `lists` SET `members_id` = 1 ,
-                                     `name` = ?, 
-                                     -- `list_image_path` = ,
-                                     `created` = NOW()';
-          $data = array($_POST['list_name']);
-          $stmt = $dbh->prepare($sql);
-          $stmt ->execute($data);
+        $sql = 'INSERT `atom_lists` SET `members_id` = 1 ,
+                                   `name` = ?, 
+                                   -- `list_image_path` = ,
+                                   `created` = NOW()';
+        $data = array($_POST['list_name']);
+        $stmt = $dbh->prepare($sql);
+        $stmt ->execute($data);
 
-          $sql = 'SELECT * FROM `searchs` WHERE `word`= ?';
-          $data = array($_POST['list_search']);
-          $stmt = $dbh->prepare($sql);
-          $stmt ->execute($data);
-          $search = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
-          //①ユーザの検索と一致した場合 ：
+        $sql = 'SELECT * FROM `atom_searchs` WHERE `word`= ?';
+        $data = array($_POST['list_search']);
+        $stmt = $dbh->prepare($sql);
+        $stmt ->execute($data);
+        $search = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
+        //①ユーザの検索と一致した場合 ：
           if ($search['word'] == $_POST['list_search']) {
             // アイテムに追加
-            $sql= 'INSERT INTO `items` SET `categories_id` =?,
-                                           `content` = ?,
-                                           `lists_id` = ?';
-            $data = array($search['baggage_classify'], $_POST['list_search'], 3);
-            $stmt = $dbh->prepare($sql);
-            $stmt ->execute($data);
-          
+              $sql= 'INSERT INTO `atom_items` SET `categories_id` =?,
+                                             `content` = ?,
+                                             `lists_id` = ?';
+              $data = array($search['baggage_classify'], $_POST['list_search'], 3);
+              $stmt = $dbh->prepare($sql);
+              $stmt ->execute($data);
+        
           }   
           
           
@@ -51,7 +51,7 @@
           //   }
          
         //検索収集用テーブルに登録
-        $sql= 'INSERT INTO `searched_words` SET `word` = ?,
+        $sql= 'INSERT INTO `atom_searched_words` SET `word` = ?,
                                         `created` = NOW()';
         $data = array($_POST['list_search']);
         $stmt = $dbh->prepare($sql);
@@ -60,7 +60,7 @@
 
     // 一時保存ボタンが押された時
     if (!empty($_POST['tmp_btn'])) {
-        $sql = 'INSERT `lists` SET `members_id` = 1 ,
+        $sql = 'INSERT `atom_lists` SET `members_id` = 1 ,
                                    `name` = ?, 
                                    -- `list_image_path` = ,
                                    `created` = NOW()';
@@ -72,12 +72,12 @@
 
     //キャンセルボタンが押された時
     if (!empty($_POST['can_btn'])) {
-          header('Location:lists.php');
+        header('Location:lists.php');
     }
 
     // 保存ボタンが押された時
     if (!empty($_POST['keep_btn'])) {
-        $sql = 'INSERT `lists` SET 
+        $sql = 'INSERT `atom_lists` SET 
                            `members_id` = 1 ,
                            `name` = ?, 
                            -- `list_image_path` = ,
@@ -91,31 +91,31 @@
       // $stmt = $dbh->prepare();
       // $stmt ->execute();
     }
-        // リストとアイテムを結合
-    // $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
-    //        FROM `items` AS `i`
-    //        LEFT JOIN `lists` AS `l`
-    //        ON `i`.`lists_id` = `l`.`id`
-    //        WHERE 1';
-    // $data = array();
-    // $stmt = $dbh->prepare($sql);
-    // $stmt ->execute();
-    // $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
+        //リストとアイテムを結合
+    $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
+           FROM `atom_items` AS `i`
+           LEFT JOIN `lists` AS `l`
+           ON `i`.`lists_id` = `l`.`id`
+           WHERE 1';
+    $data = array();
+    $stmt = $dbh->prepare($sql);
+    $stmt ->execute();
+    $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // ユーザーとリストのリンク
-    // $sql= 'SELECT `l`.*,`m`.`account_name`
-    //          FROM `lists`AS`l`
-    //          LEFT JOIN `members` AS `m`
-    //          ON `l`.`members_id`=`m`.`id`
-    //          WHERE 1';
-    // $data = array();
-    // $stmt = $dbh->prepare($sql);
-    // $stmt ->execute($data);
-    // $record = $stmt->fetch(PDO::FETCH_ASSOC);
+    //ユーザーとリストのリンク
+    $sql= 'SELECT `l`.*,`m`.`account_name`
+             FROM `atom_lists`AS`l`
+             LEFT JOIN `members` AS `m`
+             ON `l`.`members_id`=`m`.`id`
+             WHERE 1';
+    $data = array();
+    $stmt = $dbh->prepare($sql);
+    $stmt ->execute($data);
+    $record = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
                 // 一致したアイテムの結果を取得
-    $sql = 'SELECT * FROM `items` WHERE 1';
+    $sql = 'SELECT * FROM `atom_items` WHERE 1';
     $data = array($_POST['list_search']);
     $stmt = $dbh->prepare($sql);
     $stmt ->execute($data);
@@ -123,7 +123,7 @@
     while(true){
         $items = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($items == false) {
-          break;
+            break;
         }
         //アイテムにデータがあるとき
         if (isset($items)) {
@@ -141,7 +141,7 @@
           } 
             //持ち込めない場合
           else {
-            $banned_baggage = 'その荷物は持ち込めません！！';
+              $banned_baggage = 'その荷物は持ち込めません！！';
           } 
         }
       }
@@ -266,7 +266,7 @@
                         <?php  ?>
                       </li>
                     </label>
-                  <?php  }?>
+                  <?php  } ?>
                 </ul>
               </div>  
             </div>
@@ -326,13 +326,13 @@
 
 <?php 
 // // 条件用
-//       INSERT INTO `searchs` SET `word` = 'まさきっき',
-//                                 `condition` = 'ほげ',
-//                                 `baggage_classify` = 2, // 1:両方 2:機内 3:預け 4:不可
-//                                 `aviation_id` = 1,
-//                                 `categoryies_l2_id` =3, 
-//                                 `created` = NOW()
-//                                 // aviation_id  categoryies_l2_id 
+      // INSERT INTO `atom_searchs` SET `word` = 'くり',
+      //                           `condition` = 'ほげ',
+      //                           `baggage_classify` = 2, // 1:両方 2:機内 3:預け 4:不可
+      //                           `aviation_id` = 1,
+      //                           `categories_l2_id` =3, 
+      //                           `created` = NOW()
+                                // aviation_id  categories_l2_id 
  ?>
 
 

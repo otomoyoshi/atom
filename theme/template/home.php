@@ -71,7 +71,8 @@ if (!empty($_POST)) {
             </div>
 
             <div class="form-group">
-              <input type="text" id="search" class="form-control" placeholder="例：液体物" maxlength=10 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
+
+              <input type="text" id="search" class="form-control" placeholder="例：液体物" maxlength=15 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
 
                <?php if (isset($errors['word'])  == 'blank') {?>
                   <div class="alert alert-danger">検索ワードを入力してください</div>

@@ -4,7 +4,7 @@ require('../../../developer/dbconnect.php');
 
 // var_dump($_SESSION['user_info']);
 
-$sql = 'SELECT * FROM `lists` WHERE `members_id`=?';
+$sql = 'SELECT * FROM `atom_lists` WHERE `members_id`=?';
 $data = array($_SESSION['login_user']['id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
