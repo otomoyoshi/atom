@@ -2,6 +2,7 @@
 require('../../../developer/dbconnect.php');
 session_start();
 $errors = array();
+$email = '';
 
 // 新規登録ボタンが押された時
 if (!empty($_POST)) {
@@ -20,16 +21,16 @@ if (!empty($_POST)) {
     
     $sql = 'SELECT * FROM `members` WHERE `email`=? AND `password`=?';
     // $data = array($email,sha1($password));
-    $data = array($email,$password);
+    $data = array($email,sha1($password));
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
 
     $user_info = $stmt->fetch(PDO::FETCH_ASSOC);
-    var_dump($user_info);
+    // var_dump($user_info);
 
     if ($user_info) {
-      $_SESSION['user_info']['id'] = $user_info['id'];
-      $_SESSION['user_info'] = $user_info;
+      $_SESSION['login_user']['id'] = $user_info['id'];
+      $_SESSION['login_user'] = $user_info;
 
       header('Location: ../login/myPage.php');
       exit();
@@ -99,7 +100,8 @@ if (!empty($_POST)) {
               <div class="col-lg-12">
                 <div class="text-center text_loc">
                   <label>メールアドレス ※</label><br>
-                  <input type="email" name="email"　placeholder="tabi@example.com" maxlength="50" autofocus>
+
+                  <input type="email" name="email"　placeholder="tabi@example.com"  maxlength="50" autofocus value="<?php echo $email; ?>">
                   <!-- メールアドレスが入力されていない時 -->
                   <?php if (isset($errors['email']) && $errors['email'] == 'blank'): ?>
                     <br>

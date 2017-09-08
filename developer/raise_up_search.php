@@ -72,7 +72,7 @@
       // echo var_dump($errors);
       if(empty($errors)){ //全て入力が存在したとき
         // echo "hello";
-        if (isset($_POST['result'])){ //ajaxの値が存在したら
+        if (isset($_POST['result'])){
             $encourage = 'encourage';
             // echo "T";
             // echo $word . $judge . $condition . $classify;
@@ -82,6 +82,7 @@
             $stmt->execute($data);
             // echo var_dump($stmt);
         }
+
         if(isset($_POST['delete'])){
 
             $sql = 'DELETE FROM `searchs` WHERE `word`=?';
@@ -125,49 +126,57 @@
       </div>
       <!-- <div class="row"> -->
           <!-- <div class="col-lg-12"> -->
-      <div class="row">
-        <div class="">
-          <form method="POST" action="" name="mainForm">
-            <!-- <div class="row block-center"> -->
-              <div class="form-group">
-                <div class="input-group col-xs-12 col-lg-6 col-lg-offset-3">
-                  <?php if($encourage == 'encourage') { ?>
-                  <input type="submit" class="btn btn-danger" value="前の登録を削除" onclick="return confirm('確認してね?');" name="delete"><br>
-                  <?php } ?>
-                </div>
-              </div>
-            <!-- </div> -->
 
-            <!-- <div class="row"> -->
-              <div class="form-group">
-                <div class="input-group col-lg-6 col-lg-offset-3">
-                  <span class="input-group-addon">単語</span>
-                  <input type="text" class="form-control" name="word" value="<?php echo $word ?>">
-                </div>
-                  <!-- 単語：<br><input type="text" name="word" value="<?php echo $word ?>"><br> -->
-                <?php if(isset($errors['word'])){ ?>
-                  <p class="alert alert-danger">入力してください</p><br>
+      <form method="POST" action="" class="form-horizontal">
+        <div class="row">
+          <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
+            <div class="form-group text-center">
+              <div class="input-group">
+                <?php if($encourage == 'encourage') { ?>
+                <input type="submit" class="btn btn-danger" value="今の登録を削除" onclick="return confirm('確認してね?');" name="delete"><br>
                 <?php } ?>
               </div>
-            <!-- </div> -->
+            </div>
+          </div>
+        </div>
 
-            <!-- <div class="row"> -->
-              <div class="form-group">
-                <!-- 条件：<br><input type="text" name="condition" value="<?php echo $condition ?>"><br> -->
-                <div class="input-group col-lg-6 col-lg-offset-3">
-                  <span class="input-group-addon">条件</span>
-                  <input type="text" class="form-control" name="condition" value="<?php echo $condition ?>">
-                </div>
+        <div class="row">
+          <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
+            <div class="form-group block-center">
+              <div class="input-group">
+              <!-- <div class="input-group col-lg-6 col-lg-offset-3"> -->
 
-                <?php if(isset($errors['condition'])){ ?>
-                  <p class="alert alert-danger">入力してください</p><br>
-                <?php } ?>
+                <span class="input-group-addon">単語</span>
+                <input type="text" class="form-control" name="word" value="<?php echo $word ?>">
               </div>
-            <!-- </div> -->
+                <!-- 単語：<br><input type="text" name="word" value="<?php echo $word ?>"><br> -->
+              <?php if(isset($errors['word'])){ ?>
+                <p class="alert alert-danger">入力してください</p><br>
+              <?php } ?>
+            </div>
+          </div>
+        </div>
 
-            <!-- <div class="row"> -->
+        <div class="row">
+          <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
             <div class="form-group">
-                <div class="input-group col-lg-6 col-lg-offset-3 text-left">
+              <!-- 条件：<br><input type="text" name="condition" value="<?php echo $condition ?>"><br> -->
+              <div class="input-group">
+                <span class="input-group-addon">条件</span>
+                <input type="text" class="form-control" name="condition" value="<?php echo $condition ?>">
+              </div>
+
+              <?php if(isset($errors['condition'])){ ?>
+                <p class="alert alert-danger">入力してください</p><br>
+              <?php } ?>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
+            <div class="form-group">
+                <div class="input-group">
                 <?php for($i=0; $i < 4; $i++) { ?>
                   <? if(isset($judge) && $i == $judge && $judge != 'default') { ?>
                     <label class="radio-inline"><? echo $category[$i]; ?><input type="radio" name="judge" value="<?php echo $i;?>" checked></label>
@@ -177,47 +186,52 @@
                 <?php } ?>
                 </div>
 
-                <?php if(isset($errors['judge_blank']) && $judge == 'default'){ ?>
-                  <p class="alert alert-danger">入力してください</p><br>
-                <?php } ?>
-              </div>
-            <!-- </div> -->
-
-            <!-- <div class="row"> -->
-              <div class="form-group">
-                <div class="input-group col-lg-6 col-lg-offset-3 text-left">
-                  <?php for($i=0; $i < 8; $i++) { ?>
-                    <? if(isset($classify) && $i == $classify && $classify != 'default') { ?>
-                      <label class="radio-inline">分類<?php echo $i ?><input type="radio" name="classify" value="<?php echo $i;?>" checked></label>
-                    <?php } else { ?>
-                      <label class="radio-inline">分類<?php echo $i ?><input type="radio" name="classify" value="<?php echo $i;?>"></label>
-                    <?php } ?>
-                  <?php } ?>
-                </div>
-
-                <?php if(isset($errors['classify_blank']) && $classify == 'default') { ?>
-                  <p class="alert alert-danger">入力してください</p><br>
-                <?php } ?>
-              </div>
+              <?php if(isset($errors['judge_blank']) && $judge == 'default'){ ?>
+                <p class="alert alert-danger">入力してください</p><br>
+              <?php } ?>
             </div>
-
-            <div class="row block-center">
-              <div class="form-group">
-                <!-- <input type="submit" class="btn btn-info" value="気力を注入" id="check_btn"> -->
-                <div class="input-group col-lg-6 col-lg-offset-3 text-center">
-                <?php if($encourage != 'encourage') { ?>
-                  <input type="submit" class="btn btn-info" value="気力を注入" onclick="return confirm('確認してね?');" name="result">
-                <?php } ?>
-                </div>
-              </div>
-            </div>
-          </form>
+          </div>
         </div>
-      </div>
+
+        <div class="row">
+          <div class="form-group">
+            <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
+              <div class="input-group">
+                <?php for($i=0; $i < 8; $i++) { ?>
+                  <? if(isset($classify) && $i == $classify && $classify != 'default') { ?>
+                    <label class="radio-inline">分類<?php echo $i ?><input type="radio" name="classify" value="<?php echo $i;?>" checked></label>
+                  <?php } else { ?>
+                    <label class="radio-inline">分類<?php echo $i ?><input type="radio" name="classify" value="<?php echo $i;?>"></label>
+                  <?php } ?>
+                <?php } ?>
+              </div>
+            </div>
+
+            <?php if(isset($errors['classify_blank']) && $classify == 'default') { ?>
+              <p class="alert alert-danger">入力してください</p><br>
+            <?php } ?>
+          </div>
+        </div>
+
+        <div class="row block-center">
+          <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
+            <div class="form-group">
+              <!-- <input type="submit" class="btn btn-info" value="気力を注入" id="check_btn"> -->
+              <div class="input-group col-lg-6 col-lg-offset-3 text-center">
+              <?php if($encourage != 'encourage') { ?>
+                <input type="submit" class="btn btn-info" value="気力を注入" onclick="return confirm('確認してね?');" name="result">
+              <?php } ?>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+        <!-- </div> -->
+      <!-- </div> -->
 
       <?php if($encourage == 'encourage') { ?>
         <div class="row">
-          <div class="col-lg-12 block-center">
+          <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
           <a href="raise_up_search.php" class="btn btn-success">もう１度やる</a>
           <h2><?php echo $encourages[rand(0, count($encourages)-1)]; ?></h2>
             <!-- <?php echo rand(0, $image_len); ?> -->
