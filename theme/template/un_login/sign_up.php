@@ -73,7 +73,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
   }
 
   if (empty($errors)) {   
-    $sql = 'INSERT INTO `members` SET `account_name`=?,
+    $sql = 'INSERT INTO `atom_members` SET `account_name`=?,
                                       `email`=?,
                                       `password`=?,
                                       `created`=NOW()';

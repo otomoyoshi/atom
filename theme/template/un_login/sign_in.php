@@ -19,7 +19,7 @@ if (!empty($_POST)) {
 
   if (empty($errors)) {
     
-    $sql = 'SELECT * FROM `members` WHERE `email`=? AND `password`=?';
+    $sql = 'SELECT * FROM `atom_members` WHERE `email`=? AND `password`=?';
     // $data = array($email,sha1($password));
     $data = array($email,sha1($password));
     $stmt = $dbh->prepare($sql);
