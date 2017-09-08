@@ -157,13 +157,9 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
              <div class="text-center">
 
 
-<<<<<<< HEAD
-              <label><i class="fa fa-user" aria-hidden="true"></i>アカウント名 </label><br> 
-              <input type="text" name="acount_name" placeholder="アカウント名" maxlength="15"autofocus>
-=======
+             
               <label><i class="fa fa-user" aria-hidden="true"></i>アカウント名 </label><br>
-                <input type="text" name="account_name" placeholder="アカウント名" autofocus value="<?php echo $account_name; ?>">
->>>>>>> 5ff5bbce40ea0f48abd9e90d93d1be023d80b61a
+                <input type="text" name="account_name" placeholder="アカウント名" maxlength="15" autofocus value="<?php echo $account_name; ?>">
 
               <?php if (isset($errors['account_name']) && $errors['account_name'] == 'blank') {?>
               <div class="alert alert-danger">アカウント名を入力してください</div>
@@ -178,11 +174,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
           <div class="col-lg-12">
            <div class="text-center">
               <label><i class="fa fa-envelope-o"></i>メールアドレス </label><br>
-<<<<<<< HEAD
-                <input type="email" name="email" placeholder="tabi@example.com" maxlength="50">
-=======
-                <input type="email" name="email" placeholder="tabi@example.com" value="<?php echo $email; ?>">
->>>>>>> 5ff5bbce40ea0f48abd9e90d93d1be023d80b61a
+                <input type="email" name="email" placeholder="tabi@example.com" maxlength="50" value="<?php echo $email; ?>">
 
               <?php if (isset($errors['email']) && $errors['email'] == 'blank'): ?>
                <!--  <span style="color:red:">メールアドレスを入力してください</span> -->
