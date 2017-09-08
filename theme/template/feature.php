@@ -69,34 +69,16 @@
 
                 <div class="row">
                   <div class="col-lg-12" >   
-                    <h2 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" >hoge</h2>
+                    <h1 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" >旅にもつ</h1><br>
                   </div>
                 </div>
 
                 <div class="row">
 
-                  <div class="col-lg-12" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" >   
+                  <div class="col-lg-12 font_cotent" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" > 本サービスでは検索機能と持ち物リスト作成機能を用いて、空港を利用し旅行の前の荷造りにかかる時間や労力を減らして、”旅行をより楽しく、快適なもの”にすることができます。
 
-                    Call your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    Call your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    all your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    all your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    to stay connected with your loved ones.
-                    to stay connected with your loved ones.
+                    
+
 
 
                   </div>                  
@@ -114,33 +96,14 @@
 
                 <div class="row">
                   <div class="col-lg-12" >
-                    <h2 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)">hoge</h2>
+                    <h1 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)">検索機能</h1><br>
 
                   </div>
                 </div>
                   
                 <div class="row">
-                  <div class="col-lg-12" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)">   
-                    Call your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    Call your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    all your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    all your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    to stay connected with your loved ones.
-                    to stay connected with your loved ones.
+                  <div class="col-lg-12" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)">  
+                    航空会社を選択し、検索窓に持っていきたい持ちものを入力して検索するだけで、持ち物が機内持ち込み可能か、お預け入れのみ可能かの判断と持ち込み条件を一目で確認することができます。さらに、このページから検索した持ち物を持ち物リストへ直接追加することができます。この機能により、自分だけの持ち物リストが自動で作成されます。
                   </div>                  
                 </div> 
 
@@ -166,34 +129,15 @@
 
                 <div class="row">
                   <div class="col-lg-12" ">   
-                    <h2 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" >hoge</h2>
+                    <h1 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" >持ち物リスト作成</h1><br>
 
                   </div>
                 </div>
 
                 <div class="row"> 
-                  <div class="col-lg-12" style="color: #ffffff;text-shadow: 0px 0px 30px rgba(255,255,255,1)">   
+                  <div class="col-lg-12" style="color: #ffffff;text-shadow: 0px 0px 1   0px rgba(255,255,255,1)">    このページでは、自分だけの持ち物リストが作成できます。持ち込みたいアイテムを打ち込むと自動で分類してリストへ追加することができます。一時保存システムによって一度作業を中断しても途中から作業を続けることができ、持ち物リストをマイページへ保存することができます。
 
-                   Call your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    Call your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    all your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    all your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    to stay connected with your loved ones.
-                    to stay connected with your loved ones.
+                   
                   </div>                  
 
 

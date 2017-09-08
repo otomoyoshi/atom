@@ -63,6 +63,7 @@ while(1){
       <div class="col-md-8 col-sm-8 col-xs-10 col-md-offset-2 col-sm-offset-2 col-xs-offset-1 tabinimotsu_main_div" style="margin-bottom: 50px">
         <div class="container-fluid">
 
+        <!-- ユーザー情報の表示 -->
           <div class="row">
             <div class="col-md-4"></div>
               <div class="col-md-8" style="padding-top: 20px">
@@ -145,8 +146,8 @@ while(1){
                         <button type="button" class="col-md-4 col-xs-4" data-intro="削除はここで" data-step="4"><i class="glyphicon glyphicon-trash"></i></button>
 ======= -->
                     <div>
-              
                     <!-- <div class="container col-md-12"> -->
+
                       <div class="row">
                         <a href="../myPage_function/list_copy.php?id=<?php echo $list['id']; ?>">
                           <button name="list_copy" type="button" class="col-md-4 col-xs-4" data-intro="持ち物リストを複製できるよ" data-step="2"><i class="glyphicon glyphicon-file"></i></button>
@@ -159,7 +160,7 @@ while(1){
                         </a>
 
                       </div>
-                    </div>
+    <!--                 </div> -->
                   </div>
                  </div>
                 </div>
