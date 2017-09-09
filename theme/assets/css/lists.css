@@ -120,7 +120,7 @@ input #h3 {
 }
 
 li:hover {
-  background: #51a8ff;
+  background: rgba(81,168,255,0.8);;
 }
 
 .tmp_btn, .can_btn, .keep_btn {
@@ -165,6 +165,28 @@ li:hover {
 
 .search_window_1{
 	width:300px;
+}
+
+.right_position{
+	float: right;
+}
+
+.right{
+	float:right;
+}
+
+.right,.right_position{
+	display: inline;
+}
+
+.right_position:hover {
+	transform: scale(1.5);
+	color: #fff 
+}
+
+.right:hover {
+	transform: scale(1.5); 
+	color: #fff;
 }
 
 
