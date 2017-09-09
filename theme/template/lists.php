@@ -41,8 +41,7 @@
           $data = array($search['baggage_classify'], $_POST['list_search'], 3);
           $stmt = $dbh->prepare($sql);
           $stmt ->execute($data);
-    
-      }   
+      }
         
         
         // //アイテムにデータがない時
@@ -60,38 +59,24 @@
 
   // 一時保存ボタンが押された時
   if (!empty($_POST['tmp_btn'])) {
-      $sql = 'INSERT `atom_lists` SET `members_id` = 1 ,
+      $sql = 'INSERT `atom_lists` SET `members_id` = ?,
                                  `name` = ?, 
                                  -- `list_image_path` = ,
                                  `created` = NOW()';
-      $data = array($_POST['list_name']);
+      $data = array(($_SESSION['login_user']['id']), $_POST['list_name']);
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
-
   }
 
   //キャンセルボタンが押された時
   if (!empty($_POST['can_btn'])) {
-      header('Location:lists.php');
-  }
-
-  // 保存ボタンが押された時
-  if (!empty($_POST['keep_btn'])) {
-      $sql = 'INSERT `atom_lists` SET 
-                         `members_id` = 1 ,
-                         `name` = ?, 
-                         -- `list_image_path` = ,
-                         `created` = NOW()';
-      $data = array($_POST['list_name']);
+      $sql = 'DELETE FROM `atom_items` WHERE 1 ';
       $stmt = $dbh->prepare($sql);
-      $stmt ->execute($data);
-  } else {
-    // $sql = '';
-    // $data = array(,$_POST['list_name'],$_FILES['']);
-    // $stmt = $dbh->prepare();
-    // $stmt ->execute();
+      $stmt ->execute();
+      header('Location:lists.php');
+      exit();
   }
-      //リストとアイテムを結合
+  //リストとアイテムを結合
   $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
          FROM `atom_items` AS `i`
          LEFT JOIN `lists` AS `l`
@@ -102,18 +87,36 @@
   $stmt ->execute();
   $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
+  // 保存ボタンが押された時
+  if (!empty($_POST['keep_btn'])) {
+    if (!isset($list_data)) {
+      $sql = 'INSERT `atom_lists` SET `members_id` = ?,
+                                      `name` = ?, 
+                           -- `list_image_path` = ,
+                           `created` = NOW()';
+      $data = array(($_SESSION['login_user']['id']), $_POST['list_name']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+    }
+  } else {
+      $sql = 'UPDATE `atom_lists` SET `members_id` = ?,
+                                      `name` = ?, 
+                                  -- `list_image_path` = ,
+                                      `modified` = NOW()';
+      $data = array(($_SESSION['login_user']['id']), $_POST['list_name']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+  }
   //ユーザーとリストのリンク
   $sql= 'SELECT `l`.*,`m`.`account_name`
            FROM `atom_lists`AS`l`
-           LEFT JOIN `members` AS `m`
+           LEFT JOIN `atom_members` AS `m`
            ON `l`.`members_id`=`m`.`id`
            WHERE 1';
   $data = array();
   $stmt = $dbh->prepare($sql);
-  $stmt ->execute($data);
+  $stmt ->execute();
   $record = $stmt->fetch(PDO::FETCH_ASSOC);
-// <<<<<<< HEAD
-
 
   $lists_id = '1'; //リストid
   $is_image = ''; //画像が存在するか確認する
@@ -255,8 +258,8 @@
         // $data = array($_POST['list_search']);
         // $stmt = $dbh->prepare($sql);
         // $stmt ->execute($data);
-// =======
-                  // 一致したアイテムの結果を取得
+
+
   $sql = 'SELECT * FROM `atom_items` WHERE 1';
   $stmt = $dbh->prepare($sql);
   $stmt ->execute();
@@ -275,22 +278,22 @@
       if ($items[$i]['categories_id'] == '1') {
           //両方持ち込みの場合 
           $item_boths[] = $items[$i];
-// >>>>>>> 2045d96d9b7981fdff0436bda0ef8474c762a3fd
+
       }
+
         // 持ち込みの場合
-      elseif ($items[$i]['categories_id'] == '2') {
-          $item_carry_ins[] = $items[$i];
-      }
+        elseif ($items[$i]['categories_id'] == '2') {
+            $item_carry_ins[] = $items[$i];
+        }
         //預け入れの場合
-      elseif ($items[$i]['categories_id'] == '3') {
-          $item_azukeires[] = $items[$i];    
-      } 
+        elseif ($items[$i]['categories_id'] == '3') {
+            $item_azukeires[] = $items[$i];    
+        } 
         //持ち込めない場合
-      else {
-          $banned_baggage = 'その荷物は持ち込めません！！';
-      } 
+        else {
+            $banned_baggage = 'その荷物は持ち込めません！！';
+        } 
     }
-// <<<<<<< HEAD
 
     // 保存ボタンが押された時
     if (!empty($_POST['keep_btn'])) {
@@ -321,10 +324,10 @@
                 // var_dump($item_azukeires);
                 // var_dump($item_carry_ins);
 
-// =======
+
     $i++;
   }
-// >>>>>>> 2045d96d9b7981fdff0436bda0ef8474c762a3fd
+
 ?>
 
 <!DOCTYPE html>
@@ -370,18 +373,17 @@
         <div class="row height">
           <div class="col-lg-offset-2 col-lg-5 col-md-12 col-sm-12 col-xs-12">
             <form action="" method="POST">
-              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" data-intro="リスト名を入力してね" data-step="1">
-              <input type="text" name="created" placeholder="作成日時" class="form-control created_location">
-
+              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" data-intro="リスト名を入力してね" data-step="1" value="<?php echo $_POST['list_name'] ?>">
+              <input type="text" name="created" placeholder="作成日時" class="form-control created_location" value="<?php echo $record['created']?>">
             </div>
               <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
 
               <label>
               <!-- 画像がデータベースに登録されているとき -->
-              <?php if ($isimage['list_image_path'] != NULL) {?>
+              <?php if ($isimage['list_image_path'] != NULL) { ?>
                 <img src="../../list_image_path/<?php echo $isimage['list_image_path']?>" class="img-circle" width="150px" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
                 <p class="set_profile">
-                
+                  <?php echo $record['account_name'] ?>
                 </p>
               <!-- 画像がデータベースに登録されてないとき -->
               <?php } else {?>
@@ -446,8 +448,11 @@
                          <?php echo $item_both['content'];?> 
                           <!-- 削除処理を書いていく -->
                            <a href="delete_category.php?id=<?php echo $item_both['id'];?>">
-                             <i class="fa fa-trash"></i>
+                             <i class="fa fa-trash right_position"></i>
                            </a>
+                          <a href="edit_category.php?id=<?php echo $item_carry_in['id'];?>">
+                           <i class="fa fa-pencil-square-o right"></i>
+                          </a>
                         </li>
                     </label>
                   <?php }?>
@@ -469,10 +474,13 @@
                         <input type="checkbox" name="che" class="left checkbox">
                         <span class="checkbox-icon"></span>
                         <?php  echo $item_carry_in['content']; ?>
-                        <!-- 削除処理を書いていく -->
                         <?php  ?>
+                        <!-- 削除処理を書いていく -->
                           <a href="delete_category.php?id=<?php echo $item_carry_in['id'];?>">
-                            <i class="fa fa-trash"></i>
+                            <i class="fa fa-trash right_position"></i>
+                          </a>
+                          <a href="edit_category.php?id=<?php echo $item_carry_in['id'];?>">
+                           <i class="fa fa-pencil-square-o right"></i>
                           </a>
                         <?php  ?>
                       </li>
@@ -496,10 +504,13 @@
                         <input type="checkbox" name="che" class="left checkbox">
                         <span class="checkbox-icon"></span>
                         <?php echo $item_azukeire['content']; ?>
-                        <!-- 削除処理を書いていく -->
                         <?php  ?>
+                          <!-- 削除処理を書いていく -->
                           <a href="delete_category.php?id=<?php echo $item_azukeire['id']; ?>">
-                            <i class="fa fa-trash"></i>
+                            <i class="fa fa-trash right_position"></i>
+                          </a>
+                          <a href="edit_category.php?id=<?php echo $item_carry_in['id'];?>">
+                           <i class="fa fa-pencil-square-o right"></i>
                           </a>
                         <?php  ?>
                       </li>
