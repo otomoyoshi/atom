@@ -43,12 +43,6 @@
           $stmt ->execute($data);
     
       }   
-        
-        
-        // //アイテムにデータがない時
-        //   else {
-        //     //カテゴリー表示
-        //   }
        
       //検索収集用テーブルに登録
       $sql= 'INSERT INTO `atom_searched_words` SET `word` = ?,
@@ -56,26 +50,6 @@
       $data = array($_POST['list_search']);
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
-  }
-
-  // 一時保存ボタンが押された時
-  if (!empty($_POST['tmp_btn'])) {
-      $sql = 'INSERT `atom_lists` SET `members_id` = ?,
-                                 `name` = ?, 
-                                 -- `list_image_path` = ,
-                                 `created` = NOW()';
-      $data = array(($_SESSION['login_user']['id']), $_POST['list_name']);
-      $stmt = $dbh->prepare($sql);
-      $stmt ->execute($data);
-  }
-
-  //キャンセルボタンが押された時
-  if (!empty($_POST['can_btn'])) {
-      $sql = 'DELETE FROM `atom_items` WHERE 1 ';
-      $stmt = $dbh->prepare($sql);
-      $stmt ->execute();
-      header('Location:lists.php');
-      exit();
   }
   //リストとアイテムを結合
   $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
@@ -87,19 +61,38 @@
   $stmt = $dbh->prepare($sql);
   $stmt ->execute();
   $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
+  var_dump($list_data);
+  // 一時保存ボタンが押された時
+  if (!empty($_POST['tmp_btn'])) {
+      $sql = 'INSERT `atom_lists` SET `members_id` = ?,
+                                      `name` = ?, 
+                                  -- `list_image_path` = ,
+                                      `created` = NOW()';
+      $data = array(($_SESSION['login_user']['id']), $_POST['list_name']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+  }
+  //キャンセルボタンが押された時
+  if (!empty($_POST['can_btn'])) {
+      $sql = 'DELETE FROM `atom_items` WHERE 1 ';
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute();
+      header('Location:lists.php');
+      exit();
+  }
 
   // 保存ボタンが押された時
   if (!empty($_POST['keep_btn'])) {
     if (!isset($list_data)) {
       $sql = 'INSERT `atom_lists` SET `members_id` = ?,
                                       `name` = ?, 
-                           -- `list_image_path` = ,
-                           `created` = NOW()';
+                                   -- `list_image_path` = ,
+                                      `created` = NOW()';
       $data = array(($_SESSION['login_user']['id']), $_POST['list_name']);
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
     }
-  } else {
+    else {
       $sql = 'UPDATE `atom_lists` SET `members_id` = ?,
                                       `name` = ?, 
                                   -- `list_image_path` = ,
@@ -107,9 +100,10 @@
       $data = array(($_SESSION['login_user']['id']), $_POST['list_name']);
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
+    }
   }
   //ユーザーとリストのリンク
-  $sql= 'SELECT `l`.*,`m`.`account_name`
+  $sql= 'SELECT `l`.*,`m`.`account_name`,`m`.`id`
            FROM `atom_lists`AS`l`
            LEFT JOIN `atom_members` AS `m`
            ON `l`.`members_id`=`m`.`id`
@@ -149,10 +143,14 @@
             $item_azukeires[] = $items[$i];    
         } 
         //持ち込めない場合
-        else {
+        elseif ($items[$i]['categories_id'] == '4'){
             $banned_baggage = 'その荷物は持ち込めません！！';
         } 
-    }
+     } //アイテムにデータがない時
+      else{
+          //カテゴリー表示
+      }
+
     $i++;
   }
 ?>
@@ -194,14 +192,17 @@
         <div class="row height">
           <div class="col-lg-offset-2 col-lg-5 col-md-12 col-sm-12 col-xs-12">
             <form action="" method="POST">
-              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" data-intro="リスト名を入力してね" data-step="1" value="<?php echo $_POST['list_name'] ?>">
+              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
+              data-intro="リスト名を入力してね" data-step="1" value="<?php if(!empty($_POST)){ echo $_POST['list_name']; }?>">
               <input type="text" name="created" placeholder="作成日時" class="form-control created_location" value="<?php echo $record['created']?>">
             </div>
             <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
               <?php if (!isset($hoge)) {?>
                 <img src="../assets/img/pic1.jpg" class="img-circle" width="150px" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
                 <p class="set_profile">
-                  <?php echo $record['account_name'] ?>
+                  <?php if (isset($record)) {
+                    echo $record['account_name'];
+                  } ?>
                 </p>
               <?php } else {?>
 
@@ -320,7 +321,7 @@
               <input value="キャンセル" class="btn btn-warning can_btn" type="submit" name="can_btn">
             </div>
             <div class="keep">
-              <input class="btn btn-success keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの履歴やメールに送信できるよ" data-step="5">
+              <a href="../template/login/myPage.php"><input class="btn btn-success keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの履歴やメールに送信できるよ" data-step="5"></a>
             </div>  
           </form>
         </div>
