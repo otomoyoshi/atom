@@ -1,6 +1,6 @@
 <?php
 
-    $dbname = "atom";
+    $dbname = "webcourselesson";
     $dsn = "mysql:dbname=" . $dbname . "; host=localhost";
     $usr = 'root';
 	$dbh = new PDO($dsn, $usr);

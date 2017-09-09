@@ -1,9 +1,17 @@
 <?php 
 
+// bool mb_send_mail(string $to, string $subject, string $message[, string $headers[, string $headers ]])
+
 $email ='';
 $content='';
 $errors = array ();
 
+$to = "maho.atom@gmail.com";
+$subject = "TEST MAIL";
+$message = "Hello!\r\nThis is TEST MAIL.";
+$headers = "From: hana.mare55@gmail.com";
+ 
+mail($to, $subject, $message, $headers);
 
 //送信ボタンが押されたとき
 if (!empty($_POST)) {
@@ -26,8 +34,9 @@ if (!empty($_POST)) {
     }
 
 
-  
 }
+
+
  ?>
 
 
@@ -82,8 +91,11 @@ if (!empty($_POST)) {
                   </figcaption>
                 </figure> -->
 
-                <h1 class="text-center your_name">阪急電車</h1>
-                <h2 class="text-center your_name">電車の乗客の人間関係にスポットを当てて進行していくストーリー。電車のように何度も会う関係ではないからこそ、悩みを話せたりアドバイスを言えたりできるのかもしれないと感じた。とても心が温かくなる話。</h2>
+                <h2 class="text-center your_name">お問い合わせフォーム</h2><br>
+                <h2 class="text-center your_name">本フォームでは、旅にもつウェブサイトに関するお客様からのお問い合わせをお受けしています。
+
+</h2>
+
               </div>
 
                 <div class="col-md-12 col-lg-offset-1 col-lg-6 background_blue center-block"  id="border-space">
@@ -97,7 +109,7 @@ if (!empty($_POST)) {
 
                                 <div class="form-group">
                                   <label for="exampleInputEmail2"><i class="fa fa-envelope-o"></i>メールアドレス</label>
-                                  <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com" maxlength="30" autofocus>
+                                  <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com" maxlength="50" autofocus>
 
                                     <?php if (isset($errors['email']) && $errors['email'] == 'blank') {?>
                                       <div class="alert alert-danger">メールアドレスを入力してください</div>
@@ -105,7 +117,7 @@ if (!empty($_POST)) {
                                                         <!-- </div>
                                 <div class="form-group "> -->
                                   <label for="exampleInputText">お問い合わせ内容</label>
-                                 <textarea name="content" class="form-control" placeholder="メッセージをご記入ください"></textarea>
+                                 <textarea name="content" class="form-control" placeholder="メッセージをご記入ください" maxlength="1000"></textarea>
 
                                     <?php if (isset($errors['content']) && $errors['content'] == 'blank') { ?>
                                       <div class="alert alert-danger">お問い合わせ内容をご記入してください</div>
@@ -132,6 +144,21 @@ if (!empty($_POST)) {
         </div>
       </div>
     </div>
+    <?php
+      mb_language("Japanese");
+      mb_internal_encoding("UTF-8");
+ 
+      $to = $_POST['to'];
+      $title = $_POST['title'];
+      $message = $_POST['content'];
+ 
+      if(mb_send_mail($to, $title, $message)){
+        echo "メールを送信しました";
+      } else {
+        echo "メールの送信に失敗しました";
+      }
+    ?>
+
   <!-- </div> -->
 
 

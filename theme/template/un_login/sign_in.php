@@ -19,7 +19,7 @@ if (!empty($_POST)) {
 
   if (empty($errors)) {
     
-    $sql = 'SELECT * FROM `members` WHERE `email`=? AND `password`=?';
+    $sql = 'SELECT * FROM `atom_members` WHERE `email`=? AND `password`=?';
     // $data = array($email,sha1($password));
     $data = array($email,sha1($password));
     $stmt = $dbh->prepare($sql);
@@ -85,14 +85,11 @@ if (!empty($_POST)) {
         <div class="row" id="adjustment">
           <div class="col-lg-6">
             <div class="row">
-              <div class="col-lg-6 title_show">
-                旅にもつ
-              </div>
+              <div class="text-center title_show">ログイン</div>
             </div>
             <div class="row">
-              <div class="col-lg-12 explain">
-                いろいろなスライダー・カルーセルjQueryプラグインを利用してみて、一番簡単でカスタマイズ性に富んだものがこのslickです。非常に便利な分、注意しなければならないこともあるので、その点も含めて紹介したいと思います。
-                まとめまとめまとめ。
+              <div class="col-lg-12 font_content">
+                検索窓に入力するだけで旅行に持っていける荷物がすぐにわかる！
               </div>
             </div>
           </div>
@@ -103,7 +100,8 @@ if (!empty($_POST)) {
               <div class="col-lg-12">
                 <div class="text-center text_loc">
                   <label>メールアドレス ※</label><br>
-                  <input type="email" name="email"　placeholder="アカウント名" autofocus value="<?php echo $email; ?>">
+
+                  <input type="email" name="email"　placeholder="tabi@example.com"  maxlength="50" autofocus value="<?php echo $email; ?>">
                   <!-- メールアドレスが入力されていない時 -->
                   <?php if (isset($errors['email']) && $errors['email'] == 'blank'): ?>
                     <br>
@@ -119,7 +117,7 @@ if (!empty($_POST)) {
               <div class="col-lg-12">
                 <div class="text-center text_loc">
                   <label>パスワード ※</label><br>
-                  <input type="password" name="password">
+                  <input type="password" name="password" maxlength="8">
                   <!-- アドレス、パスワードのいずれかが間違っている時 -->
                   <?php if (isset($errors['password']) && $errors['password'] == 'mistake'): ?>
                     <br><br><span class="alert alert-danger">

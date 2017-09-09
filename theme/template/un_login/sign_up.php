@@ -45,16 +45,13 @@ if (!empty($_POST)) {
     }
 
 
+
   //バリデーション(すべての値の入力チェックのみ)
 if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['account_name']) && !empty($_POST['comfirm_password'])) {
   if (empty($errors)) {
-  $sql = 'SELECT COUNT(*) FROM `members` WHERE `email` = ?' ;
-  //COUNT集計関数は、取得したデータの個数を計算する関数
-  //カラム名はCOUNT(*)になる
-  //$record['COUNT(*)']として個数を取得できる
-
   
   // メールアドレスの重複チェック！！
+  $sql = 'SELECT COUNT(*) FROM `members` WHERE `email` = ?' ;
   $data = array($email);
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
@@ -72,7 +69,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
   }
 
   if (empty($errors)) {   
-    $sql = 'INSERT INTO `members` SET `account_name`=?,
+    $sql = 'INSERT INTO `atom_members` SET `account_name`=?,
                                       `email`=?,
                                       `password`=?,
                                       `created`=NOW()';
@@ -132,18 +129,17 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
 <div id="headerwrap">
   <div class="container">
     <div class="row" id="adjustment">
-
       <div class="col-lg-6">
          <div class="row">
-            <div class="text-center font_title">旅にもつ</div>
+            <br>
+            <div class="text-center font_title">新規登録</div>
             <!-- <div class="col-lg-12 font_title">旅にもつ</div> -->
         </div>
 
         <div class="row">
           <div class="col-lg-12 font_content">
-          この荷物持っていける？重さは？そんな旅の疑問をスマートに解決します！空港を利用して旅行を予定している人の荷造りの悩みを解決します！
-
-
+          <br>
+          旅にもつ会員になって、あなたの旅行をもっと便利にもっと快適に
           </div>
         </div>
 
@@ -157,8 +153,9 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
              <div class="text-center">
 
 
+             
               <label><i class="fa fa-user" aria-hidden="true"></i>アカウント名 </label><br>
-                <input type="text" name="account_name" placeholder="アカウント名" autofocus value="<?php echo $account_name; ?>">
+                <input type="text" name="account_name" placeholder="アカウント名" maxlength="15" autofocus value="<?php echo $account_name; ?>">
 
               <?php if (isset($errors['account_name']) && $errors['account_name'] == 'blank') {?>
               <div class="alert alert-danger">アカウント名を入力してください</div>
@@ -173,7 +170,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
           <div class="col-lg-12">
            <div class="text-center">
               <label><i class="fa fa-envelope-o"></i>メールアドレス </label><br>
-                <input type="email" name="email" placeholder="tabi@example.com" value="<?php echo $email; ?>">
+                <input type="email" name="email" placeholder="tabi@example.com" maxlength="50" value="<?php echo $email; ?>">
 
               <?php if (isset($errors['email']) && $errors['email'] == 'blank'): ?>
                <!--  <span style="color:red:">メールアドレスを入力してください</span> -->
@@ -196,7 +193,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
           <div class="col-lg-12">
            <div class="text-center">
                 <label><i class="fa fa-unlock-alt" aria-hidden="true"></i>パスワード </label><br>
-              <input type="password" name="password" >
+              <input type="password" name="password" maxlength="8">
               <?php if (isset($errors['password']) && $errors['password'] == 'blank') {?>
               <div class="alert alert-danger">パスワードを入力してください</div>
               <?php } ?>
@@ -213,7 +210,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
           <div class="col-lg-12">
             <div class="text-center">
               <label><i class="fa fa-unlock-alt" aria-hidden="true"></i>確認用パスワード </label><br>
-              <input type="password" name="comfirm_password">
+              <input type="password" name="comfirm_password" maxlength="8">
               <?php if (isset($errors['comfirm_password']) && $errors['comfirm_password'] == 'blank') {?>
               <div class="alert alert-danger">確認用パスワードを入力してください</div>
               <?php } ?>
@@ -241,7 +238,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
         <div class="row">
           <div class="col-lg-12">
             <div class="text-center">
-             <input type="submit" value="新規作成" class="btn btn-info" >
+             <input type="submit" value="新規登録" class="btn btn-info" >
             </div>
           </div>      
         </div>
