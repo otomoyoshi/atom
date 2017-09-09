@@ -28,3 +28,5 @@
 
 <link rel="stylesheet" type="text/css" href="../assets/css/lists.css">
 
+<link rel="stylesheet" type="text/css" href="../assets/ionicons-2.0.1/css/ionicons.min.css">
+

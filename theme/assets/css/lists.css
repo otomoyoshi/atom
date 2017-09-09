@@ -95,12 +95,13 @@ input #h3 {
   content: "\f372";
   font-family: "Ionicons";
   color: #ccc;
-  font-size: 22px;
+  font-size: 20px;
 }
 .checkbox:checked + .checkbox-icon::before {
   content: "\f374";
   color: #17bcdf;
 }
+
 
 .padding {
 	margin-top: 30px; 
@@ -120,7 +121,7 @@ input #h3 {
 }
 
 li:hover {
-  background: rgba(81,168,255,0.8);;
+ 	transform: scale(1.1); 
 }
 
 .tmp_btn, .can_btn, .keep_btn {
@@ -156,7 +157,6 @@ li:hover {
 
 .under_line1 {
 	margin:50px; 
-	
 }
 
 .keep_btn{
@@ -181,12 +181,10 @@ li:hover {
 
 .right_position:hover {
 	transform: scale(1.5);
-	color: #fff 
 }
 
 .right:hover {
 	transform: scale(1.5); 
-	color: #fff;
 }
 
 
