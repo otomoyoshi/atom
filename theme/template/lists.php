@@ -13,9 +13,6 @@
       exit();
   }
 
-   
-  // この中に各種ボタンが押された時の条件を書き込んでいく
-
     //検索ボタンが押された時
   if (!empty($_POST['list_search']) && $_POST['list_search'] != ''){
         // リストに追加
@@ -191,53 +188,7 @@
         echo "アップロードに失敗しました";
       }
     }
-  }
-
-    // この中に各種ボタンが押された時の条件を書き込んでいく
-
-   
-          // //①ユーザの検索と一致した場合 ：
-          // if ($search['word'] == $_POST['list_search']) {
-          //   // アイテムに追加
-          //   $sql= 'INSERT INTO `items` SET `categories_id` =?,
-          //                                  `content` = ?,
-          //                                  `lists_id` = ?';
-          //   $data = array($search['baggage_classify'], $_POST['list_search'], 3);
-          //   $stmt = $dbh->prepare($sql);
-          //   $stmt ->execute($data);
-          
-          //   // 一致したアイテムの結果を取得
-          //   $sql = 'SELECT * FROM `items` WHERE `content`= ?';
-          //   $data = array($_POST['list_search']);
-          //   $stmt = $dbh->prepare($sql);
-          //   $stmt ->execute($data);
-          //   $items = $stmt->fetch(PDO::FETCH_ASSOC);
-          //   var_dump($items);
-          // }   
-          //   // searchsにデータがない場合： カテゴリー表示
-          //   // else{
-          //   // カテゴリーわけに飛ぶ
-          //   // }
-
-          // // リストとアイテムを結合
-          // $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
-          //        FROM `items` AS `i`
-          //        LEFT JOIN `lists` AS `l`
-          //        ON `i`.`lists_id` = `l`.`id`
-          //        WHERE 1';
-          // $data = array();
-          // $stmt = $dbh->prepare($sql);
-          // $stmt ->execute();
-          // $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
-          //アイテムにデータがあるとき
-         //}
-        //検索収集用テーブルに登
-        // $sql= 'INSERT INTO `searched_words` SET `word` = ?,
-        //                                 `created` = NOW()';
-        // $data = array($_POST['list_search']);
-        // $stmt = $dbh->prepare($sql);
-        // $stmt ->execute($data);
-
+  }          
 
   $sql = 'SELECT * FROM `atom_items` WHERE 1';
   $stmt = $dbh->prepare($sql);
@@ -257,28 +208,26 @@
       if ($items[$i]['categories_id'] == '1') {
           //両方持ち込みの場合 
           $item_boths[] = $items[$i];
-
       }
-
-        // 持ち込みの場合
-        elseif ($items[$i]['categories_id'] == '2') {
-            $item_carry_ins[] = $items[$i];
-        }
-        //預け入れの場合
-        elseif ($items[$i]['categories_id'] == '3') {
-            $item_azukeires[] = $items[$i];    
-        } 
-        //持ち込めない場合
-        elseif ($items[$i]['categories_id'] == '4'){
-            $banned_baggage = 'その荷物は持ち込めません！！';
-        } 
+      // 持ち込みの場合
+      elseif ($items[$i]['categories_id'] == '2') {
+          $item_carry_ins[] = $items[$i];
+      }
+      //預け入れの場合
+      elseif ($items[$i]['categories_id'] == '3') {
+          $item_azukeires[] = $items[$i];    
+      } 
+      //持ち込めない場合
+      elseif ($items[$i]['categories_id'] == '4'){
+          $banned_baggage = 'その荷物は持ち込めません！！';
+      } 
 
      } //アイテムにデータがない時
-      else{
-          //カテゴリー表示
-      } 
+    else{
+        //カテゴリー表示
+    } 
       $i++;
-    }
+  }
 
 
          // リストデータを取得
