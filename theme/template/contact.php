@@ -6,12 +6,6 @@ $email ='';
 $content='';
 $errors = array ();
 
-$to = "maho.atom@gmail.com";
-$subject = "TEST MAIL";
-$message = "Hello!\r\nThis is TEST MAIL.";
-$headers = "From: hana.mare55@gmail.com";
- 
-mail($to, $subject, $message, $headers);
 
 //送信ボタンが押されたとき
 if (!empty($_POST)) {
