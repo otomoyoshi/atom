@@ -432,9 +432,10 @@
                         <a href="delete_category.php?id=<?php echo $item_both['id'];?>">
                           <i class="fa fa-trash right_position"></i>
                         </a>
-                        <a href="edit_category.php?id=<?php echo $item_carry_in['id'];?>">
+                    <!--編集ボタン     
+                        <span>
                          <i class="fa fa-pencil-square-o right"></i>
-                        </a>
+                        </span> -->
                     </li>
                   </label>
                 <?php }?>
@@ -461,9 +462,10 @@
                       <a href="delete_category.php?id=<?php echo $item_carry_in['id'];?>">
                         <i class="fa fa-trash right_position"></i>
                       </a>
-                      <a href="edit_category.php?id=<?php echo $item_carry_in['id'];?>">
+           <!--       編集ボタン     
+                      <span>
                        <i class="fa fa-pencil-square-o right"></i>
-                      </a>
+                      </span> -->
                       <?php  ?>
                     </li>
                   </label>
@@ -491,9 +493,9 @@
                         <a href="delete_category.php?id=<?php echo $item_azukeire['id']; ?>">
                           <i class="fa fa-trash right_position"></i>
                         </a>
-                        <a href="edit_category.php?id=<?php echo $item_carry_in['id'];?>">
+                     <!--  編集ボタン  <span>
                          <i class="fa fa-pencil-square-o right"></i>
-                        </a>
+                        </span> -->
                       <?php  ?>
                     </li>
                 </label>
