@@ -30,12 +30,23 @@
       $stmt ->execute($data);
       $search = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
       //①ユーザの検索と一致した場合 ：
+        //リストとアイテムを結合
+      $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
+             FROM `atom_items` AS `i`
+             LEFT JOIN `lists` AS `l`
+             ON `i`.`lists_id` = `l`.`id`
+             WHERE 1';
+      $data = array();
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute();
+      $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
+      var_dump($list_data);
       if ($search['word'] == $_POST['list_search']) {
         // アイテムに追加
           $sql= 'INSERT INTO `atom_items` SET `categories_id` =?,
                                          `content` = ?,
                                          `lists_id` = ?';
-          $data = array($search['baggage_classify'], $_POST['list_search'], 3);
+          $data = array($search['baggage_classify'], $_POST['list_search'], $list_data['id']);
           $stmt = $dbh->prepare($sql);
           $stmt ->execute($data);
 
@@ -49,17 +60,7 @@
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
   }
-  //リストとアイテムを結合
-  $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
-         FROM `atom_items` AS `i`
-         LEFT JOIN `lists` AS `l`
-         ON `i`.`lists_id` = `l`.`id`
-         WHERE 1';
-  $data = array();
-  $stmt = $dbh->prepare($sql);
-  $stmt ->execute();
-  $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
-  var_dump($list_data);
+
   // 一時保存ボタンが押された時
   if (!empty($_POST['tmp_btn'])) {
     if (!isset($list_data)) {
@@ -260,16 +261,16 @@
   <body>
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
   <?php
-    $ini = parse_ini_file("config.ini");
-    $is_login = $ini['is_login'];
-    // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($is_login) { //ログインしてるとき
-      // echo "login success";
-      require('login_header.php');
-    } else {// ログインしてないとき
-      // echo "login fail";
-      require('header.php');
-    }
+    // $ini = parse_ini_file("config.ini");
+    // $is_login = $ini['is_login'];
+    // // $is_login = 0; //ログインしてるときを１とする（仮）
+    // if ($is_login) { //ログインしてるとき
+    //   // echo "login success";
+    //   require('login_header.php');
+    // } else {// ログインしてないとき
+    //   // echo "login fail";
+    //   require('header.php');
+    // }
   ?>
 
   <!-- 画像の変更 -->
