@@ -250,7 +250,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href=".favicon.png./assets/img/">
-    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 
     <title>旅にもつ</title>
     <?php require('load_css.php'); ?>
@@ -359,13 +360,16 @@
                       <li class="list-group-item list_float">
                         <input type="checkbox" name="che" class="left checkbox">
                         <span class="checkbox-icon"></span>
-                         <?php echo $item_both['content'];?> 
+                         <span class="change_before"><?php echo $item_both['content'];?></span>
+                         <label class="change_after">
+                           
+                         </label>
                           <!-- 削除処理を書いていく -->
                            <a href="delete_category.php?id=<?php echo $item_both['id'];?>">
                              <i class="fa fa-trash right_position"></i>
                            </a>
                           <a href="edit_category.php?id=<?php echo $item_carry_in['id'];?>">
-                           <i class="fa fa-pencil-square-o right"></i>
+                            <i class="fa fa-pencil-square-o right"></i>
                           </a>
                       </li>
                     </label>
@@ -393,7 +397,7 @@
                           <a href="delete_category.php?id=<?php echo $item_carry_in['id'];?>">
                             <i class="fa fa-trash right_position"></i>
                           </a>
-                          <a href="edit_category.php?id=<?php echo $item_carry_in['id'];?>">
+                          <a class="change_lists" href="edit_category.php?id=<?php echo $item_carry_in['id'];?>">
                            <i class="fa fa-pencil-square-o right"></i>
                           </a>
                         <?php  ?>
@@ -459,7 +463,7 @@
       introJs().start();
     </script>
   <?php } ?>
-
+  <script type="text/javascript" src="../assets/js/lists.js"></script>
 </body>
 </html>
 
