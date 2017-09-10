@@ -1,7 +1,5 @@
 <?php
   require('lists_sql.php');
-
-
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +48,12 @@
             <form action="" method="POST">
               <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
               data-intro="リスト名を入力してね" data-step="1" value="<?php if(!empty($_POST)){ echo $_POST['list_name']; }?>">
-              <input type="text" name="created" placeholder="作成日時" class="form-control created_location" value="<?php echo $record['created']?>">
+              <?php if(isset($_GET['id'])){ ?>
+                <input type="text" name="created" placeholder="作成日時" class="form-control created_location" value="<?php echo $list_data['created']; ?>">
+              <?php } else { ?>
+                <input type="text" name="created" placeholder="作成日時" class="form-control created_location" value="<?php echo ""; ?>">
+              <?php } ?>
+
 
             </div>
               <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
@@ -71,7 +74,7 @@
             <?php if ($is_image['list_image_path'] != NULL) { ?>
               <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
               <p class="set_profile">
-                <?php echo $record['account_name'] ?>
+                <?php echo $list_data['account_name'] ?>
               </p>
             <!-- 画像がデータベースに登録されてないとき -->
             <?php } else {?>
@@ -211,15 +214,15 @@
         <!-- リストの保存機能たち -->
 
           <div class="list_contents text-center">
-              <div class="tmp_keep">
+<!--               <div class="tmp_keep">
                 <input class="btn btn-info tmp_btn" value="一時保存" type="submit" name="tmp_btn" data-intro="作成の続きからリストが作れるよ" data-step="4">
-              </div>
-            <div class="cansel">
+              </div> -->
+<!--             <div class="cansel">
               <input value="キャンセル" class="btn btn-warning can_btn" type="submit" name="can_btn">
-            </div>
+            </div> -->
             <div class="keep">
 
-              <a href="../template/login/myPage.php"><input class="btn btn-success keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの履歴やメールに送信できるよ" data-step="5"></a>
+              <input class="btn btn-success keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの履歴やメールに送信できるよ" data-step="5">
             </div>  
 
           </form>

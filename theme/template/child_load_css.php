@@ -27,3 +27,7 @@
 
 <link rel="stylesheet" type="text/css" href="../../assets/css/lists.css">
 
+<!-- チュートリアル -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.1.0/introjs.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/intro.css">
+

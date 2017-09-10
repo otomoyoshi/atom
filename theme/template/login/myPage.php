@@ -4,22 +4,46 @@ require('../../../developer/dbconnect.php');
 
 // var_dump($_SESSION['user_info']);
 
+if(!empty($_POST)){
+  // echo "post" . '<br>';
+  // 新規リストを作成
+  if(isset($_POST['new'])){
+    $sql = 'INSERT `atom_lists` SET `members_id` = ?,
+                                     -- `name` = ?,
+                                     -- `list_image_path` = ?,
+                                     `created` = NOW()';
+    // $data = array($_SESSION['login_user']['id'], $_POST['list_name']);
+    $data = array($_SESSION['login_user']['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt ->execute($data);
+    // var_dump($stmt) .'<br>';
+  }
+
+}
+
+// ユーザが持つリストを全て取得
 $sql = 'SELECT * FROM `atom_lists` WHERE `members_id`=?';
 $data = array($_SESSION['login_user']['id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 
 $lists = array();
+$max = 0;
 while(1){
   $rec = $stmt->fetch(PDO::FETCH_ASSOC);
   if ($rec == false) {
     break;
   }
+  // echo $rec['id'];
+  if($max < (int) $rec['id']){
+    $max = (int) $rec['id'];
+    // echo $max;
+  }
   $lists[] = $rec;
 }
-
 // var_dump($lists);
-
+$list_last = $max+1;
+// echo $list_last;
 
  ?>
 
@@ -93,12 +117,12 @@ while(1){
 
         <!-- リスト全体 -->
           <div class="row">
-
+              <a href="../lists.php?id=<?php echo $list_last?>">
                 <!-- 追加ボタン -->
               <div class="col-md-4 col-sm-4" data-intro="新しい持ち物リストを作成できるよ" data-step="1">
                 <div class="wrimagecard wrimagecard-topimage lists_margin">
 
-                    <a href="../lists.php">
+                    <a href="../lists.php?new=<?php echo $list_last; ?>">
                       <div class="wrimagecard-topimage_header" style="background-color:rgba(255, 135, 0, 0.2); ">
                         <div style="text-align: center"><i class="fa fa-plus-square-o" style="color:rgba(255, 135, 0, 0.4);"></i></div>
                       </div>
@@ -106,15 +130,31 @@ while(1){
                         <h4>新しく追加してね！</h4>
                       </div>
                     </a>
+<!--                   <form method="POST" action="">
+                      <input type="hidden" value="new" name="new">
+
+                    <label>
+                        <input type="submit" hidden="True">
+                        <div class="wrimagecard-topimage_header" style="background-color:rgba(255, 135, 0, 0.2); ">
+                          <div style="text-align: center"><i class="fa fa-plus-square-o" style="color:rgba(255, 135, 0, 0.4);"></i></div>
+                        </div>
+                        <div class="wrimagecard-topimage_title_add">
+                          <h4>新しく追加してね！</h4>
+                        </div>
+
+                    </label>
+
+                  </form> -->
 
                 </div>
               </div>
+            </a>
 
           <!-- 個々のリスト -->
           <?php foreach($lists as $list): ?>
             <div class="col-md-4 col-sm-4">
               <div class="wrimagecard wrimagecard-topimage lists_margin">
-                <a href="../lists.php">
+                <a href="../lists.php?id=<?php echo $list['id']; ?>">
                   <div class="wrimagecard-topimage_header" style="background-color: rgba(60, 216, 255, 0.2)">
                     <div class="row">
 
@@ -149,12 +189,15 @@ while(1){
                     <!-- <div class="container col-md-12"> -->
 
                       <div class="row">
+<!--                         <a href="../myPage_function/list_copy.php?id=<?php echo $list['id']; ?>">
+                          <button name="list_copy" type="button" class="col-md-4 col-xs-4" data-intro="持ち物リストを複製できるよ" data-step="2"><i class="glyphicon glyphicon-file"></i></button>
+                        </a> -->
                         <a href="../myPage_function/list_copy.php?id=<?php echo $list['id']; ?>">
                           <button name="list_copy" type="button" class="col-md-4 col-xs-4" data-intro="持ち物リストを複製できるよ" data-step="2"><i class="glyphicon glyphicon-file"></i></button>
                         </a>
                         <!-- <a href="../function/list_delete.php"> -->
                           <button name="list_email" type="button" class="col-md-4 col-xs-4" data-intro="メールで持ち物リストを送信できるよ" data-step="3"><i class="glyphicon glyphicon-envelope"></i></button>
-                        </a>
+                        <!-- </a> -->
                         <a href="../myPage_function/list_delete.php?id=<?php echo $list['id']; ?>" onClick="return confirm('削除します。\nよろしいですか？');">
                           <button name="list_delete" type="button" class="col-md-4 col-xs-4" data-intro="削除はここで" data-step="4"><i class="glyphicon glyphicon-trash"></i></button>
                         </a>
@@ -182,8 +225,12 @@ while(1){
 
   <?php require('../footer.php'); ?>
   <?php require('../child_load_js.php'); ?>
+
+  <?php if(!isset($lists)){ ?>
   <script type="text/javascript">
   introJs().start();
   </script>
+  <?php } ?>
+
   </body>
 </html>

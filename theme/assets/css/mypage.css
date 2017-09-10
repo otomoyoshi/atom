@@ -1,6 +1,9 @@
 input {
     font-family: FontAwesome;
 }
+label {
+    display: block;
+}
 .wrimagecard{
 	margin-top: 0;
     margin-bottom: 1.5rem;
