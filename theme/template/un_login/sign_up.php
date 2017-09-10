@@ -24,6 +24,7 @@ if (!empty($_POST)) {
     $errors['account_name'] = 'blank';
 
     }
+
     if ($email == '') {
     $errors['email'] = 'blank';
     }

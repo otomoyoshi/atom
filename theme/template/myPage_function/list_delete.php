@@ -17,7 +17,7 @@ session_start();
 // }
 
 
-$sql = 'DELETE FROM `lists` WHERE `id`=?';
+$sql = 'DELETE FROM `atom_lists` WHERE `id`=?';
 $data = array($_GET['id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
