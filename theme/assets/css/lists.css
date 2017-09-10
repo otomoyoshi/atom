@@ -1,10 +1,14 @@
 #img{
-	background: url(../img/beach4_bokashi.jpg);
+	background: url(../img/beach_blur.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	/*width:100%; 
 	/*max-width: 100%;*/
 	/*height: auto;*/
+}
+
+.circle_border {
+  border: solid 5px black;
 }
 
 .list_name_location{
@@ -120,7 +124,7 @@ input #h3 {
 }
 
 li:hover {
-  background: #51a8ff;
+  background: rgba(81,168,255,0.8);;
 }
 
 .tmp_btn, .can_btn, .keep_btn {
@@ -167,4 +171,74 @@ li:hover {
 	width:300px;
 }
 
+/**/
+/* layout.css Style */
+.upload-drop-zone {
+  height: 200px;
+  width: 200px;
+  border-width: 2px;
+  /*margin-bottom: 20px;*/
+}
 
+/* skin.css Style*/
+.upload-drop-zone {
+  color: #ccc;
+  border-style: dashed;
+  border-color: #ccc;
+  line-height: 200px;
+  text-align: center
+}
+.upload-drop-zone.drop {
+  color: #222;
+  border-color: #222;
+}
+
+
+
+.image-preview-input {
+    position: relative;
+    overflow: hidden;
+    margin: 0px;    
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;    
+}
+.image-preview-input input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+    margin-left:2px;
+}
+
+.right_position{
+	float: right;
+}
+
+.right{
+	float:right;
+}
+
+.right,.right_position{
+	display: inline;
+}
+
+.right_position:hover {
+	transform: scale(1.5);
+	color: #fff 
+}
+
+.right:hover {
+	transform: scale(1.5); 
+	color: #fff;
+}
+
+
+/**/

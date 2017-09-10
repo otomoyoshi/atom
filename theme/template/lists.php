@@ -8,76 +8,296 @@
   //$banned_baggage = '';
 
 
-  // if (!isset($_SESSION['login_user']['id'])) {
-    //   header('Location: ../un_login/sign_in.php');
-    //   exit();
-  // }
+  if (!isset($_SESSION['login_user']['id'])) {
+      header('Location: ../un_login/sign_in.php');
+      exit();
+  }
 
    
   // この中に各種ボタンが押された時の条件を書き込んでいく
 
     //検索ボタンが押された時
-    if (!empty($_POST['list_search']) && $_POST['list_search'] != ''){
-          // リストに追加
-        $sql = 'INSERT `atom_lists` SET `members_id` = 1 ,
-                                   `name` = ?, 
-                                   -- `list_image_path` = ,
-                                   `created` = NOW()';
-        $data = array($_POST['list_name']);
+  if (!empty($_POST['list_search']) && $_POST['list_search'] != ''){
+        // リストに追加
+      $sql = 'INSERT `atom_lists` SET `members_id` = ?,
+                                 `name` = ?, 
+                                 -- `list_image_path` = ,
+                                 `created` = NOW()';
+      $data = array($_SESSION['login_user']['id'], $_POST['list_name']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+
+      $sql = 'SELECT * FROM `atom_searchs` WHERE `word`= ?';
+      $data = array($_POST['list_search']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+      $search = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
+      //①ユーザの検索と一致した場合 ：
+      if ($search['word'] == $_POST['list_search']) {
+        // アイテムに追加
+          $sql= 'INSERT INTO `atom_items` SET `categories_id` =?,
+                                         `content` = ?,
+                                         `lists_id` = ?';
+          $data = array($search['baggage_classify'], $_POST['list_search'], 3);
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute($data);
+      }
+        
+        
+        // //アイテムにデータがない時
+        //   else {
+        //     //カテゴリー表示
+        //   }
+       
+      //検索収集用テーブルに登録
+      $sql= 'INSERT INTO `atom_searched_words` SET `word` = ?,
+                                      `created` = NOW()';
+      $data = array($_POST['list_search']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+  }
+
+  // 一時保存ボタンが押された時
+  if (!empty($_POST['tmp_btn'])) {
+      $sql = 'INSERT `atom_lists` SET `members_id` = ?,
+                                 `name` = ?, 
+                                 -- `list_image_path` = ,
+                                 `created` = NOW()';
+      $data = array(($_SESSION['login_user']['id']), $_POST['list_name']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+  }
+
+  //キャンセルボタンが押された時
+  if (!empty($_POST['can_btn'])) {
+      $sql = 'DELETE FROM `atom_items` WHERE 1 ';
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute();
+      header('Location:lists.php');
+      exit();
+  }
+  //リストとアイテムを結合
+  $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
+         FROM `atom_items` AS `i`
+         LEFT JOIN `lists` AS `l`
+         ON `i`.`lists_id` = `l`.`id`
+         WHERE 1';
+  $data = array();
+  $stmt = $dbh->prepare($sql);
+  $stmt ->execute();
+  $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  // 保存ボタンが押された時
+  if (!empty($_POST['keep_btn'])) {
+    if (!isset($list_data)) {
+      $sql = 'INSERT `atom_lists` SET `members_id` = ?,
+                                      `name` = ?, 
+                           -- `list_image_path` = ,
+                           `created` = NOW()';
+      $data = array(($_SESSION['login_user']['id']), $_POST['list_name']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+    }
+  } else {
+      $sql = 'UPDATE `atom_lists` SET `members_id` = ?,
+                                      `name` = ?, 
+                                  -- `list_image_path` = ,
+                                      `modified` = NOW()';
+      $data = array(($_SESSION['login_user']['id']), $_POST['list_name']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+  }
+  //ユーザーとリストのリンク
+  $sql= 'SELECT `l`.*,`m`.`account_name`
+           FROM `atom_lists`AS`l`
+           LEFT JOIN `atom_members` AS `m`
+           ON `l`.`members_id`=`m`.`id`
+           WHERE 1';
+  $data = array();
+  $stmt = $dbh->prepare($sql);
+  $stmt ->execute();
+  $record = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  $lists_id = '1'; //リストid
+  $is_image = ''; //画像が存在するか確認する
+
+  if(!empty($_FILES)){
+    echo "post" .'<br>';
+    // 画像アップロード処理
+    if(isset($_FILES['image'])){
+      //  && is_uploaded_file($_FILES['image']['name'])
+      $file_name = $_FILES['image']['name'];
+      $file_path = '../../list_image_path/' . $file_name;
+      $tmp_name = $_FILES['image']['tmp_name'];
+
+      // 画像をサーバに保存
+      if (move_uploaded_file($tmp_name, $file_path)) { //サーバに画像保存が成功したら
+      // echo $file_name. "に変更しました" .'<br>';
+
+        // リストデータを取得
+        $sql= 'SELECT * FROM `lists` WHERE `id`=?';
+        $data = array($lists_id);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
+        $isimage = $stmt->fetch(PDO::FETCH_ASSOC);
+        echo "元の画像" . $isimage['list_image_path'] .'<br>';
 
-        $sql = 'SELECT * FROM `atom_searchs` WHERE `word`= ?';
+        if($isimage['list_image_path'] == NULL) { //サーバに画像が登録されていないとき
+
+            // 画像名をデータベースに登録する
+            $sql= 'UPDATE `lists` SET `list_image_path` =?,`modified`=NOW() WHERE `id`=?';
+            $data = array($file_name,$lists_id);
+            $stmt = $dbh->prepare($sql);
+            $stmt ->execute($data);
+            // header('Location : lists.php');
+            // exit();
+        } elseif($isimage['list_image_path'] == $file_name){
+          // 画像名をデータベースに登録
+          // $sql= 'UPDATE `lists` SET `list_image_path` =?,`modified`=NOW() WHERE `id`=?';
+          // $data = array($file_name,$lists_id);
+          // $stmt = $dbh->prepare($sql);
+          // $stmt ->execute($data);
+          // header('Location : lists.php');
+          // exit();
+        // }
+          echo "一緒だよ" .'<br>';
+        } else { //データベースにすでに画像が登録されていて、登録されている画像名が新しく入力された画像名と異なるとき
+          echo "登録" . '<br>';
+
+          // 既存に指定されていた画像をサーバから削除
+          $file_delpath = '../../list_image_path/' . $isimage['list_image_path'];
+          unlink($file_delpath);
+
+          // 画像名をデータベースに登録
+          $sql= 'UPDATE `lists` SET `list_image_path`=?,`modified`=NOW() WHERE `id`=?';
+          $data = array($file_name,$lists_id);
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute($data);
+          // header('Location : lists.php');
+          // exit();
+
+        }
+        // header('Location : lists.php');
+        // exit();
+
+      } else {
+        echo "アップロードに失敗しました";
+      }
+    }
+  }
+
+    // この中に各種ボタンが押された時の条件を書き込んでいく
+
+    //検索ボタンが押された時
+    if (!empty($_POST['list_search']) && $_POST['list_search'] != ''){
+        //検索ワード収集データベースにインサート
+        $sql = 'SELECT * FROM `searchs` WHERE `word`= ?';
         $data = array($_POST['list_search']);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
         $search = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
-        //①ユーザの検索と一致した場合 ：
-          if ($search['word'] == $_POST['list_search']) {
-            // アイテムに追加
-              $sql= 'INSERT INTO `atom_items` SET `categories_id` =?,
-                                             `content` = ?,
-                                             `lists_id` = ?';
-              $data = array($search['baggage_classify'], $_POST['list_search'], 3);
-              $stmt = $dbh->prepare($sql);
-              $stmt ->execute($data);
         
-          }   
+        $item_boths = array();
+        $item_azukeires = array();
+        $item_carry_ins = array();
           
+
+          // //①ユーザの検索と一致した場合 ：
+          // if ($search['word'] == $_POST['list_search']) {
+          //   // アイテムに追加
+          //   $sql= 'INSERT INTO `items` SET `categories_id` =?,
+          //                                  `content` = ?,
+          //                                  `lists_id` = ?';
+          //   $data = array($search['baggage_classify'], $_POST['list_search'], 3);
+          //   $stmt = $dbh->prepare($sql);
+          //   $stmt ->execute($data);
           
-          // //アイテムにデータがない時
-          //   else {
-          //     //カテゴリー表示
-          //   }
-         
-        //検索収集用テーブルに登録
-        $sql= 'INSERT INTO `atom_searched_words` SET `word` = ?,
-                                        `created` = NOW()';
-        $data = array($_POST['list_search']);
-        $stmt = $dbh->prepare($sql);
-        $stmt ->execute($data);
-      }
+          //   // 一致したアイテムの結果を取得
+          //   $sql = 'SELECT * FROM `items` WHERE `content`= ?';
+          //   $data = array($_POST['list_search']);
+          //   $stmt = $dbh->prepare($sql);
+          //   $stmt ->execute($data);
+          //   $items = $stmt->fetch(PDO::FETCH_ASSOC);
+          //   var_dump($items);
+          // }   
+          //   // searchsにデータがない場合： カテゴリー表示
+          //   // else{
+          //   // カテゴリーわけに飛ぶ
+          //   // }
 
-    // 一時保存ボタンが押された時
-    if (!empty($_POST['tmp_btn'])) {
-        $sql = 'INSERT `atom_lists` SET `members_id` = 1 ,
-                                   `name` = ?, 
-                                   -- `list_image_path` = ,
-                                   `created` = NOW()';
-        $data = array($_POST['list_name']);
-        $stmt = $dbh->prepare($sql);
-        $stmt ->execute($data);
+          // // リストとアイテムを結合
+          // $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
+          //        FROM `items` AS `i`
+          //        LEFT JOIN `lists` AS `l`
+          //        ON `i`.`lists_id` = `l`.`id`
+          //        WHERE 1';
+          // $data = array();
+          // $stmt = $dbh->prepare($sql);
+          // $stmt ->execute();
+          // $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
+          //アイテムにデータがあるとき
+          if (isset($items)) {
+            if ($items['categories_id'] == 1) {
+                //両方持ち込みの場合 
+                $item_boths[] = $items['content'];
+            }
+              // 持ち込みの場合
+            elseif ($items['categories_id'] == 2) {
+                $item_carry_ins[] = $items['content'];
+            }
+              // //預け入れの場合
+            elseif ($items['categories_id'] == 3) {
+                $item_azukeires[] = $items['content'];
+            } else{
+            $banned_baggage = '禁止です';
+          }
+         }
+        //検索収集用テーブルに登
+        // $sql= 'INSERT INTO `searched_words` SET `word` = ?,
+        //                                 `created` = NOW()';
+        // $data = array($_POST['list_search']);
+        // $stmt = $dbh->prepare($sql);
+        // $stmt ->execute($data);
 
+
+  $sql = 'SELECT * FROM `atom_items` WHERE 1';
+  $stmt = $dbh->prepare($sql);
+  $stmt ->execute();
+  $is_items = $stmt->fetch(PDO::FETCH_ASSOC);  
+
+  $i = 0;
+  while(true){
+    $items[] = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($items[$i] == false) {
+        break;
     }
 
-    //キャンセルボタンが押された時
-    if (!empty($_POST['can_btn'])) {
-        header('Location:lists.php');
+
+    //アイテムにデータがあるとき
+    if (isset($items)) {
+      if ($items[$i]['categories_id'] == '1') {
+          //両方持ち込みの場合 
+          $item_boths[] = $items[$i];
+
+      }
+
+        // 持ち込みの場合
+        elseif ($items[$i]['categories_id'] == '2') {
+            $item_carry_ins[] = $items[$i];
+        }
+        //預け入れの場合
+        elseif ($items[$i]['categories_id'] == '3') {
+            $item_azukeires[] = $items[$i];    
+        } 
+        //持ち込めない場合
+        else {
+            $banned_baggage = 'その荷物は持ち込めません！！';
+        } 
     }
 
     // 保存ボタンが押された時
     if (!empty($_POST['keep_btn'])) {
-        $sql = 'INSERT `atom_lists` SET 
+        $sql = 'INSERT `lists` SET 
                            `members_id` = 1 ,
                            `name` = ?, 
                            -- `list_image_path` = ,
@@ -85,67 +305,28 @@
         $data = array($_POST['list_name']);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
-    } else {
-      // $sql = '';
-      // $data = array(,$_POST['list_name'],$_FILES['']);
-      // $stmt = $dbh->prepare();
-      // $stmt ->execute();
-    }
-        //リストとアイテムを結合
-    $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
-           FROM `atom_items` AS `i`
-           LEFT JOIN `lists` AS `l`
-           ON `i`.`lists_id` = `l`.`id`
-           WHERE 1';
-    $data = array();
-    $stmt = $dbh->prepare($sql);
-    $stmt ->execute();
-    $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
+      } else {
+        // $sql = '';
+        // $data = array(,$_POST['list_name'],$_FILES['']);
+        // $stmt = $dbh->prepare();
+        // $stmt ->execute();
+     }
 
-    //ユーザーとリストのリンク
-    $sql= 'SELECT `l`.*,`m`.`account_name`
-             FROM `atom_lists`AS`l`
-             LEFT JOIN `members` AS `m`
-             ON `l`.`members_id`=`m`.`id`
-             WHERE 1';
-    $data = array();
+         // リストデータを取得
+    $sql= 'SELECT * FROM `lists` WHERE `id`=?';
+    $data = array($lists_id);
     $stmt = $dbh->prepare($sql);
     $stmt ->execute($data);
-    $record = $stmt->fetch(PDO::FETCH_ASSOC);
+    $isimage = $stmt->fetch(PDO::FETCH_ASSOC);
+    echo "出力画像" . $isimage['list_image_path'].'<br>';
+
+                // var_dump($item_boths);
+                // var_dump($item_azukeires);
+                // var_dump($item_carry_ins);
 
 
-                // 一致したアイテムの結果を取得
-    $sql = 'SELECT * FROM `atom_items` WHERE 1';
-    $data = array($_POST['list_search']);
-    $stmt = $dbh->prepare($sql);
-    $stmt ->execute($data);
-    $is_items = $stmt->fetch(PDO::FETCH_ASSOC);
-    while(true){
-        $items = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($items == false) {
-            break;
-        }
-        //アイテムにデータがあるとき
-        if (isset($items)) {
-          if ($items['categories_id'] == '1') {
-              //両方持ち込みの場合 
-              $item_boths[] = $items['content'];
-          }
-            // 持ち込みの場合
-          elseif ($items['categories_id'] == '2') {
-              $item_carry_ins[] = $items['content'];
-          }
-            //預け入れの場合
-          elseif ($items['categories_id'] == '3') {
-              $item_azukeires[] = $items['content'];    
-          } 
-            //持ち込めない場合
-          else {
-              $banned_baggage = 'その荷物は持ち込めません！！';
-          } 
-        }
-      }
-
+    $i++;
+  }
 
 ?>
 
@@ -179,26 +360,60 @@
     }
   ?>
 
- <div id="img"> 
+  <!-- 画像の変更 -->
+  <form method="POST" action="" enctype="multipart/form-data">
+    <input type="file" name="image">
+    <input type="submit" value="send">
+  </form>
+
+ <div id="img">
     <div id="headerwrap" class="back">
       <div class="container">
       <!-- リストの情報画面を書いていく -->
         <div class="row height">
           <div class="col-lg-offset-2 col-lg-5 col-md-12 col-sm-12 col-xs-12">
             <form action="" method="POST">
-              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" data-intro="リスト名を入力してね" data-step="1">
-              <input type="text" name="created" placeholder="作成日時" class="form-control created_location">
-
+              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" data-intro="リスト名を入力してね" data-step="1" value="<?php echo $_POST['list_name'] ?>">
+              <input type="text" name="created" placeholder="作成日時" class="form-control created_location" value="<?php echo $record['created']?>">
             </div>
-            <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
-              <?php if (!isset($hoge)) {?>
-                <img src="../assets/img/pic1.jpg" class="img-circle" width="150px" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
+              <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
+
+              <label>
+              <!-- 画像がデータベースに登録されているとき -->
+              <?php if ($isimage['list_image_path'] != NULL) { ?>
+                <img src="../../list_image_path/<?php echo $isimage['list_image_path']?>" class="img-circle" width="150px" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
                 <p class="set_profile">
-                
+                  <?php echo $record['account_name'] ?>
                 </p>
+              <!-- 画像がデータベースに登録されてないとき -->
               <?php } else {?>
+              <div>デフォルト画像を表示</div>
+ <!--                <div class="panel panel-default">
+                  <div class="panel-body">
+                    Drop Zone
+                    <div class="upload-drop-zone" id="drop-zone"> Or drag and drop files here </div>
+                    <div class="upload-drop-zone" id="drop-zone">
+
+                    </div>
+                  </div>
+                </div> -->
+
+              <!-- 画像の変更 -->
+<!--               <form method="post" action="" enctype="multipart/form-data">
+                <span class="btn btn-primary">
+                    Choose File
+                    <input type="file" name="image" style="display:none;">
+                </span>
+                <span class="btn btn-success">
+                    Send
+                  <input type="submit" style="display:none;">
+                </span>
+
+              </form> -->
 
               <?php } ?>
+
+              </label>
             </div>
           </div>
           <div class="row">
@@ -230,14 +445,15 @@
                       <li class="list-group-item list_float">
                         <input type="checkbox" name="che" class="left checkbox">
                         <span class="checkbox-icon"></span>
-                         <?php echo $item_both;?> 
+                         <?php echo $item_both['content'];?> 
                           <!-- 削除処理を書いていく -->
-                         <?php  ?>
-                           <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
-                             <i class="fa fa-trash"></i>
+                           <a href="delete_category.php?id=<?php echo $item_both['id'];?>">
+                             <i class="fa fa-trash right_position"></i>
                            </a>
-                         <?php  ?>
-                      </li>
+                          <a href="edit_category.php?id=<?php echo $item_carry_in['id'];?>">
+                           <i class="fa fa-pencil-square-o right"></i>
+                          </a>
+                        </li>
                     </label>
                   <?php }?>
                 </ul>
@@ -257,11 +473,14 @@
                       <li class="list-group-item list_float">
                         <input type="checkbox" name="che" class="left checkbox">
                         <span class="checkbox-icon"></span>
-                        <?php  echo $item_carry_in; ?>
-                        <!-- 削除処理を書いていく -->
+                        <?php  echo $item_carry_in['content']; ?>
                         <?php  ?>
-                          <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
-                            <i class="fa fa-trash"></i>
+                        <!-- 削除処理を書いていく -->
+                          <a href="delete_category.php?id=<?php echo $item_carry_in['id'];?>">
+                            <i class="fa fa-trash right_position"></i>
+                          </a>
+                          <a href="edit_category.php?id=<?php echo $item_carry_in['id'];?>">
+                           <i class="fa fa-pencil-square-o right"></i>
                           </a>
                         <?php  ?>
                       </li>
@@ -284,11 +503,14 @@
                       <li class="list-group-item list_float">
                         <input type="checkbox" name="che" class="left checkbox">
                         <span class="checkbox-icon"></span>
-                        <?php echo $item_azukeire; ?>
-                        <!-- 削除処理を書いていく -->
+                        <?php echo $item_azukeire['content']; ?>
                         <?php  ?>
-                          <a href="delete_category.php?id=<?php echo $tweet['id'];?>">
-                            <i class="fa fa-trash"></i>
+                          <!-- 削除処理を書いていく -->
+                          <a href="delete_category.php?id=<?php echo $item_azukeire['id']; ?>">
+                            <i class="fa fa-trash right_position"></i>
+                          </a>
+                          <a href="edit_category.php?id=<?php echo $item_carry_in['id'];?>">
+                           <i class="fa fa-pencil-square-o right"></i>
                           </a>
                         <?php  ?>
                       </li>
@@ -307,7 +529,7 @@
             </div>
             <div class="keep">
               <input class="btn btn-success keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの履歴やメールに送信できるよ" data-step="5">
-            </div>  
+            </div>
           </form>
         </div>
       </div>
@@ -315,17 +537,31 @@
   </div>
   <?php require('footer.php'); ?>
   <?php require('load_js.php'); ?>
+
   <?php if ($is_items == false) { ?>
     <script type="text/javascript">
       introJs().start();
     </script>
   <?php } ?>
+
 </body>
 </html>
 
 
 <?php 
 // // 条件用
+
+      // INSERT INTO `searchs` SET `word` = 'まさきっき',
+      //                           `condition` = 'ほげ',
+      //                           `baggage_classify` = 2, // 1:両方 2:機内 3:預け 4:不可
+      //                           `aviation_id` = 1,
+      //                           `categoryies_l2_id` =3, 
+      //                           `created` = NOW()
+      //                           // aviation_id  categoryies_l2_id 
+
+// listsにデータを挿入するためのsql
+// INSERT INTO `lists`(`members_id`, `name`, `created`) VALUES (1,"a",NOW())
+
       // INSERT INTO `atom_searchs` SET `word` = 'くり',
       //                           `condition` = 'ほげ',
       //                           `baggage_classify` = 2, // 1:両方 2:機内 3:預け 4:不可
@@ -333,6 +569,7 @@
       //                           `categories_l2_id` =3, 
       //                           `created` = NOW()
                                 // aviation_id  categories_l2_id 
+
  ?>
 
 
