@@ -8,7 +8,7 @@
   $item_azukeires = array();
   $item_carry_ins = array();
   //$banned_baggage = '';
-  $lists_id = '3'; //リストid
+  $list_data['lists_id'] = '3'; //リストid
 
   if (!isset($_SESSION['login_user']['id'])) {
       header('Location: un_login/sign_in.php');
@@ -56,7 +56,7 @@
 
         // リストデータを取得
         $sql= 'SELECT * FROM `atom_lists` WHERE `id`=?';
-        $data = array($lists_id);
+        $data = array($list_data['lists_id']);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
         $is_image = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -66,7 +66,7 @@
 
             // 画像名をデータベースに登録する
             $sql= 'UPDATE `atom_lists` SET `list_image_path` =?,`modified`=NOW() WHERE `id`=?';
-            $data = array($file_name,$lists_id);
+            $data = array($file_name,$list_data['lists_id']);
             $stmt = $dbh->prepare($sql);
             $stmt ->execute($data);
             // header('Location : lists.php');
@@ -84,7 +84,7 @@
 
           // 画像名をデータベースに登録
           $sql= 'UPDATE `atom_lists` SET `list_image_path`=?,`modified`=NOW() WHERE `id`=?';
-          $data = array($file_name,$lists_id);
+          $data = array($file_name,$list_data['lists_id']);
           $stmt = $dbh->prepare($sql);
           $stmt ->execute($data);
           // header('Location : lists.php');
@@ -290,7 +290,7 @@
 
   // リストデータを取得
   $sql= 'SELECT * FROM `atom_lists` WHERE `id`=?';
-  $data = array($lists_id);
+  $data = array($list_data['lists_id']);
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
   $is_image = $stmt->fetch(PDO::FETCH_ASSOC);
