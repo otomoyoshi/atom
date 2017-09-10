@@ -131,11 +131,19 @@
     // 画像アップロード処理
     if(isset($_FILES['image'])){
       echo "ファイルが存在します" .'<br>';
-      
-      $file_name = $_FILES['image']['name'] .date('YmdHis');
+     $info = new SplFileInfo($_FILES['image']['name']);
+     $extension = strtolower($info->getExtension());
+
+     if($extension != 'png' && $extension != 'jpg' && $extension != 'gif') {
+      echo 'extensionが間違っています' .'<br>';
+        $errors['extension'] = 'blank';
+     }
+    
+      $file_name = date('YmdHis') . $_FILES['image']['name'];
       // $file_name = $_FILES['image']['name'] . $date->format('YmdHisu');;
       $file_path = '../../list_image_path/' . $file_name;
       $tmp_name = $_FILES['image']['tmp_name'];
+
 
       // 画像をサーバに保存
       if (move_uploaded_file($tmp_name, $file_path)) { //サーバに画像保存が成功したら
@@ -344,7 +352,7 @@
   </head>
   <body>
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
-  <?php
+<!--   <?php
     $ini = parse_ini_file("config.ini");
     $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
@@ -355,16 +363,9 @@
       // echo "login fail";
       require('header.php');
     }
-  ?>
+  ?> -->
 
-  <?php require('footer.php'); ?>
-  <?php require('load_js.php'); ?>
 
- <!-- 画像の変更 -->
-  <form method="POST" action="" enctype="multipart/form-data">
-    <input type="file" name="image">
-    <input type="submit" value="send">
-  </form>
 
  <div id="img">
     <div id="headerwrap" class="back">
@@ -377,10 +378,24 @@
               <input type="text" name="created" placeholder="作成日時" class="form-control created_location" value="<?php echo $record['created']?>">
           </div>
           <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
+
+
+           <!-- 画像の変更 -->
+            <!-- <form method="POST" action="" enctype="multipart/form-data"> -->
+              <input type="file" name="image">
+              <input type="submit" value="send">
+            <!-- </form> -->
+
+            <?php if (isset($errors['extension'])) { ?>
+              <div class="alert alert-danger">
+                拡張子は、jpg,png,gifの画像を選択ください
+              </div>
+            <?php } ?>
+
             <label>
             <!-- 画像がデータベースに登録されているとき -->
             <?php if ($is_image['list_image_path'] != NULL) { ?>
-              <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
+              <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
               <p class="set_profile">
                 <?php echo $record['account_name'] ?>
               </p>
@@ -532,6 +547,9 @@
       </div>
     </div>
   </div>
+
+  <?php require('footer.php'); ?>
+  <?php require('load_js.php'); ?>
 
 </body>
 </html>
