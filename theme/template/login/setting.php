@@ -31,7 +31,7 @@ if (!empty($_POST)) {
 
     // 性別の登録処理
     if ($gender != '') {
-      $sql = 'UPDATE `members` SET `gender`=? WHERE `id`=?';
+      $sql = 'UPDATE `atom_members` SET `gender`=? WHERE `id`=?';
       $data = array($gender,$_SESSION['login_user']['id']);
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
@@ -41,7 +41,7 @@ if (!empty($_POST)) {
 
     // 年齢の登録処理
     if ($age != '') {
-      $sql = 'UPDATE `members` SET `age`=? WHERE `id`=?';
+      $sql = 'UPDATE `atom_members` SET `age`=? WHERE `id`=?';
       $data = array($age,$_SESSION['login_user']['id']);
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
@@ -80,10 +80,10 @@ if (!empty($_POST)) {
   <body>
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
   <?php
-    $ini = parse_ini_file("../config.ini");
-    $is_login = $ini['is_login'];
+    // $ini = parse_ini_file("../config.ini");
+    // $is_login = $ini['is_login'];
     // $is_login = 1; //ログインしてるときを１とする（仮）
-    if ($is_login) { //ログインしてるとき
+    if (isset($_SESSION['login_user'])) { //ログインしてるとき
       // echo "login success";
       require('../child_login_header.php');
     } else {// ログインしてないとき
@@ -197,6 +197,10 @@ if (!empty($_POST)) {
             <?php if(isset($errors['profile_image']) && $errors['profile_image'] == 'type'): ?>
               <div class="alert alert-danger">jpg png gif のいずれかの画像を挿入してください</div>
             <?php endif; ?>
+            <!-- ログアウトボタン -->
+            <div style="text-align: right;">
+              <a href="../setting_function/logout.php" class="btn btn-danger">ログアウト</a>
+            </div>
           </div>
         </div>
 

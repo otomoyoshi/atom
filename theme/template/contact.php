@@ -1,4 +1,5 @@
 <?php 
+session_start();
 
 // bool mb_send_mail(string $to, string $subject, string $message[, string $headers[, string $headers ]])
 
@@ -53,10 +54,10 @@ if (!empty($_POST)) {
   <body>
     <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
   <?php
-    $ini = parse_ini_file("config.ini");
-    $is_login = $ini['is_login'];
+    // $ini = parse_ini_file("config.ini");
+    // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($is_login) { //ログインしてるとき
+    if ($_SESSION['login_user']) { //ログインしてるとき
       // echo "login success";
       require('login_header.php');
     } else {// ログインしてないとき
@@ -138,20 +139,6 @@ if (!empty($_POST)) {
         </div>
       </div>
     </div>
-    <?php
-      mb_language("Japanese");
-      mb_internal_encoding("UTF-8");
- 
-      $to = $_POST['to'];
-      $title = $_POST['title'];
-      $message = $_POST['content'];
- 
-      if(mb_send_mail($to, $title, $message)){
-        echo "メールを送信しました";
-      } else {
-        echo "メールの送信に失敗しました";
-      }
-    ?>
 
   <!-- </div> -->
 

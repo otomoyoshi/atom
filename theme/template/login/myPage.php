@@ -45,10 +45,10 @@ while(1){
   <body>
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
   <?php
-    $ini = parse_ini_file("../config.ini");
-    $is_login = $ini['is_login'];
+    // $ini = parse_ini_file("../config.ini");
+    // $is_login = $ini['is_login'];
     // $is_login = 1; //ログインしてるときを１とする（仮）
-    if ($is_login) { //ログインしてるとき
+    if (isset($_SESSION['login_user'])) { //ログインしてるとき
       // echo "login success";
       require('../child_login_header.php');
     } else {// ログインしてないとき
