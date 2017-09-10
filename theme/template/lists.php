@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-=======
+
+
 <?php
   session_start();
   require('../../developer/dbconnect.php');
@@ -8,12 +8,23 @@
   $item_azukeires = array();
   $item_carry_ins = array();
   //$banned_baggage = '';
-  $lists_id = '3'; //リストid
+  $list_data['lists_id'] = '3'; //リストid
 
   if (!isset($_SESSION['login_user']['id'])) {
       header('Location: un_login/sign_in.php');
       exit();
   }
+    //リストとアイテムを結合
+  $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
+         FROM `atom_items` AS `i`
+         LEFT JOIN `atom_lists` AS `l`
+         ON `i`.`lists_id` = `l`.`id`
+         WHERE 1';
+  $data = array();
+  $stmt = $dbh->prepare($sql);
+  $stmt ->execute();
+  $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
+  var_dump($list_data) . '<br>';
 
   // ファイル選択ボタンが押された時
   if(!empty($_FILES)){
@@ -45,7 +56,7 @@
 
         // リストデータを取得
         $sql= 'SELECT * FROM `atom_lists` WHERE `id`=?';
-        $data = array($lists_id);
+        $data = array($list_data['lists_id']);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
         $is_image = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -55,7 +66,7 @@
 
             // 画像名をデータベースに登録する
             $sql= 'UPDATE `atom_lists` SET `list_image_path` =?,`modified`=NOW() WHERE `id`=?';
-            $data = array($file_name,$lists_id);
+            $data = array($file_name,$list_data['lists_id']);
             $stmt = $dbh->prepare($sql);
             $stmt ->execute($data);
             // header('Location : lists.php');
@@ -71,10 +82,9 @@
             unlink($file_delpath);
           }
 
-
           // 画像名をデータベースに登録
           $sql= 'UPDATE `atom_lists` SET `list_image_path`=?,`modified`=NOW() WHERE `id`=?';
-          $data = array($file_name,$lists_id);
+          $data = array($file_name,$list_data['lists_id']);
           $stmt = $dbh->prepare($sql);
           $stmt ->execute($data);
           // header('Location : lists.php');
@@ -137,17 +147,6 @@
       $stmt ->execute($data);
       $search = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
       //①ユーザの検索と一致した場合 ：
-        //リストとアイテムを結合
-      $sql= 'SELECT `i`.*,`l`.`id`,`l`.`name`
-             FROM `atom_items` AS `i`
-             LEFT JOIN `atom_lists` AS `l`
-             ON `i`.`lists_id` = `l`.`id`
-             WHERE 1';
-      $data = array();
-      $stmt = $dbh->prepare($sql);
-      $stmt ->execute();
-      $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
-      var_dump($list_data) . '<br>';
       // var_dump($search) .'<br>';
       // var_dump($_POST['list_search']) . '<br>';
       if ($search['word'] == $_POST['list_search']) {
@@ -197,11 +196,13 @@
   }
   //キャンセルボタンが押された時
   if (!empty($_POST['can_btn'])) {
-      $sql = 'DELETE FROM `atom_items` WHERE 1 ';
+      $sql = 'DELETE FROM `atom_items` WHERE `lists_id`= ?';
+      $data = array($list_data['lists_id']);
       $stmt = $dbh->prepare($sql);
-      $stmt ->execute();
-      header('Location:lists.php');
-      exit();
+      $stmt ->execute($data);
+      // header('Location:lists.php');
+      // exit();
+      echo $list_data['lists_id'];
   }
 
   // 保存ボタンが押された時
@@ -247,11 +248,10 @@
   $is_image = ''; //画像が存在するか確認する
 
 
-
-
-  $sql = 'SELECT * FROM `atom_items` WHERE 1';
+  $sql = 'SELECT * FROM `atom_items` WHERE `lists_id` = ?';
+  $data = array($list_data['lists_id']);
   $stmt = $dbh->prepare($sql);
-  $stmt ->execute();
+  $stmt ->execute($data);
   $is_items = $stmt->fetch(PDO::FETCH_ASSOC);
 
   $i = 0;
@@ -290,7 +290,7 @@
 
   // リストデータを取得
   $sql= 'SELECT * FROM `atom_lists` WHERE `id`=?';
-  $data = array($lists_id);
+  $data = array($list_data['lists_id']);
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
   $is_image = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -439,9 +439,6 @@
                   </label>
                 <?php }?>
               </ul>
-<!-- ======= -->
- 
-<!-- >>>>>>> 8a48efcae0c5c3563068c672fadd36eafe7684ac -->
             </div>
           </div>
           <!-- 持ち込みの欄を作る -->
@@ -561,4 +558,4 @@
       //                           `created` = NOW()
                                 // aviation_id  categories_l2_id 
  ?>
->>>>>>> 6a6b7afec32b1184df286c5d199651bba2cda140
+
