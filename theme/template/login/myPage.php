@@ -71,14 +71,14 @@ $list_last = $max+1;
   <?php
     // $ini = parse_ini_file("../config.ini");
     // $is_login = $ini['is_login'];
-    // // $is_login = 1; //ログインしてるときを１とする（仮）
-    // if ($is_login) { //ログインしてるとき
-    //   // echo "login success";
-    //   require('../child_login_header.php');
-    // } else {// ログインしてないとき
-    //   // echo "login fail";
-    //   require('../child_header.php');
-    // }
+    // $is_login = 1; //ログインしてるときを１とする（仮）
+    if (isset($_SESSION['login_user'])) { //ログインしてるとき
+      // echo "login success";
+      require('../child_login_header.php');
+    } else {// ログインしてないとき
+      // echo "login fail";
+      require('../child_header.php');
+    }
   ?>
 
     <div id="headerwrap" style="padding-top: 100px">

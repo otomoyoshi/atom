@@ -68,10 +68,10 @@ if (!empty($_POST)) {
   <body>
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
   <?php
-    $ini = parse_ini_file("../config.ini");
-    $is_login = $ini['is_login'];
+    // $ini = parse_ini_file("../config.ini");
+    // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($is_login) { //ログインしてるとき
+    if (isset($_SESSION['login_user']) && $_SESSION['login_user']['new_user'] != 'yes') { //ログインしてるとき
       // echo "login success";
       require('../child_login_header.php');
     } else {// ログインしてないとき
@@ -96,6 +96,14 @@ if (!empty($_POST)) {
 
         <form method="POST" action="">
           <div class="col-lg-6 flame">
+
+          <?php if((isset($_SESSION['login_user']['new_user'])) && $_SESSION['login_user']['new_user'] == 'yes'): ?>
+            <div class="row text-center">
+              <h3 style="text-align: center; margin-top:0px; margin-bottom: 20px; color: rgba(10,10,10,0.9);">新規登録ありがとうございます！<br>以下からログインをお願いします</h3>
+            </div>
+          <?php $_SESSION['login_user']['new_user'] = ''; ?>
+          <?php endif; ?>
+
             <div class="row email_input">
               <div class="col-lg-12">
                 <div class="text-center text_loc">

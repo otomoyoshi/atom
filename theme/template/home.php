@@ -45,10 +45,10 @@ if (!empty($_POST)) {
 
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
   <?php
-    $ini = parse_ini_file("config.ini");
-    $is_login = $ini['is_login'];
+    // $ini = parse_ini_file("config.ini");
+    // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($is_login) { //ログインしてるとき
+    if ($_SESSION['login_user']) { //ログインしてるとき
       // echo "login success";
       require('login_header.php');
     } else {// ログインしてないとき
