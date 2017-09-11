@@ -218,42 +218,43 @@ if(isset($_GET['id'])){
     $stmt = $dbh->prepare($sql);
     $stmt ->execute($data);
     $is_items = $stmt->fetch(PDO::FETCH_ASSOC);
-  } else { //GET[new]のとき
-    $is_items = false;
-  }
 
-  $i = 0;
-  while(true){
-    $items[] = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($items[$i] == false) {
-        break;
+    $i = 0;
+    while(true){
+      $items[] = $stmt->fetch(PDO::FETCH_ASSOC);
+      if ($items[$i] == false) {
+          break;
+      }
+
+
+      //アイテムにデータがあるとき
+      if (isset($items)) {
+        if ($items[$i]['categories_id'] == '1') {
+            //両方持ち込みの場合 
+            $item_boths[] = $items[$i];
+        }
+        // 持ち込みの場合
+        elseif ($items[$i]['categories_id'] == '2') {
+            $item_carry_ins[] = $items[$i];
+        }
+        //預け入れの場合
+        elseif ($items[$i]['categories_id'] == '3') {
+            $item_azukeires[] = $items[$i];    
+        } 
+        //持ち込めない場合
+        elseif ($items[$i]['categories_id'] == '4'){
+            $banned_baggage = 'その荷物は持ち込めません！！';
+        } 
+
+       } //アイテムにデータがない時
+      else{
+          //カテゴリー表示
+      } 
+      $i++;
     }
 
-
-    //アイテムにデータがあるとき
-    if (isset($items)) {
-      if ($items[$i]['categories_id'] == '1') {
-          //両方持ち込みの場合 
-          $item_boths[] = $items[$i];
-      }
-      // 持ち込みの場合
-      elseif ($items[$i]['categories_id'] == '2') {
-          $item_carry_ins[] = $items[$i];
-      }
-      //預け入れの場合
-      elseif ($items[$i]['categories_id'] == '3') {
-          $item_azukeires[] = $items[$i];    
-      } 
-      //持ち込めない場合
-      elseif ($items[$i]['categories_id'] == '4'){
-          $banned_baggage = 'その荷物は持ち込めません！！';
-      } 
-
-     } //アイテムにデータがない時
-    else{
-        //カテゴリー表示
-    } 
-      $i++;
+    } else { //GET[new]のとき
+    $is_items = false;
   }
 
   if(isset($_GET['id'])){
