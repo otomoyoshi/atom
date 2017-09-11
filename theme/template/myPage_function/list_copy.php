@@ -18,7 +18,7 @@ session_start();
 
 // $copied_list = array();
 
-$sql = 'SELECT * FROM `lists` WHERE `id`=?';
+$sql = 'SELECT * FROM `atom_lists` WHERE `id`=?';
 $data = array($_GET['id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
@@ -27,7 +27,7 @@ $copied_list[] = $stmt->fetch(PDO::FETCH_ASSOC);
 // var_dump($copied_list);
 // echo $copied_list[0]['members_id'];
 
-$sql = 'INSERT INTO `lists` SET `members_id`=?,
+$sql = 'INSERT INTO `atom_lists` SET `members_id`=?,
 								`name`=?,
 								`list_image_path`=?;
 								`created`=NOW()';
