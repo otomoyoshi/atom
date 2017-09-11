@@ -87,13 +87,13 @@ $list_last = $max+1;
       <div class="col-md-8 col-sm-8 col-xs-10 col-md-offset-2 col-sm-offset-2 col-xs-offset-1 tabinimotsu_main_div" style="margin-bottom: 50px">
         <div class="container-fluid">
 
-        <!-- ユーザー情報の表示 -->
+        <!-- ユーザーユーザー情報の表示 -->
           <div class="row">
             <div class="col-md-4"></div>
               <div class="col-md-8" style="padding-top: 20px">
                 <div class="media">
                   <a class="pull-left" href="#">
-                  <?php if($_SESSION['login_user']['profile_image_path']): ?>
+                  <?php if(isset($_SESSION['login_user']['profile_image_path'])): ?>
                     <img class="media-object dp img-circle" src="../../../profile_image_path/<?php echo $_SESSION['login_user']['profile_image_path']; ?>" style="width: 80px;height:80px;">
                   <?php else: ?>
                     <img class="media-object dp img-circle" src="../../../profile_image_path/masaki.png" style="width: 80px;height:80px;">
@@ -101,7 +101,9 @@ $list_last = $max+1;
                   </a>
                   <div class="media-body">
                     <h3 class="mypage_username">
-                      <?php echo $_SESSION['login_user']['account_name']; ?>くん
+                      <?php if(isset($_SESSION['login_user']['account_name'])) { ?>
+                        <?php echo $_SESSION['login_user']['account_name']; ?>くん
+                      <?php } ?>
                     </h3>
                   </div>
                 </div>
