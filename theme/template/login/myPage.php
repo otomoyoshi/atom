@@ -195,7 +195,7 @@ $list_last = $max+1;
                         <a href="../myPage_function/list_copy.php?id=<?php echo $list['id']; ?>">
                           <button name="list_copy" type="button" class="col-md-4 col-xs-4" data-intro="持ち物リストを複製できるよ" data-step="2"><i class="glyphicon glyphicon-file"></i></button>
                         </a>
-                        <!-- <a href="../function/list_delete.php"> -->
+                        <!-- <a href="../function/list_email.php"> -->
                           <button name="list_email" type="button" class="col-md-4 col-xs-4" data-intro="メールで持ち物リストを送信できるよ" data-step="3"><i class="glyphicon glyphicon-envelope"></i></button>
                         <!-- </a> -->
                         <a href="../myPage_function/list_delete.php?id=<?php echo $list['id']; ?>" onClick="return confirm('削除します。\nよろしいですか？');">
