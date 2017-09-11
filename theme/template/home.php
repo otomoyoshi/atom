@@ -6,16 +6,58 @@ $errors = array ();
 
 //検索ボタンが押されたとき
 if (!empty($_POST)) {
+    if (isset($_POST['list_search']) && $_POST['list_search'] != '') {
+      $sql= 'INSERT INTO `atom_searched_words` SET `word` = ?,
+                            `created` = NOW()';
+      $data = array($_POST['list_search']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
 
-    $word = $_POST['search'];
-
-    if ($word == '') {
+      $sql = 'SELECT * FROM `atom_searchs` WHERE `word`= ?';
+      $data = array($_POST['list_search']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+      $search = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
+    } elseif (isset($_POST['list_search']) && $_POST['list_search'] == '') {
     $errors['word'] = 'blank';
     }
+      if (isset($search)) {
+        if ($search['baggage_classify'] == '1') {
+            //両方持ち込みの場合
+           $word = $search['word'];
+           $classify = '機内への持ち込み・預け入れ共に可能です';
+           $condition = $search['condition'];
+        }
+        // 持ち込みの場合
+        elseif ($search['baggage_classify'] == '2') {
+          $word = $search['word'];
+          $classify = '機内持ち込みのみ可能です';
+          $condition = $search['condition'];
+
+        }
+        //預け入れの場合
+        elseif ($search['baggage_classify'] == '3') {
+          $word = $search['word'];
+          $classify = 'お荷物預け入れのみ可能です';
+          $condition = $search['condition'];
+        } 
+        //持ち込めない場合
+        elseif ($search['baggage_classify'] == '4'){
+          $word = $search['word'];
+          $classify = '機内への持ち込み・預け入れ共にできません';
+          $condition = '';
+
+        } 
+
+      } //アイテムにデータがない時
+      else{
+          //カテゴリー表示
+      }
 
 }
 
- ?>
+
+?>
 
 
 
@@ -29,6 +71,7 @@ if (!empty($_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!-- <link rel="shortcut icon" href="../..assets/img/favicon.png"> -->
     <!-- <link rel="shortcut icon" href="../assets/img/tabinimotsu_v1.png"> -->
 
@@ -59,8 +102,8 @@ if (!empty($_POST)) {
   <div id="headerwrap">
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-lg-8">
-          <h2>「荷造りの悩み」ここに置いて行きませんか？</h2>
+        <div class="col-xs-12 col-lg-6">
+          <h2 id ="catch_copy">「荷造りの悩み」ここに置いて行きませんか？</h2>
          
         <form method="POST" action="">
             <div class="form-group">
@@ -72,19 +115,72 @@ if (!empty($_POST)) {
 
             <div class="form-group">
 
-              <input type="text" id="search" class="form-control" placeholder="例：液体物" maxlength=15 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
+              <input type="text" id="search" class="form-control" placeholder="例：液体物" name = "list_search" maxlength=15 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
 
                <?php if (isset($errors['word'])  == 'blank') {?>
-                  <div class="alert alert-danger">検索ワードを入力してください</div>
+                  <div class="alert alert-danger error_search">検索ワードを入力してください</div>
                 <?php } ?>
 
             </div>
-            <button id="search-btn" type="submit" class="btn btn-warning btn-lg">検索</button>
+            <input id="search-btn1" type="submit" class="btn btn-warning btn-lg" value="検索">
           </form>
         </div><!-- /col-lg-6 -->
-        <div class="col-xs-12 col-lg-4">
+        <!-- 検索結果を表示していく -->
+        <div class="col-xs-12 col-lg-6 ">
+              <?php 
+                if (isset($search)) {
+                  // 両方可能の時
+                  if ($search['baggage_classify'] == '1') { ?>
+                    <div class="backgrounding">
+                      <ul class="show_word">
+                        <h3 class="result_word">検索結果</h3>
+                        <li id = 'word'>検索ワード：<?php echo $word ?></li>
+                        <!-- <li id = 'word_classify'>分類</li> -->
+                        <li>持ち込み：<span class="judge_good">○</span></li>
+                        <li>預け入れ：<span class="judge_good">○</span></li>
+                        <li>持ち込み条件：<?php echo $condition ?></li>
+                        <form method="POST" action="">
+                          <input class = "btn btn-success btn_position" type="submit" name="move_list" value="リストへ追加"> 
+                        </form>
+                  <!-- 持ち込みのみ可能の時 -->
+                  <?php } elseif ($search['baggage_classify'] == '2') { ?>
+                    <div class="backgrounding">
+                      <ul class="show_word">
+                        <h3 class="result_word">検索結果</h3>
+                        <li id = 'word'>検索ワード：<?php echo $word ?></li>
+                        <!-- <li id = 'word_classify'>分類</li> -->
+                        <li>持ち込み：<span class="judge_good">○</span></li>
+                        <li>預け入れ：<span class="judge_bad">×</span></li>
+                        <li>持ち込み条件：<?php echo $condition ?></li>
+                        <form method="POST" action="">
+                          <input class = "btn btn-success btn_position" type="submit" name="move_list" value="リストへ追加"> 
+                        </form>
+                  <!-- 預け入れのみ可能の時 -->
+                  <?php } elseif ($search['baggage_classify'] == '3') { ?>
+                    <div class="backgrounding">
+                      <ul class="show_word">
+                        <h3 class="result_word">検索結果</h3>
+                        <li id = 'word'>検索ワード：<?php echo $word ?></li>
+                        <!-- <li id = 'word_classify'>分類</li> -->
+                        <li>持ち込み：<span class="judge_bad">×</span></li>
+                        <li>預け入れ：<span class="judge_good">◯</span></li>
+                        <li>持ち込み条件：<?php echo $condition ?></li>
+                        <form method="POST" action="">
+                          <input class = "btn btn-success btn_position" type="submit" name="move_list" value="リストへ追加">
+                        </form>
+                  <!-- 禁止の荷物の時 -->
+                  <?php }elseif ($search['baggage_classify'] == '4') { ?>
+                    <div class="backgrounding">
+                      <ul class="show_word">
+                        <h3 class="result_word">検索結果</h3>
+                        <li id = 'word'>検索ワード：<?php echo $word ?></li>
+                        <!-- <li id = 'word_classify'>分類</li> -->
+                        <li>持ち込み：<span class="judge_bad">×</span></li>
+                        <li>預け入れ：<span class="judge_bad">×</span></li>
+              <?php } } ?>
+            </ul>
+          </div>
         </div><!-- /col-lg-6 -->
-
       </div><!-- /row -->
     </div><!-- /container -->
   </div><!-- /headerwrap -->
@@ -97,6 +193,6 @@ if (!empty($_POST)) {
   <script type="text/javascript">
   introJs().start();
   </script>
-
+  <script type="text/javascript" src=""></script>
   </body>
 </html>
