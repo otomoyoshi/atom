@@ -47,7 +47,7 @@ li {
   }
 
   #sel1 {
-    width: 100%;
+    width: 80%;
   }
 
 
@@ -60,16 +60,22 @@ li {
 
   #search {
     position: relative;
-    /*width: 750px;*/
+    width: 80%;
     margin-bottom: 10px;
     margin-top: 10px;
-
   }
 
-  #search-btn {
+  #catch_copy{
+    font-size:20px;
+  }
+
+  #search-btn1 {
     position: relative;
-    width: 100%;
+    width: 12%;
     margin-bottom: 20px;
+  }
+  .error_search{
+    width:60%;
   }
 
 
@@ -77,7 +83,49 @@ li {
     width: 30%;
   }
 
+  .show_word{
+    padding-top:10px;
+    font-size: 20px;
+    list-style: none;
+    color: black;
+  }
 
+  .result_word{
+    text-align: center;
+  }
+
+  .result_word{
+    color: black;
+  }
+
+  .judge_good{
+    color: red;
+    font-weight: 900;
+    font-size:15px;
+  }
+
+  .judge_bad{
+    padding-left: 2px;
+    color: red;
+    font-weight: 800;
+    font-size:25px;
+  }
+  
+  .backgrounding{
+    background:rgba(255,255,255,0.6);
+    width: 100%;
+    height: 231px;
+  }
+
+  .btn_position{
+    float: right;
+    margin-right: 20px;
+  }
+
+  .text_position{
+    text-align: center;
+    float: none;
+  }
 }
 
 /* Landscape tablets and medium desktops */
@@ -100,7 +148,7 @@ li {
 
   }
 
-  #search-btn {
+  #search-btn1 {
     position: relative;
     width: 80%;
     margin-bottom: 20px;
@@ -113,6 +161,7 @@ li {
   .text_center{
     width: 80%;
   }
+
 }
 
 /* Portrait tablets and small desktops */
@@ -132,7 +181,7 @@ li {
     width: 100%;
   }
 
-  #search-btn {
+  #search-btn1 {
     position: relative;
     width: 100%;
     margin-bottom: 20px;
@@ -165,7 +214,7 @@ li {
     width: 100%;
   }
 
-  #search-btn {
+  #search-btn1{
     position: relative;
     width: 100%;
     margin-bottom: 20px;
@@ -200,7 +249,7 @@ li {
     width: 100%;
   }
 
-  #search-btn {
+  #search-btn1 {
     position: relative;
     width: 100%;
     margin-bottom: 20px;

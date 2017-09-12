@@ -1,5 +1,7 @@
 <?php 
+
 session_start();
+
 
 // bool mb_send_mail(string $to, string $subject, string $message[, string $headers[, string $headers ]])
 
@@ -13,6 +15,10 @@ if (!empty($_POST)) {
 
   $email = $_POST['email'];
   $content = $_POST['content'];
+  // $to = $_POST['to'];
+  
+
+
 
 
   if ($email == '') {
@@ -28,8 +34,18 @@ if (!empty($_POST)) {
       # code...
     }
 
+  if (mb_send_mail($to, $subject, $content, $header)) {
+   echo "メールを送信しました";
+    } else {
+    echo "メールの送信に失敗しました";
+    }   
+    # code...
+  }
 
-}
+    // メール送信機能実装
+    require('contact_function/phpmailer.php');
+
+
 
 
  ?>
@@ -87,9 +103,7 @@ if (!empty($_POST)) {
                 </figure> -->
 
                 <h2 class="text-center your_name">お問い合わせフォーム</h2><br>
-                <h2 class="text-center your_name">本フォームでは、旅にもつウェブサイトに関するお客様からのお問い合わせをお受けしています。
-
-</h2>
+                <h2 class="text-center your_name">本フォームでは、旅にもつウェブサイトに関するお客様からのお問い合わせをお受けしています。</h2>
 
               </div>
 
@@ -100,7 +114,8 @@ if (!empty($_POST)) {
                          <!--  <div class="row">
                             <div class="col-lg-8 col-md-offset-2"> -->
                             <!-- <form class="form-horizontal"> -->
-                              <form method="POST" action="">
+                              <!-- <form method="POST" action="mailto:maho.atom@gmail.com"> -->
+                              <form method="POST" action="contact_function/phpmailer.php">
 
                                 <div class="form-group">
                                   <label for="exampleInputEmail2"><i class="fa fa-envelope-o"></i>メールアドレス</label>
@@ -124,7 +139,10 @@ if (!empty($_POST)) {
 
 
                                 </div>
-                                <button type="subm9it" class="btn btn-success">送信</button>
+                                <button type="submit" class="btn btn-success">送信</button>
+
+
+
                               </form>
                             <!-- </form> -->
                             <!-- </div>

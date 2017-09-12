@@ -1,4 +1,4 @@
-<?php 
+<?php
 require('../../developer/dbconnect.php');
 
 $word = '';
@@ -6,16 +6,58 @@ $errors = array ();
 
 //検索ボタンが押されたとき
 if (!empty($_POST)) {
-
     $word = $_POST['search'];
 
     if ($word == '') {
     $errors['word'] = 'blank';
     }
-
 }
 
-// $result = array(1,2,3);
+
+//1階層目のデータを全件表示する
+$sql = 'SELECT * FROM `atom_categories_l1` WHERE 1' ;
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+
+//全件取得
+$results = array();
+$i = 0;
+while (1) {
+  $results[]= $stmt->fetch(PDO::FETCH_ASSOC);// １レコード分のみ取得
+  if ($results[$i] == false) {
+    break;
+  }
+  $i++;
+}
+
+// $result = get_data($stmt);
+// var_dump($result);
+// echo "---------";
+// echo $result[0]['category'] .'<br>';
+
+foreach ($results as $result) {
+  echo $result['category_l1'] .'<br>';
+// var_dump($result);  
+}
+
+
+
+
+// $sql = 'SELECT `category_l1` FROM `atom_categories_l1` WHERE `id`=? ';
+// $data = array($_GET['id']);
+// $stmt = $dbh->prepare($sql);
+// $stmt->execute($data);
+
+
+//一階層目のデータを全件取得
+$sql = 'SELECT `category_l1` FROM `atom_categories_l1` WHERE 1 '; //sql文
+$stmt = $dbh->prepare($sql); //sqlのみ読み込み
+$stmt->execute(); //sql実行　データを読み込む
+
+var_dump($stmt);
+
+// echo 'ほげ';
+ ?>
 
 ?>
 
@@ -44,6 +86,7 @@ if (!empty($_POST)) {
   <?php
     // $ini = parse_ini_file("config.ini");
     // $is_login = $ini['is_login'];
+
     // $is_login = 0; //ログインしてるときを１とする（仮）
     if ($_SESSION['login_user']) { //ログインしてるとき
       // echo "login success";
@@ -52,13 +95,14 @@ if (!empty($_POST)) {
       // echo "login fail";
       // require('header.php');
     }
+
   ?>
   <div id="headerwrap">
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-lg-6">
           <h2>「荷造りの悩み」ここに置いて行きませんか？</h2>
-         
+
         <form method="POST" action="">
             <div class="form-group">
               <!-- <label for="sel1"></label> -->
@@ -100,7 +144,8 @@ if (!empty($_POST)) {
 
   <?php require('footer.php'); ?>
   <?php require('load_js.php'); ?>
-  <!--  -->
+
+  <!-- チュートリアル -->
 <!--   <script type="text/javascript">
   introJs().start();
   </script> -->
@@ -111,6 +156,7 @@ if (!empty($_POST)) {
     animation: true
   });
   </script>
+
 
   </body>
 </html>
