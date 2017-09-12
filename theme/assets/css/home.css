@@ -19,7 +19,7 @@ body {
 
 .both_contents{
   width: 30%;
-}　
+}
 
 
 /* Large desktops and laptops */
@@ -74,23 +74,28 @@ body {
     list-style: none;
     color: black;
   }
+
   .result_word{
     text-align: center;
   }
+
   .result_word{
     color: black;
   }
+
   .judge_good{
     color: red;
     font-weight: 900;
     font-size:15px;
   }
+
   .judge_bad{
     padding-left: 2px;
     color: red;
     font-weight: 800;
     font-size:25px;
   }
+  
   .backgrounding{
     background:rgba(255,255,255,0.6);
     width: 100%;
@@ -102,9 +107,10 @@ body {
     margin-right: 20px;
   }
 
-  .backgrounding{
-  display:none;
-}
+  .text_position{
+    text-align: center;
+    float: none;
+  }
 }
 
 /* Landscape tablets and medium desktops */

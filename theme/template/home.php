@@ -25,26 +25,38 @@ if (!empty($_POST)) {
             //両方持ち込みの場合
            $word = $search['word'];
            $classify = '機内への持ち込み・預け入れ共に可能です';
-           $condition = $search['condition'];
+           $condition_carry_in = $search['condition_carry_in'];
+           $condition_azukeire = $search['condition_azukeire'];
+           $judge_carry_in = '◯';
+           $judge_azukeire = '◯';
         }
         // 持ち込みの場合
         elseif ($search['baggage_classify'] == '2') {
           $word = $search['word'];
           $classify = '機内持ち込みのみ可能です';
-          $condition = $search['condition'];
+          $condition_carry_in = $search['condition_carry_in'];
+          $condition_azukeire = $search['condition_azukeire'];
+          $judge_carry_in = '◯';
+          $judge_azukeire = '×';
 
         }
         //預け入れの場合
         elseif ($search['baggage_classify'] == '3') {
           $word = $search['word'];
           $classify = 'お荷物預け入れのみ可能です';
-          $condition = $search['condition'];
+          $condition_carry_in = $search['condition_carry_in'];
+          $condition_azukeire = $search['condition_azukeire'];
+          $judge_carry_in = '×';
+          $judge_azukeire = '◯';
         } 
         //持ち込めない場合
         elseif ($search['baggage_classify'] == '4'){
           $word = $search['word'];
           $classify = '機内への持ち込み・預け入れ共にできません';
-          $condition = '';
+          $condition_carry_in = '';
+          $condition_azukeire = '';
+          $judge_carry_in = '×';
+          $judge_azukeire = '×';
 
         } 
 
@@ -77,7 +89,7 @@ if (!empty($_POST)) {
     <title>旅にもつ</title>
 
     <?php require('load_css.php');?>
-
+    <link rel="stylesheet" type="text/css" href="../assets/css/home.css">
 
 
 
@@ -126,58 +138,20 @@ if (!empty($_POST)) {
         </div><!-- /col-lg-6 -->
         <!-- 検索結果を表示していく -->
         <div class="col-xs-12 col-lg-6 ">
-              <?php 
-                if (isset($search)) {
-                  // 両方可能の時
-                  if ($search['baggage_classify'] == '1') { ?>
-                    <div class="backgrounding">
-                      <ul class="show_word">
-                        <h3 class="result_word">検索結果</h3>
-                        <li id = 'word'>検索ワード：<?php echo $word ?></li>
-                        <!-- <li id = 'word_classify'>分類</li> -->
-                        <li>持ち込み：<span class="judge_good">○</span></li>
-                        <li>預け入れ：<span class="judge_good">○</span></li>
-                        <li>持ち込み条件：<?php echo $condition ?></li>
-                        <form method="POST" action="">
-                          <input class = "btn btn-success btn_position" type="submit" name="move_list" value="リストへ追加"> 
-                        </form>
-                  <!-- 持ち込みのみ可能の時 -->
-                  <?php } elseif ($search['baggage_classify'] == '2') { ?>
-                    <div class="backgrounding">
-                      <ul class="show_word">
-                        <h3 class="result_word">検索結果</h3>
-                        <li id = 'word'>検索ワード：<?php echo $word ?></li>
-                        <!-- <li id = 'word_classify'>分類</li> -->
-                        <li>持ち込み：<span class="judge_good">○</span></li>
-                        <li>預け入れ：<span class="judge_bad">×</span></li>
-                        <li>持ち込み条件：<?php echo $condition ?></li>
-                        <form method="POST" action="">
-                          <input class = "btn btn-success btn_position" type="submit" name="move_list" value="リストへ追加"> 
-                        </form>
-                  <!-- 預け入れのみ可能の時 -->
-                  <?php } elseif ($search['baggage_classify'] == '3') { ?>
-                    <div class="backgrounding">
-                      <ul class="show_word">
-                        <h3 class="result_word">検索結果</h3>
-                        <li id = 'word'>検索ワード：<?php echo $word ?></li>
-                        <!-- <li id = 'word_classify'>分類</li> -->
-                        <li>持ち込み：<span class="judge_bad">×</span></li>
-                        <li>預け入れ：<span class="judge_good">◯</span></li>
-                        <li>持ち込み条件：<?php echo $condition ?></li>
-                        <form method="POST" action="">
-                          <input class = "btn btn-success btn_position" type="submit" name="move_list" value="リストへ追加">
-                        </form>
-                  <!-- 禁止の荷物の時 -->
-                  <?php }elseif ($search['baggage_classify'] == '4') { ?>
-                    <div class="backgrounding">
-                      <ul class="show_word">
-                        <h3 class="result_word">検索結果</h3>
-                        <li id = 'word'>検索ワード：<?php echo $word ?></li>
-                        <!-- <li id = 'word_classify'>分類</li> -->
-                        <li>持ち込み：<span class="judge_bad">×</span></li>
-                        <li>預け入れ：<span class="judge_bad">×</span></li>
-              <?php } } ?>
-            </ul>
+              <?php if (isset($search)) {?>
+                  <div class="row">
+                    <div class = "col-lg-12">
+                      <table>
+                        <tr>
+                          <?php echo $word; ?>
+                        </tr>
+                        <tr>
+                          <?php echo $word; ?>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+              <?php  } ?>
           </div>
         </div><!-- /col-lg-6 -->
       </div><!-- /row -->
