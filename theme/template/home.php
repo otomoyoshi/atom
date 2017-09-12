@@ -141,14 +141,8 @@ if (!empty($_POST)) {
               <?php if (isset($search)) {?>
                   <div class="row">
                     <div class = "col-lg-12">
-                      <table>
-                        <tr>
-                          <?php echo $word; ?>
-                        </tr>
-                        <tr>
-                          <?php echo $word; ?>
-                        </tr>
-                      </table>
+                      <?php echo $word; ?>
+                      <?php echo $word; ?>
                     </div>
                   </div>
               <?php  } ?>
