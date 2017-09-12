@@ -34,12 +34,12 @@ if (!empty($_POST)) {
       # code...
     }
 
-  if (mb_send_mail($to, $subject, $content, $header)) {
-   echo "メールを送信しました";
-    } else {
-    echo "メールの送信に失敗しました";
-    }   
-    # code...
+  // if (mb_send_mail($to, $subject, $content, $header)) {
+  //  echo "メールを送信しました";
+  //   } else {
+  //   echo "メールの送信に失敗しました";
+  //   }   
+  //   # code...
   }
 
     // メール送信機能実装
@@ -115,7 +115,7 @@ if (!empty($_POST)) {
                             <div class="col-lg-8 col-md-offset-2"> -->
                             <!-- <form class="form-horizontal"> -->
                               <!-- <form method="POST" action="mailto:maho.atom@gmail.com"> -->
-                              <form method="POST" action="contact_function/phpmailer.php">
+                              <form method="POST" action="">
 
                                 <div class="form-group">
                                   <label for="exampleInputEmail2"><i class="fa fa-envelope-o"></i>メールアドレス</label>
