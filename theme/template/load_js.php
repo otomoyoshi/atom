@@ -24,3 +24,6 @@
 <!-- チュートリアル -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.1.0/intro.min.js"></script>
 
+<!-- Tabslet -->
+<script type="text/javascript" src="../assets/js/Tabslet-master/jquery.tabslet.min.js"></script>
+

@@ -1,5 +1,6 @@
 <?php
   require('lists_sql.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href=".favicon.png./assets/img/">
+    <link rel="shortcut icon" href="../favicon.png./assets/img/">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
@@ -35,7 +36,7 @@
   ?>
 
 <!-- 画像の変更 -->
-<form method="POST" action="" enctype="multipart/form-data"> -->
+<form method="POST" action="" enctype="multipart/form-data">
   <input type="file" name="image">
   <input type="submit" value="send">
 </form>
@@ -47,21 +48,12 @@
           <div class="col-lg-offset-2 col-lg-5 col-md-12 col-sm-12 col-xs-12">
             <form action="" method="POST">
               <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
-              data-intro="リスト名を入力してね" data-step="1" value="<?php if(!empty($_POST)){ echo $_POST['list_name']; }?>">
-              <?php if(isset($_GET['id'])){ ?>
-                <input type="text" name="created" placeholder="作成日時" class="form-control created_location" value="<?php echo $list_data['created']; ?>">
-              <?php } else { ?>
-                <input type="text" name="created" placeholder="作成日時" class="form-control created_location" value="<?php echo ""; ?>">
-              <?php } ?>
+              data-intro="リスト名を入力してね" data-step="1" value="<?php echo $list_data['name']; ?>">
 
+                <input type="text" name="created" placeholder="作成日時" class="form-control created_location" value="<?php echo $list_data['created']; ?>">
 
             </div>
               <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
-
-
-
-
-
 
             <?php if (isset($errors['extension'])) { ?>
               <div class="alert alert-danger">
@@ -74,33 +66,14 @@
             <?php if ($is_image['list_image_path'] != NULL) { ?>
               <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
               <p class="set_profile">
-                <?php echo $list_data['account_name'] ?>
+                <?php echo $list_data['account_name']; ?>
               </p>
             <!-- 画像がデータベースに登録されてないとき -->
             <?php } else {?>
-            <div>デフォルト画像を表示</div>
-            <!--                <div class="panel panel-default">
-                              <div class="panel-body">
-                                Drop Zone
-                                <div class="upload-drop-zone" id="drop-zone"> Or drag and drop files here </div>
-                                <div class="upload-drop-zone" id="drop-zone">
-
-                                </div>
-                              </div>
-                            </div> -->
-
-                          <!-- 画像の変更 -->
-            <!--               <form method="post" action="" enctype="multipart/form-data">
-                            <span class="btn btn-primary">
-                                Choose File
-                                <input type="file" name="image" style="display:none;">
-                            </span>
-                            <span class="btn btn-success">
-                                Send
-                              <input type="submit" style="display:none;">
-                            </span>
-
-                            </form> -->
+              <div>デフォルト画像を表示</div>
+                <p class="set_profile">
+                <?php echo $list_data['account_name']; ?>
+                </p>
             <?php } ?>
             </label>
           </div>
@@ -137,7 +110,7 @@
                       <span class="checkbox-icon"></span>
                       <?php echo $item_both['content'];?>
                         <!-- 削除処理を書いていく -->
-                        <a href="delete_category.php?id=<?php echo $item_both['id'];?>">
+                        <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_both['id'];?>">
                           <i class="fa fa-trash right_position"></i>
                         </a>
                     <!--編集ボタン     
@@ -167,7 +140,8 @@
                       <?php  echo $item_carry_in['content']; ?>
                       <?php  ?>
                       <!-- 削除処理を書いていく -->
-                      <a href="delete_category.php?id=<?php echo $item_carry_in['id'];?>">
+                      <!-- <a href="delete_category.php?id=<?php echo $item_carry_in['id'];?>"> -->
+                      <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_carry_in['id'];?>">
                         <i class="fa fa-trash right_position"></i>
                       </a>
            <!--       編集ボタン     
@@ -198,7 +172,8 @@
                       <?php echo $item_azukeire['content']; ?>
                       <?php  ?>
                         <!-- 削除処理を書いていく -->
-                        <a href="delete_category.php?id=<?php echo $item_azukeire['id']; ?>">
+                        <!-- <a href="delete_category.php?id=<?php echo $item_azukeire['id']; ?>"> -->
+                        <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
                           <i class="fa fa-trash right_position"></i>
                         </a>
                      <!--  編集ボタン  <span>
