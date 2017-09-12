@@ -28,7 +28,7 @@ while (1) {
     break;
   }
   $i++;
-}
+  }
 
 // $result = get_data($stmt);
 // var_dump($result);
