@@ -19,7 +19,7 @@ body {
 
 .both_contents{
   width: 30%;
-}
+}　
 
 
 /* Large desktops and laptops */
@@ -102,6 +102,9 @@ body {
     margin-right: 20px;
   }
 
+  .backgrounding{
+  display:none;
+}
 }
 
 /* Landscape tablets and medium desktops */

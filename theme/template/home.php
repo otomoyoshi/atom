@@ -1,8 +1,7 @@
 <?php 
 require('../../developer/dbconnect.php');
-
 $word = '';
-$errors = array ();
+$errors = array();
 
 //検索ボタンが押されたとき
 if (!empty($_POST)) {
@@ -193,6 +192,6 @@ if (!empty($_POST)) {
   <script type="text/javascript">
   introJs().start();
   </script>
-  <script type="text/javascript" src=""></script>
+  <script type="text/javascript" src="../assets/js/home.js"></script>
   </body>
 </html>
