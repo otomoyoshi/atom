@@ -10,8 +10,7 @@
 <!-- Fonts from Google Fonts -->
 <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
 
-<!-- ono追加css -->
-<link rel="stylesheet" type="text/css" href="../assets/css/home.css">
+
 
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan" rel="stylesheet">
@@ -21,6 +20,9 @@
 
 <!-- font-awesome -->
 <link rel="stylesheet" type="text/css" href="../assets/font-awesome/css/font-awesome.min.css">
+
+<!-- ono追加css -->
+<link rel="stylesheet" type="text/css" href="../assets/css/home.css">
 
 <!-- slick -->
 <link rel="stylesheet" type="text/css" href="../assets/js/slick-1.6.0/slick/slick-theme.css">
