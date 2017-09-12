@@ -116,7 +116,7 @@ var_dump($results);
     <!-- <link rel="shortcut icon" href="../..assets/img/favicon.png"> -->
     <!-- <link rel="shortcut icon" href="../assets/img/tabinimotsu_v1.png"> -->
 
-    <title>旅にも</title>
+    <!-- <title>旅にもつ</title> -->
 
     <?php require('load_css.php');?>
     <link rel="stylesheet" type="text/css" href="../assets/css/home.css">
