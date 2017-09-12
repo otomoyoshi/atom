@@ -86,7 +86,7 @@ if (!empty($_POST)) {
     <!-- <link rel="shortcut icon" href="../..assets/img/favicon.png"> -->
     <!-- <link rel="shortcut icon" href="../assets/img/tabinimotsu_v1.png"> -->
 
-    <title>旅にもつ</title>
+    <title>旅にも</title>
 
     <?php require('load_css.php');?>
     <link rel="stylesheet" type="text/css" href="../assets/css/home.css">
