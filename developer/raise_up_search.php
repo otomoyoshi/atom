@@ -17,6 +17,7 @@
 
     $word = '';
     $condition = '';
+    $condition_azukeire = '';
     $judge = 'default';
     $judge_blank = '';
     $classify = 'default';
@@ -46,6 +47,9 @@
       if(isset($_POST['condition'])){
         $condition = $_POST['condition'];
       }
+      if(isset($_POST['condition_azukeire'])){
+        $condition_azukeire = $_POST['condition_azukeire'];
+      }
 
       if(isset($_POST['judge'])){
         $judge = $_POST['judge'];
@@ -60,9 +64,12 @@
       if($word == '') {
         $errors['word'] = 'blank';
       }
-      // if($condition == '') {
-      //   $errors['condition'] = 'blank';
-      // }
+      if($condition == '') {
+        $errors['condition'] = 'blank';
+      }
+      if($condition_azukeire == '') {
+        $errors['condition_azukeire'] = 'blank';
+      }
       if($judge_blank == '') {
         $errors['judge_blank'] = 'blank';
       }
@@ -74,10 +81,10 @@
         // echo "hello";
         if (isset($_POST['result'])){
             $encourage = 'encourage';
-            // echo "T";
-            // echo $word . $judge . $condition . $classify;
-            $sql = 'INSERT INTO `searchs`(`word`, `condition`, `created`, `aviation_id`, `categoryies_l2_id`, `classify`) VALUES (?,?, NOW(), ?, ?, ?)';
-            $data = array($word,$condition,1,1,$classify);
+            // echo $judge;
+            // echo $word . $condition . $condition_azukeire . $judge . $classify;
+            $sql = 'INSERT INTO `atom_searchs`(`word`, `condition_carry_in`, `condition_azukeire`, `created`, `aviation_id`, `categories_l2_id`, `baggage_classify`) VALUES (?, ?, ?, NOW(), ?, ?, ?)';
+            $data = array($word,$condition, $condition_azukeire, 1, $classify, $judge);
             $stmt = $dbh->prepare($sql);
             $stmt->execute($data);
             // echo var_dump($stmt);
@@ -85,7 +92,7 @@
 
         if(isset($_POST['delete'])){
 
-            $sql = 'DELETE FROM `searchs` WHERE `word`=?';
+            $sql = 'DELETE FROM `atom_searchs` WHERE `word`=?';
             $data = array($word);
             $stmt = $dbh->prepare($sql);
             $stmt->execute($data);
@@ -162,11 +169,27 @@
             <div class="form-group">
               <!-- 条件：<br><input type="text" name="condition" value="<?php echo $condition ?>"><br> -->
               <div class="input-group">
-                <span class="input-group-addon">条件</span>
-                <input type="text" class="form-control" name="condition" value="<?php echo $condition ?>">
+                <span class="input-group-addon">持ち込み条件</span>
+                <input type="text" class="form-control" name="condition" value="<?php echo $condition; ?>">
               </div>
 
               <?php if(isset($errors['condition'])){ ?>
+                <p class="alert alert-danger">入力してください</p><br>
+              <?php } ?>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
+            <div class="form-group">
+              <!-- 条件：<br><input type="text" name="condition" value="<?php echo $condition ?>"><br> -->
+              <div class="input-group">
+                <span class="input-group-addon">お預け入れ条件</span>
+                <input type="text" class="form-control" name="condition_azukeire" value="<?php echo $condition_azukeire; ?>">
+              </div>
+
+              <?php if(isset($errors['condition_azukeire'])){ ?>
                 <p class="alert alert-danger">入力してください</p><br>
               <?php } ?>
             </div>
