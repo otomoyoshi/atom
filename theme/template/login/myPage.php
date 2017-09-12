@@ -16,7 +16,17 @@ if(!empty($_POST)){
     $data = array($_SESSION['login_user']['id']);
     $stmt = $dbh->prepare($sql);
     $stmt ->execute($data);
+
+    // ユーザが持つリストを全て取得
+    $sql = 'SELECT * FROM `atom_lists` WHERE `members_id`=? ORDER BY `id` DESC';
+    $data = array($_SESSION['login_user']['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
     // var_dump($stmt) .'<br>';
+    header('Location: ../lists.php?id=' . $result['id']);
+    exit();
   }
 
 }
@@ -34,16 +44,10 @@ while(1){
   if ($rec == false) {
     break;
   }
-  // echo $rec['id'];
-  if($max < (int) $rec['id']){
-    $max = (int) $rec['id'];
-    // echo $max;
-  }
   $lists[] = $rec;
 }
 // var_dump($lists);
-$list_last = $max+1;
-// echo $list_last;
+
 
  ?>
 
@@ -57,8 +61,7 @@ $list_last = $max+1;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/img/favicon.png">
-    
+    <?php echo require('../child_icon.php'); ?>
     <title>旅にもつ</title>
 
   <?php require('../child_load_css.php'); ?>
@@ -119,20 +122,12 @@ $list_last = $max+1;
 
         <!-- リスト全体 -->
           <div class="row">
-              <a href="../lists.php?id=<?php echo $list_last?>">
+              
                 <!-- 追加ボタン -->
               <div class="col-md-4 col-sm-4" data-intro="新しい持ち物リストを作成できるよ" data-step="1">
                 <div class="wrimagecard wrimagecard-topimage lists_margin">
 
-                    <a href="../lists.php?new=<?php echo $list_last; ?>">
-                      <div class="wrimagecard-topimage_header" style="background-color:rgba(255, 135, 0, 0.2); ">
-                        <div style="text-align: center"><i class="fa fa-plus-square-o" style="color:rgba(255, 135, 0, 0.4);"></i></div>
-                      </div>
-                      <div class="wrimagecard-topimage_title_add">
-                        <h4>新しく追加してね！</h4>
-                      </div>
-                    </a>
-<!--                   <form method="POST" action="">
+                  <form method="POST" action="">
                       <input type="hidden" value="new" name="new">
 
                     <label>
@@ -146,11 +141,11 @@ $list_last = $max+1;
 
                     </label>
 
-                  </form> -->
+                  </form>
 
                 </div>
               </div>
-            </a>
+            
 
           <!-- 個々のリスト -->
           <?php foreach($lists as $list): ?>

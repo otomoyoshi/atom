@@ -1,0 +1,1 @@
+<link rel="shortcut icon" href="../assets/img/tabinimotsu_v1.png">

@@ -15,11 +15,9 @@ if (!empty($_POST)) {
 
 }
 
- ?>
+// $result = array(1,2,3);
 
-
-
-
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -29,8 +27,7 @@ if (!empty($_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- <link rel="shortcut icon" href="../..assets/img/favicon.png"> -->
-    <!-- <link rel="shortcut icon" href="../assets/img/tabinimotsu_v1.png"> -->
+    <?php require('icon.php'); ?>
 
     <title>旅にもつ</title>
 
@@ -50,16 +47,16 @@ if (!empty($_POST)) {
     // $is_login = 0; //ログインしてるときを１とする（仮）
     if ($_SESSION['login_user']) { //ログインしてるとき
       // echo "login success";
-      require('login_header.php');
+      // require('login_header.php');
     } else {// ログインしてないとき
       // echo "login fail";
-      require('header.php');
+      // require('header.php');
     }
   ?>
   <div id="headerwrap">
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-lg-8">
+        <div class="col-xs-12 col-lg-6">
           <h2>「荷造りの悩み」ここに置いて行きませんか？</h2>
          
         <form method="POST" action="">
@@ -82,7 +79,17 @@ if (!empty($_POST)) {
             <button id="search-btn" type="submit" class="btn btn-warning btn-lg">検索</button>
           </form>
         </div><!-- /col-lg-6 -->
-        <div class="col-xs-12 col-lg-4">
+        <div class="col-xs-12 col-lg-6">
+          <div class='tabs'>
+              <ul class='horizontal'>
+                <li class="background_white"><a href="#tab-1">タブ１</a></li>
+                <li class="background_white"><a href="#tab-2">タブ２</a></li>
+                <li class="background_white"><a href="#tab-3">タブ３</a></li>
+              </ul>
+              <div id='tab-1' class="background_white">タブ１の中身</div>
+              <div id='tab-2' class="background_white">タブ２の中身</div>
+              <div id='tab-3' class="background_white">タブ３の中身</div>
+            </div>
         </div><!-- /col-lg-6 -->
 
       </div><!-- /row -->
@@ -92,10 +99,17 @@ if (!empty($_POST)) {
 
 
   <?php require('footer.php'); ?>
-
   <?php require('load_js.php'); ?>
-  <script type="text/javascript">
+  <!--  -->
+<!--   <script type="text/javascript">
   introJs().start();
+  </script> -->
+
+  <script type="text/javascript"> 
+  $('.tabs').tabslet({
+    active: 1,
+    animation: true
+  });
   </script>
 
   </body>
