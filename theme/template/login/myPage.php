@@ -156,21 +156,26 @@ $list_last = $max+1;
           <?php foreach($lists as $list): ?>
             <div class="col-md-4 col-sm-4">
               <div class="wrimagecard wrimagecard-topimage lists_margin">
-                <a href="../lists.php?id=<?php echo $list['id']; ?>">
+                <!-- <a href="../lists.php?id=<?php echo $list['id']; ?>"> -->
                   <div class="wrimagecard-topimage_header" style="background-color: rgba(60, 216, 255, 0.2)">
-                    <div class="row">
+                    <div class="row" style="margin-right: 0px">
 
-                      <div class="col-xs-6 col-lg-7">
-                        <h4 style="text-align: right; padding-top: 10px">LIST NAME</h4>
+                      <div class="col-xs-8 col-lg-8" style="padding-right: 0px">
+                      <?php if(isset($list['name']) && $list['name'] != ''): ?>
+                        <h4 style="text-align: center; padding: 10px 0px 0px 20px; font-size: 20px"><?php echo $list['name']; ?></h4>
+                      <?php else: ?>
+                        <!-- <h4 style="text-align: center; padding: 10px 0px 0px 20px">LIST NAME</h4> -->
+                        <input type="search" class="input_list_name" name="list_name" placeholder="LIST NAME" style="background-color: rgba(0,0,0,0); border: 1px solid rgba(0,0,0,0); margin-top: 15px; margin-left: 3px;">
+                      <?php endif; ?>
                         <h5 style="text-align: center; padding: 0px 0px 0px 20px">
-                          <?php echo $list['name']; ?>
+                          <?php echo $list['modified']; ?>
                         </h5>
                       </div>
-                      <div class="col-xs-3 col-mlg-3">
+                      <div class="col-xs-3 col-mlg-4" style="padding-left: 0px;">
                         <?php if(!empty($list['list_image_path'])): ?>
-                          <img src="../../../list_image_path/<?php echo $list['list_image_path'] ?>" class="img-circle" style="width: 70px; height:70px; margin: 8px">
+                          <img src="../../../list_image_path/<?php echo $list['list_image_path'] ?>" class="img-circle" style="width: 70px; height: 70px; margin: 8px">
                         <?php else: ?>
-                          <i class = "fa fa-suitcase" style="color:rgba(0, 152, 255, 0.6)"></i>
+                          <i class = "fa fa-suitcase" style="color:rgba(0, 152, 255, 0.6);"></i>
                         <?php endif; ?>
                       </div>
 
