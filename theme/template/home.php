@@ -20,6 +20,35 @@ if (!empty($_POST)) {
     } elseif (isset($_POST['list_search']) && $_POST['list_search'] == '') {
     $errors['word'] = 'blank';
     }
+// <<<<<<< HEAD
+}
+
+
+//1階層目のデータを全件表示する
+$sql = 'SELECT * FROM `atom_categories_l1` WHERE 1' ;
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+
+//全件取得
+$results = array();
+$i = 0;
+while (1) {
+  $results[]= $stmt->fetch(PDO::FETCH_ASSOC);// １レコード分のみ取得
+  if ($results[$i] == false) {
+    break;
+  }
+  $i++;
+  }
+
+foreach ($results as $result) {
+  echo $result['category_l1'] .'<br>';
+}
+
+// $result = get_data($stmt);
+var_dump($results);
+// echo "---------";
+// echo $result[0]['category'] .'<br>';
+// =======
       if (isset($search)) {
         if ($search['baggage_classify'] == '1') {
             //両方持ち込みの場合
@@ -64,8 +93,9 @@ if (!empty($_POST)) {
       else{
           //カテゴリー表示
       }
+// >>>>>>> 139007b4d02545674733945456ad5cd057ae5a75
 
-}
+// }
 
 
 ?>
@@ -102,13 +132,13 @@ if (!empty($_POST)) {
     // $ini = parse_ini_file("config.ini");
     // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($_SESSION['login_user']) { //ログインしてるとき
-      // echo "login success";
-      require('login_header.php');
-    } else {// ログインしてないとき
-      // echo "login fail";
-      require('header.php');
-    }
+    // if ($_SESSION['login_user']) { //ログインしてるとき
+    //   // echo "login success";
+    //   require('login_header.php');
+    // } else {// ログインしてないとき
+    //   // echo "login fail";
+    //   require('header.php');
+    // }
   ?>
   <div id="headerwrap">
     <div class="container">
