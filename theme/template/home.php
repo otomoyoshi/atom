@@ -6,7 +6,6 @@ $errors = array ();
 
 //検索ボタンが押されたとき
 if (!empty($_POST)) {
-
     $word = $_POST['search'];
 
     if ($word == '') {
@@ -14,6 +13,51 @@ if (!empty($_POST)) {
     }
 
 }
+
+//1階層目のデータを全件表示する
+$sql = 'SELECT * FROM `atom_categories_l1` WHERE 1' ;
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+
+//全件取得
+$results = array();
+$i = 0;
+while (1) {
+  $results[]= $stmt->fetch(PDO::FETCH_ASSOC);
+  if ($results[$i] == false) {
+    break;
+  }
+  $i++;
+}
+
+// $result = get_data($stmt);
+// var_dump($result);
+// echo "---------";
+// echo $result[0]['category'] .'<br>';
+
+foreach ($results as $result) {
+  echo $result['category_l1'] .'<br>';
+// var_dump($result);  
+}
+
+
+
+
+// $sql = 'SELECT `category_l1` FROM `atom_categories_l1` WHERE `id`=? ';
+// $data = array($_GET['id']);
+// $stmt = $dbh->prepare($sql);
+// $stmt->execute($data);
+
+
+//一階層目のデータを全件取得
+$sql = 'SELECT `category_l1` FROM `atom_categories_l1` WHERE 1 '; //sql文
+$stmt = $dbh->prepare($sql); //sqlのみ読み込み
+$stmt->execute(); //sql実行　データを読み込む
+
+var_dump($stmt);
+
+// echo 'ほげ';
+
 
  ?>
 
@@ -45,16 +89,16 @@ if (!empty($_POST)) {
 
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
   <?php
-    $ini = parse_ini_file("config.ini");
-    $is_login = $ini['is_login'];
-    // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($is_login) { //ログインしてるとき
-      // echo "login success";
-      require('login_header.php');
-    } else {// ログインしてないとき
-      // echo "login fail";
-      require('header.php');
-    }
+    // $ini = parse_ini_file("config.ini");
+    // $is_login = $ini['is_login'];
+    // // $is_login = 0; //ログインしてるときを１とする（仮）
+    // if ($is_login) { //ログインしてるとき
+    //   // echo "login success";
+    //   require('login_header.php');
+    // } else {// ログインしてないとき
+    //   // echo "login fail";
+    //   require('header.php');
+    // }
   ?>
   <div id="headerwrap">
     <div class="container">
@@ -94,9 +138,9 @@ if (!empty($_POST)) {
   <?php require('footer.php'); ?>
 
   <?php require('load_js.php'); ?>
-  <script type="text/javascript">
+<!--   <script type="text/javascript">
   introJs().start();
-  </script>
+  </script> -->
 
   </body>
 </html>
