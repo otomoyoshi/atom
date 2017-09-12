@@ -56,8 +56,8 @@ var_dump($results);
            $classify = '機内への持ち込み・預け入れ共に可能です';
            $condition_carry_in = $search['condition_carry_in'];
            $condition_azukeire = $search['condition_azukeire'];
-           $judge_carry_in = '◯';
-           $judge_azukeire = '◯';
+           $judge_carry_in = '<i class="fa fa-circle-o"></i>';
+           $judge_azukeire = '<i class="fa fa-circle-o"></i>';
         }
         // 持ち込みの場合
         elseif ($search['baggage_classify'] == '2') {
@@ -65,8 +65,8 @@ var_dump($results);
           $classify = '機内持ち込みのみ可能です';
           $condition_carry_in = $search['condition_carry_in'];
           $condition_azukeire = $search['condition_azukeire'];
-          $judge_carry_in = '◯';
-          $judge_azukeire = '×';
+          $judge_carry_in = '<i class="fa fa-circle-o"></i>';
+          $judge_azukeire = '<i class="fa fa-close"></i>';
 
         }
         //預け入れの場合
@@ -75,8 +75,8 @@ var_dump($results);
           $classify = 'お荷物預け入れのみ可能です';
           $condition_carry_in = $search['condition_carry_in'];
           $condition_azukeire = $search['condition_azukeire'];
-          $judge_carry_in = '×';
-          $judge_azukeire = '◯';
+          $judge_carry_in = '<i class="fa fa-close"></i>';
+          $judge_azukeire = '<i class="fa fa-circle-o"></i>';
         } 
         //持ち込めない場合
         elseif ($search['baggage_classify'] == '4'){
@@ -84,8 +84,8 @@ var_dump($results);
           $classify = '機内への持ち込み・預け入れ共にできません';
           $condition_carry_in = '';
           $condition_azukeire = '';
-          $judge_carry_in = '×';
-          $judge_azukeire = '×';
+          $judge_carry_in = '<i class="fa fa-close"></i>';
+          $judge_azukeire = '<i class="fa fa-close"></i>';
 
         } 
 
@@ -170,9 +170,36 @@ var_dump($results);
         <div class="col-xs-12 col-lg-6 ">
           <?php if (isset($search)) {?>
             <div class="row">
-              <div class = "col-lg-12">
-                <?php echo $word; ?>
-                <?php echo $word; ?>
+              <div class = "col-lg-12 show_size backgrounding">
+                <ul class="list-group" id="list_design">
+                  <label class="width list_searchs">
+                    <h3 class="word_titles"><?php echo $word; ?></h3>
+                    <li class="list-group-item">
+                      <h2 class="judge_show_icon">機内持ち込み：</h2>
+                      <p class="judge_icon">
+                        <?php echo $judge_carry_in ?>
+                      </p>
+                      <p class="conditions">
+                        機内持ち込み条件：<br>
+                        <?php echo $condition_carry_in; ?>
+                      </p>
+                    </li>
+                    <li class="list-group-item">
+                      <h2 class="judge_show_icon">預け入れ：</h2>
+                      <p class="judge_icon">
+                        <?php echo $judge_azukeire ?>
+                      </p>
+                      <p class="conditions">
+                        機内預け入れ条件：<br>
+                        <?php echo $condition_azukeire ?>
+                      </p>
+                    </li>
+                    <form method="POST" action="">
+                      <input type="submit" name="list_move" value="リストへ追加" class = "btn btn-info btn_list_move">
+                    </form>
+                  </label>
+                </ul>
+              
               </div>
             </div>
           <?php  } ?>
