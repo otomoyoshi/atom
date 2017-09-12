@@ -116,7 +116,7 @@ if (!empty($_POST)) {
         <div class="col-xs-12 col-lg-6">
           <h2 id ="catch_copy">「荷造りの悩み」ここに置いて行きませんか？</h2>
          
-        <form method="POST" action="">
+          <form method="POST" action="">
             <div class="form-group">
               <!-- <label for="sel1"></label> -->
               <select class="form-control" id="sel1" data-intro="航空会社をお選びください" data-step="1">
@@ -138,20 +138,19 @@ if (!empty($_POST)) {
         </div><!-- /col-lg-6 -->
         <!-- 検索結果を表示していく -->
         <div class="col-xs-12 col-lg-6 ">
-              <?php if (isset($search)) {?>
-                  <div class="row">
-                    <div class = "col-lg-12">
-                      <?php echo $word; ?>
-                      <?php echo $word; ?>
-                    </div>
-                  </div>
-              <?php  } ?>
-          </div>
-        </div><!-- /col-lg-6 -->
-      </div><!-- /row -->
-    </div><!-- /container -->
-  </div><!-- /headerwrap -->
-
+          <?php if (isset($search)) {?>
+            <div class="row">
+              <div class = "col-lg-12">
+                <?php echo $word; ?>
+                <?php echo $word; ?>
+              </div>
+            </div>
+          <?php  } ?>
+        </div>
+      </div><!-- /col-lg-6 -->
+    </div><!-- /row -->
+  </div><!-- /container -->
+</div><!-- /headerwrap -->
 
 
   <?php require('footer.php'); ?>
