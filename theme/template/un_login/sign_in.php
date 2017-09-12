@@ -109,7 +109,13 @@ if (!empty($_POST)) {
                 <div class="text-center text_loc">
                   <label>メールアドレス ※</label><br>
 
-                  <input type="email" name="email"　placeholder="tabi@example.com"  maxlength="50" autofocus value="<?php echo $email; ?>">
+                  <?php if(isset($_SESSION['login_user']['new_email']) && !empty($_SESSION['login_user']['new_email'])): ?>
+                    <input type="email" name="email"　placeholder="tabi@example.com" maxlength="50" autofocus value="<?php echo $_SESSION['login_user']['new_email']; ?>">
+                    <?php $_SESSION['login_user']['new_email'] = ''; ?>
+                  <?php else: ?>
+                    <input type="email" name="email"　placeholder="tabi@example.com" maxlength="50" autofocus value="<?php echo $email; ?>">
+                  <?php endif; ?>
+
                   <!-- メールアドレスが入力されていない時 -->
                   <?php if (isset($errors['email']) && $errors['email'] == 'blank'): ?>
                     <br>
@@ -117,6 +123,7 @@ if (!empty($_POST)) {
                       メールアドレスを入力してください
                     </div>
                   <?php endif; ?>
+
                 </div>
               </div>
             </div>

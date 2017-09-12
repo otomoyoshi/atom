@@ -79,6 +79,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
     $stmt->execute($data);
 
     $_SESSION['login_user']['new_user'] = 'yes';
+    $_SESSION['login_user']['new_email'] = $email;
 
     header('Location: sign_in.php');
     exit();

@@ -59,3 +59,8 @@ a.wrimagecard:hover, .wrimagecard-topimage:hover {
     padding: 8px 15px 0px 0px;
 }
 
+.input_list_name{
+    width: 170px;
+    text-align: center;
+}
+
