@@ -1,16 +1,26 @@
-<?php
+<?php 
 require('../../developer/dbconnect.php');
-
 $word = '';
-$errors = array ();
+$errors = array();
 
 //検索ボタンが押されたとき
 if (!empty($_POST)) {
-    $word = $_POST['search'];
+    if (isset($_POST['list_search']) && $_POST['list_search'] != '') {
+      $sql= 'INSERT INTO `atom_searched_words` SET `word` = ?,
+                            `created` = NOW()';
+      $data = array($_POST['list_search']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
 
-    if ($word == '') {
+      $sql = 'SELECT * FROM `atom_searchs` WHERE `word`= ?';
+      $data = array($_POST['list_search']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+      $search = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
+    } elseif (isset($_POST['list_search']) && $_POST['list_search'] == '') {
     $errors['word'] = 'blank';
     }
+// <<<<<<< HEAD
 }
 
 
@@ -30,36 +40,69 @@ while (1) {
   $i++;
   }
 
-// $result = get_data($stmt);
-// var_dump($result);
-// echo "---------";
-// echo $result[0]['category'] .'<br>';
-
 foreach ($results as $result) {
   echo $result['category_l1'] .'<br>';
-// var_dump($result);  
 }
 
+// $result = get_data($stmt);
+var_dump($results);
+// echo "---------";
+// echo $result[0]['category'] .'<br>';
+// =======
+      if (isset($search)) {
+        if ($search['baggage_classify'] == '1') {
+            //両方持ち込みの場合
+           $word = $search['word'];
+           $classify = '機内への持ち込み・預け入れ共に可能です';
+           $condition_carry_in = $search['condition_carry_in'];
+           $condition_azukeire = $search['condition_azukeire'];
+           $judge_carry_in = '◯';
+           $judge_azukeire = '◯';
+        }
+        // 持ち込みの場合
+        elseif ($search['baggage_classify'] == '2') {
+          $word = $search['word'];
+          $classify = '機内持ち込みのみ可能です';
+          $condition_carry_in = $search['condition_carry_in'];
+          $condition_azukeire = $search['condition_azukeire'];
+          $judge_carry_in = '◯';
+          $judge_azukeire = '×';
 
+        }
+        //預け入れの場合
+        elseif ($search['baggage_classify'] == '3') {
+          $word = $search['word'];
+          $classify = 'お荷物預け入れのみ可能です';
+          $condition_carry_in = $search['condition_carry_in'];
+          $condition_azukeire = $search['condition_azukeire'];
+          $judge_carry_in = '×';
+          $judge_azukeire = '◯';
+        } 
+        //持ち込めない場合
+        elseif ($search['baggage_classify'] == '4'){
+          $word = $search['word'];
+          $classify = '機内への持ち込み・預け入れ共にできません';
+          $condition_carry_in = '';
+          $condition_azukeire = '';
+          $judge_carry_in = '×';
+          $judge_azukeire = '×';
 
+        } 
 
-// $sql = 'SELECT `category_l1` FROM `atom_categories_l1` WHERE `id`=? ';
-// $data = array($_GET['id']);
-// $stmt = $dbh->prepare($sql);
-// $stmt->execute($data);
+      } //アイテムにデータがない時
+      else{
+          //カテゴリー表示
+      }
+// >>>>>>> 139007b4d02545674733945456ad5cd057ae5a75
 
+// }
 
-//一階層目のデータを全件取得
-$sql = 'SELECT `category_l1` FROM `atom_categories_l1` WHERE 1 '; //sql文
-$stmt = $dbh->prepare($sql); //sqlのみ読み込み
-$stmt->execute(); //sql実行　データを読み込む
-
-var_dump($stmt);
-
-// echo 'ほげ';
- ?>
 
 ?>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -69,12 +112,14 @@ var_dump($stmt);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <?php require('icon.php'); ?>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- <link rel="shortcut icon" href="../..assets/img/favicon.png"> -->
+    <!-- <link rel="shortcut icon" href="../assets/img/tabinimotsu_v1.png"> -->
 
     <title>旅にもつ</title>
 
     <?php require('load_css.php');?>
-
+    <link rel="stylesheet" type="text/css" href="../assets/css/home.css">
 
 
 
@@ -86,24 +131,22 @@ var_dump($stmt);
   <?php
     // $ini = parse_ini_file("config.ini");
     // $is_login = $ini['is_login'];
-
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($_SESSION['login_user']) { //ログインしてるとき
-      // echo "login success";
-      // require('login_header.php');
-    } else {// ログインしてないとき
-      // echo "login fail";
-      // require('header.php');
-    }
-
+    // if ($_SESSION['login_user']) { //ログインしてるとき
+    //   // echo "login success";
+    //   require('login_header.php');
+    // } else {// ログインしてないとき
+    //   // echo "login fail";
+    //   require('header.php');
+    // }
   ?>
   <div id="headerwrap">
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-lg-6">
-          <h2>「荷造りの悩み」ここに置いて行きませんか？</h2>
-
-        <form method="POST" action="">
+          <h2 id ="catch_copy">「荷造りの悩み」ここに置いて行きませんか？</h2>
+         
+          <form method="POST" action="">
             <div class="form-group">
               <!-- <label for="sel1"></label> -->
               <select class="form-control" id="sel1" data-intro="航空会社をお選びください" data-step="1">
@@ -113,50 +156,39 @@ var_dump($stmt);
 
             <div class="form-group">
 
-              <input type="text" id="search" class="form-control" placeholder="例：液体物" maxlength=15 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
+              <input type="text" id="search" class="form-control" placeholder="例：液体物" name = "list_search" maxlength=15 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
 
                <?php if (isset($errors['word'])  == 'blank') {?>
-                  <div class="alert alert-danger">検索ワードを入力してください</div>
+                  <div class="alert alert-danger error_search">検索ワードを入力してください</div>
                 <?php } ?>
 
             </div>
-            <button id="search-btn" type="submit" class="btn btn-warning btn-lg">検索</button>
+            <input id="search-btn1" type="submit" class="btn btn-warning btn-lg" value="検索">
           </form>
         </div><!-- /col-lg-6 -->
-        <div class="col-xs-12 col-lg-6">
-          <div class='tabs'>
-              <ul class='horizontal'>
-                <li class="background_white"><a href="#tab-1">タブ１</a></li>
-                <li class="background_white"><a href="#tab-2">タブ２</a></li>
-                <li class="background_white"><a href="#tab-3">タブ３</a></li>
-              </ul>
-              <div id='tab-1' class="background_white">タブ１の中身</div>
-              <div id='tab-2' class="background_white">タブ２の中身</div>
-              <div id='tab-3' class="background_white">タブ３の中身</div>
+        <!-- 検索結果を表示していく -->
+        <div class="col-xs-12 col-lg-6 ">
+          <?php if (isset($search)) {?>
+            <div class="row">
+              <div class = "col-lg-12">
+                <?php echo $word; ?>
+                <?php echo $word; ?>
+              </div>
             </div>
-        </div><!-- /col-lg-6 -->
-
-      </div><!-- /row -->
-    </div><!-- /container -->
-  </div><!-- /headerwrap -->
-
+          <?php  } ?>
+        </div>
+      </div><!-- /col-lg-6 -->
+    </div><!-- /row -->
+  </div><!-- /container -->
+</div><!-- /headerwrap -->
 
 
   <?php require('footer.php'); ?>
+
   <?php require('load_js.php'); ?>
-
-  <!-- チュートリアル -->
-<!--   <script type="text/javascript">
+  <script type="text/javascript">
   introJs().start();
-  </script> -->
-
-  <script type="text/javascript"> 
-  $('.tabs').tabslet({
-    active: 1,
-    animation: true
-  });
   </script>
-
-
+  <script type="text/javascript" src="../assets/js/home.js"></script>
   </body>
 </html>
