@@ -64,12 +64,12 @@
       if($word == '') {
         $errors['word'] = 'blank';
       }
-      if($condition == '') {
-        $errors['condition'] = 'blank';
-      }
-      if($condition_azukeire == '') {
-        $errors['condition_azukeire'] = 'blank';
-      }
+      // if($condition == '') {
+      //   $errors['condition'] = 'blank';
+      // }
+      // if($condition_azukeire == '') {
+      //   $errors['condition_azukeire'] = 'blank';
+      // }
       if($judge_blank == '') {
         $errors['judge_blank'] = 'blank';
       }
@@ -167,6 +167,46 @@
         <div class="row">
           <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
             <div class="form-group">
+                <div class="input-group">
+                <?php for($i=0; $i < 4; $i++) { ?>
+                  <? if(isset($judge) && $i == $judge && $judge != 'default') { ?>
+                    <label class="radio-inline"><? echo $category[$i]; ?><input type="radio" name="judge" value="<?php echo $i;?>" checked></label>
+                  <?php } else { ?>
+                    <label class="radio-inline"><? echo $category[$i]; ?><input type="radio" name="judge" value="<?php echo $i;?>"></label>
+                  <?php } ?>
+                <?php } ?>
+                </div>
+
+              <?php if(isset($errors['judge_blank']) && $judge == 'default'){ ?>
+                <p class="alert alert-danger">入力してください</p><br>
+              <?php } ?>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
+              <div class="input-group">
+                <?php for($i=0; $i < 8; $i++) { ?>
+                  <? if(isset($classify) && $i == $classify && $classify != 'default') { ?>
+                    <label class="radio-inline">分類<?php echo $i+1 ?><input type="radio" name="classify" value="<?php echo $i;?>" checked></label>
+                  <?php } else { ?>
+                    <label class="radio-inline">分類<?php echo $i+1 ?><input type="radio" name="classify" value="<?php echo $i;?>"></label>
+                  <?php } ?>
+                <?php } ?>
+              </div>
+            </div>
+
+            <?php if(isset($errors['classify_blank']) && $classify == 'default') { ?>
+              <p class="alert alert-danger">入力してください</p><br>
+            <?php } ?>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
+            <div class="form-group">
               <!-- 条件：<br><input type="text" name="condition" value="<?php echo $condition ?>"><br> -->
               <div class="input-group">
                 <span class="input-group-addon">持ち込み条件</span>
@@ -193,46 +233,6 @@
                 <p class="alert alert-danger">入力してください</p><br>
               <?php } ?>
             </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
-            <div class="form-group">
-                <div class="input-group">
-                <?php for($i=0; $i < 4; $i++) { ?>
-                  <? if(isset($judge) && $i == $judge && $judge != 'default') { ?>
-                    <label class="radio-inline"><? echo $category[$i]; ?><input type="radio" name="judge" value="<?php echo $i;?>" checked></label>
-                  <?php } else { ?>
-                    <label class="radio-inline"><? echo $category[$i]; ?><input type="radio" name="judge" value="<?php echo $i;?>"></label>
-                  <?php } ?>
-                <?php } ?>
-                </div>
-
-              <?php if(isset($errors['judge_blank']) && $judge == 'default'){ ?>
-                <p class="alert alert-danger">入力してください</p><br>
-              <?php } ?>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group">
-            <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
-              <div class="input-group">
-                <?php for($i=0; $i < 8; $i++) { ?>
-                  <? if(isset($classify) && $i == $classify && $classify != 'default') { ?>
-                    <label class="radio-inline">分類<?php echo $i ?><input type="radio" name="classify" value="<?php echo $i;?>" checked></label>
-                  <?php } else { ?>
-                    <label class="radio-inline">分類<?php echo $i ?><input type="radio" name="classify" value="<?php echo $i;?>"></label>
-                  <?php } ?>
-                <?php } ?>
-              </div>
-            </div>
-
-            <?php if(isset($errors['classify_blank']) && $classify == 'default') { ?>
-              <p class="alert alert-danger">入力してください</p><br>
-            <?php } ?>
           </div>
         </div>
 
