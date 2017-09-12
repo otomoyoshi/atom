@@ -23,7 +23,7 @@ $stmt->execute();
 $results = array();
 $i = 0;
 while (1) {
-  $results[]= $stmt->fetch(PDO::FETCH_ASSOC);
+  $results[]= $stmt->fetch(PDO::FETCH_ASSOC);// １レコード分のみ取得
   if ($results[$i] == false) {
     break;
   }

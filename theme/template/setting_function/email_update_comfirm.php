@@ -2,7 +2,7 @@
 
 	if ($email != '') {
 		 // メールアドレスの重複チェック
-	    $sql = 'SELECT COUNT(*) FROM `members` WHERE `email` = ?' ;
+	    $sql = 'SELECT COUNT(*) FROM `atom_members` WHERE `email` = ?' ;
 	    $data = array($email);
 	    $stmt = $dbh->prepare($sql);
 	    $stmt ->execute($data);

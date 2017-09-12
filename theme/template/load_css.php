@@ -27,4 +27,10 @@
 <link rel="stylesheet" type="text/css" href="../assets/js/slick-1.6.0/slick/slick.css">
 
 <link rel="stylesheet" type="text/css" href="../assets/css/lists.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/intro.css">
+
+<link rel="stylesheet" type="text/css" href="../assets/ionicons-2.0.1/css/ionicons.min.css">
+<!-- チュートリアル -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.1.0/introjs.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../assets/css/intro.css"><!-- チュートリアルのjs修正 -->
 

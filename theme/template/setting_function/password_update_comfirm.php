@@ -19,7 +19,7 @@
           $errors['now_password'] = 'blank';
         }else{
         // 入力された現在のパスワードがあっているかのチェック
-        $sql = 'SELECT * FROM `members` WHERE `id`=?';
+        $sql = 'SELECT * FROM `atom_members` WHERE `id`=?';
         $data = array($_SESSION['login_user']['id']);
         $stmt = $dbh->prepare($sql);
         $stmt->execute($data);
@@ -31,7 +31,7 @@
         }
         // エラーが一つもない場合
         if (empty($errors)) {
-          $sql = 'UPDATE `members` SET `password`=? WHERE `id`=?';
+          $sql = 'UPDATE `atom_members` SET `password`=? WHERE `id`=?';
           $data = array(sha1($new_password),$_SESSION['login_user']['id']);
           $stmt = $dbh->prepare($sql);
           $stmt->execute($data);

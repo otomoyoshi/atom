@@ -24,6 +24,7 @@ if (!empty($_POST)) {
     $errors['account_name'] = 'blank';
 
     }
+
     if ($email == '') {
     $errors['email'] = 'blank';
     }
@@ -51,7 +52,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
   if (empty($errors)) {
   
   // メールアドレスの重複チェック！！
-  $sql = 'SELECT COUNT(*) FROM `members` WHERE `email` = ?' ;
+  $sql = 'SELECT COUNT(*) FROM `atom_members` WHERE `email` = ?' ;
   $data = array($email);
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
@@ -76,6 +77,8 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
     $data = array($account_name,$email,sha1($password));
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
+
+    $_SESSION['login_user']['new_user'] = 'yes';
 
     header('Location: sign_in.php');
     exit();
@@ -114,10 +117,10 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
 
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
   <?php
-    $ini = parse_ini_file("../config.ini");
-    $is_login = $ini['is_login'];
+    // $ini = parse_ini_file("../config.ini");
+    // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($is_login) { //ログインしてるとき
+    if (isset($_SESSION['login_user'])) { //ログインしてるとき
       // echo "login success";
       require('../child_login_header.php');
     } else {// ログインしてないとき
