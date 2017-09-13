@@ -220,7 +220,7 @@ var_dump($results);
             <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
             <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
             </ul>
-            <div id='tab-1' class="tabs">
+            <div id='tab-1'>
               <div class="row background_white">
 
                 <?php
@@ -228,7 +228,7 @@ var_dump($results);
                   foreach ($results_l1 as $result_l1) {
                 ?>
 
-                  <div class="col-lg-2 text-center dev_border" id="<?php echo $i ?>">
+                  <div class="col-lg-2 text-center dev_border tabs" id="<?php echo $i ?>">
                     <?php echo $result_l1; ?>
                   </div>
 
@@ -239,13 +239,13 @@ var_dump($results);
                </div>
             </div>
 
-            <div id='tab-2' class="tabs">
+            <div id='tab-2'>
               <div class="row background_white">
                 <?php
                   $i=1;
                   foreach ($results_l2 as $result_l2) {
                 ?>
-                <div class="col-lg-2 text-center dev_border" id="<?php echo $i ?>">
+                <div class="col-lg-2 text-center dev_border tabs" id="<?php echo $i ?>">
                   <?php echo $result_l2; ?>
                 </div>
 
@@ -255,13 +255,13 @@ var_dump($results);
                  ?>
                </div>
             </div>
-            <div id='tab-3' class="tabs">
+            <div id='tab-3'>
               <div class="row background_white">
                 <?php
                   $i=1;
                   foreach ($results_l3 as $result_l3) {
                 ?>
-                <div class="col-lg-2 text-center dev_border" id="<?php echo $i ?>">
+                <div class="col-lg-2 text-center dev_border tabs" id="<?php echo $i ?>">
                   <?php echo $result_l3; ?>
                 </div>
 
