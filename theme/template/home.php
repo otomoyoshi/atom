@@ -195,7 +195,7 @@ var_dump($results);
                       </p>
                     </li>
                     <form method="POST" action="">
-                      <input type="submit" name="list_move" value="リストへ追加" class = "btn btn-info btn_list_move">
+                      <input type="submit" name="list_move" value="リストへ追加" class = "btn btn_atom btn_list_move">
                     </form>
                   </label>
                 </ul>
