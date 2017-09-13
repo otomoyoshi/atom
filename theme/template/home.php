@@ -44,11 +44,65 @@ foreach ($results as $result) {
   echo $result['category_l1'] .'<br>';
 }
 
+$tmp_category_l1 = 1;
+//2階層目のデータを取得
+$sql = 'SELECT * FROM `atom_categories_l2` WHERE `category_l1_id`=? ' ;
+$data = array($tmp_category_l1);
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);
+
+//全件取得
+$results = array();
+$i = 0;
+while (1) {
+  $results[]= $stmt->fetch(PDO::FETCH_ASSOC);// １レコード分のみ取得
+  if ($results[$i] == false) {
+    break;
+  }
+  $i++;
+  }
+
+foreach ($results as $result) {
+  echo $result['category_l2'] .'<br>';
+}
+
+
+//3階層目
+$tmp_category_l2_id = 3;
+$sql = 'SELECT * FROM `atom_searchs` WHERE `categories_l2_id` = ? ' ;
+$data = array($tmp_category_l2_id);
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);
+
+//全件取得
+$results = array();
+$i = 0;
+while (1) {
+  $results[]= $stmt->fetch(PDO::FETCH_ASSOC);// １レコード分のみ取得
+  if ($results[$i] == false) {
+    break;
+  }
+  $i++;
+  }
+
+  var_dump($results);
+
+foreach ($results as $result) {
+  echo $result['word'] .'<br>';
+  echo $result['condition_azukeire'] .'<br>';
+  echo $result['created'] .'<br>';
+
+
+}
+
 // $result = get_data($stmt);
 var_dump($results);
 // echo "---------";
 // echo $result[0]['category'] .'<br>';
 // =======
+
+
+
       if (isset($search)) {
         if ($search['baggage_classify'] == '1') {
             //両方持ち込みの場合
