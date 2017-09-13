@@ -16,10 +16,10 @@
     // echo var_dump($image_paths);
 
     $word = '';
-    $condition = '';
-    $condition_azukeire = '';
-    $judge = 'default';
-    $judge_blank = '';
+    // $condition = '';
+    // $condition_azukeire = '';
+    // $judge = 'default';
+    // $judge_blank = '';
     $classify = 'default';
     $classify_blank = '';
     $encourage = '';
@@ -44,12 +44,12 @@
       if(isset($_POST['word'])){
         $word = $_POST['word'];
       }
-      if(isset($_POST['condition'])){
-        $condition = $_POST['condition'];
-      }
-      if(isset($_POST['condition_azukeire'])){
-        $condition_azukeire = $_POST['condition_azukeire'];
-      }
+      // if(isset($_POST['condition'])){
+      //   $condition = $_POST['condition'];
+      // }
+      // if(isset($_POST['condition_azukeire'])){
+      //   $condition_azukeire = $_POST['condition_azukeire'];
+      // }
 
       if(isset($_POST['judge'])){
         $judge = $_POST['judge'];
@@ -70,9 +70,9 @@
       // if($condition_azukeire == '') {
       //   $errors['condition_azukeire'] = 'blank';
       // }
-      if($judge_blank == '') {
-        $errors['judge_blank'] = 'blank';
-      }
+      // if($judge_blank == '') {
+      //   $errors['judge_blank'] = 'blank';
+      // }
       if($classify_blank == '') {
         $errors['classify_blank'] = 'blank';
       }
@@ -82,9 +82,9 @@
         if (isset($_POST['result'])){
             $encourage = 'encourage';
             // echo $judge;
-            // echo $word . $condition . $condition_azukeire . $judge . $classify;
-            $sql = 'INSERT INTO `atom_searchs`(`word`, `condition_carry_in`, `condition_azukeire`, `created`, `aviation_id`, `categories_l2_id`, `baggage_classify`) VALUES (?, ?, ?, NOW(), ?, ?, ?)';
-            $data = array($word,$condition, $condition_azukeire, 1, $classify, $judge);
+            // echo $word . $classify;
+            $sql = 'INSERT INTO `atom_categories_l2`(`category_l2`, `category_l1_id`) VALUES (?, ?)';
+            $data = array($word, $classify);
             $stmt = $dbh->prepare($sql);
             $stmt->execute($data);
             // echo var_dump($stmt);
@@ -129,7 +129,7 @@
       <div class="row">
           <div class="col-lg-12 text-center">
             <h1>みんなで検索エンジンを育てよう！目指せ1000件</h1>
-            <h2>階層3用</h2>
+            <h2>階層２用</h2>
           </div>
       </div>
       <!-- <div class="row"> -->
@@ -154,7 +154,7 @@
               <div class="input-group">
               <!-- <div class="input-group col-lg-6 col-lg-offset-3"> -->
 
-                <span class="input-group-addon">単語</span>
+                <span class="input-group-addon">分類名</span>
                 <input type="text" class="form-control" name="word" value="<?php echo $word ?>">
               </div>
                 <!-- 単語：<br><input type="text" name="word" value="<?php echo $word ?>"><br> -->
@@ -165,25 +165,6 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
-            <div class="form-group">
-                <div class="input-group">
-                <?php for($i=0; $i < 4; $i++) { ?>
-                  <? if(isset($judge) && $i == $judge && $judge != 'default') { ?>
-                    <label class="radio-inline"><? echo $category[$i]; ?><input type="radio" name="judge" value="<?php echo $i;?>" checked></label>
-                  <?php } else { ?>
-                    <label class="radio-inline"><? echo $category[$i]; ?><input type="radio" name="judge" value="<?php echo $i;?>"></label>
-                  <?php } ?>
-                <?php } ?>
-                </div>
-
-              <?php if(isset($errors['judge_blank']) && $judge == 'default'){ ?>
-                <p class="alert alert-danger">入力してください</p><br>
-              <?php } ?>
-            </div>
-          </div>
-        </div>
 
         <div class="row">
           <div class="form-group">
@@ -205,38 +186,6 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
-            <div class="form-group">
-              <!-- 条件：<br><input type="text" name="condition" value="<?php echo $condition ?>"><br> -->
-              <div class="input-group">
-                <span class="input-group-addon">持ち込み条件</span>
-                <input type="text" class="form-control" name="condition" value="<?php echo $condition; ?>">
-              </div>
-
-              <?php if(isset($errors['condition'])){ ?>
-                <p class="alert alert-danger">入力してください</p><br>
-              <?php } ?>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
-            <div class="form-group">
-              <!-- 条件：<br><input type="text" name="condition" value="<?php echo $condition ?>"><br> -->
-              <div class="input-group">
-                <span class="input-group-addon">お預け入れ条件</span>
-                <input type="text" class="form-control" name="condition_azukeire" value="<?php echo $condition_azukeire; ?>">
-              </div>
-
-              <?php if(isset($errors['condition_azukeire'])){ ?>
-                <p class="alert alert-danger">入力してください</p><br>
-              <?php } ?>
-            </div>
-          </div>
-        </div>
-
         <div class="row block-center">
           <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
             <div class="form-group">
@@ -249,6 +198,7 @@
             </div>
           </div>
         </div>
+
       </form>
         <!-- </div> -->
       <!-- </div> -->

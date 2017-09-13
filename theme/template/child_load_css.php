@@ -31,3 +31,6 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.1.0/introjs.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="../../assets/css/intro.css">
 
+<!-- ヘッダ用 -->
+<link rel="stylesheet" type="text/css" href="../../assets/css/header.css">
+
