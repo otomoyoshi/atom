@@ -30,7 +30,7 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute();
 
 //全件取得
-$results = array();
+
 $i = 0;
 while (1) {
   $results[]= $stmt->fetch(PDO::FETCH_ASSOC);// １レコード分のみ取得
@@ -85,12 +85,12 @@ while (1) {
   $i++;
   }
 
-  var_dump($results);
+  // var_dump($results);
 
 foreach ($results as $result) {
   echo $result['word'] .'<br>';
   echo $result['condition_azukeire'] .'<br>';
-  echo $result['created'] .'<br>';
+  // echo $result['created'] .'<br>';
 
 
 }
@@ -217,7 +217,7 @@ var_dump($results);
 
             <div class="form-group">
 
-              <input type="text" id="search" class="form-control" placeholder="例：液体物" name = "list_search" maxlength=15 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
+              <input type="text" id="search" class="form-control" placeholder="例：液体物" name = "list_search" maxlength=20 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
 
                <?php if (isset($errors['word'])  == 'blank') {?>
                   <div class="alert alert-danger error_search">検索ワードを入力してください</div>
