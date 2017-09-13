@@ -304,6 +304,7 @@ foreach ($results as $result) {
             </div>
           <?php  } ?>
         </div>
+        <!--  
         <div class="col-xs-12 col-lg-6">
           <div class='after_event'>
             <ul class='horizontal btn_disabled'>
@@ -423,6 +424,8 @@ foreach ($results as $result) {
 
 
   </script>
-  <script type="text/javascript" src="../assets/js/home.js"></script>
+  <script type="text/javascript" src="../assets/js/home.js">
+    
+  </script>
   </body>
 </html>
