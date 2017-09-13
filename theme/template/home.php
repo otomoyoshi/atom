@@ -143,7 +143,7 @@ var_dump($results);
   <div id="headerwrap">
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-lg-6">
+        <div class="col-xs-12 col-lg-6 col-md-6 col-sm-12">
           <h2 id ="catch_copy">「荷造りの悩み」ここに置いて行きませんか？</h2>
          
           <form method="POST" action="">
@@ -167,10 +167,10 @@ var_dump($results);
           </form>
         </div><!-- /col-lg-6 -->
         <!-- 検索結果を表示していく -->
-        <div class="col-xs-12 col-lg-6 ">
+        <div class="col-xs-12 col-lg-6 col-sm-12 col-xs-12 col-md-6">
           <?php if (isset($search)) {?>
             <div class="row">
-              <div class = "col-lg-12 show_size backgrounding">
+              <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding">
                 <ul class="list-group" id="list_design">
                   <label class="width list_searchs">
                     <h3 class="word_titles"><?php echo $word; ?></h3>
