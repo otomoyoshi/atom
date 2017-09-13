@@ -3,6 +3,8 @@ require('../../developer/dbconnect.php');
 $word = '';
 $errors = array();
 
+
+
 //検索ボタンが押されたとき
 if (!empty($_POST)) {
     if (isset($_POST['list_search']) && $_POST['list_search'] != '') {
@@ -159,10 +161,8 @@ var_dump($results);
   $results_l3 = array("i"=>"j",
                       "k"=>"l",
                       "m"=>"n");
+
 ?>
-
-
-
 
 
 <!DOCTYPE html>
@@ -176,6 +176,7 @@ var_dump($results);
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!-- <link rel="shortcut icon" href="../..assets/img/favicon.png"> -->
     <!-- <link rel="shortcut icon" href="../assets/img/tabinimotsu_v1.png"> -->
+    <?php require('header.php'); ?>
 
     <title>旅にもつ</title>
 
@@ -262,7 +263,7 @@ var_dump($results);
                     </form>
                   </label>
                 </ul>
-              
+
               </div>
             </div>
           <?php  } ?>
@@ -274,7 +275,7 @@ var_dump($results);
             <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
             <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
             </ul>
-            <div id='tab-1'>
+            <div id='tab-1 tab'>
               <div class="row background_white">
 
                 <?php
@@ -282,7 +283,7 @@ var_dump($results);
                   foreach ($results_l1 as $result_l1) {
                 ?>
 
-                  <div class="col-lg-2 text-center dev_border tabs" id="<?php echo $i ?>">
+                  <div class="col-lg-2 text-center dev_border tabs" id="tab1_<?php echo $i ?>">
                     <?php echo $result_l1; ?>
                   </div>
 
@@ -299,7 +300,7 @@ var_dump($results);
                   $i=1;
                   foreach ($results_l2 as $result_l2) {
                 ?>
-                <div class="col-lg-2 text-center dev_border tabs" id="<?php echo $i ?>">
+                <div class="col-lg-2 text-center dev_border tabs" id="tab2_<?php echo $i ?>">
                   <?php echo $result_l2; ?>
                 </div>
 
@@ -315,7 +316,7 @@ var_dump($results);
                   $i=1;
                   foreach ($results_l3 as $result_l3) {
                 ?>
-                <div class="col-lg-2 text-center dev_border tabs" id="<?php echo $i ?>">
+                <div class="col-lg-2 text-center dev_border tabs" id="tab3_<?php echo $i ?>">
                   <?php echo $result_l3; ?>
                 </div>
 
@@ -339,53 +340,41 @@ var_dump($results);
 <!--   <script type="text/javascript">
   introJs().start();
   </script> -->
-  <script type="text/javascript"> 
+  <script type="text/javascript">
     $('.after_event').tabslet({
     active: 1,
     animation: true
     });
-    // $('.tabs').tabslet({
-    // active: 1,
-    // animation: true
-    // });
+
     $('.tabs').click(function(e){
       var id = this.id;
-      alert(id);
-      if(id == 'tab-1') {
+      var data = id.split('_');
+      var level = data[0];
+      var id = data[1];
+      // alert(id);
+      // alert(level);
+      if(level == 'tab1') {
         console.log('tab-1');
         $('#tab2').addClass('div_border');
         $('#tab1').removeClass('div_border');
         $('#tab2').click();
       }
 
-      if(id == 'tab-2') {
+      if(level == 'tab2') {
         console.log('tab-2');
         $('#tab3').addClass('div_border');
         $('#tab2').removeClass('div_border');
         $('#tab3').click();
       }
 
-      if(id == 'tab-3') {
+      if(level == 'tab3') {
         console.log('tab-3');
         alert("3階層目");
       }
 
-
-        // if(id == 'tab2') {
-        //   $('#tab2').addClass('btn_disabled');
-        //   console.log(1);
-        //   $('#tab3').removeClass('btn_disabled');
-        //   console.log(2);
-
-        // }
-        // if(id == 'tab3') {
-        //   $('#tab3').addClass('btn_disabled');
-        //   console.log(2);
-        // }
-      });
-
+    });
 
   </script>
-  <script type="text/javascript" src="../assets/js/home.js"></script>
-  </body>
+    <script type="text/javascript" src="../assets/js/home.js"></script>
+</body>
 </html>
