@@ -2,6 +2,10 @@
 require('../../developer/dbconnect.php');
 $word = '';
 $errors = array();
+$condition_carry_in = '';
+$condition_azukeire = '';
+$judge_azukeire = '';
+$judge_carry_in = '';
 
 //検索ボタンが押されたとき
 if (!empty($_POST)) {
@@ -104,40 +108,78 @@ var_dump($results);
 
 
       if (isset($search)) {
-        if ($search['baggage_classify'] == '1') {
+        if ($search['baggage_classify'] == '0') {
             //両方持ち込みの場合
            $word = $search['word'];
            $classify = '機内への持ち込み・預け入れ共に可能です';
            $condition_carry_in = $search['condition_carry_in'];
            $condition_azukeire = $search['condition_azukeire'];
-           $judge_carry_in = '<i class="fa fa-circle-o"></i>';
-           $judge_azukeire = '<i class="fa fa-circle-o"></i>';
-        }
+           if ($condition_carry_in == '') {
+              $judge_carry_in = '<i class="fa fa-circle-o"></i>';
+           } else{
+              $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+           }
+           if ($condition_azukeire == '') {
+              $judge_azukeire = '<i class="fa fa-circle-o"></i>';
+           } else{
+              $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+           }
+                  }
         // 持ち込みの場合
-        elseif ($search['baggage_classify'] == '2') {
+        elseif ($search['baggage_classify'] == '1') {
           $word = $search['word'];
           $classify = '機内持ち込みのみ可能です';
           $condition_carry_in = $search['condition_carry_in'];
           $condition_azukeire = $search['condition_azukeire'];
-          $judge_carry_in = '<i class="fa fa-circle-o"></i>';
-          $judge_azukeire = '<i class="fa fa-close"></i>';
+           if ($condition_carry_in == '') {
+              $judge_carry_in = '<i class="fa fa-circle-o"></i>';
+           } else{
+              $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+           }
+           if ($condition_azukeire == '') {
+              $judge_azukeire = '<i class="fa fa-close"></i>';
+           } else{
+              $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+           }
+
+          
 
         }
         //預け入れの場合
-        elseif ($search['baggage_classify'] == '3') {
+        elseif ($search['baggage_classify'] == '2') {
           $word = $search['word'];
           $classify = 'お荷物預け入れのみ可能です';
           $condition_carry_in = $search['condition_carry_in'];
           $condition_azukeire = $search['condition_azukeire'];
-          $judge_carry_in = '<i class="fa fa-close"></i>';
-          $judge_azukeire = '<i class="fa fa-circle-o"></i>';
+           if ($condition_carry_in == '') {
+              $judge_carry_in = '<i class="fa fa-close"></i>';
+           } else{
+              $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+           }
+           if ($condition_azukeire == '') {
+              $judge_azukeire = '<i class="fa fa-circle-o"></i>';
+           } else{
+              $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+           }
+
         } 
         //持ち込めない場合
-        elseif ($search['baggage_classify'] == '4'){
+        elseif ($search['baggage_classify'] == '3'){
           $word = $search['word'];
           $classify = '機内への持ち込み・預け入れ共にできません';
-          $condition_carry_in = '';
-          $condition_azukeire = '';
+          $condition_carry_in = $search['condition_carry_in'];
+          $condition_azukeire = $search['condition_azukeire'];
+          if ($condition_carry_in == '') {
+              $judge_carry_in = '<i class="fa fa-close"></i>';
+           } else{
+              $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+           }
+           if ($condition_azukeire == '') {
+              $judge_azukeire = '<i class="fa fa-close"></i>';
+           } else{
+              $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+           }
+
           $judge_carry_in = '<i class="fa fa-close"></i>';
           $judge_azukeire = '<i class="fa fa-close"></i>';
 
@@ -204,7 +246,7 @@ var_dump($results);
   <div id="headerwrap">
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-lg-6 col-md-6 col-sm-12">
+        <div class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
           <h2 id ="catch_copy">「荷造りの悩み」ここに置いて行きませんか？</h2>
          
           <form method="POST" action="">
@@ -224,12 +266,12 @@ var_dump($results);
                 <?php } ?>
 
             </div>
-            <input id="search-btn" type="submit" class="btn btn_atom btn-lg" value="検索">
+            <input id="search-btn1" type="submit" class="btn btn_atom btn-lg" value="検索">
           </form>
         </div><!-- /col-lg-6 -->
         <!-- 検索結果を表示していく -->
 
-        <div class="col-xs-12 col-lg-6 col-sm-12 col-xs-12 col-md-6">
+        <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6">
 
           <?php if (isset($search)) {?>
             <div class="row">
@@ -237,7 +279,7 @@ var_dump($results);
                 <ul class="list-group" id="list_design">
                   <label class="width list_searchs">
                     <h3 class="word_titles"><?php echo $word; ?></h3>
-                    <li class="list-group-item">
+                    <li class="list-group-item list_property">
                       <h2 class="judge_show_icon">機内持ち込み：</h2>
                       <p class="judge_icon">
                         <?php echo $judge_carry_in ?>
@@ -258,7 +300,7 @@ var_dump($results);
                       </p>
                     </li>
                     <form method="POST" action="">
-                      <input type="submit" name="list_move" value="リストへ追加" class = "btn btn-info btn_list_move">
+                      <input type="submit" name="list_move" value="リストへ追加" class = "btn btn_atom btn_list_move">
                     </form>
                   </label>
                 </ul>

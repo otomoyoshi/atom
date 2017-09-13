@@ -3,7 +3,7 @@
 }*/
 
 body {
-  /*background: url(../img/beach_blur.jpg);*/
+  background: url(../img/beach_blur.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #f1f1f1;
@@ -96,11 +96,14 @@ li {
   width: 30%;
 }
 
-  .btn_list_move{
-    margin-top: 10px;
-    width: 100%;
-    height: 12%;
-
+  .backgrounding:hover{
+    transform: none;
+  }
+  .orange{
+    color: orange;
+  }
+  .list_property{
+    width: ;
   }
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
@@ -172,9 +175,17 @@ li {
   padding-left: : 20px;
   padding-right: : 20px;
   padding-bottom: 0px;
-  height: 56%;
+  height: 57%;
   }
 
+  .width{
+    width:100%;
+  }
+    .btn_list_move{
+    margin-top: 10px;
+    width: 100%;
+    height: 12%;
+  }
 }
 
 
@@ -211,7 +222,48 @@ li {
   .text_center{
     width: 80%;
   }
+  .judge_icon{
+    float:right;
+    font-weight: 300;
+    font-size: 35px;
+    display: list-item;
+    padding-top: 0px;
+  }
+  .judge_show_icon, .judge_icon{
+    display: inline;
+  }
 
+  .word_titles{
+    text-align: center;
+    color: black;
+  }
+
+  .lists_searchs{
+    height: 60%;
+  }
+
+  .backgrounding{
+  background-color: rgba(240,240,240,0.7);
+  /*background-color: rgba(0,0,0,0.7);*/
+  /*border-radius: 8px;*/
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+  width: 100%;
+  padding-left: : 20px;
+  padding-right: : 20px;
+  padding-bottom: 0px;
+  height: 58%;
+  }
+
+
+  .width{
+    width:100%;
+  }
+
+  .btn_list_move{
+    margin-top: 10px;
+    width: 100%;
+    height: 12%;
+  }
 }
 
 /* Portrait tablets and small desktops */
@@ -244,7 +296,51 @@ li {
   .list_name_location{
     width: 90%;
   }
+    .text_center{
+    width: 80%;
+  }
+  .judge_icon{
+    float:right;
+    font-weight: 300;
+    font-size: 35px;
+    display: list-item;
+    padding-top: 0px;
+  }
+  .judge_show_icon, .judge_icon{
+    display: inline;
+  }
 
+  .word_titles{
+    text-align: center;
+    color: black;
+  }
+
+  .lists_searchs{
+    height: 60%;
+  }
+
+  .backgrounding{
+  background-color: rgba(240,240,240,0.7);
+  /*background-color: rgba(0,0,0,0.7);*/
+  /*border-radius: 8px;*/
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+  width: 100%;
+  padding-left: : 20px;
+  padding-right: : 20px;
+  padding-bottom: 0px;
+  height: 52%;
+  }
+
+
+  .width{
+    width:100%;
+  }
+
+  .btn_list_move{
+    margin-top: 10px;
+    width: 100%;
+    height: 12%;
+  }
 }
 
 /* Landscape phones and portrait tablets */
@@ -281,6 +377,50 @@ li {
   .list_name_location{
     width: 80%;
   }
+
+  .judge_icon{
+    float:right;
+    font-weight: 300;
+    font-size: 35px;
+    display: list-item;
+    padding-top: 0px;
+  }
+  .judge_show_icon, .judge_icon{
+    display: inline;
+  }
+
+  .word_titles{
+    text-align: center;
+    color: black;
+  }
+
+  .lists_searchs{
+    height: 60%;
+  }
+
+  .backgrounding{
+  background-color: rgba(240,240,240,0.7);
+  /*background-color: rgba(0,0,0,0.7);*/
+  /*border-radius: 8px;*/
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+  width: 95%;
+  padding-left: : 20px;
+  padding-right: : 20px;
+  padding-bottom: 0px;
+  height: 56%;
+  text-align: center;
+  margin: auto;
+  } 
+
+  .width{
+    width:100%;
+  }
+
+  .btn_list_move{
+    margin-top: 10px;
+    width: 100%;
+    height: 12%;
+  }
 }
 
 /* Portrait phones and smaller */
@@ -312,6 +452,50 @@ li {
   }
    .search{
     width: 60%;
+  }
+    .text_center{
+    width: 80%;
+  }
+  .judge_icon{
+    float:right;
+    font-weight: 300;
+    font-size: 35px;
+    display: list-item;
+    padding-top: 0px;
+  }
+  .judge_show_icon, .judge_icon{
+    display: inline;
+  }
+
+  .word_titles{
+    text-align: center;
+    color: black;
+  }
+
+  .lists_searchs{
+    height: 60%;
+  }
+
+  .backgrounding{
+  background-color: rgba(240,240,240,0.7);
+  /*background-color: rgba(0,0,0,0.7);*/
+  /*border-radius: 8px;*/
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+  width: 93%;
+  padding-left: : 20px;
+  padding-right: : 20px;
+  padding-bottom: 0px;
+  height: 51%;
+  margin: auto;
+  text-align: center; 
+  } 
+   #search-btn1{
+    text-align: center;
+    margin: auto;
+   }
+
+  .width{
+    width:100%;
   }
 }
 
