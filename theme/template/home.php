@@ -67,7 +67,7 @@ while (1) {
   }
 
 foreach ($results as $result) {
-  echo $result['category_l2'] .'<br>';
+  // echo $result['category_l2'] .'<br>';
 }
 
 
@@ -89,7 +89,7 @@ while (1) {
   $i++;
   }
 
-  var_dump($results);
+  //var_dump($results);
 
 foreach ($results as $result) {
   echo $result['word'] .'<br>';
@@ -100,7 +100,7 @@ foreach ($results as $result) {
 }
 
 // $result = get_data($stmt);
-var_dump($results);
+//var_dump($results);
 // echo "---------";
 // echo $result[0]['category'] .'<br>';
 // =======
@@ -179,10 +179,6 @@ var_dump($results);
            } else{
               $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
            }
-
-          $judge_carry_in = '<i class="fa fa-close"></i>';
-          $judge_azukeire = '<i class="fa fa-close"></i>';
-
         } 
 
       } //アイテムにデータがない時
@@ -296,15 +292,14 @@ var_dump($results);
                       </p>
                       <p class="conditions">
                         機内預け入れ条件：<br>
-                        <?php echo $condition_azukeire ?>
+                        <?php echo $condition_azukeire; ?>
                       </p>
                     </li>
-                    <form method="POST" action="">
-                      <input type="submit" name="list_move" value="リストへ追加" class = "btn btn_atom btn_list_move">
-                    </form>
                   </label>
                 </ul>
-              
+                <form method="POST" action="">
+                  <input type="submit" name="list_move" value="リストへ追加" class = "btn btn_atom btn_list_move">
+                </form>
               </div>
             </div>
           <?php  } ?>
