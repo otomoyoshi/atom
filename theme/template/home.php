@@ -97,7 +97,14 @@ var_dump($results);
 
 // }
 
-
+  // カテゴリー表示の開発用
+  $results_l1 = array("a"=>"b",
+                      "c"=>"d",
+                      "e"=>"f");
+  $results_l2 = array("g"=>"h");
+  $results_l3 = array("i"=>"j",
+                      "k"=>"l",
+                      "m"=>"n");
 ?>
 
 
@@ -163,11 +170,13 @@ var_dump($results);
                 <?php } ?>
 
             </div>
-            <input id="search-btn1" type="submit" class="btn btn-warning btn-lg" value="検索">
+            <input id="search-btn" type="submit" class="btn btn_atom btn-lg" value="検索">
           </form>
         </div><!-- /col-lg-6 -->
         <!-- 検索結果を表示していく -->
+
         <div class="col-xs-12 col-lg-6 col-sm-12 col-xs-12 col-md-6">
+
           <?php if (isset($search)) {?>
             <div class="row">
               <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding">
@@ -204,6 +213,66 @@ var_dump($results);
             </div>
           <?php  } ?>
         </div>
+        <div class="col-xs-12 col-lg-6">
+          <div class='after_event'>
+            <ul class='horizontal'>
+            <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">タブ１</a></li>
+            <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
+            <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
+            </ul>
+            <div id='tab-1' class="tabs">
+              <div class="row background_white">
+
+                <?php
+                  $i=1;
+                  foreach ($results_l1 as $result_l1) {
+                ?>
+
+                  <div class="col-lg-2 text-center dev_border" id="<?php echo $i ?>">
+                    <?php echo $result_l1; ?>
+                  </div>
+
+                 <?php
+                    $i++;
+                   }
+                 ?>
+               </div>
+            </div>
+
+            <div id='tab-2' class="tabs">
+              <div class="row background_white">
+                <?php
+                  $i=1;
+                  foreach ($results_l2 as $result_l2) {
+                ?>
+                <div class="col-lg-2 text-center dev_border" id="<?php echo $i ?>">
+                  <?php echo $result_l2; ?>
+                </div>
+
+                 <?php
+                    $i++;
+                   }
+                 ?>
+               </div>
+            </div>
+            <div id='tab-3' class="tabs">
+              <div class="row background_white">
+                <?php
+                  $i=1;
+                  foreach ($results_l3 as $result_l3) {
+                ?>
+                <div class="col-lg-2 text-center dev_border" id="<?php echo $i ?>">
+                  <?php echo $result_l3; ?>
+                </div>
+
+                 <?php
+                    $i++;
+                   }
+                 ?>
+               </div>
+            </div>
+            </div>
+        </div>
       </div><!-- /col-lg-6 -->
     </div><!-- /row -->
   </div><!-- /container -->
@@ -213,8 +282,55 @@ var_dump($results);
   <?php require('footer.php'); ?>
 
   <?php require('load_js.php'); ?>
-  <script type="text/javascript">
+<!--   <script type="text/javascript">
   introJs().start();
+  </script> -->
+  <script type="text/javascript"> 
+    $('.after_event').tabslet({
+    active: 1,
+    animation: true
+    });
+    // $('.tabs').tabslet({
+    // active: 1,
+    // animation: true
+    // });
+    $('.tabs').click(function(e){
+      var id = this.id;
+      alert(id);
+      if(id == 'tab-1') {
+        console.log('tab-1');
+        $('#tab2').addClass('div_border');
+        $('#tab1').removeClass('div_border');
+        $('#tab2').click();
+      }
+
+      if(id == 'tab-2') {
+        console.log('tab-2');
+        $('#tab3').addClass('div_border');
+        $('#tab2').removeClass('div_border');
+        $('#tab3').click();
+      }
+
+      if(id == 'tab-3') {
+        console.log('tab-3');
+        alert("3階層目");
+      }
+
+
+        // if(id == 'tab2') {
+        //   $('#tab2').addClass('btn_disabled');
+        //   console.log(1);
+        //   $('#tab3').removeClass('btn_disabled');
+        //   console.log(2);
+
+        // }
+        // if(id == 'tab3') {
+        //   $('#tab3').addClass('btn_disabled');
+        //   console.log(2);
+        // }
+      });
+
+
   </script>
   <script type="text/javascript" src="../assets/js/home.js"></script>
   </body>

@@ -6,6 +6,7 @@ body {
   /*background: url(../img/beach_blur.jpg);*/
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: #f1f1f1;
 }
 
 #footer {
@@ -16,14 +17,67 @@ body {
   text-align: center;
 }
 
+#page-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 77%;
+}
+#page-top a {
+    background: #666;
+    text-decoration: none;
+    color: #fff;
+    width: 100px;
+    padding: 30px 0;
+    text-align: center;
+    display: block;
+    border-radius: 5px;
+}
+#page-top a:hover {
+    text-decoration: none;
+    background: #999;
+}
+
+.btn_atom {
+  background-color: #51a8ff;
+  color: white;
+}
+
+.dev_border{
+  border: solid 1px #51a8ff;
+}
+
 .background_white {
   /*background-color: rgba(81,168,255,0.7);*/
   background-color: rgba(255,255,255,0.7);
   /*background-color: rgba(0,0,0,0.7);*/
   /*border-radius: 8px;*/
-  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
-
+  /*box-shadow: 4px 4px 4px rgba(0,0,0,0.05);*/
+  height: 300px;
+  color: #555;
+  /*font-size: 35px;*/
+  
 }
+
+.font_size {
+  font-size: 35px;
+}
+
+.div_border {
+  border-bottom: solid 3px #51a8ff;
+}
+
+/*.background_atom {
+  background-color: rgba(81,168,255,0.7);
+  background-color: #51a8ff;
+  background-color: rgba(0,0,0,0.7);
+  border-radius: 8px;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.05);
+  height: 300px;
+  color: white;
+  font-size: 35px;
+
+}*/
 
 ul {
   list-style: none;
@@ -31,6 +85,12 @@ ul {
 li {
   display: inline-block;
 }
+
+.btn_disabled{
+    pointer-events: none; /* aタグのリンクを無効にする */
+/*    cursor: default;   マウスオーバー時のカーソルをdefaultに固定 
+*/
+  }
 
 .both_contents{
   width: 30%;
@@ -102,7 +162,7 @@ li {
   .lists_searchs{
     height: 60%;
   }
-  
+
   .backgrounding{
   background-color: rgba(240,240,240,0.7);
   /*background-color: rgba(0,0,0,0.7);*/
