@@ -48,11 +48,65 @@ foreach ($results as $result) {
   echo $result['category_l1'] .'<br>';
 }
 
+$tmp_category_l1 = 1;
+//2階層目のデータを取得
+$sql = 'SELECT * FROM `atom_categories_l2` WHERE `category_l1_id`=? ' ;
+$data = array($tmp_category_l1);
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);
+
+//全件取得
+$results = array();
+$i = 0;
+while (1) {
+  $results[]= $stmt->fetch(PDO::FETCH_ASSOC);// １レコード分のみ取得
+  if ($results[$i] == false) {
+    break;
+  }
+  $i++;
+  }
+
+foreach ($results as $result) {
+  echo $result['category_l2'] .'<br>';
+}
+
+
+//3階層目
+$tmp_category_l2_id = 3;
+$sql = 'SELECT * FROM `atom_searchs` WHERE `categories_l2_id` = ? ' ;
+$data = array($tmp_category_l2_id);
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);
+
+//全件取得
+$results = array();
+$i = 0;
+while (1) {
+  $results[]= $stmt->fetch(PDO::FETCH_ASSOC);// １レコード分のみ取得
+  if ($results[$i] == false) {
+    break;
+  }
+  $i++;
+  }
+
+  var_dump($results);
+
+foreach ($results as $result) {
+  echo $result['word'] .'<br>';
+  echo $result['condition_azukeire'] .'<br>';
+  echo $result['created'] .'<br>';
+
+
+}
+
 // $result = get_data($stmt);
 var_dump($results);
 // echo "---------";
 // echo $result[0]['category'] .'<br>';
 // =======
+
+
+
       if (isset($search)) {
         if ($search['baggage_classify'] == '0') {
             //両方持ち込みの場合
@@ -257,12 +311,12 @@ var_dump($results);
         </div>
         <div class="col-xs-12 col-lg-6">
           <div class='after_event'>
-            <ul class='horizontal'>
+            <ul class='horizontal btn_disabled'>
             <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">タブ１</a></li>
             <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
             <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
             </ul>
-            <div id='tab-1' class="tabs">
+            <div id='tab-1'>
               <div class="row background_white">
 
                 <?php
@@ -270,7 +324,7 @@ var_dump($results);
                   foreach ($results_l1 as $result_l1) {
                 ?>
 
-                  <div class="col-lg-2 text-center dev_border" id="<?php echo $i ?>">
+                  <div class="col-lg-2 text-center dev_border tabs" id="<?php echo $i ?>">
                     <?php echo $result_l1; ?>
                   </div>
 
@@ -281,13 +335,13 @@ var_dump($results);
                </div>
             </div>
 
-            <div id='tab-2' class="tabs">
+            <div id='tab-2'>
               <div class="row background_white">
                 <?php
                   $i=1;
                   foreach ($results_l2 as $result_l2) {
                 ?>
-                <div class="col-lg-2 text-center dev_border" id="<?php echo $i ?>">
+                <div class="col-lg-2 text-center dev_border tabs" id="<?php echo $i ?>">
                   <?php echo $result_l2; ?>
                 </div>
 
@@ -297,13 +351,13 @@ var_dump($results);
                  ?>
                </div>
             </div>
-            <div id='tab-3' class="tabs">
+            <div id='tab-3'>
               <div class="row background_white">
                 <?php
                   $i=1;
                   foreach ($results_l3 as $result_l3) {
                 ?>
-                <div class="col-lg-2 text-center dev_border" id="<?php echo $i ?>">
+                <div class="col-lg-2 text-center dev_border tabs" id="<?php echo $i ?>">
                   <?php echo $result_l3; ?>
                 </div>
 
