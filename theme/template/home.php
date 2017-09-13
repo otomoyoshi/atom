@@ -215,7 +215,7 @@ var_dump($results);
         </div>
         <div class="col-xs-12 col-lg-6">
           <div class='after_event'>
-            <ul class='horizontal'>
+            <ul class='horizontal btn_disabled'>
             <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">タブ１</a></li>
             <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
             <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
