@@ -7,6 +7,8 @@ $condition_azukeire = '';
 $judge_azukeire = '';
 $judge_carry_in = '';
 
+
+
 //検索ボタンが押されたとき
 if (!empty($_POST)) {
     if (isset($_POST['list_search']) && $_POST['list_search'] != '') {
@@ -34,7 +36,7 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute();
 
 //全件取得
-$results = array();
+
 $i = 0;
 while (1) {
   $results[]= $stmt->fetch(PDO::FETCH_ASSOC);// １レコード分のみ取得
@@ -89,12 +91,13 @@ while (1) {
   $i++;
   }
 
-  //var_dump($results);
+
+  // var_dump($results);
 
 foreach ($results as $result) {
   echo $result['word'] .'<br>';
   echo $result['condition_azukeire'] .'<br>';
-  echo $result['created'] .'<br>';
+  // echo $result['created'] .'<br>';
 
 
 }
@@ -197,10 +200,8 @@ foreach ($results as $result) {
   $results_l3 = array("i"=>"j",
                       "k"=>"l",
                       "m"=>"n");
+
 ?>
-
-
-
 
 
 <!DOCTYPE html>
@@ -214,6 +215,7 @@ foreach ($results as $result) {
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!-- <link rel="shortcut icon" href="../..assets/img/favicon.png"> -->
     <!-- <link rel="shortcut icon" href="../assets/img/tabinimotsu_v1.png"> -->
+    <?php require('header.php'); ?>
 
     <title>旅にもつ</title>
 
@@ -255,7 +257,7 @@ foreach ($results as $result) {
 
             <div class="form-group">
 
-              <input type="text" id="search" class="form-control" placeholder="例：液体物" name = "list_search" maxlength=15 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
+              <input type="text" id="search" class="form-control" placeholder="例：液体物" name = "list_search" maxlength=20 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
 
                <?php if (isset($errors['word'])  == 'blank') {?>
                   <div class="alert alert-danger error_search">検索ワードを入力してください</div>
@@ -300,6 +302,7 @@ foreach ($results as $result) {
                 <form method="POST" action="">
                   <input type="submit" name="list_move" value="リストへ追加" class = "btn btn_atom btn_list_move">
                 </form>
+
               </div>
             </div>
           <?php  } ?>
@@ -312,7 +315,7 @@ foreach ($results as $result) {
             <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
             <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
             </ul>
-            <div id='tab-1'>
+            <div id='tab-1 tab'>
               <div class="row background_white">
 
                 <?php
@@ -320,7 +323,7 @@ foreach ($results as $result) {
                   foreach ($results_l1 as $result_l1) {
                 ?>
 
-                  <div class="col-lg-2 text-center dev_border tabs" id="<?php echo $i ?>">
+                  <div class="col-lg-2 text-center dev_border tabs" id="tab1_<?php echo $i ?>">
                     <?php echo $result_l1; ?>
                   </div>
 
@@ -337,7 +340,7 @@ foreach ($results as $result) {
                   $i=1;
                   foreach ($results_l2 as $result_l2) {
                 ?>
-                <div class="col-lg-2 text-center dev_border tabs" id="<?php echo $i ?>">
+                <div class="col-lg-2 text-center dev_border tabs" id="tab2_<?php echo $i ?>">
                   <?php echo $result_l2; ?>
                 </div>
 
@@ -353,7 +356,7 @@ foreach ($results as $result) {
                   $i=1;
                   foreach ($results_l3 as $result_l3) {
                 ?>
-                <div class="col-lg-2 text-center dev_border tabs" id="<?php echo $i ?>">
+                <div class="col-lg-2 text-center dev_border tabs" id="tab3_<?php echo $i ?>">
                   <?php echo $result_l3; ?>
                 </div>
 
@@ -377,51 +380,39 @@ foreach ($results as $result) {
 <!--   <script type="text/javascript">
   introJs().start();
   </script> -->
-  <script type="text/javascript"> 
+  <script type="text/javascript">
     $('.after_event').tabslet({
     active: 1,
     animation: true
     });
-    // $('.tabs').tabslet({
-    // active: 1,
-    // animation: true
-    // });
+
     $('.tabs').click(function(e){
       var id = this.id;
-      alert(id);
-      if(id == 'tab-1') {
+      var data = id.split('_');
+      var level = data[0];
+      var id = data[1];
+      // alert(id);
+      // alert(level);
+      if(level == 'tab1') {
         console.log('tab-1');
         $('#tab2').addClass('div_border');
         $('#tab1').removeClass('div_border');
         $('#tab2').click();
       }
 
-      if(id == 'tab-2') {
+      if(level == 'tab2') {
         console.log('tab-2');
         $('#tab3').addClass('div_border');
         $('#tab2').removeClass('div_border');
         $('#tab3').click();
       }
 
-      if(id == 'tab-3') {
+      if(level == 'tab3') {
         console.log('tab-3');
         alert("3階層目");
       }
 
-
-        // if(id == 'tab2') {
-        //   $('#tab2').addClass('btn_disabled');
-        //   console.log(1);
-        //   $('#tab3').removeClass('btn_disabled');
-        //   console.log(2);
-
-        // }
-        // if(id == 'tab3') {
-        //   $('#tab3').addClass('btn_disabled');
-        //   console.log(2);
-        // }
-      });
-
+    });
 
   </script>
   <script type="text/javascript" src="../assets/js/home.js">

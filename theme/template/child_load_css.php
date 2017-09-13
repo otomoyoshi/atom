@@ -32,3 +32,7 @@
 <!-- ヘッダ用 -->
 <link rel="stylesheet" type="text/css" href="../../assets/css/header.css">
 
+<!-- Tooltip -->
+<link rel="stylesheet" type="text/css" href="../../assets/js/tooltipster-master/dist/css/tooltipster.main.min.css">
+<link rel="stylesheet" type="text/css" href="../../assets/js/tooltipster-master/dist/css/tooltipster.bundle.min.css">
+
