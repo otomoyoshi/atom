@@ -151,6 +151,11 @@
 
             </div>
           <!-- </div> -->
+          <div class="row">
+            <div class="col-lg-offset-10">
+              <p id="page-top"><a href="#wrap">PAGE TOP</a></p>
+            </div>
+          </div>
     </div>
     <!-- </div> -->
 
@@ -159,6 +164,27 @@
 
   <?php require('footer.php'); ?>
   <?php require('load_js.php'); ?>
+  <script type="text/javascript">
+    $(function() {
+      var topBtn = $('#page-top');    
+      topBtn.hide();
+      //スクロールが100に達したらボタン表示
+      $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+              topBtn.fadeIn();
+          } else {
+              topBtn.fadeOut();
+          }
+      });
+      //スクロールしてトップ
+      topBtn.click(function () {
+          $('body,html').animate({
+              scrollTop: 0
+          }, 500);
+          return false;
+      });
+  });
+  </script>
 
 
   </body>
