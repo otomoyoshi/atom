@@ -39,15 +39,20 @@ $stmt->execute();
 
 $i = 0;
 while (1) {
-  $results[]= $stmt->fetch(PDO::FETCH_ASSOC);// １レコード分のみ取得
-  if ($results[$i] == false) {
+  $results_l1[]= $stmt->fetch(PDO::FETCH_ASSOC);// １レコード分のみ取得
+  if ($results_l1[$i] == false) {
     break;
   }
   $i++;
   }
+  $DEV = 6;
+  $cnt_l1 = count($results_l1)-1;
+  $cnt_l1_div = (int)($cnt_l1 / ($DEV+1));
+  $cnt_l1_sur = $cnt_l1 % ($DEV+1);
+  // echo "cnt_l1: " . $cnt_l1;
 
-foreach ($results as $result) {
-  echo $result['category_l1'] .'<br>';
+foreach ($results_l1 as $result_l1) {
+  // echo $result_l1['category_l1'] .'<br>';
 }
 
 $tmp_category_l1 = 1;
@@ -58,20 +63,23 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 
 //全件取得
-$results = array();
+$results_l2 = array();
 $i = 0;
 while (1) {
-  $results[]= $stmt->fetch(PDO::FETCH_ASSOC);// １レコード分のみ取得
-  if ($results[$i] == false) {
+  $results_l2[]= $stmt->fetch(PDO::FETCH_ASSOC);// １レコード分のみ取得
+  if ($results_l2[$i] == false) {
     break;
   }
   $i++;
   }
 
-foreach ($results as $result) {
-  echo $result['category_l2'] .'<br>';
+foreach ($results_l2 as $result_l2) {
+  // echo $result_l2['category_l2'] .'<br>';
 }
-
+  $cnt_l2 = count($results_l2)-1;
+  $cnt_l2_div = (int)($cnt_l2 / ($DEV+1));
+  $cnt_l2_sur = $cnt_l2 % ($DEV+1);
+  // echo "cnt_l2: " . $cnt_l2;
 
 //3階層目
 $tmp_category_l2_id = 3;
@@ -81,11 +89,11 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 
 //全件取得
-$results = array();
+$results_l3 = array();
 $i = 0;
 while (1) {
-  $results[]= $stmt->fetch(PDO::FETCH_ASSOC);// １レコード分のみ取得
-  if ($results[$i] == false) {
+  $results_l3[]= $stmt->fetch(PDO::FETCH_ASSOC);// １レコード分のみ取得
+  if ($results_l3[$i] == false) {
     break;
   }
   $i++;
@@ -93,21 +101,23 @@ while (1) {
 
   // var_dump($results);
 
-foreach ($results as $result) {
-  echo $result['word'] .'<br>';
-  echo $result['condition_azukeire'] .'<br>';
+foreach ($results_l3 as $result_l3) {
+  // echo $result_l3['word'] .'<br>';
+  // echo $result_l3['condition_azukeire'] .'<br>';
   // echo $result['created'] .'<br>';
-
 
 }
 
+  $cnt_l3 = count($results_l3)-1;
+  $cnt_l3_div = (int)($cnt_l3 / ($DEV+1));
+  $cnt_l3_sur = $cnt_l3 % ($DEV+1);
+  // echo "cnt_l3: " . $cnt_l3;
+
 // $result = get_data($stmt);
-var_dump($results);
+// var_dump($results_l3);
 // echo "---------";
 // echo $result[0]['category'] .'<br>';
 // =======
-
-
 
       if (isset($search)) {
         if ($search['baggage_classify'] == '0') {
@@ -143,8 +153,6 @@ var_dump($results);
            } else{
               $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
            }
-
-          
 
         }
         //預け入れの場合
@@ -196,13 +204,15 @@ var_dump($results);
 // }
 
   // カテゴリー表示の開発用
-  $results_l1 = array("a"=>"b",
-                      "c"=>"d",
-                      "e"=>"f");
-  $results_l2 = array("g"=>"h");
-  $results_l3 = array("i"=>"j",
-                      "k"=>"l",
-                      "m"=>"n");
+  // $results_l1 = array("a"=>"b",
+  //                     "c"=>"d",
+  //                     "e"=>"f");
+  // $results_l2 = array("g"=>"h");
+  // $results_l3 = array("i"=>"j",
+  //                     "k"=>"l",
+  //                     "m"=>"n");
+  // if(isset($_GET['level']) && isset($_GET['level_id'])){
+
 
 ?>
 
@@ -311,66 +321,105 @@ var_dump($results);
           <?php  } ?>
         </div>
         <div class="col-xs-12 col-lg-6">
+          <!-- <div class="output">確認用</div> -->
           <div class='after_event'>
             <ul class='horizontal btn_disabled'>
             <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">タブ１</a></li>
             <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
             <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
             </ul>
-            <div id='tab-1 tab'>
-              <div class="row background_white">
+          
+            <div id='tab-1'>
 
-                <?php
-                  $i=1;
-                  foreach ($results_l1 as $result_l1) {
-                ?>
+              <?php
+                $i=0;
+                for($j=0; $j<=$cnt_l1; $j++) {
 
-                  <div class="col-lg-2 text-center dev_border tabs" id="tab1_<?php echo $i ?>">
-                    <?php echo $result_l1; ?>
+                  $div = (int)(($j+1) / ($DEV+1)); //商
+                  // echo "div-default: " . $j . '<br>';
+                  // echo "cnt_l1: " . $cnt_l1 . '<br>';
+                  // echo "cnt_l1_div: " . $cnt_l1_div . '<br>';
+                  // echo "cnt_l1_sur: " . $cnt_l1_sur . '<br>';
+
+                  if($j % $DEV == 0){ //rowタグの開始を出力するタイミングを制御
+                    $i = $j + $DEV - 1; //rowのタグの終了を出力するタイミングを制御
+                    // echo "i=0: " . $i . '<br>';
+
+               ?>
+                    <div class="row dev_border">
+                  <?php } ?>
+
+                  <div class="col-lg-2 text-center tabs" id="tab1_<?php echo $j; ?>">
+                    <?php echo $results_l1[$j]['category_l1']; ?>
                   </div>
 
-                 <?php
-                    $i++;
-                   }
-                 ?>
-               </div>
+                  <?php
+                    // rowの閉じタグを出力するタイミンを記述
+                    // 商-1までは６個のcolができたら、rowを出力
+                    // $jが商と一致するとき、剰余数のcolができたら、rowを出力
+                    if( ($j == $i && $div < $cnt_l1_div) || ($cnt_l1_sur == $j && $div == $cnt_l1_div) ) {
+                  ?>
+
+                  </div><!-- row -->
+
+                <?php } ?><!-- if -->
+              <?php } ?><!-- for -->
             </div>
 
             <div id='tab-2'>
-              <div class="row background_white">
-                <?php
-                  $i=1;
-                  foreach ($results_l2 as $result_l2) {
-                ?>
-                <div class="col-lg-2 text-center dev_border tabs" id="tab2_<?php echo $i ?>">
-                  <?php echo $result_l2; ?>
-                </div>
+              <?php
+                $i=0;
+                for($j=0; $j<=$cnt_l2; $j++) {
 
-                 <?php
-                    $i++;
-                   }
-                 ?>
-               </div>
-            </div>
+                $div = (int)(($j+1) / ($DEV+1));
+                // echo "div-default: " . $j . '<br>';
+                // echo "cnt_l2: " . $cnt_l2 . '<br>';
+                // echo "cnt_l2_div: " . $cnt_l2_div . '<br>';
+                // echo "cnt_l2_sur: " . $cnt_l2_sur . '<br>';
+                  if($j % $DEV == 0){
+                    $i = $j + $DEV - 1;
+              ?>
+                    <div class="row dev_border">
+                  <?php } ?>
+
+                  <div class="col-lg-2 text-center tabs" id="tab2_<?php echo $j ?>">
+                    <?php echo $results_l2[$j]['category_l2']; ?>
+                  </div>
+
+                 <?php if( ($j == $i && $div < $cnt_l2_div) || ($cnt_l2_sur == $j && $div == $cnt_l2_div) ) { ?>
+
+                  </div><!-- row-->
+                <?php } ?><!-- if -->
+              <?php } ?><!-- for -->
+            </div><!-- tab-2 -->
+
             <div id='tab-3'>
-              <div class="row background_white">
-                <?php
-                  $i=1;
-                  foreach ($results_l3 as $result_l3) {
-                ?>
-                <div class="col-lg-2 text-center dev_border tabs" id="tab3_<?php echo $i ?>">
-                  <?php echo $result_l3; ?>
-                </div>
+            
+              <?php
+                $i=0;
+                for($j=0; $j<=$cnt_l3; $j++) {
+                  $div = (int)(($j+1) / ($DEV+1)); 
+                  if($j % $DEV == 0){
+                    $i = $j + $DEV -1;
+              ?>
+                    <div class="row dev_border">
 
-                 <?php
-                    $i++;
-                   }
-                 ?>
-               </div>
-            </div>
-            </div>
-        </div>
-      </div><!-- /col-lg-6 -->
+                    <div class="col-lg-2 text-center tabs" id="tab3_<?php echo $i ?>">
+                      <?php echo $results_l3[$j]['word']; ?>
+                    </div>
+
+                  <?php if( ($j == $i && $div < $cnt_l3_div) || ($cnt_l3_sur == $j && $div == $cnt_l3_div)) ?>
+                    </div>
+                  <?php } ?>
+              <?php } ?>
+            </div><!-- tab-3 -->
+
+
+          </div><!-- after_event -->
+
+          <!-- </div> -->
+        </div><!-- /col-lg-6 -->
+
     </div><!-- /row -->
   </div><!-- /container -->
 </div><!-- /headerwrap -->
@@ -392,7 +441,7 @@ var_dump($results);
       var id = this.id;
       var data = id.split('_');
       var level = data[0];
-      var id = data[1];
+      var level_id = data[1];
       // alert(id);
       // alert(level);
       if(level == 'tab1') {
@@ -410,11 +459,24 @@ var_dump($results);
       }
 
       if(level == 'tab3') {
-        console.log('tab-3');
+        // console.log('tab-3');
+        // console.log('level:%s, level_id:%s', level,level_id);
+        // $.get('get_home.php',
+        //   {
+        //     level : level,
+        //     level_id : level_id
+        //   },
+        //   changeHtml
+        // );
+        // function changeHtml(result){
+        //   $('.output').text(result);
+        // }
         alert("3階層目");
       }
 
     });
+
+
 
   </script>
     <script type="text/javascript" src="../assets/js/home.js"></script>
