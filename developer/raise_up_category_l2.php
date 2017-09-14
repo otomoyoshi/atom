@@ -22,6 +22,8 @@
     // $judge_blank = '';
     $classify = 'default';
     $classify_blank = '';
+    $res = 'default';
+    $res_blank = '';
     $encourage = '';
     $encourages = array('頑張ろう',
                         'ありがとう',
@@ -61,6 +63,11 @@
         $classify_blank = "classify";
       }
 
+      if(isset($_POST['res'])){
+        $res = $_POST['res'];
+        $res_blank = "res";
+      }
+
       if($word == '') {
         $errors['word'] = 'blank';
       }
@@ -76,6 +83,9 @@
       if($classify_blank == '') {
         $errors['classify_blank'] = 'blank';
       }
+      if($res_blank == '') {
+        $errors['res_blank'] = 'blank';
+      }
       // echo var_dump($errors);
       if(empty($errors)){ //全て入力が存在したとき
         // echo "hello";
@@ -83,8 +93,8 @@
             $encourage = 'encourage';
             // echo $judge;
             // echo $word . $classify;
-            $sql = 'INSERT INTO `atom_categories_l2`(`category_l2`, `category_l1_id`) VALUES (?, ?)';
-            $data = array($word, $classify);
+            $sql = 'INSERT INTO `atom_categories_l2`(`category_l2`, `category_l1_id`, `result`) VALUES (?, ?, ?)';
+            $data = array($word, $classify, $res);
             $stmt = $dbh->prepare($sql);
             $stmt->execute($data);
             // echo var_dump($stmt);
@@ -181,6 +191,27 @@
             </div>
 
             <?php if(isset($errors['classify_blank']) && $classify == 'default') { ?>
+              <p class="alert alert-danger">入力してください</p><br>
+            <?php } ?>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
+              <div class="input-group">
+                <h4>結果表示:1 結果非表示:2</h4>
+                <?php for($i=0; $i < 2; $i++) { ?>
+                  <? if(isset($res) && $i == $res && $res != 'default') { ?>
+                    <label class="radio-inline"><?php echo $i+1 ?><input type="radio" name="res" value="<?php echo $i+1;?>" checked></label>
+                  <?php } else { ?>
+                    <label class="radio-inline"><?php echo $i+1 ?><input type="radio" name="res" value="<?php echo $i+1;?>"></label>
+                  <?php } ?>
+                <?php } ?>
+              </div>
+            </div>
+
+            <?php if(isset($errors['res_blank']) && $res == 'default') { ?>
               <p class="alert alert-danger">入力してください</p><br>
             <?php } ?>
           </div>
