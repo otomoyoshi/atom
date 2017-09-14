@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require('../../developer/dbconnect.php');
 $word = '';
 $errors = array();
@@ -7,8 +8,7 @@ $condition_azukeire = '';
 $judge_azukeire = '';
 $judge_carry_in = '';
 
-
-
+ 
 //検索ボタンが押されたとき
 if (!empty($_POST)) {
     if (isset($_POST['list_search']) && $_POST['list_search'] != '') {
@@ -26,7 +26,13 @@ if (!empty($_POST)) {
     } elseif (isset($_POST['list_search']) && $_POST['list_search'] == '') {
     $errors['word'] = 'blank';
     }
-// <<<<<<< HEAD
+    if (!empty($_POST['list_move'])) {
+      $sql = 'SELECT * FROM `atom_lists` WHERE ``= ?';
+      $data = array();
+      $stmt = $dbh->prepare();
+      $stmt ->execute();
+      //$search = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
 
 
@@ -252,13 +258,13 @@ foreach ($results_l3 as $result_l3) {
     // $ini = parse_ini_file("config.ini");
     // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    // if ($_SESSION['login_user']) { //ログインしてるとき
-    //   // echo "login success";
-    //   require('login_header.php');
-    // } else {// ログインしてないとき
-    //   // echo "login fail";
-    //   require('header.php');
-    // }
+    if ($_SESSION['login_user']) { //ログインしてるとき
+      // echo "login success";
+      require('login_header.php');
+    } else {// ログインしてないとき
+      // echo "login fail";
+      require('header.php');
+    }
   ?>
   <div id="headerwrap">
     <div class="container">
@@ -335,22 +341,21 @@ foreach ($results_l3 as $result_l3) {
             <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
             <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
             </ul>
-          
+
             <div id='tab-1'>
 
               <?php
                 $i=0;
                 for($j=0; $j<=$cnt_l1; $j++) {
-
                   $div = (int)(($j+1) / ($DEV+1)); //商
-                  // echo "div-default: " . $j . '<br>';
+                  // echo "j: " . $j . '<br>';
                   // echo "cnt_l1: " . $cnt_l1 . '<br>';
                   // echo "cnt_l1_div: " . $cnt_l1_div . '<br>';
                   // echo "cnt_l1_sur: " . $cnt_l1_sur . '<br>';
 
                   if($j % $DEV == 0){ //rowタグの開始を出力するタイミングを制御
                     $i = $j + $DEV - 1; //rowのタグの終了を出力するタイミングを制御
-                    // echo "i=0: " . $i . '<br>';
+                    // echo "i: " . $i . '<br>';
 
                ?>
                     <div class="row dev_border">
@@ -364,7 +369,9 @@ foreach ($results_l3 as $result_l3) {
                     // rowの閉じタグを出力するタイミンを記述
                     // 商-1までは６個のcolができたら、rowを出力
                     // $jが商と一致するとき、剰余数のcolができたら、rowを出力
-                    if( ($j == $i && $div < $cnt_l1_div) || ($cnt_l1_sur == $j && $div == $cnt_l1_div) ) {
+                    if( ($j == $i && $div < $cnt_l1_div) || ($cnt_l1_sur == ($j % $DEV) && $div == $cnt_l1_div) ) {
+                      // echo "--j: " . $j . '<br>';
+                      // echo "--div: " . $div . '<br>';
                   ?>
 
                   </div><!-- row -->
@@ -393,7 +400,7 @@ foreach ($results_l3 as $result_l3) {
                     <?php echo $results_l2[$j]['category_l2']; ?>
                   </div>
 
-                 <?php if( ($j == $i && $div < $cnt_l2_div) || ($cnt_l2_sur == $j && $div == $cnt_l2_div) ) { ?>
+                 <?php if( ($j == $i && $div < $cnt_l2_div) || ($cnt_l2_sur == ($j % $DEV) && $div == $cnt_l2_div) ) { ?>
 
                   </div><!-- row-->
                 <?php } ?><!-- if -->
@@ -412,11 +419,11 @@ foreach ($results_l3 as $result_l3) {
                     <div class="row dev_border">
                   <?php } ?>
                     <!-- <div class="col-lg-2 text-center tabs" id="tab3_<?php echo $i ?>"> -->
-                    <div class="col-lg-2 text-center tabs" id="tab3_<?php echo $i ?>">
+                    <div class="col-lg-2 text-center tabs" id="tab3_<?php echo $j ?>">
                       <?php echo $results_l3[$j]['word']; ?>
                     </div>
 
-                  <?php if( ($j == $i && $div < $cnt_l3_div) || ($cnt_l3_sur == $j && $div == $cnt_l3_div)){ ?>
+                  <?php if( ($j == $i && $div < $cnt_l3_div) || ($cnt_l3_sur == ($j % $DEV) && $div == $cnt_l3_div)){ ?>
                     </div>
                   <?php } ?>
               <?php } ?>
@@ -485,8 +492,7 @@ foreach ($results_l3 as $result_l3) {
 
 
   </script>
-  <script type="text/javascript" src="../assets/js/home.js">
-    
+  <script src="../assets/js/home.js">
   </script>
   </body>
 </html>

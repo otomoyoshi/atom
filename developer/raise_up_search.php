@@ -18,6 +18,8 @@
     $word = '';
     $condition = '';
     $condition_azukeire = '';
+    $condition_per_person = '';
+    $condition_per_container='';
     $judge = 'default';
     $judge_blank = '';
     $classify = 'default';
@@ -49,6 +51,12 @@
       }
       if(isset($_POST['condition_azukeire'])){
         $condition_azukeire = $_POST['condition_azukeire'];
+      }
+      if(isset($_POST['condition_per_person'])){
+        $condition_per_person = $_POST['condition_per_person'];
+      }
+      if(isset($_POST['condition_container'])){
+        $condition_container = $_POST['condition_container'];
       }
 
       if(isset($_POST['judge'])){
@@ -83,8 +91,8 @@
             $encourage = 'encourage';
             // echo $judge;
             // echo $word . $condition . $condition_azukeire . $judge . $classify;
-            $sql = 'INSERT INTO `atom_searchs`(`word`, `condition_carry_in`, `condition_azukeire`, `created`, `aviation_id`, `categories_l2_id`, `baggage_classify`) VALUES (?, ?, ?, NOW(), ?, ?, ?)';
-            $data = array($word,$condition, $condition_azukeire, 1, $classify, $judge);
+            $sql = 'INSERT INTO `atom_searchs`(`word`, `condition_carry_in`, `condition_azukeire`, `created`, `aviation_id`, `categories_l2_id`, `baggage_classify`, `per_container`, `per_person`) VALUES (?, ?, ?, NOW(), ?, ?, ?, ?, ?)';
+            $data = array($word,$condition, $condition_azukeire, 1, $classify, $judge, $condition_per_container, $condition_per_person);
             $stmt = $dbh->prepare($sql);
             $stmt->execute($data);
             // echo var_dump($stmt);
@@ -237,6 +245,39 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
+            <div class="form-group">
+              <!-- 条件：<br><input type="text" name="condition" value="<?php echo $condition ?>"><br> -->
+              <div class="input-group">
+                <span class="input-group-addon">1容器あたりの条件</span>
+                <input type="text" class="form-control" name="condition_per_container" value="<?php echo $condition_per_container; ?>">
+              </div>
+
+              <?php if(isset($errors['condition_container'])){ ?>
+                <p class="alert alert-danger">入力してください</p><br>
+              <?php } ?>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
+            <div class="form-group">
+              <!-- 条件：<br><input type="text" name="condition" value="<?php echo $condition ?>"><br> -->
+              <div class="input-group">
+                <span class="input-group-addon">1人あたりの条件</span>
+                <input type="text" class="form-control" name="condition_per_person" value="<?php echo $condition_per_person; ?>">
+              </div>
+
+              <?php if(isset($errors['condition_per_person'])){ ?>
+                <p class="alert alert-danger">入力してください</p><br>
+              <?php } ?>
+            </div>
+          </div>
+        </div>
+
+        <!--  結果表示 -->
         <div class="row block-center">
           <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
             <div class="form-group">
