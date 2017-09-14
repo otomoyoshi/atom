@@ -103,17 +103,19 @@ if (!empty($_POST)) {
         <div class="row">
           <div class="col-xs-12 col-sm-6 col-md-6">
             <div class="form-group">
-              <label style="font-size: 18px">アカウント名入力</label>
-                <input type="text" name="account_name" id="first_name" class="form-control input-lg" placeholder="アカウント名" tabindex="1">
+              <label style="font-size: 18px">アカウント名変更</label>
+                <input type="text" name="account_name" id="first_name" class="form-control input-lg" placeholder="新しいアカウント名" tabindex="1">
             </div>
           </div>
         </div>
 
+        <hr>
+
         <div class="row">
           <div class="col-xs-12 col-sm-6 col-md-6">
             <div class="form-group">
-              <label style="font-size: 18px">メールアドレス入力</label>
-              <input type="email" name="email" id="last_name" class="form-control input-lg" placeholder="メールアドレス" tabindex="2">
+              <label style="font-size: 18px">メールアドレス変更</label>
+              <input type="email" name="email" id="last_name" class="form-control input-lg" placeholder="新しいメールアドレス" tabindex="2">
               <?php if(isset($errors['email']) && $errors['email'] == 'duplicate'): ?>
                 <div class="alert alert-danger">既に使用されているメールアドレスです</div>
               <?php endif; ?>
@@ -121,39 +123,13 @@ if (!empty($_POST)) {
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-6">
-            <div class="form-group">
-              <label style="font-size: 18px">パスワード入力</label>
-              <input type="password" name="new_password" id="password" class="form-control input-lg" placeholder="新しいパスワード" tabindex="3" style="margin: 5px 0px;">
-              <?php if(isset($errors['new_password']) && $errors['new_password'] == 'length'): ?>
-                <div class="alert alert-danger">８文字以上入力してください</div>
-              <?php endif; ?>
-            </div>
-          </div>
+        <hr>
 
-          <div class="col-xs-12 col-sm-6 col-md-6">
-            <div class="form-group">
-              <label style="font-size: 18px">確認用パスワード入力</label>
-              <input type="password" name="comfirm_password" id="password_confirmation" class="form-control input-lg" placeholder="もう一度入力してください" tabindex="4" style="margin: 5px 0px;">
-              <?php if(isset($errors['comfirm_password']) && $errors['comfirm_password'] == 'length'): ?>
-                <div class="alert alert-danger">８文字以上入力してください</div>
-              <?php endif; ?>
+        <div class="row" style="height: 88px">
 
-              <?php if(isset($errors['comfirm']) && $errors['comfirm'] == 'mismatch'): ?>
-                <div class="alert alert-danger">確認用パスワードが間違っています</div>
-              <?php endif; ?>             
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-              <label style="font-size: 14px">※　パスワードを変更したい方は、現在のパスワードを入力してください</label>
-            </div>
-              <div class="col-xs-12 col-sm-16 col-md-6">
-                <input type="password" name="now_password" id="last_name" class="form-control input-lg" placeholder="現在のパスワード" tabindex="5"><br>
+              <div class="col-xs-12 col-md-4" style="margin-right: 0px;">
+                <label style="font-size: 18px">パスワード変更</label>
+                <input type="password" name="now_password" id="" style="margin: 5px 0px;" class="form-control input-lg" placeholder="現在のパスワード" tabindex="3"><br>
                 <?php if(isset($errors['now_password']) && $errors['now_password'] == 'blank'): ?>
                   <div class="alert alert-danger">現在のパスワードを入力してください</div>
                 <?php endif; ?>
@@ -162,8 +138,30 @@ if (!empty($_POST)) {
                   <div class="alert alert-danger">パスワードが間違っています<br>もう一度入力してください</div>
                 <?php endif; ?>
             </div>
-          </div>
+
+            <div class="col-xs-12 col-lg-4" style="margin-right: 0px;">
+              <label style="font-size: 18px">　　　　</label>
+              <input type="password" name="new_password" id="password" class="form-control input-lg" placeholder="新しいパスワード" tabindex="4" style="margin: 5px 0px;">
+              <?php if(isset($errors['new_password']) && $errors['new_password'] == 'length'): ?>
+                <div class="alert alert-danger">８文字以上入力してください</div>
+              <?php endif; ?>
+            </div>
+
+            <div class="col-xs-12 col-lg-4" style="margin-right: 0px">
+              <label style="font-size: 18px">　　　　</label>
+              <input type="password" name="comfirm_password" id="password_confirmation" class="form-control input-lg" placeholder="確認用パスワード" tabindex="5" style="margin: 5px 0px;">
+              <?php if(isset($errors['comfirm_password']) && $errors['comfirm_password'] == 'length'): ?>
+                <div class="alert alert-danger">８文字以上入力してください</div>
+              <?php endif; ?>
+
+              <?php if(isset($errors['comfirm']) && $errors['comfirm'] == 'mismatch'): ?>
+                <div class="alert alert-danger">確認用パスワードが間違っています</div>
+              <?php endif; ?>             
+            </div>
+
         </div>
+
+        <hr>
 
         <div>
           <label style="font-size: 20px">性別 </label>
@@ -176,15 +174,25 @@ if (!empty($_POST)) {
           </label>
         </div>
 
+        <hr>
+
         <div style="margin-bottom: 10px">
           <label style="font-size: 20px">年齢</label>
           <select name="age">
-            <option value="<?php echo $_SESSION['login_user']['age']; ?>">選択してください</option>
-          <?php for($i = 10;$i <= 80;$i++): ?>
-            <option value="<?php echo $i; ?>"><?php echo $i; ?>歳</option>
+            <option value="<?php echo $_SESSION['login_user']['age']; ?>" >選択してください</option>
+          <?php for($i = 10;$i <= 80;$i=$i+10): ?>
+            <option value="<?php echo $i; ?>">
+              <?php if($i == 80): ?>
+                <?php echo $i; ?>代以上
+              <?php else: ?>
+                <?php echo $i; ?>代
+              <?php endif; ?>
+            </option>
           <?php endfor; ?>
           </select>
         </div>
+
+        <hr>
 
         <div class="control-group">
           <div class="controls" style="padding-bottom: 10px">
@@ -193,7 +201,7 @@ if (!empty($_POST)) {
             <?php else: ?>
                     <img class="media-object dp img-circle" src="../../../profile_image_path/masaki.png" style="width: 80px;height:80px;">
             <?php endif; ?>
-            <input type="file" name="profile_image">
+              <input type="file" name="profile_image">
             <?php if(isset($errors['profile_image']) && $errors['profile_image'] == 'type'): ?>
               <div class="alert alert-danger">jpg png gif のいずれかの画像を挿入してください</div>
             <?php endif; ?>
