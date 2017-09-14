@@ -8,7 +8,6 @@ $judge_azukeire = '';
 $judge_carry_in = '';
 
 
-
 //検索ボタンが押されたとき
 if (!empty($_POST)) {
     if (isset($_POST['list_search']) && $_POST['list_search'] != '') {
@@ -26,7 +25,13 @@ if (!empty($_POST)) {
     } elseif (isset($_POST['list_search']) && $_POST['list_search'] == '') {
     $errors['word'] = 'blank';
     }
-// <<<<<<< HEAD
+    if (!empty($_POST['list_move'])) {
+      $sql = 'SELECT * FROM `atom_lists` WHERE ``= ?';
+      $data = array();
+      $stmt = $dbh->prepare();
+      $stmt ->execute();
+      //$search = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
 
 
