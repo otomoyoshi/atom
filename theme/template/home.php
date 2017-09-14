@@ -411,6 +411,7 @@ foreach ($results_l3 as $result_l3) {
               ?>
                     <div class="row dev_border">
                   <?php } ?>
+                    <!-- <div class="col-lg-2 text-center tabs" id="tab3_<?php echo $i ?>"> -->
                     <div class="col-lg-2 text-center tabs" id="tab3_<?php echo $i ?>">
                       <?php echo $results_l3[$j]['word']; ?>
                     </div>
