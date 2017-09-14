@@ -4,9 +4,9 @@ require('PHPMailer-master/class.phpmailer.php');
 
 ini_set('SMTP', 'smtp.gmail.com');
 ini_set('smtp_port', '465');
-ini_set('username', 'hana.mare55@gmail.com@gmail.com');
+ini_set('username', 'hana.mare55@gmail.com');
 ini_set('password', '0820mw55');
-ini_set('sendmail_from', 'hana.mare55@gmail.com@gmail.com');
+ini_set('sendmail_from', 'hana.mare55@gmail.com');
 
 //言語設定、内部エンコーディングを指定する
 mb_language("japanese");

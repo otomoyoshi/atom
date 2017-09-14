@@ -198,20 +198,20 @@
 
     //アイテムにデータがあるとき
     if (isset($items)) {
-      if ($items[$i]['categories_id'] == '1') {
+      if ($items[$i]['categories_id'] == '0') {
           //両方持ち込みの場合 
           $item_boths[] = $items[$i];
       }
       // 持ち込みの場合
-      elseif ($items[$i]['categories_id'] == '2') {
+      elseif ($items[$i]['categories_id'] == '1') {
           $item_carry_ins[] = $items[$i];
       }
       //預け入れの場合
-      elseif ($items[$i]['categories_id'] == '3') {
+      elseif ($items[$i]['categories_id'] == '2') {
           $item_azukeires[] = $items[$i];
       }
       //持ち込めない場合
-      elseif ($items[$i]['categories_id'] == '4'){
+      elseif ($items[$i]['categories_id'] == '3'){
           $banned_baggage = 'その荷物は持ち込めません！！';
       }
 

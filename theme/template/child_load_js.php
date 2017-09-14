@@ -26,4 +26,4 @@
 
 <!-- Tabslet -->
 <script type="text/javascript" src="../../assets/js/Tabslet-master/jquery.tabslet.min.js"></script>
-
+<script type="text/javascript" src="../../assets/js/tooltipster-master/dist/js/tooltipster.bundle.min.js"></script>

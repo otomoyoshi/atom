@@ -28,7 +28,6 @@
 <link rel="stylesheet" type="text/css" href="../assets/js/slick-1.6.0/slick/slick-theme.css">
 <link rel="stylesheet" type="text/css" href="../assets/js/slick-1.6.0/slick/slick.css">
 
-<link rel="stylesheet" type="text/css" href="../assets/css/lists.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/intro.css">
 
 <link rel="stylesheet" type="text/css" href="../assets/ionicons-2.0.1/css/ionicons.min.css">
@@ -39,3 +38,6 @@
 <!-- ヘッダ用 -->
 <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
 
+<!-- Tooltip -->
+<link rel="stylesheet" type="text/css" href="../assets/js/tooltipster-master/dist/css/tooltipster.main.min.css">
+<link rel="stylesheet" type="text/css" href="../assets/js/tooltipster-master/dist/css/tooltipster.bundle.min.css">

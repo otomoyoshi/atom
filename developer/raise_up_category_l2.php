@@ -206,7 +206,7 @@
       <?php if($encourage == 'encourage') { ?>
         <div class="row">
           <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
-          <a href="raise_up_search.php" class="btn btn-success">次の入力へ</a>
+          <a href="raise_up_category_l2.php" class="btn btn-success">次の入力へ</a>
           <h2><?php echo $encourages[rand(0, count($encourages)-1)]; ?></h2>
             <!-- <?php echo rand(0, $image_len); ?> -->
             <img src="<?php echo $image_paths[rand(0, $image_len)]; ?>" class="img-circle" style="width:auto; height: 320px;">
