@@ -1,5 +1,5 @@
 $(function(){
 	$('#search-btn1').click(function(){
-	  $('.backgrounding').show();
+	  $('.backgrounding').show(90000);
 	});
   });

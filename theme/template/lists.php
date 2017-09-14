@@ -17,7 +17,7 @@
 
     <title>旅にもつ</title>
     <?php require('load_css.php'); ?>
-    <link rel="stylesheet" type="text/css" href="../../assets/css/lists.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/lists.css">
 
   </head>
   <body>
