@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require('../../developer/dbconnect.php');
 $word = '';
 $errors = array();
@@ -7,7 +8,7 @@ $condition_azukeire = '';
 $judge_azukeire = '';
 $judge_carry_in = '';
 
-
+ 
 //検索ボタンが押されたとき
 if (!empty($_POST)) {
     if (isset($_POST['list_search']) && $_POST['list_search'] != '') {
@@ -257,13 +258,13 @@ foreach ($results_l3 as $result_l3) {
     // $ini = parse_ini_file("config.ini");
     // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    // if ($_SESSION['login_user']) { //ログインしてるとき
-    //   // echo "login success";
-    //   require('login_header.php');
-    // } else {// ログインしてないとき
-    //   // echo "login fail";
-    //   require('header.php');
-    // }
+    if ($_SESSION['login_user']) { //ログインしてるとき
+      // echo "login success";
+      require('login_header.php');
+    } else {// ログインしてないとき
+      // echo "login fail";
+      require('header.php');
+    }
   ?>
   <div id="headerwrap">
     <div class="container">
@@ -490,8 +491,7 @@ foreach ($results_l3 as $result_l3) {
 
 
   </script>
-  <script type="text/javascript" src="../assets/js/home.js">
-    
+  <script src="../assets/js/home.js">
   </script>
   </body>
 </html>
