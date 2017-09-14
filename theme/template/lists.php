@@ -1,5 +1,18 @@
 <?php
+
   require('lists_sql.php');
+
+  // ユーザーが新規でリストを作成する際
+  if ($list_data['name'] == '') {
+    
+    $sql = 'SELECT COUNT(*) FROM `atom_lists` WHERE `members_id`=?';
+    $data = array($_SESSION['login_user']['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+    // ログインしているユーザーが作成しているリストの数を取得
+    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+    $list_amount = $rec['COUNT(*)'];
+  }
 
 ?>
 
@@ -17,7 +30,7 @@
 
     <title>旅にもつ</title>
     <?php require('load_css.php'); ?>
-    <link rel="stylesheet" type="text/css" href="../../assets/css/lists.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/lists.css">
 
   </head>
   <body>
@@ -29,7 +42,7 @@
     // $is_login = 0; //ログインしてるときを１とする（仮）
     if (isset($_SESSION['login_user'])){ //ログインしてるとき
       // echo "login success";
-      require('login_header.php');
+      // require('login_header.php');
     } else {// ログインしてないとき
       // echo "login fail";
       require('header.php');
@@ -48,8 +61,18 @@
         <div class="row height">
           <div class="col-lg-offset-2 col-lg-5 col-md-12 col-sm-12 col-xs-12">
             <form action="" method="POST">
+
+            <?php if($list_data['name'] != ''): ?>
+              <!-- リスト名が登録されている場合、そのリスト名を表示する -->
               <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
               data-intro="リスト名を入力してね" data-step="1" value="<?php echo $list_data['name']; ?>">
+
+            <?php else: ?>
+              <!-- リスト名が登録されていない場合、自動的にリスト名がvalueに入る -->
+              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
+              data-intro="リスト名を入力してね" data-step="1" value="リスト  <?php echo $list_amount; ?>">
+
+            <?php endif; ?>
 
                 <input type="text" name="created" placeholder="作成日時" class="form-control created_location" value="<?php echo $list_data['created']; ?>">
 

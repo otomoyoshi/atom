@@ -151,7 +151,7 @@ while(1){
           <?php foreach($lists as $list): ?>
             <div class="col-md-4 col-sm-4">
               <div class="wrimagecard wrimagecard-topimage lists_margin">
-                <!-- <a href="../lists.php?id=<?php echo $list['id']; ?>"> -->
+                <a href="../lists.php?id=<?php echo $list['id']; ?>">
                   <div class="wrimagecard-topimage_header" style="background-color: rgba(60, 216, 255, 0.2)">
                     <div class="row" style="margin-right: 0px">
 
@@ -159,8 +159,7 @@ while(1){
                       <?php if(isset($list['name']) && $list['name'] != ''): ?>
                         <h4 style="text-align: center; padding: 10px 0px 0px 20px; font-size: 20px"><?php echo $list['name']; ?></h4>
                       <?php else: ?>
-                        <!-- <h4 style="text-align: center; padding: 10px 0px 0px 20px">LIST NAME</h4> -->
-                        <input type="search" class="input_list_name" name="list_name" placeholder="LIST NAME" style="background-color: rgba(0,0,0,0); border: 1px solid rgba(0,0,0,0); margin-top: 15px; margin-left: 3px;">
+                        <h4 style="text-align: center; padding: 10px 0px 0px 20px">LIST NAME</h4>
                       <?php endif; ?>
                         <h5 style="text-align: center; padding: 0px 0px 0px 20px">
                           <?php echo $list['modified']; ?>
@@ -230,8 +229,11 @@ while(1){
   <?php require('../footer.php'); ?>
   <?php require('../child_load_js.php'); ?>
 
+  <script src="../../assets/js/myPage.js"></script>
+
+
   <?php if(!isset($lists)){ ?>
-  <script type="text/javascript">
+  <script type="text/javascript"></script>
   introJs().start();
   </script>
   <?php } ?>

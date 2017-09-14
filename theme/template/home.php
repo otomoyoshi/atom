@@ -73,9 +73,14 @@ while (1) {
   $i++;
   }
 
-foreach ($results_l2 as $result_l2) {
+// <<<<<<< HEAD
+// foreach ($results_l2 as $result_l2) {
   // echo $result_l2['category_l2'] .'<br>';
-}
+// =======
+// foreach ($results as $result) {
+  // echo $result['category_l2'] .'<br>';
+// >>>>>>> 38edd2d7443c46a7c8ab51ba676ee9f54ad28f1c
+// }
   $cnt_l2 = count($results_l2)-1;
   $cnt_l2_div = (int)($cnt_l2 / ($DEV+1));
   $cnt_l2_sur = $cnt_l2 % ($DEV+1);
@@ -99,6 +104,7 @@ while (1) {
   $i++;
   }
 
+
   // var_dump($results);
 
 foreach ($results_l3 as $result_l3) {
@@ -114,7 +120,11 @@ foreach ($results_l3 as $result_l3) {
   // echo "cnt_l3: " . $cnt_l3;
 
 // $result = get_data($stmt);
+// <<<<<<< HEAD
 // var_dump($results_l3);
+// =======
+//var_dump($results);
+// >>>>>>> 38edd2d7443c46a7c8ab51ba676ee9f54ad28f1c
 // echo "---------";
 // echo $result[0]['category'] .'<br>';
 // =======
@@ -189,10 +199,6 @@ foreach ($results_l3 as $result_l3) {
            } else{
               $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
            }
-
-          $judge_carry_in = '<i class="fa fa-close"></i>';
-          $judge_azukeire = '<i class="fa fa-close"></i>';
-
         } 
 
       } //アイテムにデータがない時
@@ -307,19 +313,20 @@ foreach ($results_l3 as $result_l3) {
                       </p>
                       <p class="conditions">
                         機内預け入れ条件：<br>
-                        <?php echo $condition_azukeire ?>
+                        <?php echo $condition_azukeire; ?>
                       </p>
                     </li>
-                    <form method="POST" action="">
-                      <input type="submit" name="list_move" value="リストへ追加" class = "btn btn_atom btn_list_move">
-                    </form>
                   </label>
                 </ul>
+                <form method="POST" action="">
+                  <input type="submit" name="list_move" value="リストへ追加" class = "btn btn_atom btn_list_move">
+                </form>
 
               </div>
             </div>
           <?php  } ?>
         </div>
+        
         <div class="col-xs-12 col-lg-6">
           <!-- <div class="output">確認用</div> -->
           <div class='after_event'>
@@ -398,23 +405,21 @@ foreach ($results_l3 as $result_l3) {
               <?php
                 $i=0;
                 for($j=0; $j<=$cnt_l3; $j++) {
-                  $div = (int)(($j+1) / ($DEV+1)); 
+                  $div = (int)(($j+1) / ($DEV+1));
                   if($j % $DEV == 0){
                     $i = $j + $DEV -1;
               ?>
                     <div class="row dev_border">
-
+                  <?php } ?>
                     <div class="col-lg-2 text-center tabs" id="tab3_<?php echo $i ?>">
                       <?php echo $results_l3[$j]['word']; ?>
                     </div>
 
-                  <?php if( ($j == $i && $div < $cnt_l3_div) || ($cnt_l3_sur == $j && $div == $cnt_l3_div)) ?>
+                  <?php if( ($j == $i && $div < $cnt_l3_div) || ($cnt_l3_sur == $j && $div == $cnt_l3_div)){ ?>
                     </div>
                   <?php } ?>
               <?php } ?>
             </div><!-- tab-3 -->
-
-
           </div><!-- after_event -->
 
           <!-- </div> -->
@@ -479,6 +484,8 @@ foreach ($results_l3 as $result_l3) {
 
 
   </script>
-    <script type="text/javascript" src="../assets/js/home.js"></script>
-</body>
+  <script type="text/javascript" src="../assets/js/home.js">
+    
+  </script>
+  </body>
 </html>
