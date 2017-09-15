@@ -106,7 +106,8 @@ li {
     width: ;
   }
   #move_header{
-    padding-top: 12px;
+    padding-top: 6px;
+    padding-bottom: 0px;
   }
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
