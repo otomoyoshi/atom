@@ -3,7 +3,7 @@
   require('lists_sql.php');
 
   // ユーザーが新規でリストを作成する際
-  if ($list_data['name'] == '') {
+  if ($is_image['name'] == '') {
     
     $sql = 'SELECT COUNT(*) FROM `atom_lists` WHERE `members_id`=?';
     $data = array($_SESSION['login_user']['id']);
@@ -62,10 +62,10 @@
           <div class="col-lg-offset-2 col-lg-5 col-md-12 col-sm-12 col-xs-12">
             <form action="" method="POST">
 
-            <?php if($list_data['name'] != ''): ?>
+            <?php if($is_image['name'] != ''): ?>
               <!-- リスト名が登録されている場合、そのリスト名を表示する -->
               <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
-              data-intro="リスト名を入力してね" data-step="1" value="<?php echo $list_data['name']; ?>">
+              data-intro="リスト名を入力してね" data-step="1" value="<?php echo $is_image['name']; ?>">
 
             <?php else: ?>
               <!-- リスト名が登録されていない場合、自動的にリスト名がvalueに入る -->
@@ -240,6 +240,11 @@
     </script>
   <?php } ?>
   <script type="text/javascript" src="../assets/js/lists.js"></script>
+  <script>
+   $(window).on('beforeunload', function(e) {
+    return '保存されていない内容は破棄されます。 本当によろしいですか？ ';
+    });
+  </script>
 
 </body>
 </html>
