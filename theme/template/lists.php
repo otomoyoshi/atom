@@ -193,8 +193,9 @@
                     <li class="list-group-item list_float">
                       <input type="checkbox" name="che" class="left checkbox">
                       <span class="checkbox-icon"></span>
-                      <?php echo $item_azukeire['content']; ?>
-                      <?php  ?>
+                      <input type="text" class="list_input" name="" value="<?php echo $item_azukeire['content']; ?>">
+                      <!-- <span class="list_content"><?php echo $item_azukeire['content']; ?></span> -->
+                      
                         <!-- 削除処理を書いていく -->
                         <!-- <a href="delete_category.php?id=<?php echo $item_azukeire['id']; ?>"> -->
                         <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
@@ -240,6 +241,7 @@
     </script>
   <?php } ?>
   <script type="text/javascript" src="../assets/js/lists.js"></script>
+  
   <script>
    $(window).on('beforeunload', function(e) {
     return '保存されていない内容は破棄されます。 本当によろしいですか？ ';

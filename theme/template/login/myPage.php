@@ -135,7 +135,7 @@ while(1){
         </div>
 
         <!-- リスト全体 -->
-          <div class="row">
+          <div class="row"><dd>ここここめ</dd>
               
                 <!-- 追加ボタン -->
               <div class="col-md-4 col-sm-4" data-intro="新しい持ち物リストを作成できるよ" data-step="1">
@@ -245,7 +245,7 @@ while(1){
   <?php require('../footer.php'); ?>
   <?php require('../child_load_js.php'); ?>
 
-  <script src="../../assets/js/myPage.js"></script>
+  <script src="../../assets/js/lists.js"></script>
 
 
   <?php if(!isset($lists)){ ?>

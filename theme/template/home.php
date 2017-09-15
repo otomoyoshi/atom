@@ -7,7 +7,7 @@ $condition_carry_in = '';
 $condition_azukeire = '';
 $judge_azukeire = '';
 $judge_carry_in = '';
-
+$no_result = '';
  
 //検索ボタンが押されたとき
 if (!empty($_POST)) {
@@ -18,11 +18,41 @@ if (!empty($_POST)) {
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
 
-      $sql = 'SELECT * FROM `atom_searchs` WHERE `word`= ?';
-      $data = array($_POST['list_search']);
+      $sql = 'SELECT * FROM `atom_searchs` WHERE `word` LIKE ?';
+      $data = array('%' . $_POST['list_search'] . '%');
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
-      $search = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
+
+      
+      while (1) {
+        $rec = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
+        if ($rec == false) {
+          break;
+        }
+        $tmp_searchs[] = $rec;
+      }
+
+      // var_dump($search);
+      // var_dump($tmp_searchs);
+      // echo count($tmp_searchs);
+
+      if (isset($tmp_searchs)) { // 検索結果が存在する時
+
+        if (count($tmp_searchs) == 1) { // 曖昧検索の結果がひとつのみの場合
+          foreach($tmp_searchs as $ts){
+            $search[] = $ts;
+            $search = $search[0];
+          }
+        }elseif(count($tmp_searchs) > 1){ // 曖昧検索の結果が複数存在する場合
+          foreach($tmp_searchs as $ts){
+            $vague_searchs[] = $ts;
+          }
+        }
+      }else{ // 検索結果が存在しない時
+        $no_result = 'no_result';
+      }
+
+      
     } elseif (isset($_POST['list_search']) && $_POST['list_search'] == '') {
     $errors['word'] = 'blank';
     }
@@ -134,6 +164,8 @@ foreach ($results_l3 as $result_l3) {
 // echo "---------";
 // echo $result[0]['category'] .'<br>';
 // =======
+
+
 
       if (isset($search)) {
         if ($search['baggage_classify'] == '0') {
@@ -292,6 +324,18 @@ foreach ($results_l3 as $result_l3) {
             <input id="search-btn1" type="submit" class="btn btn_atom btn-lg" value="検索">
           </form>
         </div><!-- /col-lg-6 -->
+
+        <!-- 仮の曖昧検索結果表示場 -->
+        <?php if(isset($vague_searchs)): ?>
+          <?php foreach($vague_searchs as $tss): ?>
+            <h5><?php echo $tss['id'] . '：' . $tss['word']. "\n"; ?></h5>
+          <?php endforeach; ?>
+        <?php endif; ?>
+
+        <?php if($no_result == 'no_result'): ?>
+          <h5>検索結果が見つかりませんでした</h5>
+        <?php endif; ?>
+
         <!-- 検索結果を表示していく -->
 
         <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6">
