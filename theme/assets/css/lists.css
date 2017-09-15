@@ -149,6 +149,8 @@ li:hover {
 #search-btn{
 	display: inline;
 	width: 70px;
+	margin-bottom: 20px;
+
 }
 
 .border{
