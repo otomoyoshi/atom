@@ -133,7 +133,7 @@ while(1){
         </div>
 
         <!-- リスト全体 -->
-          <div class="row"><dd>ここここめ</dd>
+          <div class="row">
               
                 <!-- 追加ボタン -->
               <div class="col-md-4 col-sm-4" data-intro="新しい持ち物リストを作成できるよ" data-step="1">

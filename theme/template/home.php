@@ -8,6 +8,7 @@ $condition_azukeire = '';
 $judge_azukeire = '';
 $judge_carry_in = '';
 $no_result = '';
+
  
 //検索ボタンが押されたとき
 if (!empty($_POST)) {
@@ -52,17 +53,105 @@ if (!empty($_POST)) {
         $no_result = 'no_result';
       }
 
-      
+    // フォームの空チェック 
     } elseif (isset($_POST['list_search']) && $_POST['list_search'] == '') {
-    $errors['word'] = 'blank';
+      $errors['word'] = 'blank';
     }
-    if (!empty($_POST['list_move'])) {
-      $sql = 'SELECT * FROM `atom_lists` WHERE ``= ?';
-      $data = array();
-      $stmt = $dbh->prepare();
-      $stmt ->execute();
-      //$search = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+    // リストへ追加ボタンが押された時
+    if (!empty($_POST['list_move'])) { 
+      if (!isset($_SESSION['login_user'])) { // ユーザーがログインしていない時
+        // 新規登録画面に飛ばす けどまだポップアップなどつけてない
+        header('Location: un_login/sign_up.php');
+        exit();
+      }else{ // ユーザーがログインしている時
+        $sql = 'SELECT COUNT(*) FROM `atom_lists` WHERE `members_id`=?';
+        $data = array($_SESSION['login_user']['id']);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute($data);
+        // ログインしているユーザーが作成しているリストの数を取得
+        $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+        $list_amount = $rec['COUNT(*)'];
+
+
+        if($list_amount == 0) { // ユーザーが作成しているリストの数がゼロの時
+          // 新しいリストを一つ作成
+          $sql = 'INSERT `atom_lists` SET `members_id` = ?,
+                                          `name`=? ,
+                                          `created` = NOW()';
+          $data = array($_SESSION['login_user']['id'],'リスト 1');
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute($data);
+
+          $sql = 'SELECT `id` FROM `atom_lists` WHERE `members_id`=?';
+          $data = array($_SESSION['login_user']['id']);
+          $stmt = $dbh->prepare($sql);
+          $stmt->execute($data);
+
+          $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+          $created_list_id = $rec['id']; // ユーザーが作成しているリストのIDを取得
+
+          // ログインユーザーの唯一作っているリストに検索結果のワードを登録
+          $sql= 'INSERT INTO `atom_items` SET `lists_id`=?,
+                                              `content`=?,
+                                              `categories_id` =?';
+          $data = array($created_list_id,$_POST['word'],$_POST['baggage_classify']);
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute($data);
+
+          header('Location: home.php');
+          exit();
+
+
+        }elseif ($list_amount == 1) { // ユーザーが作成しているリストの数が一つの時
+          $sql = 'SELECT `id` FROM `atom_lists` WHERE `members_id`=?';
+          $data = array($_SESSION['login_user']['id']);
+          $stmt = $dbh->prepare($sql);
+          $stmt->execute($data);
+
+          $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+          $created_list_id = $rec['id'];  // ユーザーが作成しているリストのIDを取得
+          // echo $created_list_id;
+
+          // ログインユーザーの唯一作っているリストに検索結果のワードを登録
+          $sql= 'INSERT INTO `atom_items` SET `lists_id`=?,
+                                              `content`=?,
+                                              `categories_id` =?';
+          $data = array($created_list_id,$_POST['word'],$_POST['baggage_classify']);
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute($data);
+
+          header('Location: home.php');
+          exit();
+
+        }else{ // ユーザーが作成しているリストの数が複数ある時
+          $sql = 'SELECT * FROM `atom_lists` WHERE `members_id`=?';
+          $data = array($_SESSION['login_user']['id']);
+          $stmt = $dbh->prepare($sql);
+          $stmt->execute($data);
+        }
+
+        while (1) {
+        $rec = $stmt->fetch(PDO::FETCH_ASSOC); //ユーザーが作成している複数のリストのじょうほうを取得
+        if ($rec == false) {
+          break;
+        }
+        $user_lists[] = $rec;
+      }
+      }
     }
+}
+
+// 曖昧検索の結果からなにかしらが選択された時
+if (isset($_GET['id']) && !isset($tmp_searchs) && empty($no_result)) {
+  $sql = 'SELECT * FROM `atom_searchs` WHERE `id`=?';
+  $data = array($_GET['id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+
+  // ↓ があると検索結果が表示される
+  $search = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
 
@@ -72,6 +161,7 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute();
 
 //全件取得
+
 
 $i = 0;
 while (1) {
@@ -91,12 +181,14 @@ foreach ($results_l1 as $result_l1) {
   // echo $result_l1['category_l1'] .'<br>';
 }
 
+
 $tmp_category_l1 = 1;
 //2階層目のデータを取得
 $sql = 'SELECT * FROM `atom_categories_l2` WHERE `category_l1_id`=? ' ;
 $data = array($tmp_category_l1);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
+
 
 //全件取得
 $results_l2 = array();
@@ -219,8 +311,8 @@ foreach ($results_l3 as $result_l3) {
            } else{
               $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
            }
+        }
 
-        } 
         //持ち込めない場合
         elseif ($search['baggage_classify'] == '3'){
           $word = $search['word'];
@@ -256,6 +348,20 @@ foreach ($results_l3 as $result_l3) {
   //                     "k"=>"l",
   //                     "m"=>"n");
   // if(isset($_GET['level']) && isset($_GET['level_id'])){
+
+
+// ユーザーが複数作成しているリストのどのリストに項目を追加するか選んだ時
+if (!empty($_POST['user_lists_id'])) {
+  $sql= 'INSERT INTO `atom_items` SET `lists_id`=?,
+                                      `content`=?,
+                                      `categories_id` =?';
+  $data = array($_POST['user_lists_id'],$_POST['word'],$_POST['baggage_classify']);
+  $stmt = $dbh->prepare($sql);
+  $stmt ->execute($data);
+
+  header('Location: home.php');
+  exit();
+}
 
 
 ?>
@@ -325,13 +431,7 @@ foreach ($results_l3 as $result_l3) {
           </form>
         </div><!-- /col-lg-6 -->
 
-        <!-- 仮の曖昧検索結果表示場 -->
-        <?php if(isset($vague_searchs)): ?>
-          <?php foreach($vague_searchs as $tss): ?>
-            <h5><?php echo $tss['id'] . '：' . $tss['word']. "\n"; ?></h5>
-          <?php endforeach; ?>
-        <?php endif; ?>
-
+        <!-- 検索結果が見つからない時 -->
         <?php if($no_result == 'no_result'): ?>
           <h5>検索結果が見つかりませんでした</h5>
         <?php endif; ?>
@@ -340,11 +440,40 @@ foreach ($results_l3 as $result_l3) {
 
         <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6">
 
-          <?php if (isset($search)) {?>
+          <!-- 曖昧検索表示 -->
+          <?php if(isset($vague_searchs)): ?>
             <div class="row">
               <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding">
                 <ul class="list-group" id="list_design">
                   <label class="width list_searchs">
+                    <h3 class="word_titles">複数件の結果が見つかりました</h3>
+                    <li class="list-group-item list_property">
+                      <h2 class="judge_show_icon">もしかして？</h2><br>
+                      <?php if(isset($vague_searchs)): ?>
+                        <?php foreach($vague_searchs as $tss): ?>
+                          <a href="home.php?id=<?php echo $tss['id'] ?>">
+                            <label style="text-decoration: underline; cursor: pointer; cursor: hand; margin-top: 5px"><?php echo $tss['word']. "\n"; ?></label><br>
+                          </a>
+                        <?php endforeach; ?>
+                      <?php endif; ?>
+                    </li>
+                  </label>
+                </ul>
+              </div>
+            </div>
+          <?php endif; ?>
+          <!-- 曖昧検索表示終わり -->
+
+          <?php if (isset($search)) {?>
+            <div class="row">
+              <form method="POST" action=""> <!-- リストへ追加を押したときに値を取得するフォーム -->
+              <!-- 検索結果をリストへ追加するときに、検索結果の分類を$_POST['baggage_classify']に入れる -->
+              <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
+              <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding">
+                <ul class="list-group" id="list_design">
+                  <label class="width list_searchs">
+                    <!-- 検索結果をリストへ追加するときに、検索結果の品目名を$_POST['word']に入れる -->
+                    <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
                     <h3 class="word_titles"><?php echo $word; ?></h3>
                     <li class="list-group-item list_property">
                       <h2 class="judge_show_icon">機内持ち込み：</h2>
@@ -368,14 +497,26 @@ foreach ($results_l3 as $result_l3) {
                     </li>
                   </label>
                 </ul>
-                <form method="POST" action="">
-                  <input type="submit" name="list_move" value="リストへ追加" class = "btn btn_atom btn_list_move">
+                <input type="submit" name="list_move" value="リストへ追加" class = "btn btn_atom btn_list_move">
                 </form>
-
               </div>
-            </div>
-          <?php  } ?>
+
+              <!-- ユーザーが登録している複数のリストの表示 -->
+              <?php if(isset($user_lists)): ?>
+                <?php foreach($user_lists as $ul): ?>
+                  <form method="POST" action="">
+                    <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
+                    <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
+                    <input type="hidden" name="user_lists_id" value="<?php echo $ul['id']; ?>">
+                    <input type="submit" name="" value="<?php echo $ul['name']; ?>">
+                  </form>
+                <?php endforeach; ?>
+              <?php endif; ?>
+            </div> <!-- 右半分を表示するdivタグの終わり -->
+          <?php } ?>
         </div>
+
+
         
         <div class="col-xs-12 col-lg-6">
           <!-- <div class="output">確認用</div> -->
