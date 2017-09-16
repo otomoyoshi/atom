@@ -4,7 +4,7 @@
 
   // ユーザーが新規でリストを作成する際
   if ($is_image['name'] == '') {
-    
+    　
     $sql = 'SELECT COUNT(*) FROM `atom_lists` WHERE `members_id`=?';
     $data = array($_SESSION['login_user']['id']);
     $stmt = $dbh->prepare($sql);
