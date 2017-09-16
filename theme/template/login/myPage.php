@@ -118,9 +118,7 @@ while(1){
                   </a>
                   <div class="media-body">
                     <h3 class="mypage_username">
-                      <?php if(isset($_SESSION['login_user']['account_name'])) { ?>
                         <?php echo $_SESSION['login_user']['account_name']; ?>くん
-                      <?php } ?>
                     </h3>
                   </div>
                 </div>
@@ -235,7 +233,7 @@ while(1){
           </div>
 
           <div style="padding-bottom: 6px">
-            <h5 style="text-align: right;">使い方がわからくなった方は<input type="button" name="how_to_use" class="fa fa-info" value="こちら">へ</h5>
+            <h5 style="text-align: right;">使い方は<input type="button" name="how_to_use" class="fa fa-info" value="こちら"></h5>
           </div>
 
           </div>

@@ -38,7 +38,7 @@ require('../../../developer/dbconnect.php');
           <?php if(isset($_SESSION['login_user']['profile_image_path'])): ?>
             <img class="media-object dp img-circle" src="../../../profile_image_path/<?php echo $_SESSION['login_user']['profile_image_path']; ?>" style="width: 40px; height: 40px;"><?php echo $result['account_name'];?>さん
           <?php else: ?>
-            <img class="media-object dp img-circle" src="../../../profile_image_path/masaki.png" style="width: 40px; height: 40px;">
+            <img class="media-object dp img-circle" src="../../../profile_image_path/masaki.png" style="width: 40px; height: 40px;"><?php echo $result['account_name'];?>さん
           <?php endif; ?>
       </a></li>
       </ul>

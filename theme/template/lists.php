@@ -193,8 +193,8 @@
                     <li class="list-group-item list_float">
                       <input type="checkbox" name="che" class="left checkbox">
                       <span class="checkbox-icon"></span>
-                      <input type="text" class="list_input" name="" value="<?php echo $item_azukeire['content']; ?>">
-                      <!-- <span class="list_content"><?php echo $item_azukeire['content']; ?></span> -->
+                      <!-- <input type="text" class="list_input" name="" value="<?php echo $item_azukeire['content']; ?>"> -->
+                      <span class="list_content"><?php echo $item_azukeire['content']; ?></span>
                       
                         <!-- 削除処理を書いていく -->
                         <!-- <a href="delete_category.php?id=<?php echo $item_azukeire['id']; ?>"> -->
