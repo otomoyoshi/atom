@@ -79,42 +79,35 @@
             </div>
               <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
 
-            <?php if (isset($errors['extension'])) { ?>
-              <div class="alert alert-danger">
-                拡張子は、jpg,png,gifの画像を選択ください
-              </div>
-            <?php } ?>
-
-            <label>
-            <!-- 画像がデータベースに登録されているとき -->
-            <?php if ($is_image['list_image_path'] != NULL) { ?>
-              <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
-              <p class="set_profile">
-                <?php echo $list_data['account_name']; ?>
-              </p>
-            <!-- 画像がデータベースに登録されてないとき -->
-            <?php } else {?>
-              <div>デフォルト画像を表示</div>
-                <p class="set_profile">
-                <?php echo $list_data['account_name']; ?>
-                </p>
-            <?php } ?>
-            </label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 col-md-12 col-xs-12">
-            <hr class="under_line1">
+                <?php if (isset($errors['extension'])) { ?>
+                  <div class="alert alert-danger">
+                    拡張子は、jpg,png,gifの画像を選択ください
+                  </div>
+                <?php } ?>
+                <label>
+                <!-- 画像がデータベースに登録されているとき -->
+                <?php if ($is_image['list_image_path'] != NULL) { ?>
+                  <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
+                  <p class="set_profile">
+                    <?php echo $list_data['account_name']; ?>
+                  </p>
+                <!-- 画像がデータベースに登録されてないとき -->
+                <?php } else {?>
+                  <div>デフォルト画像を表示</div>
+                    <p class="set_profile">
+                    <?php echo $list_data['account_name']; ?>
+                    </p>
+                <?php } ?>
+                </label>
           </div>
         </div>
         <!-- リストの大枠を作って行く -->
-        <div class="row">
+        <div class="row height_fix">
           <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center">
+            <hr class="under_line1">
             <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
-
             <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索">
           </div>
-<!-- <<<<<<< HEAD -->
         </div>
 
         <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">

@@ -7,6 +7,10 @@
 	/*height: auto;*/
 }
 
+#headerwrap{
+	padding-top: 20px;
+}
+
 .circle_border {
   border: solid 5px black;
 }
@@ -16,7 +20,6 @@
 	text-align: center;
 	width: 100%;
 	margin-top: 30px;
-	height: 70px;
 }
 
 .created_location{
@@ -25,8 +28,12 @@
   margin-top: 40px;
 }
 
+.kill_padding{
+	height: 20px;
+}
+
 .height{
-	height:200px;
+	height:170px;
 }
 .list_name {
 	text-align: center;
@@ -162,7 +169,7 @@ li:hover {
 }
 
 .under_line1 {
-	margin:50px; 
+	margin:20px; 
 }
 
 .keep_btn{
