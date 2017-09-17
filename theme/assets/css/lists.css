@@ -9,6 +9,7 @@
 
 .undefined_word{
 	color: black;
+	margin-top: 20px;
 }
 
 #headerwrap{
@@ -37,7 +38,7 @@
 }
 
 .height{
-	height:170px;
+	height:150px;
 }
 .list_name {
 	text-align: center;
@@ -96,7 +97,7 @@ input #h3 {
 .center_shift{
 	text-align: center;
 	width: 200px;
-	height: 195px;
+	height: 120px;
 	padding-bottom: 20px;
 	margin-top: 20px;
 	padding-left: 100px;
@@ -109,17 +110,10 @@ input #h3 {
 
 .vargues_position{
 	text-align: center;
+
+
 }
 
-.moving_category{
-	margin-top: 15px;
-	margin-bottom: 15px;
-	width: 15%;
-}
-
-.moving_list_direct{
-	width: 15%;
-}
 
 .both_contents{
 	background-color: rgba(156,222,255,0.75);;
@@ -168,6 +162,8 @@ input #h3 {
 .list_float{
 	text-align: left;
 }
+
+
 
 .list_float:hover {
  	transform: scale(1.1); 

@@ -73,9 +73,6 @@
               data-intro="リスト名を入力してね" data-step="1" value="リスト  <?php echo $list_amount; ?>">
 
             <?php endif; ?>
-
-                <input type="text" name="created" placeholder="作成日時" class="form-control created_location" value="<?php echo $list_data['created']; ?>">
-
             </div>
               <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
 
@@ -103,7 +100,7 @@
         </div>
         <!-- リストの大枠を作って行く -->
         <div class="row height_fix">
-          <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center">
+          <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center fix_to_search">
             <hr class="under_line1">
             <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
             <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索" name="list_search_btn">
@@ -134,8 +131,8 @@
         elseif (!isset($tmp_searchs) && !empty($_POST['list_search_btn'])){ ?>
           <div class="row">
             <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding vargues_position">
-
-              <h2 class="undefined_word">検索結果が見つかりませんでした<span class= "undefined_category">(検索ワード：<?php echo $_POST['list_search']?>)</span></h1>
+              <h5 class="undefined_word">検索結果が見つかりませんでした</h5>
+              <h7 class= "undefined_category">(検索ワード：<?php echo $_POST['list_search']?>)</h7>
               <input type="button" class = "moving_category btn btn_atom" value="カテゴリーから探す"><br>
               <input type="button" class = "moving_list_direct btn btn_atom" value="自分で分類して追加する">
             </div>
