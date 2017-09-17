@@ -265,12 +265,11 @@
       }
       //持ち込めない場合
       elseif ($items[$i]['categories_id'] == '3'){
-          $banned_baggages = $_POST['list_search'];
+          $banned_baggages = $items[$i];
       }
 
      } //アイテムにデータがない時
     else{
-          $item_banned = $_POST[''];
         //カテゴリー表示
     }
     $i++;
