@@ -37,16 +37,16 @@
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
 
   <?php
-    // $ini = parse_ini_file("config.ini");
-    // $is_login = $ini['is_login'];
-    // $is_login = 0; //ログインしてるときを１とする（仮）
-    if (isset($_SESSION['login_user'])){ //ログインしてるとき
-      // echo "login success";
-      // require('login_header.php');
-    } else {// ログインしてないとき
-      // echo "login fail";
-      require('header.php');
-    }
+    // // $ini = parse_ini_file("config.ini");
+    // // $is_login = $ini['is_login'];
+    // // $is_login = 0; //ログインしてるときを１とする（仮）
+    // if (isset($_SESSION['login_user'])){ //ログインしてるとき
+    //   // echo "login success";
+    //   require('login_header.php');
+    // } else {// ログインしてないとき
+    //   // echo "login fail";
+    //   require('header.php');
+    // }
   ?>
 
 <!-- 画像の変更 -->
@@ -106,9 +106,41 @@
           <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center">
             <hr class="under_line1">
             <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
-            <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索">
+            <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索" name="list_search_btn">
           </div>
         </div>
+        <?php if(isset($tmp_searchs) &&!empty ($_POST['list_search_btn'])){ ?>
+          <div class="row">
+            <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding">
+              <ul class="list-group" id="list_design">
+                <label class="width list_searchs">
+                  <h3 class="word_titles">複数件の結果が見つかりました</h3>
+                  <li class="list-group-item list_property">
+                    <h2 class="judge_show_icon">もしかして？</h2><br>
+                    <?php if(isset($vague_searchs)): ?>
+                      <?php foreach($vague_searchs as $tss): ?>
+                        <input type="hidden" name="vague_search_content" value="<?php echo $tss['word'] ?>">
+                        <input type="submit" name="vague_search_result" value="<?php echo $tss['word'] ?>" 
+                        class ="vanish_border"><br>
+                      <?php endforeach; ?>
+                    <?php endif; ?>
+                  </li>
+                </label>
+              </ul>
+            </div>
+          </div>
+        <?php } 
+        //以下に検索・曖昧検索共に一致しない場合について書いていく
+        elseif (!isset($tmp_searchs) && !empty($_POST['list_search_btn'])){ ?>
+          <div class="row">
+            <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding vargues_position">
+
+              <h2 class="undefined_word">検索結果が見つかりませんでした<span class= "undefined_category">(検索ワード：<?php echo $_POST['list_search']?>)</span></h1>
+              <input type="button" class = "moving_category btn btn_atom" value="カテゴリーから探す"><br>
+              <input type="button" class = "moving_list_direct btn btn_atom" value="自分で分類して追加する">
+            </div>
+          </div>
+        <?php } ?>
 
         <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
           <div class="both_contents well col-lg-4">

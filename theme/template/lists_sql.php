@@ -50,7 +50,7 @@
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
   $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
-  var_dump($list_data) . '<br>';
+  // var_dump($list_data) . '<br>';
 
   // ファイル選択ボタンが押された時
   if(!empty($_FILES)){
@@ -136,6 +136,41 @@
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
       $search = $stmt->fetch(PDO::FETCH_ASSOC); //判定結果を取得
+
+      $sql = 'SELECT * FROM `atom_searchs` WHERE `word` LIKE ?';
+      $data = array('%' . $_POST['list_search'] . '%');
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+
+      
+      while (1) {
+        $rec = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
+        if ($rec == false) {
+          break;
+        }
+        $tmp_searchs[] = $rec;
+      }
+
+      // var_dump($search);
+      // var_dump($tmp_searchs);
+      // echo count($tmp_searchs);
+
+      if (isset($tmp_searchs)) { // 検索結果が存在する時
+
+        if (count($tmp_searchs) == 1) { // 曖昧検索の結果がひとつのみの場合
+          foreach($tmp_searchs as $ts){
+            $search[] = $ts;
+            $search = $search[0];
+          }
+        }elseif(count($tmp_searchs) > 1){ // 曖昧検索の結果が複数存在する場合
+          foreach($tmp_searchs as $ts){
+            $vague_searchs[] = $ts;
+          }
+        }
+      }else{ // 検索結果が存在しない時
+        $no_result = 'no_result';
+      }
+
       //①ユーザの検索と一致した場合 ：
       // var_dump($search) .'<br>';
       // var_dump($_POST['list_search']) . '<br>';
@@ -143,8 +178,8 @@
 
         // アイテムに追加
           $sql= 'INSERT INTO `atom_items` SET `categories_id` =?,
-                                         `content` = ?,
-                                         `lists_id` = ?';
+                                              `content` = ?,
+                                              `lists_id` = ?';
           $data = array($search['baggage_classify'], $_POST['list_search'], $_GET['id']);
           $stmt = $dbh->prepare($sql);
           $stmt ->execute($data);
@@ -157,7 +192,25 @@
       $data = array($_POST['list_search']);
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
+  }
 
+  //曖昧アイテムたちが押された時の処理を書いて行く
+  if (isset($_POST['vague_search_result'])){
+    if (!empty($_POST['vague_search_result'])){
+      $sql = 'SELECT * FROM `atom_searchs` WHERE `word`= ?';
+      $data = array($_POST['vague_search_result']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+      $vargues = $stmt->fetch(PDO::FETCH_ASSOC); //判定結果を取得
+      var_dump($vargues);
+
+      $sql= 'INSERT INTO `atom_items` SET `categories_id` =?,
+                                          `content` = ?,
+                                          `lists_id` = ?';
+      $data = array($vargues['baggage_classify'], $_POST['vague_search_result'], $_GET['id']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+    }
   }
 
   // 保存ボタンが押された時
@@ -212,11 +265,12 @@
       }
       //持ち込めない場合
       elseif ($items[$i]['categories_id'] == '3'){
-          $banned_baggage = 'その荷物は持ち込めません！！';
+          $banned_baggages = $_POST['list_search'];
       }
 
      } //アイテムにデータがない時
     else{
+          $item_banned = $_POST[''];
         //カテゴリー表示
     }
     $i++;

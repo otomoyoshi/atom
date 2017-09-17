@@ -7,6 +7,10 @@
 	/*height: auto;*/
 }
 
+.undefined_word{
+	color: black;
+}
+
 #headerwrap{
 	padding-top: 20px;
 }
@@ -42,11 +46,31 @@
 
 }
 
+.vanish_border{
+	border: none;
+	margin-bottom: 5px;
+	background-color: #fff;
+	color: blue;
+}
+
+.word_list_design{
+	height: 250px;
+	width: 80%;
+}
+
+.word_list_design:hover{
+
+}
+
 .list_created{
 
 	width: 500px;
 	margin-left: 20px;
 	margin-bottom: 0px;
+}
+
+.undefined_category{
+	color: #666;
 }
 
 input #h3 {
@@ -81,6 +105,20 @@ input #h3 {
 
 .width{
 	width:100%;
+}
+
+.vargues_position{
+	text-align: center;
+}
+
+.moving_category{
+	margin-top: 15px;
+	margin-bottom: 15px;
+	width: 15%;
+}
+
+.moving_list_direct{
+	width: 15%;
 }
 
 .both_contents{
@@ -131,7 +169,7 @@ input #h3 {
 	text-align: left;
 }
 
-li:hover {
+.list_float:hover {
  	transform: scale(1.1); 
 }
 
