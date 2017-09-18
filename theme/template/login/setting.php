@@ -1,8 +1,7 @@
 <?php 
-require('../../../developer/dbconnect.php');
 session_start();
+require('../../../developer/dbconnect.php');
 $errors = array();
-
 $account_name = '';
 $email = '';
 $new_password = '';
@@ -10,6 +9,19 @@ $comfirm_password = '';
 $now_password = '';
 $gender = 0;
 $age = 0;
+
+if ($_SESSION['login_user']['gender'] != '') {
+    if ($_SESSION['login_user']['gender'] == 1) {
+      $registered_gender = '男性';
+    }elseif ($_SESSION['login_user']['gender'] == 2) {
+      $registered_gender = '女性';
+    }
+  }
+
+if ($_SESSION['login_user']['age'] != '') {
+      $registered_age = $_SESSION['login_user']['age'];
+    }
+
 
 if (!empty($_POST)) {
     $account_name = $_POST['account_name'];
@@ -37,6 +49,12 @@ if (!empty($_POST)) {
       $stmt->execute($data);
 
       $_SESSION['login_user']['gender'] = $gender;
+
+      if ($gender == 1) {
+        $registered_gender = '男性';
+      }elseif ($gender == 2) {
+        $registered_gender = '女性';
+      }
     }
 
     // 年齢の登録処理
@@ -47,11 +65,12 @@ if (!empty($_POST)) {
       $stmt->execute($data);
 
       $_SESSION['login_user']['age'] = $age;
+
+      $registered_age = $age;
     }
 
     // プロフィール画像の登録処理とバリデーション
     require('../setting_function/profile_image_path_update_comfirm.php');
-
 
 }
 
@@ -104,7 +123,7 @@ if (!empty($_POST)) {
           <div class="col-xs-12 col-sm-6 col-md-6">
             <div class="form-group">
               <label style="font-size: 18px">アカウント名変更</label>
-                <input type="text" name="account_name" id="first_name" class="form-control input-lg" placeholder="新しいアカウント名" tabindex="1">
+                <input type="text" name="account_name" id="first_name" class="form-control input-lg" placeholder="<?php echo $_SESSION['login_user']['account_name'];?>" tabindex="1">
             </div>
           </div>
         </div>
@@ -115,7 +134,7 @@ if (!empty($_POST)) {
           <div class="col-xs-12 col-sm-6 col-md-6">
             <div class="form-group">
               <label style="font-size: 18px">メールアドレス変更</label>
-              <input type="email" name="email" id="last_name" class="form-control input-lg" placeholder="新しいメールアドレス" tabindex="2">
+              <input type="email" name="email" id="last_name" class="form-control input-lg" placeholder="<?php echo $_SESSION['login_user']['email'];?>" tabindex="2">
               <?php if(isset($errors['email']) && $errors['email'] == 'duplicate'): ?>
                 <div class="alert alert-danger">既に使用されているメールアドレスです</div>
               <?php endif; ?>
@@ -163,33 +182,47 @@ if (!empty($_POST)) {
 
         <hr>
 
-        <div>
-          <label style="font-size: 20px">性別 </label>
-            <input type="hidden" name="gender">
-            <label>
-              <input type="radio" name="gender" value="1" tabindex="6" style="margin-left: 5px" />男性
+        <div class="row">
+          <div class="col-xs-12 col-md-4 col-lg-4">
+            <label style="font-size: 20px">性別 </label>
+              <input type="hidden" name="gender">
+              <label>
+                <?php if(isset($registered_gender) && $registered_gender == '男性'): ?>
+                  <input type="radio" name="gender" value="1" tabindex="6" style="margin-left: 5px" checked>男性
+                <?php else: ?>
+                  <input type="radio" name="gender" value="1" tabindex="6" style="margin-left: 5px">男性
+                <?php endif; ?>
+              </label>
+              <label>
+                <?php if(isset($registered_gender) && $registered_gender == '女性'): ?>
+                  <input type="radio" name="gender" value="2" tabindex="6" style="margin-left: 5px" checked>女性
+                <?php else: ?>
+                  <input type="radio" name="gender" value="2" tabindex="6" style="margin-left: 5px">女性
+                <?php endif; ?>
             </label>
-            <label>
-              <input type="radio" name="gender" value="2" tabindex="7" style="margin-left: 5px" />女性
-          </label>
+          </div>
         </div>
 
         <hr>
 
-        <div style="margin-bottom: 10px">
-          <label style="font-size: 20px">年齢</label>
-          <select name="age">
-            <option value="<?php echo $_SESSION['login_user']['age']; ?>" >選択してください</option>
-          <?php for($i = 10;$i <= 80;$i=$i+10): ?>
-            <option value="<?php echo $i; ?>">
-              <?php if($i == 80): ?>
-                <?php echo $i; ?>代以上
-              <?php else: ?>
-                <?php echo $i; ?>代
-              <?php endif; ?>
-            </option>
-          <?php endfor; ?>
-          </select>
+        <div class="row" style="margin-bottom: 10px">
+          <div class="col-lg-4">
+            <label style="font-size: 20px">年齢</label>
+            <select name="age">
+            <?php if(!isset($registered_age)): ?>
+              <option>選択してください</option>
+            <?php endif; ?>
+              <?php for($i = 10;$i <= 80;$i=$i+10): ?>
+                <option value="<?php echo $i; ?>" <?php if(isset($registered_age) && $registered_age == $i): ?> selected <?php endif; ?>>
+                  <?php if($i == 80): ?>
+                    <?php echo $i; ?>代以上
+                  <?php else: ?>
+                    <?php echo $i; ?>代
+                  <?php endif; ?>
+                </option>
+              <?php endfor; ?>
+            </select>
+          </div>
         </div>
 
         <hr>
