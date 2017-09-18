@@ -180,7 +180,7 @@
           <div class="form-group">
             <div class="col-xs-offset-2 col-xs-8 col-lg-offset-3 col-lg-6">
               <div class="input-group">
-                <?php for($i=0; $i < 8; $i++) { ?>
+                <?php for($i=0; $i < 9; $i++) { ?>
                   <? if(isset($classify) && $i == $classify && $classify != 'default') { ?>
                     <label class="radio-inline">分類<?php echo $i+1 ?><input type="radio" name="classify" value="<?php echo $i+1;?>" checked></label>
                   <?php } else { ?>
