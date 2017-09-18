@@ -11,16 +11,16 @@ $no_result = '';
 
  
 //検索ボタンが押されたとき
-if (!empty($_POST)) {
-    if (isset($_POST['list_search']) && $_POST['list_search'] != '') {
+
+if (isset($_GET['list_search_id']) && $_GET['list_search_id'] != '') {
       $sql= 'INSERT INTO `atom_searched_words` SET `word` = ?,
                             `created` = NOW()';
-      $data = array($_POST['list_search']);
+      $data = array($_GET['list_search_id']);
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
 
       $sql = 'SELECT * FROM `atom_searchs` WHERE `word` LIKE ?';
-      $data = array('%' . $_POST['list_search'] . '%');
+      $data = array('%' . $_GET['list_search_id'] . '%');
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
 
@@ -60,7 +60,7 @@ if (!empty($_POST)) {
 
 
     // リストへ追加ボタンが押された時
-    if (!empty($_POST['list_move'])) { 
+    if (!empty($_POST['baggage_classify'])) { 
       if (!isset($_SESSION['login_user'])) { // ユーザーがログインしていない時
         // 新規登録画面に飛ばす けどまだポップアップなどつけてない
         header('Location: un_login/sign_up.php');
@@ -141,7 +141,6 @@ if (!empty($_POST)) {
       }
       }
     }
-}
 
 // 曖昧検索の結果からなにかしらが選択された時
 if (isset($_GET['id']) && !isset($tmp_searchs) && empty($no_result)) {
@@ -410,7 +409,7 @@ if (!empty($_POST['user_lists_id'])) {
         <div class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
           <h2 id ="catch_copy">「荷造りの悩み」ここに置いて行きませんか？</h2>
          
-          <form method="POST" action="">
+          <form method="GET" action="">
             <div class="form-group">
               <!-- <label for="sel1"></label> -->
               <select class="form-control" id="sel1" data-intro="航空会社をお選びください" data-step="1">
@@ -420,7 +419,7 @@ if (!empty($_POST['user_lists_id'])) {
 
             <div class="form-group">
 
-              <input type="text" id="search" class="form-control" placeholder="例：液体物" name = "list_search" maxlength=20 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
+              <input type="text" id="search" class="form-control" placeholder="例：液体物" name = "list_search_id" maxlength=20 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
 
                <?php if (isset($errors['word'])  == 'blank') {?>
                   <div class="alert alert-danger error_search">検索ワードを入力してください</div>
@@ -512,6 +511,7 @@ if (!empty($_POST['user_lists_id'])) {
                   </form>
                 <?php endforeach; ?>
               <?php endif; ?>
+              
             </div> <!-- 右半分を表示するdivタグの終わり -->
           <?php } ?>
         </div>
