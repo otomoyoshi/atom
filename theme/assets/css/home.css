@@ -205,7 +205,7 @@ li {
   font-size: 13px;
 }
   .show_size{
-  height: 180px;
+  height: auto;
   width: 32%;
   margin: auto;
   text-align: center; 

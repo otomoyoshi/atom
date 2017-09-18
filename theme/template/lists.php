@@ -106,9 +106,9 @@
             <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索" name="list_search_btn">
           </div>
         </div>
-        <?php if(isset($tmp_searchs) &&!empty ($_POST['list_search_btn'])){ ?>
+        <?php if(isset($tmp_searchs) && !empty($_POST['list_search_btn']) && count($tmp_searchs) > 1){ ?>
           <div class="row">
-            <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding">
+            <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
               <ul class="list-group" id="list_design">
                 <label class="width list_searchs">
                   <h3 class="word_titles">複数件の結果が見つかりました</h3>
@@ -137,8 +137,7 @@
               <input type="button" class = "moving_list_direct btn btn_atom" value="自分で分類して追加する">
             </div>
           </div>
-        <?php } ?>
-
+        <?php }// elseif ($items[$i]['categories_id'] != '0' && $items[$i]['categories_id'] != '1' && $items[$i]['categories_id'] != '2' && $items[$i]['categories_id'] == '3') { ?>
         <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
           <div class="both_contents well col-lg-4">
             <!-- BOTHの欄を作る -->
