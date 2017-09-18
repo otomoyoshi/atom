@@ -1,3 +1,56 @@
+<?php 
+
+session_start();
+
+
+// bool mb_send_mail(string $to, string $subject, string $message[, string $headers[, string $headers ]])
+
+$email ='';
+$content='';
+$errors = array ();
+
+
+//送信ボタンが押されたとき
+if (!empty($_POST)) {
+
+  $email = $_POST['email'];
+  $content = $_POST['content'];
+  // $to = $_POST['to'];
+  
+
+
+
+
+  if ($email == '') {
+    $errors['email'] = 'blank';
+    # code...
+  }
+
+  if ($content == '') {
+      $errors['content'] = 'blank';
+      # code...
+    }elseif (strlen($content) < 5 ) {
+      $errors['content'] = 'length';
+      # code...
+    }
+
+  // if (mb_send_mail($to, $subject, $content, $header)) {
+  //  echo "メールを送信しました";
+  //   } else {
+  //   echo "メールの送信に失敗しました";
+  //   }   
+  //   # code...
+  }
+
+    // メール送信機能実装
+    require('contact_function/phpmailer.php');
+
+
+
+
+ ?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -6,7 +59,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../assets/img/favicon.png">
+    <?php require('icon.php'); ?>
 
     <title>旅にもつ</title>
     <?php require('load_css.php'); ?>
@@ -17,10 +70,10 @@
   <body>
     <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
   <?php
-    $ini = parse_ini_file("config.ini");
-    $is_login = $ini['is_login'];
+    // $ini = parse_ini_file("config.ini");
+    // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($is_login) { //ログインしてるとき
+    if ($_SESSION['login_user']) { //ログインしてるとき
       // echo "login success";
       require('login_header.php');
     } else {// ログインしてないとき
@@ -49,8 +102,9 @@
                   </figcaption>
                 </figure> -->
 
-                <h1 class="text-center your_name">阪急電車</h1>
-                <h2 class="text-center your_name">電車の乗客の人間関係にスポットを当てて進行していくストーリー。電車のように何度も会う関係ではないからこそ、悩みを話せたりアドバイスを言えたりできるのかもしれないと感じた。とても心が温かくなる話。</h2>
+                <h2 class="text-center your_name">お問い合わせフォーム</h2><br>
+                <h2 class="text-center your_name">本フォームでは、旅にもつウェブサイトに関するお客様からのお問い合わせをお受けしています。</h2>
+
               </div>
 
                 <div class="col-md-12 col-lg-offset-1 col-lg-6 background_blue center-block"  id="border-space">
@@ -59,12 +113,13 @@
                     <div class="contact-section">
                          <!--  <div class="row">
                             <div class="col-lg-8 col-md-offset-2"> -->
-                            <form class="form-horizontal">
+                            <!-- <form class="form-horizontal"> -->
+                              <!-- <form method="POST" action="mailto:maho.atom@gmail.com"> -->
                               <form method="POST" action="">
 
                                 <div class="form-group">
                                   <label for="exampleInputEmail2"><i class="fa fa-envelope-o"></i>メールアドレス</label>
-                                  <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+                                  <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com" maxlength="50" autofocus>
 
                                     <?php if (isset($errors['email']) && $errors['email'] == 'blank') {?>
                                       <div class="alert alert-danger">メールアドレスを入力してください</div>
@@ -72,11 +127,10 @@
                                                         <!-- </div>
                                 <div class="form-group "> -->
                                   <label for="exampleInputText">お問い合わせ内容</label>
-                                 <textarea  class="form-control" placeholder="メッセージをご記入ください"></textarea>
+                                 <textarea name="content" class="form-control" placeholder="メッセージをご記入ください" maxlength="1000"></textarea>
 
                                     <?php if (isset($errors['content']) && $errors['content'] == 'blank') { ?>
                                       <div class="alert alert-danger">お問い合わせ内容をご記入してください</div>
-
                                     <?php } ?>
 
                                     <?php if (isset($errors['content']) && $errors['content'] == 'length') { ?>
@@ -85,9 +139,12 @@
 
 
                                 </div>
-                                <button type="subm9it" class="btn btn-success">送信</button>
+                                <button type="submit" class="btn btn-success">送信</button>
+
+
+
                               </form>
-                            </form>
+                            <!-- </form> -->
                             <!-- </div>
                           </div> -->
                         <!-- </div> -->
@@ -100,6 +157,7 @@
         </div>
       </div>
     </div>
+
   <!-- </div> -->
 
 

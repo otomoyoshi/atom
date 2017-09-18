@@ -1,6 +1,9 @@
 input {
     font-family: FontAwesome;
 }
+label {
+    display: block;
+}
 .wrimagecard{
 	margin-top: 0;
     margin-bottom: 1.5rem;
@@ -54,5 +57,10 @@ a.wrimagecard:hover, .wrimagecard-topimage:hover {
 /*ユーザー情報*/
 .mypage_username{
     padding: 8px 15px 0px 0px;
+}
+
+.input_list_name{
+    width: 170px;
+    text-align: center;
 }
 

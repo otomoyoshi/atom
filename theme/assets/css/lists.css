@@ -1,10 +1,23 @@
 #img{
-	background: url(../img/beach4_bokashi.jpg);
+	background: url(../img/beach_blur.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
-	/*width:100%;*/ 
+	/*width:100%; 
 	/*max-width: 100%;*/
 	/*height: auto;*/
+}
+
+.undefined_word{
+	color: black;
+	margin-top: 20px;
+}
+
+#headerwrap{
+	padding-top: 20px;
+}
+
+.circle_border {
+  border: solid 5px black;
 }
 
 .list_name_location{
@@ -12,7 +25,6 @@
 	text-align: center;
 	width: 100%;
 	margin-top: 30px;
-	height: 70px;
 }
 
 .created_location{
@@ -21,8 +33,12 @@
   margin-top: 40px;
 }
 
+.kill_padding{
+	height: 20px;
+}
+
 .height{
-	height:200px;
+	height:150px;
 }
 .list_name {
 	text-align: center;
@@ -31,11 +47,31 @@
 
 }
 
+.vanish_border{
+	border: none;
+	margin-bottom: 5px;
+	background-color: #fff;
+	color: blue;
+}
+
+.word_list_design{
+	height: 250px;
+	width: 80%;
+}
+
+.word_list_design:hover{
+
+}
+
 .list_created{
 
 	width: 500px;
 	margin-left: 20px;
 	margin-bottom: 0px;
+}
+
+.undefined_category{
+	color: #666;
 }
 
 input #h3 {
@@ -61,7 +97,7 @@ input #h3 {
 .center_shift{
 	text-align: center;
 	width: 200px;
-	height: 195px;
+	height: 120px;
 	padding-bottom: 20px;
 	margin-top: 20px;
 	padding-left: 100px;
@@ -71,6 +107,13 @@ input #h3 {
 .width{
 	width:100%;
 }
+
+.vargues_position{
+	text-align: center;
+
+
+}
+
 
 .both_contents{
 	background-color: rgba(156,222,255,0.75);;
@@ -95,12 +138,13 @@ input #h3 {
   content: "\f372";
   font-family: "Ionicons";
   color: #ccc;
-  font-size: 22px;
+  font-size: 20px;
 }
 .checkbox:checked + .checkbox-icon::before {
   content: "\f374";
   color: #17bcdf;
 }
+
 
 .padding {
 	margin-top: 30px; 
@@ -119,8 +163,10 @@ input #h3 {
 	text-align: left;
 }
 
-li:hover {
-  background: #51a8ff;
+
+
+.list_float:hover {
+ 	transform: scale(1.1); 
 }
 
 .tmp_btn, .can_btn, .keep_btn {
@@ -144,6 +190,8 @@ li:hover {
 #search-btn{
 	display: inline;
 	width: 70px;
+	margin-bottom: 20px;
+
 }
 
 .border{
@@ -155,8 +203,7 @@ li:hover {
 }
 
 .under_line1 {
-	margin:50px; 
-	
+	margin:20px; 
 }
 
 .keep_btn{
@@ -167,4 +214,77 @@ li:hover {
 	width:300px;
 }
 
+/**/
+/* layout.css Style */
+.upload-drop-zone {
+  height: 200px;
+  width: 200px;
+  border-width: 2px;
+  /*margin-bottom: 20px;*/
+}
 
+/* skin.css Style*/
+.upload-drop-zone {
+  color: #ccc;
+  border-style: dashed;
+  border-color: #ccc;
+  line-height: 200px;
+  text-align: center
+}
+.upload-drop-zone.drop {
+  color: #222;
+  border-color: #222;
+}
+
+
+
+.image-preview-input {
+    position: relative;
+    overflow: hidden;
+    margin: 0px;    
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;    
+}
+.image-preview-input input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+    margin-left:2px;
+}
+
+.right_position{
+	float: right;
+}
+
+.right{
+	float:right;
+}
+
+.right,.right_position{
+	display: inline;
+}
+
+.right_position:hover {
+	transform: scale(1.5);
+}
+
+.right:hover {
+	transform: scale(1.5); 
+}
+
+.list_input{
+	background-color: rgba(0,0,0,0);
+	border: 1px solid rgba(0,0,0,0);
+	width: auto;
+}
+
+/**/

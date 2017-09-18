@@ -1,91 +1,19 @@
 <?php
-  session_start();
-  require('../../developer/dbconnect.php');
 
-  // if (!isset($_SESSION[''])) {
-  //   header('Location: sign_in.php');
-  //   exit();
-  // }
+  require('lists_sql.php');
 
-  // この中に各種ボタンが押された時の条件を書き込んでいく
-  if (!empty($_POST)) {
+  // ユーザーが新規でリストを作成する際
 
-    //検索ボタンが押された時
-    if (!empty($_POST['list_search'])) {
-        //検索情報かつSESSEIONあるかどうか
+  if ($is_image['name'] == '') {
 
-
-        //検索ワード収集データベースにインサート
-        $sql= 'INSERT INTO `searched_words` SET `word` = ?,
-                                          `created` = NOW()';
-        $data = array($_POST['list_search']);
-        $stmt = $dbh->prepare($sql);
-        $stmt ->execute($data);
-        // 検索結果表示データベースから情報をとってリストに入れる
-
-        // $sql= 'SELECT * FROM `searchs` WHERE 1';
-        // $data = array();
-        // $stmt = $dbh->prepare();
-        // $stmt ->execute();
-
-          // //①データがある場合
-          // if () {
-            
-          // }
-          // // データがない場合： カテゴリー表示
-          // else{
-
-          // }
-
-     
-        // // BOTHの場合
-        // if () {
-        //   # code...
-        // }
-        // // 持ち込みの場合
-        // if () {
-        //   # code...
-        // }
-        // //預け入れの場合
-        // if () {
-        //   # code...
-        // }
-    }
-
-    // 一時保存ボタンが押された時
-    if (!empty($_POST['tmp_btn'])) {
-        $sql = 'INSERT `lists` SET `members_id` = ?,
-                           `name` = ?, 
-                           `list_image_path` = ?,
-                           `created` = NOW()';
-        $data = array();
-        $stmt = $dbh->prepare();
-        $stmt ->execute();
-    }
-
-    //キャンセルボタンが押された時
-    if (!empty($_POST['can_btn'])) {
-        
-    }
-
-    // 保存ボタンが押された時
-    if (!empty($_POST['keep_btn'])) {
-      // 一時保存されてない場合
-      // if () {
-      //   $sql = 'INSERT `lists` SET `members_id` = ?,
-      //                      `name` = ?, 
-      //                      `list_image_path` = ?,
-      //                      `created` = NOW()';
-      //   $data = array(,$_POST['list_name'],$_FILES['']);
-      //   $stmt = $dbh->prepare();
-      //   $stmt ->execute();
-      } else {
-        // $sql = '';
-        // $data = array(,$_POST['list_name'],$_FILES['']);
-        // $stmt = $dbh->prepare();
-        // $stmt ->execute();
-      }
-    }
+    $sql = 'SELECT COUNT(*) FROM `atom_lists` WHERE `members_id`=?';
+    $data = array($_SESSION['login_user']['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+    // ログインしているユーザーが作成しているリストの数を取得
+    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+    $list_amount = $rec['COUNT(*)'];
+  }
 
 ?>
 
@@ -97,65 +25,155 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../assets/img/favicon.png">
-    
+    <link rel="shortcut icon" href="../favicon.png./assets/img/">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 
     <title>旅にもつ</title>
     <?php require('load_css.php'); ?>
- 
+    <link rel="stylesheet" type="text/css" href="../assets/css/lists.css">
+
   </head>
   <body>
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
-  <?php
-    $ini = parse_ini_file("config.ini");
-    $is_login = $ini['is_login'];
-    // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($is_login) { //ログインしてるとき
-      // echo "login success";
-      require('login_header.php');
-    } else {// ログインしてないとき
-      // echo "login fail";
-      require('header.php');
-    }
-  ?>
 
- <div id="img"> 
+  <?php
+    // $ini = parse_ini_file("config.ini");
+    // $is_login = $ini['is_login'];
+    // $is_login = 0; //ログインしてるときを１とする（仮）
+    // if (isset($_SESSION['login_user'])){ //ログインしてるとき
+    //   // echo "login success";
+    //   // require('login_header.php');
+
+    // } else {// ログインしてないとき
+    //   // echo "login fail";
+    //   require('header.php');
+    // }
+  ?>
+<div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
+    <button data-remodal-action="close" class="remodal-close"></button>
+  <!-- <form id="img_form"> -->
+
+      <h1>画像変更</h1>
+      <!-- <p>コンテンツを記述します。</p> -->
+      <form id="my_form">
+        <input type="file" name="image" data-url="../../list_image_path/">
+        <Button type="button" onclick="file_upload()">アップロード</Button>
+      </form>
+
+      <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+      <!-- <button data-remodal-action="confirm" class="remodal-confirm">OK</button> -->
+      <button type="button" data-remodal-action="confirm" class="remodal-confirm">画像の変更</button>
+  <!-- </form> -->
+</div>
+
+
+
+ <div id="img">
     <div id="headerwrap" class="back">
       <div class="container">
-      <!-- リストの情報画面を書いていく -->
+        <!-- リストの情報画面を書いていく -->
         <div class="row height">
           <div class="col-lg-offset-2 col-lg-5 col-md-12 col-sm-12 col-xs-12">
             <form action="" method="POST">
-              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location">
-              <input type="text" name="created" placeholder="作成日時" class="form-control created_location">
-            </form>
-          </div>
-          <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
-            <?php if (!isset($hoge)) {?>
-              <img src="../assets/img/pic1.jpg" class="img-circle" width="150px" class="padding_img"><br>
-              <p class="set_profile">user nameくん</p>
-            <?php } else {?>
 
+            <?php if($is_image['name'] != ''): ?>
+              <!-- リスト名が登録されている場合、そのリスト名を表示する -->
+              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
+              data-intro="リスト名を入力してね" data-step="1" value="<?php echo $is_image['name']; ?>">
+
+            <?php else: ?>
+              <!-- リスト名が登録されていない場合、自動的にリスト名がvalueに入る -->
+              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
+              data-intro="リスト名を入力してね" data-step="1" value="リスト  <?php echo $list_amount; ?>">
+
+            <?php endif; ?>
+            </div>
+              <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
+
+<!-- <<<<<<< HEAD -->
+            <?php if (isset($errors['extension'])) { ?>
+              <div class="alert alert-danger">
+                拡張子は、jpg,png,gifの画像を選択ください
+              </div>
             <?php } ?>
+
+            <label>
+
+
+              <a data-remodal-target="modal">
+              <!-- 画像がデータベースに登録されているとき -->
+              <?php if ($is_image['list_image_path'] != NULL) { ?>
+                <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
+                <p class="set_profile">
+                  <?php echo $list_data['account_name']; ?>
+                </p>
+              </a>
+
+            <!-- 画像がデータベースに登録されてないとき -->
+            <?php } else {?>
+            <a data-remodal-target="modal">
+              <div>デフォルト画像を表示</div>
+                <p class="set_profile">
+                <?php echo $list_data['account_name']; ?>
+                </p>
+            </a>
+            <?php } ?>
+              
+            </label>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-12 col-md-12 col-xs-12">
             <hr class="under_line1">
+
           </div>
         </div>
         <!-- リストの大枠を作って行く -->
-        <div class="row">
-          <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center">
-            <form action="" method="POST">
-              <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」">
-              <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索">
-            </form>
+        <div class="row height_fix">
+          <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center fix_to_search">
+            <hr class="under_line1">
+            <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
+            <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索" name="list_search_btn">
           </div>
-        </div>
-        <div class="list_category margin_top row">
-          <div class="both_contents well col-lg-4">
 
+        </div>
+        <?php if(isset($tmp_searchs) && !empty($_POST['list_search_btn']) && count($tmp_searchs) > 1){ ?>
+          <div class="row">
+            <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
+              <ul class="list-group" id="list_design">
+                <label class="width list_searchs">
+                  <h3 class="word_titles">複数件の結果が見つかりました</h3>
+                  <li class="list-group-item list_property">
+                    <h2 class="judge_show_icon">もしかして？</h2><br>
+                    <?php if(isset($vague_searchs)): ?>
+                      <?php foreach($vague_searchs as $tss): ?>
+                        <input type="hidden" name="vague_search_content" value="<?php echo $tss['word'] ?>">
+                        <input type="submit" name="vague_search_result" value="<?php echo $tss['word'] ?>" 
+                        class ="vanish_border"><br>
+                      <?php endforeach; ?>
+                    <?php endif; ?>
+                  </li>
+                </label>
+              </ul>
+            </div>
+          </div>
+        <?php } 
+        //以下に検索・曖昧検索共に一致しない場合について書いていく
+        elseif (!isset($tmp_searchs) && !empty($_POST['list_search_btn'])){ ?>
+          <div class="row">
+            <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding vargues_position">
+              <h5 class="undefined_word">検索結果が見つかりませんでした</h5>
+              <h7 class= "undefined_category">(検索ワード：<?php echo $_POST['list_search']?>)</h7>
+              <input type="button" class = "moving_category btn btn_atom" value="カテゴリーから探す"><br>
+              <input type="button" class = "moving_list_direct btn btn_atom" value="自分で分類して追加する">
+            </div>
+          </div>
+        <?php } elseif ($vargues["baggage_classify"]=="3" || $list_data["categories_id"]=="3") { ?>
+
+        <?php } ?>
+        <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
+          <div class="both_contents well col-lg-4">
             <!-- BOTHの欄を作る -->
             <strong>
               <p class="sub_title fa fa-fighter-jet">
@@ -164,13 +182,20 @@
             </strong>
             <div>
               <ul class="list-group" id="list_design">
-                <?php for ($i=0; $i <5 ; $i++) { ?>
+                <?php foreach ($item_boths as $item_both) { ?>
                   <label class="width">
                     <li class="list-group-item list_float">
                       <input type="checkbox" name="che" class="left checkbox">
                       <span class="checkbox-icon"></span>
-                      リスト1
-                      <i class="fa fa-trash"></i>
+                      <?php echo $item_both['content'];?>
+                        <!-- 削除処理を書いていく -->
+                        <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_both['id'];?>">
+                          <i class="fa fa-trash right_position"></i>
+                        </a>
+                    <!--編集ボタン
+                        <span>
+                         <i class="fa fa-pencil-square-o right"></i>
+                        </span> -->
                     </li>
                   </label>
                 <?php }?>
@@ -186,16 +211,26 @@
             </strong>
             <div>
               <ul class="list-group">
-                <?php for ($i=0; $i <5 ; $i++) { ?>
+                <?php foreach ($item_carry_ins as $item_carry_in){ ?>
                   <label class="width">
                     <li class="list-group-item list_float">
                       <input type="checkbox" name="che" class="left checkbox">
                       <span class="checkbox-icon"></span>
-                      リスト1
-                      <i class="fa fa-trash"></i>
+                      <?php  echo $item_carry_in['content']; ?>
+                      <?php  ?>
+                      <!-- 削除処理を書いていく -->
+                      <!-- <a href="delete_category.php?id=<?php echo $item_carry_in['id'];?>"> -->
+                      <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_carry_in['id'];?>">
+                        <i class="fa fa-trash right_position"></i>
+                      </a>
+           <!--       編集ボタン
+                      <span>
+                       <i class="fa fa-pencil-square-o right"></i>
+                      </span> -->
+                      <?php  ?>
                     </li>
                   </label>
-                <?php  }?>
+                <?php  } ?>
               </ul>
             </div>  
           </div>
@@ -208,58 +243,172 @@
               </p>
             </strong>
             <ul class="list-group">
-              <?php for ($i=0; $i <5 ; $i++) { ?>
+              <?php foreach ($item_azukeires as $item_azukeire) { ?>
                 <label class="width">
                     <li class="list-group-item list_float">
                       <input type="checkbox" name="che" class="left checkbox">
                       <span class="checkbox-icon"></span>
-                      リスト1
-                      <i class="fa fa-trash"></i>
+                      <!-- <input type="text" class="list_input" name="" value="<?php echo $item_azukeire['content']; ?>"> -->
+                      <span class="list_content"><?php echo $item_azukeire['content']; ?></span>
+                      
+                        <!-- 削除処理を書いていく -->
+                        <!-- <a href="delete_category.php?id=<?php echo $item_azukeire['id']; ?>"> -->
+                        <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
+                          <i class="fa fa-trash right_position"></i>
+                        </a>
+                     <!--  編集ボタン  <span>
+                         <i class="fa fa-pencil-square-o right"></i>
+                        </span> -->
+                      <?php  ?>
                     </li>
                 </label>
-              <?php  }?>
+              <?php } ?>
             </ul>
           </div>
         </div>
+        <!-- リストの保存機能たち -->
 
-      <!-- リストの保存機能たち -->
-        <div class="list_contents text-center">
-          <form>
-            <div class="tmp_keep">
-              <input class="btn btn-info tmp_btn" value="一時保存" type="submit" name="tmp_btn">
-            </div>
+          <div class="list_contents text-center">
+<!--               <div class="tmp_keep">
+                <input class="btn btn-info tmp_btn" value="一時保存" type="submit" name="tmp_btn" data-intro="作成の続きからリストが作れるよ" data-step="4">
+              </div> -->
+<!--             <div class="cansel">
+              <input value="キャンセル" class="btn btn-warning can_btn" type="submit" name="can_btn">
+            </div> -->
+            <div class="keep">
+
+              <input class="btn btn-success keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの履歴やメールに送信できるよ" data-step="5">
+            </div>  
+
           </form>
-          <div class="cansel">
-            <input value="キャンセル"" class="btn btn-warning can_btn" type="submit" name="can_btn">
-          </div>
-          <div class="keep">
-
-            <input class="btn btn-success keep_btn" value="マイページへ登録" type="submit" name="keep_btn">
-          </div>  
+        </div>
+        <div>
+          
 
         </div>
       </div>
     </div>
   </div>
+
   <?php require('footer.php'); ?>
   <?php require('load_js.php'); ?>
+
+
+  <?php if ($is_items == false) { ?>
+    <script type="text/javascript">
+      introJs().start();
+    </script>
+  <?php } ?>
+  <script type="text/javascript" src="../assets/js/lists.js"></script>
+  
+  <script>
+   $(window).on('beforeunload', function(e) {
+    return '保存されていない内容は破棄されます。 本当によろしいですか？ ';
+    });
+  </script>
+
+    <!-- remodal -->
+  <script type="text/javascript">
+    $(document).on('opening', '.remodal', function () {
+      console.log('Modal is opening');
+    });
+
+    $(document).on('opened', '.remodal', function () {
+      console.log('Modal is opened');
+    });
+
+    $(document).on('closing', '.remodal', function (e) {
+
+      // Reason: 'confirmation', 'cancellation'
+      console.log('Modal is closing' + (e.reason ? ', reason: ' + e.reason : ''));
+    });
+
+    $(document).on('closed', '.remodal', function (e) {
+
+      // Reason: 'confirmation', 'cancellation'
+      console.log('Modal is closed' + (e.reason ? ', reason: ' + e.reason : ''));
+    });
+
+    $(document).on('confirmation', '.remodal', function () {
+      console.log('Confirmation button is clicked');
+       var formdata = new FormData($('#fileupload').get(0));
+       console.log(formdata);
+
+
+
+     // GETでid取得
+      var arg  = new Object;
+       url = location.search.substring(1).split('&');
+
+      for(i=0; url[i]; i++) {
+          var k = url[i].split('=');
+          arg[k[0]] = k[1];
+      }
+
+      var get_id = arg.id;
+      console.log(get_id);
+
+
+      // alert("ajax_finish");
+      // window.location.href='';
+
+    });
+
+    $(document).on('cancellation', '.remodal', function () {
+      console.log('Cancel button is clicked');
+
+    });
+  </script>
+
+<!-- btnが押されたとき -->
+  <script type="text/javascript">
+    function file_upload()
+      {
+          // フォームデータを取得
+          var formdata = new FormData($('#my_form').get(0));
+
+          // POSTでアップロード
+          $.ajax({
+              url  : "http://localhost/atom/theme/template/get_image.php",
+              type : "POST",
+              data : formdata,
+              cache       : false,
+              contentType : false,
+              processData : false,
+              dataType    : "html"
+          })
+          .done(function(data, textStatus, jqXHR){
+              alert(data);
+          })
+          .fail(function(jqXHR, textStatus, errorThrown){
+              alert("fail");
+          });
+      }
+  </script>
 </body>
 </html>
 
 
+<?php
+// // 条件用
 
+      // INSERT INTO `searchs` SET `word` = 'まさきっき',
+      //                           `condition` = 'ほげ',
+      //                           `baggage_classify` = 2, // 1:両方 2:機内 3:預け 4:不可
+      //                           `aviation_id` = 1,
+      //                           `categoryies_l2_id` =3, 
+      //                           `created` = NOW()
+      //                           // aviation_id  categoryies_l2_id 
 
+// listsにデータを挿入するためのsql
+// INSERT INTO `lists`(`members_id`, `name`, `created`) VALUES (1,"a",NOW())
 
-
-
-
-
-
-
-
-
-
-
-
-
+      // INSERT INTO `atom_searchs` SET `word` = 'くり',
+      //                           `condition` = 'ほげ',
+      //                           `baggage_classify` = 2, // 1:両方 2:機内 3:預け 4:不可
+      //                           `aviation_id` = 1,
+      //                           `categories_l2_id` =3, 
+      //                           `created` = NOW()
+                                // aviation_id  categories_l2_id 
+ ?>
 

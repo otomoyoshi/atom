@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -6,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <?php require('icon.php'); ?>
     
     
     <title>旅にもつ</title>
@@ -18,10 +21,10 @@
   <body>
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
   <?php
-    $ini = parse_ini_file("config.ini");
-    $is_login = $ini['is_login'];
+    // $ini = parse_ini_file("config.ini");
+    // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($is_login) { //ログインしてるとき
+    if (isset($_SESSION['login_user'])) { //ログインしてるとき
       // echo "login success";
       require('login_header.php');
     } else {// ログインしてないとき
@@ -68,35 +71,19 @@
               <div class="col-lg-6">
 
                 <div class="row">
-                  <div class="col-lg-12" >   
-                    <h2 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" >hoge</h2>
+                  <div class="col-lg-12" style="position: relative;">
+                    <img src="../assets/img/Tabinimotsu_txt.png" style="width: 95%; height: auto; position: absolute; top: 40px;">
+                    <h1 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1); padding-top: 50px">旅にもつ</h1><br>
+
                   </div>
                 </div>
 
                 <div class="row">
 
-                  <div class="col-lg-12" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" >   
+                  <div class="col-lg-12 font_cotent" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" > 本サービスでは検索機能と持ち物リスト作成機能を用いて、空港を利用し旅行の前の荷造りにかかる時間や労力を減らして、”旅行をより楽しく、快適なもの”にすることができます。
 
-                    Call your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    Call your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    all your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    all your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    to stay connected with your loved ones.
-                    to stay connected with your loved ones.
+                    
+
 
 
                   </div>                  
@@ -113,34 +100,16 @@
               <div class="col-lg-6" >
 
                 <div class="row">
-                  <div class="col-lg-12" >
-                    <h2 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)">hoge</h2>
+                  <div class="col-lg-12" style="position: relative;">
+                    <img src="../assets/img/search_function.png" style="width: 95%; height: auto; position: absolute; top: 40px;">
+                    <h1 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1); padding-top: 46px">検索機能</h1><br>
 
                   </div>
                 </div>
                   
                 <div class="row">
-                  <div class="col-lg-12" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)">   
-                    Call your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    Call your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    all your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    all your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    to stay connected with your loved ones.
-                    to stay connected with your loved ones.
+                  <div class="col-lg-12" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)">  
+                    航空会社を選択し、検索窓に持っていきたい持ちものを入力して検索するだけで、持ち物が機内持ち込み可能か、お預け入れのみ可能かの判断と持ち込み条件を一目で確認することができます。さらに、このページから検索した持ち物を持ち物リストへ直接追加することができます。この機能により、自分だけの持ち物リストが自動で作成されます。
                   </div>                  
                 </div> 
 
@@ -165,35 +134,17 @@
               <div class="col-lg-6">
 
                 <div class="row">
-                  <div class="col-lg-12" ">   
-                    <h2 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" >hoge</h2>
+                  <div class="col-lg-12" style="position: relative;">
+                    <img src="../assets/img/list_of_baggage.png" style="width: 95%; height: auto; position: absolute; top: 40px;">
+                    <h1 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1); padding-top: 46px">持ち物リスト作成</h1><br>
 
                   </div>
                 </div>
 
                 <div class="row"> 
-                  <div class="col-lg-12" style="color: #ffffff;text-shadow: 0px 0px 30px rgba(255,255,255,1)">   
+                  <div class="col-lg-12" style="color: #ffffff;text-shadow: 0px 0px 1   0px rgba(255,255,255,1)">    このページでは、自分だけの持ち物リストが作成できます。持ち込みたいアイテムを打ち込むと自動で分類してリストへ追加することができます。一時保存システムによって一度作業を中断しても途中から作業を続けることができ、持ち物リストをマイページへ保存することができます。
 
-                   Call your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    Call your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    all your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    all your friends and family as often as you want,
-                    for as long as you want!
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    Free international voice and video calls make it easy
-                    to stay connected with your loved ones.
-                    to stay connected with your loved ones.
-                    to stay connected with your loved ones.
+                   
                   </div>                  
 
 
@@ -203,6 +154,11 @@
 
             </div>
           <!-- </div> -->
+          <div class="row">
+            <div class="col-lg-offset-10">
+              <p id="page-top"><a href="#wrap">PAGE TOP</a></p>
+            </div>
+          </div>
     </div>
     <!-- </div> -->
 
@@ -211,6 +167,27 @@
 
   <?php require('footer.php'); ?>
   <?php require('load_js.php'); ?>
+  <script type="text/javascript">
+    $(function() {
+      var topBtn = $('#page-top');    
+      topBtn.hide();
+      //スクロールが100に達したらボタン表示
+      $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+              topBtn.fadeIn();
+          } else {
+              topBtn.fadeOut();
+          }
+      });
+      //スクロールしてトップ
+      topBtn.click(function () {
+          $('body,html').animate({
+              scrollTop: 0
+          }, 500);
+          return false;
+      });
+  });
+  </script>
 
 
   </body>

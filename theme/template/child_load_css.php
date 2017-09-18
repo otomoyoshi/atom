@@ -25,5 +25,18 @@
 <link rel="stylesheet" type="text/css" href="../../assets/js/slick-1.6.0/slick/slick-theme.css">
 <link rel="stylesheet" type="text/css" href="../../assets/js/slick-1.6.0/slick/slick.css">
 
-<link rel="stylesheet" type="text/css" href="../../assets/css/lists.css">
+<!-- チュートリアル -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.1.0/introjs.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/intro.css">
+
+<!-- ヘッダ用 -->
+<link rel="stylesheet" type="text/css" href="../../assets/css/header.css">
+
+<!-- Tooltip -->
+<link rel="stylesheet" type="text/css" href="../../assets/js/tooltipster-master/dist/css/tooltipster.main.min.css">
+<link rel="stylesheet" type="text/css" href="../../assets/js/tooltipster-master/dist/css/tooltipster.bundle.min.css">
+
+<!-- remodal -->
+<link rel="stylesheet" type="text/css" href="../../assets/Remodal-1.1.1/dist/remodal.css">
+<link rel="stylesheet" type="text/css" href="../../assets/Remodal-1.1.1/dist/remodal-default-theme.css">
 
