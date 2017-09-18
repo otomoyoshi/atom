@@ -184,11 +184,34 @@ li {
   .width{
     width:100%;
   }
-    .btn_list_move{
+  .btn_list_move{
     margin-top: 10px;
     width: 100%;
     height: 6%;
   }
+
+.moving_category{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 90%;
+  height: 30px;
+  font-size: 13px;
+  text-align: center; 
+}
+
+.moving_list_direct{
+  width: 90%;
+  height: 30px;
+  font-size: 13px;
+}
+  .show_size{
+  height: auto;
+  width: 32%;
+  margin: auto;
+  text-align: center; 
+  margin-left: 34%;
+  margin-right: 33%;
+}
 }
 
 
@@ -265,6 +288,28 @@ li {
     width: 100%;
     height: 6%;
   }
+  .moving_category{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 90%;
+    height: 30px;
+    font-size: 13px;
+    text-align: center; 
+  }
+
+  .moving_list_direct{
+    width: 90%;
+    height: 30px;
+    font-size: 13px;
+  }
+  .show_size{
+    height: 180px;
+    width: 38.5%;
+    margin: auto;
+    text-align: center; 
+    margin-left: 31%;
+    margin-right: 50%;
+  }
 }
 
 /* Portrait tablets and small desktops */
@@ -339,6 +384,28 @@ li {
   .btn_list_move{
     width: 100%;
     height: 6%;
+  }
+  .moving_category{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 90%;
+    height: 30px;
+    font-size: 13px;
+    text-align: center; 
+  }
+
+  .moving_list_direct{
+    width: 90%;
+    height: 30px;
+    font-size: 13px;
+  }
+  .show_size{
+    height: 180px;
+    width: 50%;
+    margin: auto;
+    text-align: center; 
+    margin-left: 25%;
+    margin-right: 50%;
   }
 }
 
@@ -416,6 +483,28 @@ li {
   .btn_list_move{
     width: 100%;
     height: 6%;
+  }
+  .moving_category{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 90%;
+    height: 30px;
+    font-size: 13px;
+    text-align: center; 
+  }
+
+  .moving_list_direct{
+    width: 90%;
+    height: 30px;
+    font-size: 13px;
+  }
+  .show_size{
+    height: 180px;
+    width: 59%;
+    margin: auto;
+    text-align: center; 
+    margin-left: 21%;
+    margin-right: 56%;
   }
 }
 
