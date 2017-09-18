@@ -31,4 +31,11 @@
 <script type="text/javascript" src="../assets/js/tooltipster-master/dist/js/tooltipster.main.min.js"></script>
 <script type="text/javascript" src="../assets/js/tooltipster-master/dist/js/tooltipster.bundle.min.js"></script>
 
+<!-- remodal -->
+<script type="text/javascript" src="../assets/Remodal-1.1.1/dist/remodal.min.js"></script>
 
+<!-- fileupload -->
+<script type="text/javascript" src="../assets/js/jQuery-File-Upload-9.19.1/js/vendor/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="../assets/js/jQuery-File-Upload-9.19.1/js/jquery.iframe-transport.js"></script>
+<script type="text/javascript"></script>
+<script type="text/javascript" src="../assets/js/jQuery-File-Upload-9.19.1/js/jquery.fileupload.js"></script>

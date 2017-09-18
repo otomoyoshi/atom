@@ -8,7 +8,6 @@ $judge_azukeire = '';
 $judge_carry_in = '';
 
 
-
 //検索ボタンが押されたとき
 if (!empty($_POST)) {
     if (isset($_POST['list_search']) && $_POST['list_search'] != '') {
@@ -26,7 +25,10 @@ if (!empty($_POST)) {
     } elseif (isset($_POST['list_search']) && $_POST['list_search'] == '') {
     $errors['word'] = 'blank';
     }
-// <<<<<<< HEAD
+
+    if(isset($_POST['to_lists'])){
+      echo "yaeh";
+    }
 }
 
 
@@ -55,7 +57,10 @@ foreach ($results_l1 as $result_l1) {
   // echo $result_l1['category_l1'] .'<br>';
 }
 
-$tmp_category_l1 = 1;
+
+if(isset($_GET['tab']) && $_GET['tab']=='tab1'){
+  echo "get_level_2";
+  $tmp_category_l1 = $_GET['level_id'];
 //2階層目のデータを取得
 $sql = 'SELECT * FROM `atom_categories_l2` WHERE `category_l1_id`=? ' ;
 $data = array($tmp_category_l1);
@@ -85,9 +90,11 @@ while (1) {
   $cnt_l2_div = (int)($cnt_l2 / ($DEV+1));
   $cnt_l2_sur = $cnt_l2 % ($DEV+1);
   // echo "cnt_l2: " . $cnt_l2;
+}
 
+if(isset($_GET['tab']) && $_GET['tab']=='tab2'){
 //3階層目
-$tmp_category_l2_id = 3;
+$tmp_category_l2_id = $_GET['level_id'];
 $sql = 'SELECT * FROM `atom_searchs` WHERE `categories_l2_id` = ? ' ;
 $data = array($tmp_category_l2_id);
 $stmt = $dbh->prepare($sql);
@@ -119,6 +126,7 @@ foreach ($results_l3 as $result_l3) {
   $cnt_l3_sur = $cnt_l3 % ($DEV+1);
   // echo "cnt_l3: " . $cnt_l3;
 
+}
 // $result = get_data($stmt);
 // <<<<<<< HEAD
 // var_dump($results_l3);
@@ -146,7 +154,7 @@ foreach ($results_l3 as $result_l3) {
            } else{
               $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
            }
-                  }
+        }
         // 持ち込みの場合
         elseif ($search['baggage_classify'] == '1') {
           $word = $search['word'];
@@ -205,19 +213,6 @@ foreach ($results_l3 as $result_l3) {
       else{
           //カテゴリー表示
       }
-// >>>>>>> 139007b4d02545674733945456ad5cd057ae5a75
-
-// }
-
-  // カテゴリー表示の開発用
-  // $results_l1 = array("a"=>"b",
-  //                     "c"=>"d",
-  //                     "e"=>"f");
-  // $results_l2 = array("g"=>"h");
-  // $results_l3 = array("i"=>"j",
-  //                     "k"=>"l",
-  //                     "m"=>"n");
-  // if(isset($_GET['level']) && isset($_GET['level_id'])){
 
 
 ?>
@@ -319,91 +314,124 @@ foreach ($results_l3 as $result_l3) {
                   </label>
                 </ul>
                 <form method="POST" action="">
-                  <input type="submit" name="list_move" value="リストへ追加" class = "btn btn_atom btn_list_move">
+                  <input type="submit" name="list_move" value="リストへ追加" class = "btn btn_atom btn_list_move" >
                 </form>
 
               </div>
             </div>
           <?php  } ?>
         </div>
-        
+
         <div class="col-xs-12 col-lg-6">
-          <!-- <div class="output">確認用</div> -->
+          <div class="output">確認用</div>
+          <div id="add_btn" class="btn btn-success">表示・非表示</div>
+          <div id="tolists" style="background-color: rgb(0, 153, 255);">
+            <form method="POST" action="">
+              <input type="submit" name="to_lists" value="リスト1">
+              <input type="submit" name="to_lists" value="リスト2">
+            </form>
+          </div>
+          
+
           <div class='after_event'>
             <ul class='horizontal btn_disabled'>
-            <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">タブ１</a></li>
+              <?php if(!isset($_GET['tab'])){ ?>
+              <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">タブ１</a></li>
+              <?php }else { ?>
+              <li><a href="#tab-1" id="tab1" class="tab background_white font_size">タブ１</a></li>
+              <?php } ?>
+
+              <?php if(isset($_GET['tab']) && $_GET['tab']=='tab1'){?>
+            <li><a href="#tab-2" id="tab2" class="tab background_white font_size div_border">タブ２</a></li>
+            <?php }else { ?>
             <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
-            <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
+            <?php } ?>
+
+            <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){?>
+            <li><a href="#tab-3" id="tab3" class="tab background_white font_size div_border">タブ３</a></li>
             </ul>
+            <?php }else{ ?>
+              <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
+            </ul>
+            <?php } ?>
+            <?php if(!isset($_GET['tab'])){ ?>
+              <div id='tab-1'>
 
-            <div id='tab-1'>
+                <?php
+                  $i=0;
+                  for($j=0; $j<=$cnt_l1; $j++) {
+                    $div = (int)(($j+1) / ($DEV+1)); //商
+                    // echo "j: " . $j . '<br>';
+                    // echo "cnt_l1: " . $cnt_l1 . '<br>';
+                    // echo "cnt_l1_div: " . $cnt_l1_div . '<br>';
+                    // echo "cnt_l1_sur: " . $cnt_l1_sur . '<br>';
 
-              <?php
-                $i=0;
-                for($j=0; $j<=$cnt_l1; $j++) {
-                  $div = (int)(($j+1) / ($DEV+1)); //商
-                  // echo "j: " . $j . '<br>';
-                  // echo "cnt_l1: " . $cnt_l1 . '<br>';
-                  // echo "cnt_l1_div: " . $cnt_l1_div . '<br>';
-                  // echo "cnt_l1_sur: " . $cnt_l1_sur . '<br>';
+                    if($j % $DEV == 0){ //rowタグの開始を出力するタイミングを制御
+                      $i = $j + $DEV - 1; //rowのタグの終了を出力するタイミングを制御
+                      // echo "i: " . $i . '<br>';
 
-                  if($j % $DEV == 0){ //rowタグの開始を出力するタイミングを制御
-                    $i = $j + $DEV - 1; //rowのタグの終了を出力するタイミングを制御
-                    // echo "i: " . $i . '<br>';
+                 ?>
+                  <div class="row dev_border">
+                    <?php } ?>
 
-               ?>
-                    <div class="row dev_border">
-                  <?php } ?>
+                    <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab1" class="col-lg-2 text-center tabs" id="tab1_<?php echo $j+1; ?>">
+                      <?php echo $results_l1[$j]['category_l1']; ?>
+                    </a>
 
-                  <div class="col-lg-2 text-center tabs" id="tab1_<?php echo $j; ?>">
-                    <?php echo $results_l1[$j]['category_l1']; ?>
-                  </div>
+                    <?php
+                      // rowの閉じタグを出力するタイミンを記述
+                      // 商-1までは６個のcolができたら、rowを出力
+                      // $jが商と一致するとき、剰余数のcolができたら、rowを出力
+                      if( ($j == $i && $div < $cnt_l1_div) || ($cnt_l1_sur == ($j % $DEV) && $div == $cnt_l1_div) ) {
+                        // echo "--j: " . $j . '<br>';
+                        // echo "--div: " . $div . '<br>';
+                    ?>
 
-                  <?php
-                    // rowの閉じタグを出力するタイミンを記述
-                    // 商-1までは６個のcolができたら、rowを出力
-                    // $jが商と一致するとき、剰余数のcolができたら、rowを出力
-                    if( ($j == $i && $div < $cnt_l1_div) || ($cnt_l1_sur == ($j % $DEV) && $div == $cnt_l1_div) ) {
-                      // echo "--j: " . $j . '<br>';
-                      // echo "--div: " . $div . '<br>';
-                  ?>
+                    </div><!-- row -->
 
-                  </div><!-- row -->
+                  <?php } ?><!-- if -->
+                <?php } ?><!-- for -->
+              </div>
+            <?php } ?>
 
-                <?php } ?><!-- if -->
-              <?php } ?><!-- for -->
-            </div>
 
-            <div id='tab-2'>
-              <?php
-                $i=0;
-                for($j=0; $j<=$cnt_l2; $j++) {
 
-                $div = (int)(($j+1) / ($DEV+1));
-                // echo "div-default: " . $j . '<br>';
-                // echo "cnt_l2: " . $cnt_l2 . '<br>';
-                // echo "cnt_l2_div: " . $cnt_l2_div . '<br>';
-                // echo "cnt_l2_sur: " . $cnt_l2_sur . '<br>';
-                  if($j % $DEV == 0){
-                    $i = $j + $DEV - 1;
-              ?>
-                    <div class="row dev_border">
-                  <?php } ?>
+            <?php if(isset($_GET['tab']) && $_GET['tab']=='tab1'){?>
 
-                  <div class="col-lg-2 text-center tabs" id="tab2_<?php echo $j ?>">
-                    <?php echo $results_l2[$j]['category_l2']; ?>
-                  </div>
+              <div id='tab-2'>
+                <?php
+                  $i=0;
+                  for($j=0; $j<=$cnt_l2; $j++) {
 
-                 <?php if( ($j == $i && $div < $cnt_l2_div) || ($cnt_l2_sur == ($j % $DEV) && $div == $cnt_l2_div) ) { ?>
+                  $div = (int)(($j+1) / ($DEV+1));
+                  // echo "div-default: " . $j . '<br>';
+                  // echo "cnt_l2: " . $cnt_l2 . '<br>';
+                  // echo "cnt_l2_div: " . $cnt_l2_div . '<br>';
+                  // echo "cnt_l2_sur: " . $cnt_l2_sur . '<br>';
+                    if($j % $DEV == 0){
+                      $i = $j + $DEV - 1;
+                ?>
+                      <div class="row dev_border">
+                    <?php } ?>
 
-                  </div><!-- row-->
-                <?php } ?><!-- if -->
-              <?php } ?><!-- for -->
-            </div><!-- tab-2 -->
+                    <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab2" class="col-lg-2 text-center tabs" id="tab2_<?php echo $j+1 ?>">
+                      <?php echo $results_l2[$j]['category_l2']; ?>
+                    </a>
+
+                   <?php if( ($j == $i && $div < $cnt_l2_div) || ($cnt_l2_sur == ($j % $DEV) && $div == $cnt_l2_div) ) { ?>
+                    </div><!-- row-->
+                  <?php } ?><!-- if -->
+
+                <?php } ?><!-- for -->
+              </div><!-- tab2 -->
+
+            <?php } ?>
+
+
+            <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){?>
 
             <div id='tab-3'>
-            
-              <?php
+                            <?php
                 $i=0;
                 for($j=0; $j<=$cnt_l3; $j++) {
                   $div = (int)(($j+1) / ($DEV+1));
@@ -413,15 +441,19 @@ foreach ($results_l3 as $result_l3) {
                     <div class="row dev_border">
                   <?php } ?>
                     <!-- <div class="col-lg-2 text-center tabs" id="tab3_<?php echo $i ?>"> -->
-                    <div class="col-lg-2 text-center tabs" id="tab3_<?php echo $j ?>">
+                    <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab3" class="col-lg-2 text-center tabs" id="tab3_<?php echo $j+1 ?>">
                       <?php echo $results_l3[$j]['word']; ?>
-                    </div>
+                    </a>
 
                   <?php if( ($j == $i && $div < $cnt_l3_div) || ($cnt_l3_sur == ($j % $DEV) && $div == $cnt_l3_div)){ ?>
                     </div>
                   <?php } ?>
               <?php } ?>
+
             </div><!-- tab-3 -->
+            <?php } ?>
+
+
           </div><!-- after_event -->
 
           <!-- </div> -->
@@ -438,56 +470,110 @@ foreach ($results_l3 as $result_l3) {
 <!--   <script type="text/javascript">
   introJs().start();
   </script> -->
+
+  <!-- カテゴリー分類 -->
   <script type="text/javascript">
-    $('.after_event').tabslet({
-    active: 1,
-    animation: true
+
+    $(document).ready(function(){
+      console.log('active_1');
+      $('.after_event').tabslet({
+      active: 1,
+      animation: true
+      });
+
+      $('.tabs').click(function(e){
+        var id = this.id;
+        var data = id.split('_');
+        var level = data[0];
+        var level_id = data[1];
+        
+        alert(level);
+        alert(level_id);
+
+        if(level == 'tab1') {
+          // $.get('home_function/get_home_l2.php',
+          //   {
+          //     level : level,
+          //     level_id : level_id
+          //   },
+          //   changeHtml
+          // );
+          // function changeHtml(result){
+          //   // $('.output').text(result);
+          //   // $('.output').html(result);
+          //   // $('#tab-2').html(result);
+          //   // alert(result);
+          //   // $('.output').html(result);
+            
+          //   // $(".output").html($('#tab-2', $(result)).html());
+          //    var imgArea = $('<div/>').append($.parseHTML(result)).find('.row');
+          //    // alert(imgArea);
+          //   // $(".output").text(imgArea); 
+          //   $("#tab-2").html(imgArea);
+
+          // }
+          console.log('tab_1');
+          $('#tab2').addClass('div_border');
+          $('#tab1').removeClass('div_border');
+          $('#tab2').click();
+
+        }
+
+        if(level == 'tab2') {
+          // $.get('home_function/get_home_l3.php',
+          //   {
+          //     level : level,
+          //     level_id : level_id
+          //   },
+          //   changeHtml
+          // );
+          // function changeHtml(result){
+          //   // $('.output').text(result);
+          //   // $('.output').html(result);
+          //   // $('#tab-3').html(result);
+          //   var imgArea = $('<div/>').append($.parseHTML(result)).find('.row');
+          //    // alert(imgArea);
+          //   // $(".output").text(imgArea); 
+          //   $("#tab-3").html(imgArea);
+          // }
+          console.log('tab-2');
+          $('#tab3').addClass('div_border');
+          $('#tab2').removeClass('div_border');
+          $('#tab3').click();
+        }
+
+        if(level == 'tab3') {
+          console.log('tab-3');
+          console.log('level:%s, level_id:%s', level,level_id);
+          // $.get('home_function/get_home_l3.php',
+          //   {
+          //     level : level,
+          //     level_id : level_id
+          //   },
+          //   changeHtml
+          // );
+          // function changeHtml(result){
+          //   $('.output').text(result);
+          // }
+          alert("3階層目");
+        }
+
+      });
     });
-
-    $('.tabs').click(function(e){
-      var id = this.id;
-      var data = id.split('_');
-      var level = data[0];
-      var level_id = data[1];
-      // alert(id);
-      // alert(level);
-      if(level == 'tab1') {
-        console.log('tab-1');
-        $('#tab2').addClass('div_border');
-        $('#tab1').removeClass('div_border');
-        $('#tab2').click();
-      }
-
-      if(level == 'tab2') {
-        console.log('tab-2');
-        $('#tab3').addClass('div_border');
-        $('#tab2').removeClass('div_border');
-        $('#tab3').click();
-      }
-
-      if(level == 'tab3') {
-        // console.log('tab-3');
-        // console.log('level:%s, level_id:%s', level,level_id);
-        // $.get('get_home.php',
-        //   {
-        //     level : level,
-        //     level_id : level_id
-        //   },
-        //   changeHtml
-        // );
-        // function changeHtml(result){
-        //   $('.output').text(result);
-        // }
-        alert("3階層目");
-      }
-
-    });
-
-
-
   </script>
+
+
+
   <script type="text/javascript" src="../assets/js/home.js">
-    
   </script>
+  <!-- 表示 -->
+  <script type="text/javascript">
+    $('#add_btn').on('click', function () {
+      $("#tolists").slideToggle();
+    });
+  </script>
+
+
+
   </body>
 </html>

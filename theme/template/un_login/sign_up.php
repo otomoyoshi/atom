@@ -99,7 +99,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <?php echo require('../child_icon.php'); ?>
+    <?php require('../child_icon.php'); ?>
 
 
     </div>

@@ -61,11 +61,11 @@ while(1){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <?php echo require('../child_icon.php'); ?>
+    <?php require('../child_icon.php'); ?>
     <title>旅にもつ</title>
 
-  <?php require('../child_load_css.php'); ?>
-  <link rel="stylesheet" type="text/css" href="../../assets/css/mypage.css">
+    <?php require('../child_load_css.php'); ?>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/mypage.css">
 
   </head>
 

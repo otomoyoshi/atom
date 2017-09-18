@@ -23,7 +23,7 @@
       exit();
     }
   // ユーザID表示
-  echo "ユーザ： " . $_SESSION['login_user']['id'] .'<br>';
+  // echo "ユーザ： " . $_SESSION['login_user']['id'] .'<br>';
 
     //ユーザーとリストのリンク
   $sql= 'SELECT `l`.*,`m`.`account_name`,`m`.`id`
@@ -50,7 +50,7 @@
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
   $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
-  var_dump($list_data) . '<br>';
+  // var_dump($list_data) . '<br>';
 
   // ファイル選択ボタンが押された時
   if(!empty($_FILES)){
@@ -199,7 +199,7 @@
     //アイテムにデータがあるとき
     if (isset($items)) {
       if ($items[$i]['categories_id'] == '0') {
-          //両方持ち込みの場合 
+          //両方持ち込みの場合
           $item_boths[] = $items[$i];
       }
       // 持ち込みの場合

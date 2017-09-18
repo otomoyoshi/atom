@@ -1,6 +1,6 @@
 <?php
 // session_start();
-require('../../../developer/dbconnect.php');
+// require('../../../developer/dbconnect.php');
 
   //ログインチェック
   if (!isset($_SESSION['login_user']['id'])) {
