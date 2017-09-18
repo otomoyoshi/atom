@@ -3,7 +3,8 @@
   require('lists_sql.php');
 
   // ユーザーが新規でリストを作成する際
-  if ($list_data['name'] == '') {
+
+  if ($is_image['name'] == '') {
 
     $sql = 'SELECT COUNT(*) FROM `atom_lists` WHERE `members_id`=?';
     $data = array($_SESSION['login_user']['id']);
@@ -43,6 +44,7 @@
     // if (isset($_SESSION['login_user'])){ //ログインしてるとき
     //   // echo "login success";
     //   // require('login_header.php');
+
     // } else {// ログインしてないとき
     //   // echo "login fail";
     //   require('header.php');
@@ -75,10 +77,10 @@
           <div class="col-lg-offset-2 col-lg-5 col-md-12 col-sm-12 col-xs-12">
             <form action="" method="POST">
 
-            <?php if($list_data['name'] != ''): ?>
+            <?php if($is_image['name'] != ''): ?>
               <!-- リスト名が登録されている場合、そのリスト名を表示する -->
               <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
-              data-intro="リスト名を入力してね" data-step="1" value="<?php echo $list_data['name']; ?>">
+              data-intro="リスト名を入力してね" data-step="1" value="<?php echo $is_image['name']; ?>">
 
             <?php else: ?>
               <!-- リスト名が登録されていない場合、自動的にリスト名がvalueに入る -->
@@ -86,20 +88,15 @@
               data-intro="リスト名を入力してね" data-step="1" value="リスト  <?php echo $list_amount; ?>">
 
             <?php endif; ?>
-
-                <input type="text" name="created" placeholder="作成日時" class="form-control created_location" value="<?php echo $list_data['created']; ?>">
-
             </div>
               <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
 
+<!-- <<<<<<< HEAD -->
             <?php if (isset($errors['extension'])) { ?>
               <div class="alert alert-danger">
                 拡張子は、jpg,png,gifの画像を選択ください
               </div>
             <?php } ?>
-
-
-          
 
             <label>
 
@@ -129,18 +126,50 @@
         <div class="row">
           <div class="col-sm-12 col-md-12 col-xs-12">
             <hr class="under_line1">
+
           </div>
         </div>
         <!-- リストの大枠を作って行く -->
-        <div class="row">
-          <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center">
+        <div class="row height_fix">
+          <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center fix_to_search">
+            <hr class="under_line1">
             <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
-
-            <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索">
+            <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索" name="list_search_btn">
           </div>
 
         </div>
-
+        <?php if(isset($tmp_searchs) && !empty($_POST['list_search_btn']) && count($tmp_searchs) > 1){ ?>
+          <div class="row">
+            <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
+              <ul class="list-group" id="list_design">
+                <label class="width list_searchs">
+                  <h3 class="word_titles">複数件の結果が見つかりました</h3>
+                  <li class="list-group-item list_property">
+                    <h2 class="judge_show_icon">もしかして？</h2><br>
+                    <?php if(isset($vague_searchs)): ?>
+                      <?php foreach($vague_searchs as $tss): ?>
+                        <input type="hidden" name="vague_search_content" value="<?php echo $tss['word'] ?>">
+                        <input type="submit" name="vague_search_result" value="<?php echo $tss['word'] ?>" 
+                        class ="vanish_border"><br>
+                      <?php endforeach; ?>
+                    <?php endif; ?>
+                  </li>
+                </label>
+              </ul>
+            </div>
+          </div>
+        <?php } 
+        //以下に検索・曖昧検索共に一致しない場合について書いていく
+        elseif (!isset($tmp_searchs) && !empty($_POST['list_search_btn'])){ ?>
+          <div class="row">
+            <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding vargues_position">
+              <h5 class="undefined_word">検索結果が見つかりませんでした</h5>
+              <h7 class= "undefined_category">(検索ワード：<?php echo $_POST['list_search']?>)</h7>
+              <input type="button" class = "moving_category btn btn_atom" value="カテゴリーから探す"><br>
+              <input type="button" class = "moving_list_direct btn btn_atom" value="自分で分類して追加する">
+            </div>
+          </div>
+        <?php }// elseif ($items[$i]['categories_id'] != '0' && $items[$i]['categories_id'] != '1' && $items[$i]['categories_id'] != '2' && $items[$i]['categories_id'] == '3') { ?>
         <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
           <div class="both_contents well col-lg-4">
             <!-- BOTHの欄を作る -->
@@ -217,8 +246,9 @@
                     <li class="list-group-item list_float">
                       <input type="checkbox" name="che" class="left checkbox">
                       <span class="checkbox-icon"></span>
-                      <?php echo $item_azukeire['content']; ?>
-                      <?php  ?>
+                      <!-- <input type="text" class="list_input" name="" value="<?php echo $item_azukeire['content']; ?>"> -->
+                      <span class="list_content"><?php echo $item_azukeire['content']; ?></span>
+                      
                         <!-- 削除処理を書いていく -->
                         <!-- <a href="delete_category.php?id=<?php echo $item_azukeire['id']; ?>"> -->
                         <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
@@ -268,6 +298,12 @@
     </script>
   <?php } ?>
   <script type="text/javascript" src="../assets/js/lists.js"></script>
+  
+  <script>
+   $(window).on('beforeunload', function(e) {
+    return '保存されていない内容は破棄されます。 本当によろしいですか？ ';
+    });
+  </script>
 
     <!-- remodal -->
   <script type="text/javascript">

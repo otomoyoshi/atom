@@ -1,6 +1,6 @@
 <?php 
-require('../../../developer/dbconnect.php');
 session_start();
+require('../../../developer/dbconnect.php');
 $errors = array();
 $email = '';
 
