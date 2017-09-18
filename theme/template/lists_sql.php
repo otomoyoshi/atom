@@ -50,7 +50,7 @@
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
   $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
-  // var_dump($list_data) . '<br>';
+  var_dump($list_data) . '<br>';
 
   // ファイル選択ボタンが押された時
   if(!empty($_FILES)){
@@ -202,7 +202,6 @@
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
       $vargues = $stmt->fetch(PDO::FETCH_ASSOC); //判定結果を取得
-      var_dump($vargues);
 
       $sql= 'INSERT INTO `atom_items` SET `categories_id` =?,
                                           `content` = ?,

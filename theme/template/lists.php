@@ -137,7 +137,9 @@
               <input type="button" class = "moving_list_direct btn btn_atom" value="自分で分類して追加する">
             </div>
           </div>
-        <?php }// elseif ($items[$i]['categories_id'] != '0' && $items[$i]['categories_id'] != '1' && $items[$i]['categories_id'] != '2' && $items[$i]['categories_id'] == '3') { ?>
+        <?php } elseif ($vargues["baggage_classify"]=="3" || $list_data["categories_id"]=="3") { ?>
+
+        <?php } ?>
         <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
           <div class="both_contents well col-lg-4">
             <!-- BOTHの欄を作る -->
