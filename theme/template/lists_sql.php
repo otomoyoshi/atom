@@ -23,7 +23,7 @@
       exit();
     }
   // ユーザID表示
-  echo "ユーザ： " . $_SESSION['login_user']['id'] .'<br>';
+  // echo "ユーザ： " . $_SESSION['login_user']['id'] .'<br>';
 
     //ユーザーとリストのリンク
   $sql= 'SELECT `l`.*,`m`.`account_name`,`m`.`id`
@@ -251,7 +251,7 @@
     //アイテムにデータがあるとき
     if (isset($items)) {
       if ($items[$i]['categories_id'] == '0') {
-          //両方持ち込みの場合 
+          //両方持ち込みの場合
           $item_boths[] = $items[$i];
       }
       // 持ち込みの場合

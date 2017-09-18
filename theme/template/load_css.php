@@ -41,3 +41,7 @@
 <!-- Tooltip -->
 <link rel="stylesheet" type="text/css" href="../assets/js/tooltipster-master/dist/css/tooltipster.main.min.css">
 <link rel="stylesheet" type="text/css" href="../assets/js/tooltipster-master/dist/css/tooltipster.bundle.min.css">
+
+<!-- remodal -->
+<link rel="stylesheet" type="text/css" href="../assets/Remodal-1.1.1/dist/remodal.css">
+<link rel="stylesheet" type="text/css" href="../assets/Remodal-1.1.1/dist/remodal-default-theme.css">

@@ -3,8 +3,9 @@
   require('lists_sql.php');
 
   // ユーザーが新規でリストを作成する際
+
   if ($is_image['name'] == '') {
-    
+
     $sql = 'SELECT COUNT(*) FROM `atom_lists` WHERE `members_id`=?';
     $data = array($_SESSION['login_user']['id']);
     $stmt = $dbh->prepare($sql);
@@ -37,23 +38,37 @@
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
 
   <?php
-    // // $ini = parse_ini_file("config.ini");
-    // // $is_login = $ini['is_login'];
-    // // $is_login = 0; //ログインしてるときを１とする（仮）
+    // $ini = parse_ini_file("config.ini");
+    // $is_login = $ini['is_login'];
+    // $is_login = 0; //ログインしてるときを１とする（仮）
     // if (isset($_SESSION['login_user'])){ //ログインしてるとき
     //   // echo "login success";
-    //   require('login_header.php');
+    //   // require('login_header.php');
+
     // } else {// ログインしてないとき
     //   // echo "login fail";
     //   require('header.php');
     // }
   ?>
+<div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
+    <button data-remodal-action="close" class="remodal-close"></button>
+  <!-- <form id="img_form"> -->
 
-<!-- 画像の変更 -->
-<form method="POST" action="" enctype="multipart/form-data">
-  <input type="file" name="image">
-  <input type="submit" value="send">
-</form>
+      <h1>画像変更</h1>
+      <!-- <p>コンテンツを記述します。</p> -->
+      <form id="my_form">
+        <input type="file" name="image" data-url="../../list_image_path/">
+        <Button type="button" onclick="file_upload()">アップロード</Button>
+      </form>
+
+      <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+      <!-- <button data-remodal-action="confirm" class="remodal-confirm">OK</button> -->
+      <button type="button" data-remodal-action="confirm" class="remodal-confirm">画像の変更</button>
+  <!-- </form> -->
+</div>
+
+
+
  <div id="img">
     <div id="headerwrap" class="back">
       <div class="container">
@@ -76,26 +91,42 @@
             </div>
               <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
 
-                <?php if (isset($errors['extension'])) { ?>
-                  <div class="alert alert-danger">
-                    拡張子は、jpg,png,gifの画像を選択ください
-                  </div>
-                <?php } ?>
-                <label>
-                <!-- 画像がデータベースに登録されているとき -->
-                <?php if ($is_image['list_image_path'] != NULL) { ?>
-                  <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
-                  <p class="set_profile">
-                    <?php echo $list_data['account_name']; ?>
-                  </p>
-                <!-- 画像がデータベースに登録されてないとき -->
-                <?php } else {?>
-                  <div>デフォルト画像を表示</div>
-                    <p class="set_profile">
-                    <?php echo $list_data['account_name']; ?>
-                    </p>
-                <?php } ?>
-                </label>
+<!-- <<<<<<< HEAD -->
+            <?php if (isset($errors['extension'])) { ?>
+              <div class="alert alert-danger">
+                拡張子は、jpg,png,gifの画像を選択ください
+              </div>
+            <?php } ?>
+
+            <label>
+
+
+              <a data-remodal-target="modal">
+              <!-- 画像がデータベースに登録されているとき -->
+              <?php if ($is_image['list_image_path'] != NULL) { ?>
+                <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
+                <p class="set_profile">
+                  <?php echo $list_data['account_name']; ?>
+                </p>
+              </a>
+
+            <!-- 画像がデータベースに登録されてないとき -->
+            <?php } else {?>
+            <a data-remodal-target="modal">
+              <div>デフォルト画像を表示</div>
+                <p class="set_profile">
+                <?php echo $list_data['account_name']; ?>
+                </p>
+            </a>
+            <?php } ?>
+              
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-xs-12">
+            <hr class="under_line1">
+
           </div>
         </div>
         <!-- リストの大枠を作って行く -->
@@ -105,6 +136,7 @@
             <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
             <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索" name="list_search_btn">
           </div>
+
         </div>
         <?php if(isset($tmp_searchs) && !empty($_POST['list_search_btn']) && count($tmp_searchs) > 1){ ?>
           <div class="row">
@@ -160,7 +192,7 @@
                         <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_both['id'];?>">
                           <i class="fa fa-trash right_position"></i>
                         </a>
-                    <!--編集ボタン     
+                    <!--編集ボタン
                         <span>
                          <i class="fa fa-pencil-square-o right"></i>
                         </span> -->
@@ -191,7 +223,7 @@
                       <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_carry_in['id'];?>">
                         <i class="fa fa-trash right_position"></i>
                       </a>
-           <!--       編集ボタン     
+           <!--       編集ボタン
                       <span>
                        <i class="fa fa-pencil-square-o right"></i>
                       </span> -->
@@ -250,6 +282,10 @@
 
           </form>
         </div>
+        <div>
+          
+
+        </div>
       </div>
     </div>
   </div>
@@ -271,6 +307,84 @@
     });
   </script>
 
+    <!-- remodal -->
+  <script type="text/javascript">
+    $(document).on('opening', '.remodal', function () {
+      console.log('Modal is opening');
+    });
+
+    $(document).on('opened', '.remodal', function () {
+      console.log('Modal is opened');
+    });
+
+    $(document).on('closing', '.remodal', function (e) {
+
+      // Reason: 'confirmation', 'cancellation'
+      console.log('Modal is closing' + (e.reason ? ', reason: ' + e.reason : ''));
+    });
+
+    $(document).on('closed', '.remodal', function (e) {
+
+      // Reason: 'confirmation', 'cancellation'
+      console.log('Modal is closed' + (e.reason ? ', reason: ' + e.reason : ''));
+    });
+
+    $(document).on('confirmation', '.remodal', function () {
+      console.log('Confirmation button is clicked');
+       var formdata = new FormData($('#fileupload').get(0));
+       console.log(formdata);
+
+
+
+     // GETでid取得
+      var arg  = new Object;
+       url = location.search.substring(1).split('&');
+
+      for(i=0; url[i]; i++) {
+          var k = url[i].split('=');
+          arg[k[0]] = k[1];
+      }
+
+      var get_id = arg.id;
+      console.log(get_id);
+
+
+      // alert("ajax_finish");
+      // window.location.href='';
+
+    });
+
+    $(document).on('cancellation', '.remodal', function () {
+      console.log('Cancel button is clicked');
+
+    });
+  </script>
+
+<!-- btnが押されたとき -->
+  <script type="text/javascript">
+    function file_upload()
+      {
+          // フォームデータを取得
+          var formdata = new FormData($('#my_form').get(0));
+
+          // POSTでアップロード
+          $.ajax({
+              url  : "http://localhost/atom/theme/template/get_image.php",
+              type : "POST",
+              data : formdata,
+              cache       : false,
+              contentType : false,
+              processData : false,
+              dataType    : "html"
+          })
+          .done(function(data, textStatus, jqXHR){
+              alert(data);
+          })
+          .fail(function(jqXHR, textStatus, errorThrown){
+              alert("fail");
+          });
+      }
+  </script>
 </body>
 </html>
 
