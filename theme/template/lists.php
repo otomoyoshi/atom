@@ -141,7 +141,6 @@
                 <label class="width list_searchs">
                   <h3 class="word_titles">複数件の結果が見つかりました</h3>
                   <li class="list-group-item list_property">
-                    <h2 class="judge_show_icon">もしかして？</h2><br>
                     <?php if(isset($vague_searchs)): ?>
                       <?php foreach($vague_searchs as $tss): ?>
                         <input type="hidden" name="vague_search_content" value="<?php echo $tss['word'] ?>">

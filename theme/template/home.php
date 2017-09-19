@@ -50,7 +50,7 @@ if (isset($_GET['list_search_id']) && $_GET['list_search_id'] != '') {
           }
         }
       }else{ // 検索結果が存在しない時
-        $no_result = 'no_result';
+        $no_result = 'no_result';//ここにカテゴリーの裏を書く
       }
 
     // フォームの空チェック 
