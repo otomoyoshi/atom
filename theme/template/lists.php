@@ -15,6 +15,7 @@
     $list_amount = $rec['COUNT(*)'];
   }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -58,12 +59,11 @@
       <!-- <p>コンテンツを記述します。</p> -->
       <form id="my_form">
         <input type="file" name="image" data-url="../../list_image_path/">
-        <Button type="button" onclick="file_upload()">アップロード</Button>
+        <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+        <Button type="button" data-remodal-action="confirm" class="remodal-confirm" onclick="file_upload()">画像変更</Button>
       </form>
-
-      <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
       <!-- <button data-remodal-action="confirm" class="remodal-confirm">OK</button> -->
-      <button type="button" data-remodal-action="confirm" class="remodal-confirm">画像の変更</button>
+      <!-- <button type="button" data-remodal-action="confirm" class="remodal-confirm">画像の変更</button> -->
   <!-- </form> -->
 </div>
 
@@ -98,10 +98,10 @@
               </div>
             <?php } ?>
 
+            <!-- <div id="output"></div> -->
             <label>
 
-
-              <a data-remodal-target="modal">
+              <a id="list_img" data-remodal-target="modal">
               <!-- 画像がデータベースに登録されているとき -->
               <?php if ($is_image['list_image_path'] != NULL) { ?>
                 <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
@@ -112,8 +112,8 @@
 
             <!-- 画像がデータベースに登録されてないとき -->
             <?php } else {?>
-            <a data-remodal-target="modal">
-              <div>デフォルト画像を表示</div>
+            <a id="list_img" data-remodal-target="modal">
+              <div >デフォルト画像を表示</div>
                 <p class="set_profile">
                 <?php echo $list_data['account_name']; ?>
                 </p>
@@ -308,7 +308,7 @@
   </script>
 
     <!-- remodal -->
-  <script type="text/javascript">
+<!--   <script type="text/javascript">
     $(document).on('opening', '.remodal', function () {
       console.log('Modal is opening');
     });
@@ -358,7 +358,7 @@
       console.log('Cancel button is clicked');
 
     });
-  </script>
+  </script> -->
 
 <!-- btnが押されたとき -->
   <script type="text/javascript">
@@ -366,6 +366,20 @@
       {
           // フォームデータを取得
           var formdata = new FormData($('#my_form').get(0));
+
+          // GETでid取得
+          var arg  = new Object;
+           url = location.search.substring(1).split('&');
+
+          for(i=0; url[i]; i++) {
+              var k = url[i].split('=');
+              arg[k[0]] = k[1];
+          }
+
+          var get_id = arg.id;
+          console.log(get_id);
+
+          // window.sessionStorage.setItem('lists_id',get_id);
 
           // POSTでアップロード
           $.ajax({
@@ -378,7 +392,11 @@
               dataType    : "html"
           })
           .done(function(data, textStatus, jqXHR){
-              alert(data);
+              // alert(data);
+              var imgArea = $('<div/>').append($.parseHTML(data)).find('#list_img');
+             // alert(imgArea);
+              // $("#output").html(imgArea);
+              $("#list_img").html(imgArea);
           })
           .fail(function(jqXHR, textStatus, errorThrown){
               alert("fail");
