@@ -21,6 +21,8 @@
     if (!isset($_GET['id'])) {
       header('Location: login/myPage.php');
       exit();
+    } else {
+      $_SESSION['login_user']['lists_id'] = $_GET['id'];
     }
   // ユーザID表示
   // echo "ユーザ： " . $_SESSION['login_user']['id'] .'<br>';
