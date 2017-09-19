@@ -135,7 +135,6 @@ if (isset($_GET['list_search_id']) && $_GET['list_search_id'] != '') {
           $data = array($_SESSION['login_user']['id']);
           $stmt = $dbh->prepare($sql);
           $stmt->execute($data);
-        }
 
         while (1) {
         $rec = $stmt->fetch(PDO::FETCH_ASSOC); //ユーザーが作成している複数のリストのじょうほうを取得
@@ -145,6 +144,7 @@ if (isset($_GET['list_search_id']) && $_GET['list_search_id'] != '') {
         $user_lists[] = $rec;
       }
       }
+    }
     }
 
 // 曖昧検索の結果からなにかしらが選択された時
