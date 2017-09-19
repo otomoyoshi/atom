@@ -6,12 +6,14 @@
 	/*max-width: 100%;*/
 	/*height: auto;*/
 }
-.text_position{
-	text-align: center;
-}
+
 .undefined_word{
 	color: black;
 	margin-top: 20px;
+}
+
+#list_img{
+	cursor: pointer;
 }
 
 #headerwrap{
