@@ -7,7 +7,7 @@
   $item_azukeires = array();
   $item_carry_ins = array();
   $list_name = '';
-
+  $vargues = array();
   //$banned_baggage = '';
   // $_GET['id'] = '3'; //リストid
 
@@ -21,6 +21,8 @@
     if (!isset($_GET['id'])) {
       header('Location: login/myPage.php');
       exit();
+    } else {
+      $_SESSION['login_user']['lists_id'] = $_GET['id'];
     }
   // ユーザID表示
   // echo "ユーザ： " . $_SESSION['login_user']['id'] .'<br>';
@@ -50,7 +52,7 @@
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
   $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
-  var_dump($list_data) . '<br>';
+  // var_dump($list_data) . '<br>';
 
   // ファイル選択ボタンが押された時
   if(!empty($_FILES)){
@@ -136,6 +138,7 @@
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
       $search = $stmt->fetch(PDO::FETCH_ASSOC); //判定結果を取得
+      var_dump($search);
 
       $sql = 'SELECT * FROM `atom_searchs` WHERE `word` LIKE ?';
       $data = array('%' . $_POST['list_search'] . '%');
@@ -234,7 +237,34 @@
   }
 
   $is_image = ''; //画像が存在するか確認する
-
+  //持ち込み預け入れボタンが押された時にリストに追加する処理を書いて行く
+  // 持ち込み・預け入れに追加する場合
+  if (!empty($_POST['move_both'])) {
+    $sql= 'INSERT INTO `atom_items` SET `categories_id` =0,
+                                    `content` = ?,
+                                    `lists_id` = ?';
+    $data = array($_POST['undefined_to_lists'], $_GET['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt ->execute($data);
+  }
+  // 持ち込みに追加する場合
+  if (!empty($_POST['move_carry_in'])) {
+    $sql= 'INSERT INTO `atom_items` SET `categories_id` =1,
+                                    `content` = ?,
+                                    `lists_id` = ?';
+    $data = array($_POST['undefined_to_lists'], $_GET['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt ->execute($data);
+  }
+  // 預け入れに追加する場合
+  if (!empty($_POST['move_azukeire'])) {
+    $sql= 'INSERT INTO `atom_items` SET `categories_id` =2,
+                                    `content` = ?,
+                                    `lists_id` = ?';
+    $data = array($_POST['undefined_to_lists'], $_GET['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt ->execute($data);
+  }
   // itemのデータを全て取得
   $sql = 'SELECT * FROM `atom_items` WHERE `lists_id` = ?';
   $data = array($_GET['id']);

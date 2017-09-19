@@ -15,6 +15,7 @@
     $list_amount = $rec['COUNT(*)'];
   }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -41,14 +42,14 @@
     // $ini = parse_ini_file("config.ini");
     // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    // if (isset($_SESSION['login_user'])){ //ログインしてるとき
-    //   // echo "login success";
-    //   // require('login_header.php');
+    if (isset($_SESSION['login_user'])){ //ログインしてるとき
+      // echo "login success";
+      require('login_header.php');
 
-    // } else {// ログインしてないとき
-    //   // echo "login fail";
-    //   require('header.php');
-    // }
+    } else {// ログインしてないとき
+      // echo "login fail";
+      require('header.php');
+    }
   ?>
 <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
     <button data-remodal-action="close" class="remodal-close"></button>
@@ -58,12 +59,11 @@
       <!-- <p>コンテンツを記述します。</p> -->
       <form id="my_form">
         <input type="file" name="image" data-url="../../list_image_path/">
-        <Button type="button" onclick="file_upload()">アップロード</Button>
+        <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+        <Button type="button" data-remodal-action="confirm" class="remodal-confirm" onclick="file_upload()">画像変更</Button>
       </form>
-
-      <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
       <!-- <button data-remodal-action="confirm" class="remodal-confirm">OK</button> -->
-      <button type="button" data-remodal-action="confirm" class="remodal-confirm">画像の変更</button>
+      <!-- <button type="button" data-remodal-action="confirm" class="remodal-confirm">画像の変更</button> -->
   <!-- </form> -->
 </div>
 
@@ -98,10 +98,10 @@
               </div>
             <?php } ?>
 
+            <!-- <div id="output"></div> -->
             <label>
 
-
-              <a data-remodal-target="modal">
+              <a id="list_img" data-remodal-target="modal">
               <!-- 画像がデータベースに登録されているとき -->
               <?php if ($is_image['list_image_path'] != NULL) { ?>
                 <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
@@ -112,8 +112,8 @@
 
             <!-- 画像がデータベースに登録されてないとき -->
             <?php } else {?>
-            <a data-remodal-target="modal">
-              <div>デフォルト画像を表示</div>
+            <a id="list_img" data-remodal-target="modal">
+              <div >デフォルト画像を表示</div>
                 <p class="set_profile">
                 <?php echo $list_data['account_name']; ?>
                 </p>
@@ -124,10 +124,6 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-12 col-md-12 col-xs-12">
-            <hr class="under_line1">
-
-          </div>
         </div>
         <!-- リストの大枠を作って行く -->
         <div class="row height_fix">
@@ -164,14 +160,33 @@
           <div class="row">
             <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding vargues_position">
               <h5 class="undefined_word">検索結果が見つかりませんでした</h5>
-              <h7 class= "undefined_category">(検索ワード：<?php echo $_POST['list_search']?>)</h7>
-              <input type="button" class = "moving_category btn btn_atom" value="カテゴリーから探す"><br>
-              <input type="button" class = "moving_list_direct btn btn_atom" value="自分で分類して追加する">
+              <h7 class= "undefined_category">(検索ワード：<?php echo $_POST['list_search']?>)</h7><br>
+              <input type="submit" class = "moving_category btn btn_atom" value="カテゴリーから探す" name=""><br>
+              <input type="hidden" name="undefined_to_lists" value="<?php echo $_POST['list_search'] ?>">
+              <input type="submit" class = "moving_list_direct btn btn_atom" value="”持ち込み・預け入れリスト”に追加する" name="move_both">
+              <input type="submit" class = "moving_list_direct btn btn_atom" value="”持ち込みリスト”に追加する" name="move_carry_in">
+              <input type="submit" class = "moving_list_direct btn btn_atom" value="”預け入れリスト”に追加する" name="move_azukeire">
             </div>
           </div>
-        <?php } elseif ($vargues["baggage_classify"]=="3" || $list_data["categories_id"]=="3") { ?>
+            <?php } ?>
 
-        <?php } ?>
+            <?php
+            if (isset($_POST['vague_search_result'])) {
+              if (isset($vargues['baggage_classify'])) {       
+                if ($vargues['baggage_classify'] == '3') { ?>
+                <div class="alert alert-danger text_position">
+                  <?php echo '"'.$_POST['vague_search_result'].'"'; ?><span class="banned_explanation">は持ち込み・預け入れ共に不可です。</span>
+                </div>
+            <?php }}} ?>
+            <?php 
+            if (isset($_POST['list_search'])) {
+              if (isset($search['baggage_classify'])) {       
+                if ($search['baggage_classify'] == '3') { ?>
+                <div class="alert alert-danger text_position">
+                  <?php echo '"'.($_POST['list_search']).'"' ?><span class="banned_explanation">は持ち込み・預け入れ共に不可です。</span>
+                </div>
+            <?php }}} ?>
+
         <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
           <div class="both_contents well col-lg-4">
             <!-- BOTHの欄を作る -->
@@ -308,7 +323,7 @@
   </script>
 
     <!-- remodal -->
-  <script type="text/javascript">
+<!--   <script type="text/javascript">
     $(document).on('opening', '.remodal', function () {
       console.log('Modal is opening');
     });
@@ -358,7 +373,7 @@
       console.log('Cancel button is clicked');
 
     });
-  </script>
+  </script> -->
 
 <!-- btnが押されたとき -->
   <script type="text/javascript">
@@ -366,6 +381,20 @@
       {
           // フォームデータを取得
           var formdata = new FormData($('#my_form').get(0));
+
+          // GETでid取得
+          var arg  = new Object;
+           url = location.search.substring(1).split('&');
+
+          for(i=0; url[i]; i++) {
+              var k = url[i].split('=');
+              arg[k[0]] = k[1];
+          }
+
+          var get_id = arg.id;
+          console.log(get_id);
+
+          // window.sessionStorage.setItem('lists_id',get_id);
 
           // POSTでアップロード
           $.ajax({
@@ -378,7 +407,11 @@
               dataType    : "html"
           })
           .done(function(data, textStatus, jqXHR){
-              alert(data);
+              // alert(data);
+              var imgArea = $('<div/>').append($.parseHTML(data)).find('#list_img');
+             // alert(imgArea);
+              // $("#output").html(imgArea);
+              $("#list_img").html(imgArea);
           })
           .fail(function(jqXHR, textStatus, errorThrown){
               alert("fail");
