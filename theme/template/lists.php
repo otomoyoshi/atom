@@ -41,14 +41,14 @@
     // $ini = parse_ini_file("config.ini");
     // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    // if (isset($_SESSION['login_user'])){ //ログインしてるとき
-    //   // echo "login success";
-    //   // require('login_header.php');
+    if (isset($_SESSION['login_user'])){ //ログインしてるとき
+      // echo "login success";
+      require('login_header.php');
 
-    // } else {// ログインしてないとき
-    //   // echo "login fail";
-    //   require('header.php');
-    // }
+    } else {// ログインしてないとき
+      // echo "login fail";
+      require('header.php');
+    }
   ?>
 <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
     <button data-remodal-action="close" class="remodal-close"></button>
@@ -124,10 +124,6 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-12 col-md-12 col-xs-12">
-            <hr class="under_line1">
-
-          </div>
         </div>
         <!-- リストの大枠を作って行く -->
         <div class="row height_fix">
@@ -164,14 +160,33 @@
           <div class="row">
             <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding vargues_position">
               <h5 class="undefined_word">検索結果が見つかりませんでした</h5>
-              <h7 class= "undefined_category">(検索ワード：<?php echo $_POST['list_search']?>)</h7>
-              <input type="button" class = "moving_category btn btn_atom" value="カテゴリーから探す"><br>
-              <input type="button" class = "moving_list_direct btn btn_atom" value="自分で分類して追加する">
+              <h7 class= "undefined_category">(検索ワード：<?php echo $_POST['list_search']?>)</h7><br>
+              <input type="submit" class = "moving_category btn btn_atom" value="カテゴリーから探す" name=""><br>
+              <input type="hidden" name="undefined_to_lists" value="<?php echo $_POST['list_search'] ?>">
+              <input type="submit" class = "moving_list_direct btn btn_atom" value="”持ち込み・預け入れリスト”に追加する" name="move_both">
+              <input type="submit" class = "moving_list_direct btn btn_atom" value="”持ち込みリスト”に追加する" name="move_carry_in">
+              <input type="submit" class = "moving_list_direct btn btn_atom" value="”預け入れリスト”に追加する" name="move_azukeire">
             </div>
           </div>
-        <?php } elseif ($vargues["baggage_classify"]=="3" || $list_data["categories_id"]=="3") { ?>
+            <?php } ?>
 
-        <?php } ?>
+            <?php
+            if (isset($_POST['vague_search_result'])) {
+              if (isset($vargues['baggage_classify'])) {       
+                if ($vargues['baggage_classify'] == '3') { ?>
+                <div class="alert alert-danger text_position">
+                  <?php echo '"'.$_POST['vague_search_result'].'"'; ?><span class="banned_explanation">は持ち込み・預け入れ共に不可です。</span>
+                </div>
+            <?php }}} ?>
+            <?php 
+            if (isset($_POST['list_search'])) {
+              if (isset($search['baggage_classify'])) {       
+                if ($search['baggage_classify'] == '3') { ?>
+                <div class="alert alert-danger text_position">
+                  <?php echo '"'.($_POST['list_search']).'"' ?><span class="banned_explanation">は持ち込み・預け入れ共に不可です。</span>
+                </div>
+            <?php }}} ?>
+
         <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
           <div class="both_contents well col-lg-4">
             <!-- BOTHの欄を作る -->
