@@ -9,9 +9,18 @@ $judge_azukeire = '';
 $judge_carry_in = '';
 $no_result = '';
 
+// カテゴリーの3階層目を押したとき
+if(isset($_GET['tab']) && $_GET['tab']=='tab3'){
+
+  $sql = 'SELECT * FROM `atom_searchs` WHERE `id`=?';
+  $data = array($_GET['level_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt ->execute($data);
+  $search = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 
 //検索ボタンが押されたとき
-
 if (isset($_GET['list_search_id']) && $_GET['list_search_id'] != '') {
       $sql= 'INSERT INTO `atom_searched_words` SET `word` = ?,
                             `created` = NOW()';
@@ -24,7 +33,7 @@ if (isset($_GET['list_search_id']) && $_GET['list_search_id'] != '') {
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
 
-      
+
       while (1) {
         $rec = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
         if ($rec == false) {
@@ -34,7 +43,7 @@ if (isset($_GET['list_search_id']) && $_GET['list_search_id'] != '') {
       }
 
       // var_dump($search);
-      // var_dump($tmp_searchs);
+      var_dump($tmp_searchs);
       // echo count($tmp_searchs);
 
       if (isset($tmp_searchs)) { // 検索結果が存在する時
