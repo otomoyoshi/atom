@@ -156,7 +156,7 @@
           </div>
         <?php } 
         //以下に検索・曖昧検索共に一致しない場合について書いていく
-        elseif (!isset($tmp_searchs) && !empty($_POST['list_search_btn'])){ ?>
+        elseif (!isset($tmp_searchs) && !empty($_POST['list_search_btn']) && $_POST['list_search'] != ''){ ?>
           <div class="row">
             <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding vargues_position">
               <h5 class="undefined_word">検索結果が見つかりませんでした</h5>
