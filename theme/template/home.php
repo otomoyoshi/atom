@@ -43,7 +43,7 @@ if (isset($_GET['list_search_id']) && $_GET['list_search_id'] != '') {
       }
 
       // var_dump($search);
-      var_dump($tmp_searchs);
+      // var_dump($tmp_searchs);
       // echo count($tmp_searchs);
 
       if (isset($tmp_searchs)) { // 検索結果が存在する時
@@ -165,7 +165,7 @@ if (isset($_GET['id']) && !isset($tmp_searchs) && empty($no_result)) {
 
   // ↓ があると検索結果が表示される
   $search = $stmt->fetch(PDO::FETCH_ASSOC);
-// >>>>>>> 94474ac3b8cfe610145eb446203442c08e369b50
+
 }
 
 
@@ -253,7 +253,7 @@ while (1) {
   }
 
 
-  // var_dump($results);
+  var_dump($results_l3);
 
 foreach ($results_l3 as $result_l3) {
   // echo $result_l3['word'] .'<br>';
