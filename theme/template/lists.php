@@ -118,7 +118,7 @@
                 </p>
             </a>
             <?php } ?>
-              
+
             </label>
           </div>
         </div>
@@ -140,7 +140,6 @@
                 <label class="width list_searchs">
                   <h3 class="word_titles">複数件の結果が見つかりました</h3>
                   <li class="list-group-item list_property">
-                    <h2 class="judge_show_icon">もしかして？</h2><br>
                     <?php if(isset($vague_searchs)): ?>
                       <?php foreach($vague_searchs as $tss): ?>
                         <input type="hidden" name="vague_search_content" value="<?php echo $tss['word'] ?>">
@@ -155,7 +154,7 @@
           </div>
         <?php } 
         //以下に検索・曖昧検索共に一致しない場合について書いていく
-        elseif (!isset($tmp_searchs) && !empty($_POST['list_search_btn'])){ ?>
+        elseif (!isset($tmp_searchs) && !empty($_POST['list_search_btn']) && $_POST['list_search'] != ''){ ?>
           <div class="row">
             <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding vargues_position">
               <h5 class="undefined_word">検索結果が見つかりませんでした</h5>
