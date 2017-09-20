@@ -57,7 +57,7 @@
       <h1>画像変更</h1>
       <!-- <p>コンテンツを記述します。</p> -->
       <form id="my_form">
-        <input type="file" name="image" data-url="../../list_image_path/">
+        <input id="pos_btn" type="file" name="image" data-url="../../list_image_path/" >
         <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
         <Button type="button" data-remodal-action="confirm" class="remodal-confirm" onclick="file_upload()">画像変更</Button>
       </form>
@@ -88,7 +88,7 @@
 
             <?php endif; ?>
             </div>
-              <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 center_shift">
+              <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 text-center">
 
 <!-- <<<<<<< HEAD -->
             <?php if (isset($errors['extension'])) { ?>
@@ -104,18 +104,12 @@
               <!-- 画像がデータベースに登録されているとき -->
               <?php if ($is_image['list_image_path'] != NULL) { ?>
                 <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
-                <p class="set_profile">
-                  <?php echo $list_data['account_name']; ?>
-                </p>
               </a>
 
             <!-- 画像がデータベースに登録されてないとき -->
             <?php } else {?>
             <a id="list_img" data-remodal-target="modal">
               <div >デフォルト画像を表示</div>
-                <p class="set_profile">
-                <?php echo $list_data['account_name']; ?>
-                </p>
             </a>
             <?php } ?>
 
