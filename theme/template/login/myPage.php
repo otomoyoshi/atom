@@ -31,6 +31,21 @@ if(!empty($_POST)){
 
 }
 
+
+// ユーザがリスト作成ページで戻るボタンで戻って来た場合
+$sql = 'SELECT * FROM `atom_lists` WHERE `name`=""';
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+
+$empty_name_list = $stmt->fetch(PDO::FETCH_ASSOC);
+// var_dump($empty_name_list);
+
+// 名前が空のデータをDBから削除
+$sql = 'DELETE FROM `atom_lists` WHERE `id`=?';
+$data = array($empty_name_list['id']);
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);
+
 // ユーザが持つリストを全て取得
 $sql = 'SELECT * FROM `atom_lists` WHERE `members_id`=?';
 $data = array($_SESSION['login_user']['id']);
@@ -48,7 +63,6 @@ while(1){
 }
 // var_dump($lists);
 
-
  ?>
 
 
@@ -61,11 +75,11 @@ while(1){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <?php echo require('../child_icon.php'); ?>
+    <?php require('../child_icon.php'); ?>
     <title>旅にもつ</title>
 
-  <?php require('../child_load_css.php'); ?>
-  <link rel="stylesheet" type="text/css" href="../../assets/css/mypage.css">
+    <?php require('../child_load_css.php'); ?>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/mypage.css">
 
   </head>
 
@@ -104,9 +118,7 @@ while(1){
                   </a>
                   <div class="media-body">
                     <h3 class="mypage_username">
-                      <?php if(isset($_SESSION['login_user']['account_name'])) { ?>
                         <?php echo $_SESSION['login_user']['account_name']; ?>くん
-                      <?php } ?>
                     </h3>
                   </div>
                 </div>
@@ -157,7 +169,9 @@ while(1){
 
                       <div class="col-xs-8 col-lg-8" style="padding-right: 0px">
                       <?php if(isset($list['name']) && $list['name'] != ''): ?>
-                        <h4 style="text-align: center; padding: 10px 0px 0px 20px; font-size: 20px"><?php echo $list['name']; ?></h4>
+                        <h4 style="text-align: center; padding: 10px 0px 0px 20px; font-size: 20px">
+                        <?php echo $list['name']; 
+                        $_SESSION['list_info']['list_name'] = $list['name']; ?></h4>
                       <?php else: ?>
                         <h4 style="text-align: center; padding: 10px 0px 0px 20px">LIST NAME</h4>
                       <?php endif; ?>
@@ -219,7 +233,7 @@ while(1){
           </div>
 
           <div style="padding-bottom: 6px">
-            <h5 style="text-align: right;">使い方がわからくなった方は<input type="button" name="how_to_use" class="fa fa-info" value="こちら">へ</h5>
+            <h5 style="text-align: right;">使い方は<input type="button" name="how_to_use" class="fa fa-info" value="こちら"></h5>
           </div>
 
           </div>
@@ -229,7 +243,7 @@ while(1){
   <?php require('../footer.php'); ?>
   <?php require('../child_load_js.php'); ?>
 
-  <script src="../../assets/js/myPage.js"></script>
+  <script src="../../assets/js/lists.js"></script>
 
 
   <?php if(!isset($lists)){ ?>

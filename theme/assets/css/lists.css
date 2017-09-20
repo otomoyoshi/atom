@@ -3,10 +3,11 @@
 */	background-color:#f1f1f1 ;
 	background-size: cover;
 	background-repeat: no-repeat;
-	/*width:100%; 
+	/*width:100%;
 	/*max-width: 100%;*/
 	/*height: auto;*/
 }
+
 
 /*test*/
 
@@ -118,6 +119,20 @@
 }
 
 
+.undefined_word{
+	color: black;
+	margin-top: 20px;
+}
+
+#list_img{
+	cursor: pointer;
+}
+
+#headerwrap{
+	padding-top: 20px;
+}
+
+
 .circle_border {
   border: solid 5px black;
 }
@@ -127,7 +142,6 @@
 	text-align: center;
 	width: 100%;
 	margin-top: 30px;
-	height: 70px;
 }
 
 .created_location{
@@ -136,8 +150,12 @@
   margin-top: 40px;
 }
 
+.kill_padding{
+	height: 20px;
+}
+
 .height{
-	height:200px;
+	height:150px;
 }
 .list_name {
 	text-align: center;
@@ -146,11 +164,31 @@
 
 }
 
+.vanish_border{
+	border: none;
+	margin-bottom: 5px;
+	background-color: #fff;
+	color: blue;
+}
+
+.word_list_design{
+	height: 250px;
+	width: 80%;
+}
+
+.word_list_design:hover{
+
+}
+
 .list_created{
 
 	width: 500px;
 	margin-left: 20px;
 	margin-bottom: 0px;
+}
+
+.undefined_category{
+	color: #666;
 }
 
 input #h3 {
@@ -176,7 +214,7 @@ input #h3 {
 .center_shift{
 	text-align: center;
 	width: 200px;
-	height: 195px;
+	height: 120px;
 	padding-bottom: 20px;
 	margin-top: 20px;
 	padding-left: 100px;
@@ -186,6 +224,13 @@ input #h3 {
 .width{
 	width:100%;
 }
+
+.vargues_position{
+	text-align: center;
+
+
+}
+
 
 .both_contents{
 	/*background-color: rgba(156,222,255,0.75);*/
@@ -269,7 +314,9 @@ input #h3 {
 	text-align: left;
 }
 
-li:hover {
+
+
+.list_float:hover {
  	transform: scale(1.1); 
 }
 
@@ -296,6 +343,8 @@ li:hover {
 	background-color: #5EA1E5; 
 	border-color: #5EA1E5;
 	width: 70px;
+	margin-bottom: 20px;
+
 }
 
 .border{
@@ -307,7 +356,7 @@ li:hover {
 }
 
 .under_line1 {
-	margin:50px; 
+	margin:20px; 
 }
 
 .keep_btn{
@@ -372,7 +421,7 @@ li:hover {
 .right{
 	float:right;
 }
-　
+
 .right,.right_position{
 	display: inline;
 }
@@ -385,7 +434,36 @@ li:hover {
 	transform: scale(1.5); 
 }
 
+.list_input{
+	background-color: rgba(0,0,0,0);
+	border: 1px solid rgba(0,0,0,0);
+	width: auto;
+}
 
+
+
+/*レスポンシブ*/
+
+#pos_btn{
+	margin: 20px 220px;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+	#pos_btn{
+		margin: 20px 200px;
+	}
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	#pos_btn{
+		margin: 20px 200px;
+	}
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+
+<<<<<<< HEAD
 .form-control {
 	color: #29354F;
 }
@@ -402,5 +480,21 @@ li:hover {
 	.col-lg-4 {
 	width: 32.47%;
 	}
+}
+
+
+	#pos_btn{
+		margin: 20px 180px;
+	}
+
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+
+	#pos_btn{
+		margin: 20px 70px;
+	}
+
 }
 

@@ -1,6 +1,6 @@
 <?php
 // session_start();
-require('../../../developer/dbconnect.php');
+// require('../../../developer/dbconnect.php');
 
   //ログインチェック
   if (!isset($_SESSION['login_user']['id'])) {
@@ -34,16 +34,16 @@ require('../../../developer/dbconnect.php');
         <li><a href="../contact.php" class="header">お問い合わせ</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="setting.php" class="header">
+        <li><a href="setting.php" class="header" id="move_header">
           <?php if(isset($_SESSION['login_user']['profile_image_path'])): ?>
-            <img class="media-object dp img-circle" src="../../../profile_image_path/<?php echo $_SESSION['login_user']['profile_image_path']; ?>" style="width:auto; height: 15px;"><?php echo $result['account_name'];?>さん
+            <img class="media-object dp img-circle" src="../../../profile_image_path/<?php echo $_SESSION['login_user']['profile_image_path']; ?>" style="width: 40px; height: 40px;"><?php echo $result['account_name'];?>さん
           <?php else: ?>
-            <img class="media-object dp img-circle" src="../../../profile_image_path/masaki.png" style="width:auto; height: 30px;">
+            <img class="media-object dp img-circle" src="../../../profile_image_path/masaki.png" style="width: 40px; height: 40px;"><?php echo $result['account_name'];?>さん
           <?php endif; ?>
-          <?php echo $result['account_name'];?>さん</a></li>
+      </a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="myPage.php" class="header">マイページ</a></li>
+        <li><a href="myPage.php" class="header">持ち物リスト</a></li>
       </ul>
 <!--       <ul class="nav navbar-nav navbar-right">
         <li><a href="../lists.php" class="header">リスト作成</a></li>

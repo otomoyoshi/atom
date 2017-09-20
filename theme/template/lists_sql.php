@@ -7,9 +7,10 @@
   $item_azukeires = array();
   $item_carry_ins = array();
   $list_name = '';
-
+  $vargues = array();
   //$banned_baggage = '';
   // $_GET['id'] = '3'; //リストid
+  
 
   //ログインチェック
   if (!isset($_SESSION['login_user']['id'])) {
@@ -21,9 +22,11 @@
     if (!isset($_GET['id'])) {
       header('Location: login/myPage.php');
       exit();
+    } else {
+      $_SESSION['login_user']['lists_id'] = $_GET['id'];
     }
   // ユーザID表示
-  echo "ユーザ： " . $_SESSION['login_user']['id'] .'<br>';
+  // echo "ユーザ： " . $_SESSION['login_user']['id'] .'<br>';
 
     //ユーザーとリストのリンク
   $sql= 'SELECT `l`.*,`m`.`account_name`,`m`.`id`
@@ -50,7 +53,7 @@
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
   $list_data = $stmt->fetch(PDO::FETCH_ASSOC);
-  var_dump($list_data) . '<br>';
+  // var_dump($list_data) . '<br>';
 
   // ファイル選択ボタンが押された時
   if(!empty($_FILES)){
@@ -136,6 +139,42 @@
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
       $search = $stmt->fetch(PDO::FETCH_ASSOC); //判定結果を取得
+      var_dump($search);
+
+      $sql = 'SELECT * FROM `atom_searchs` WHERE `word` LIKE ?';
+      $data = array('%' . $_POST['list_search'] . '%');
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+
+      
+      while (1) {
+        $rec = $stmt->fetch(PDO::FETCH_ASSOC);//判定結果を取得
+        if ($rec == false) {
+          break;
+        }
+        $tmp_searchs[] = $rec;
+      }
+
+      // var_dump($search);
+      // var_dump($tmp_searchs);
+      // echo count($tmp_searchs);
+
+      if (isset($tmp_searchs)) { // 検索結果が存在する時
+
+        if (count($tmp_searchs) == 1) { // 曖昧検索の結果がひとつのみの場合
+          foreach($tmp_searchs as $ts){
+            $search[] = $ts;
+            $search = $search[0];
+          }
+        }elseif(count($tmp_searchs) > 1){ // 曖昧検索の結果が複数存在する場合
+          foreach($tmp_searchs as $ts){
+            $vague_searchs[] = $ts;
+          }
+        }
+      }else{ // 検索結果が存在しない時
+        $no_result = 'no_result';
+      }
+
       //①ユーザの検索と一致した場合 ：
       // var_dump($search) .'<br>';
       // var_dump($_POST['list_search']) . '<br>';
@@ -143,8 +182,8 @@
 
         // アイテムに追加
           $sql= 'INSERT INTO `atom_items` SET `categories_id` =?,
-                                         `content` = ?,
-                                         `lists_id` = ?';
+                                              `content` = ?,
+                                              `lists_id` = ?';
           $data = array($search['baggage_classify'], $_POST['list_search'], $_GET['id']);
           $stmt = $dbh->prepare($sql);
           $stmt ->execute($data);
@@ -157,7 +196,24 @@
       $data = array($_POST['list_search']);
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
+  }
 
+  //曖昧アイテムたちが押された時の処理を書いて行く
+  if (isset($_POST['vague_search_result'])){
+    if (!empty($_POST['vague_search_result'])){
+      $sql = 'SELECT * FROM `atom_searchs` WHERE `word`= ?';
+      $data = array($_POST['vague_search_result']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+      $vargues = $stmt->fetch(PDO::FETCH_ASSOC); //判定結果を取得
+
+      $sql= 'INSERT INTO `atom_items` SET `categories_id` =?,
+                                          `content` = ?,
+                                          `lists_id` = ?';
+      $data = array($vargues['baggage_classify'], $_POST['vague_search_result'], $_GET['id']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+    }
   }
 
   // 保存ボタンが押された時
@@ -182,7 +238,34 @@
   }
 
   $is_image = ''; //画像が存在するか確認する
-
+  //持ち込み預け入れボタンが押された時にリストに追加する処理を書いて行く
+  // 持ち込み・預け入れに追加する場合
+  if (!empty($_POST['move_both'])) {
+    $sql= 'INSERT INTO `atom_items` SET `categories_id` =0,
+                                    `content` = ?,
+                                    `lists_id` = ?';
+    $data = array($_POST['undefined_to_lists'], $_GET['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt ->execute($data);
+  }
+  // 持ち込みに追加する場合
+  if (!empty($_POST['move_carry_in'])) {
+    $sql= 'INSERT INTO `atom_items` SET `categories_id` =1,
+                                    `content` = ?,
+                                    `lists_id` = ?';
+    $data = array($_POST['undefined_to_lists'], $_GET['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt ->execute($data);
+  }
+  // 預け入れに追加する場合
+  if (!empty($_POST['move_azukeire'])) {
+    $sql= 'INSERT INTO `atom_items` SET `categories_id` =2,
+                                    `content` = ?,
+                                    `lists_id` = ?';
+    $data = array($_POST['undefined_to_lists'], $_GET['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt ->execute($data);
+  }
   // itemのデータを全て取得
   $sql = 'SELECT * FROM `atom_items` WHERE `lists_id` = ?';
   $data = array($_GET['id']);
@@ -199,7 +282,7 @@
     //アイテムにデータがあるとき
     if (isset($items)) {
       if ($items[$i]['categories_id'] == '0') {
-          //両方持ち込みの場合 
+          //両方持ち込みの場合
           $item_boths[] = $items[$i];
       }
       // 持ち込みの場合
@@ -212,10 +295,10 @@
       }
       //持ち込めない場合
       elseif ($items[$i]['categories_id'] == '3'){
-          $banned_baggage = 'その荷物は持ち込めません！！';
+          $banned_baggages = $items[$i];
       }
 
-     } //アイテムにデータがない時
+    } //アイテムにデータがない時
     else{
         //カテゴリー表示
     }
