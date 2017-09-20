@@ -106,7 +106,6 @@ if (!empty($_POST)) {
                 <div class="font_size_explain">お客様からのお問い合わせをお受けしています</div>
 
 
-k
               </div>
             </div>
             <div class="row">
