@@ -3,7 +3,6 @@
   require('lists_sql.php');
 
   // ユーザーが新規でリストを作成する際
-
   if ($is_image['name'] == '') {
 
     $sql = 'SELECT COUNT(*) FROM `atom_lists` WHERE `members_id`=?';
@@ -130,7 +129,7 @@
           <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center fix_to_search">
             <hr class="under_line1">
             <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
-            <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索" name="list_search_btn">
+            <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索" name="list_search_btn" onClick="linkCheck(1)">
           </div>
 
         </div>
@@ -316,11 +315,11 @@
   <?php } ?>
   <script type="text/javascript" src="../assets/js/lists.js"></script>
   
-  <script>
+<!--   <script>
    $(window).on('beforeunload', function(e) {
     return '保存されていない内容は破棄されます。 本当によろしいですか？ ';
     });
-  </script>
+  </script> -->
 
     <!-- remodal -->
 <!--   <script type="text/javascript">
@@ -418,6 +417,27 @@
           });
       }
   </script>
+  <!-- 戻るときだけコンファームを出すためのjs -->
+  <script type="text/javascript">
+  // console.log(test);
+  $(document).ready(function(){
+
+    $(window).on('beforeunload', function() {
+      //個々の変数をクリックしたオブジェクトで変更できれば実装できそう
+      var test = 0;
+      function linkCheck(btn){
+        if (btn == 1) {
+          var test = 1;
+        }
+      }
+      console.log(test);
+        if(test == 0){
+          return "このページを離れると、入力したデータが削除されます。\n修正したい場合には、「マイページへ登録」ボタンをクリックしてください。";
+        }
+    });
+});
+
+</script>
 </body>
 </html>
 

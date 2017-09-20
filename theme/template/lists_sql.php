@@ -10,6 +10,7 @@
   $vargues = array();
   //$banned_baggage = '';
   // $_GET['id'] = '3'; //リストid
+  
 
   //ログインチェック
   if (!isset($_SESSION['login_user']['id'])) {

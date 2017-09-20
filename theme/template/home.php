@@ -65,7 +65,7 @@ if (isset($_GET['list_search_id']) && $_GET['list_search_id'] != '') {
 // =======
 
     // リストへ追加ボタンが押された時
-    if (!empty($_POST['baggage_classify'])) { 
+    if (isset($_POST['baggage_classify'])) { 
       if (!isset($_SESSION['login_user'])) { // ユーザーがログインしていない時
         // 新規登録画面に飛ばす けどまだポップアップなどつけてない
         header('Location: un_login/sign_up.php');
@@ -136,15 +136,15 @@ if (isset($_GET['list_search_id']) && $_GET['list_search_id'] != '') {
           $stmt = $dbh->prepare($sql);
           $stmt->execute($data);
 
-        while (1) {
-        $rec = $stmt->fetch(PDO::FETCH_ASSOC); //ユーザーが作成している複数のリストのじょうほうを取得
-        if ($rec == false) {
-          break;
+          while (1) {
+          $rec = $stmt->fetch(PDO::FETCH_ASSOC); //ユーザーが作成している複数のリストのじょうほうを取得
+          if ($rec == false) {
+            break;
+          }
+          $user_lists[] = $rec;
+          }
         }
-        $user_lists[] = $rec;
       }
-      }
-    }
     }
 
 // 曖昧検索の結果からなにかしらが選択された時
@@ -351,6 +351,7 @@ foreach ($results_l3 as $result_l3) {
 
 // ユーザーが複数作成しているリストのどのリストに項目を追加するか選んだ時
 if (!empty($_POST['user_lists_id'])) {
+  var_dump($_POST['baggage_classify']);
   $sql= 'INSERT INTO `atom_items` SET `lists_id`=?,
                                       `content`=?,
                                       `categories_id` =?';
@@ -358,8 +359,8 @@ if (!empty($_POST['user_lists_id'])) {
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
 
-  header('Location: home.php');
-  exit();
+  // header('Location: home.php');
+  // exit();
 }
 
 
