@@ -8,7 +8,6 @@ $judge_azukeire = '';
 $judge_carry_in = '';
 
 
-
 //検索ボタンが押されたとき
 if (!empty($_POST)) {
     if (isset($_POST['list_search']) && $_POST['list_search'] != '') {

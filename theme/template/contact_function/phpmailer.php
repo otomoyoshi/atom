@@ -12,6 +12,16 @@ ini_set('sendmail_from', 'hana.mare55@gmail.com');
 mb_language("japanese");
 mb_internal_encoding("UTF-8");
  
+if(mb_send_mail(
+	"hana.mare55@gmail.com",
+	"テスト",
+	"以下の内容で送信されました。",
+	"From :".mb_encode_mimeheader("テスト送信先")."<test@tomtom.com>"
+	)
+){
+	echo "送信しました";
+}
+
 //日本語添付メールを送る
 $to = "maho.atom@gmail.com"; //宛先
 $subject ="お問い合わせ内容"; //題名
