@@ -73,7 +73,7 @@ if (!empty($_POST)) {
     // $ini = parse_ini_file("config.ini");
     // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($_SESSION['login_user']) { //ログインしてるとき
+    if (isset($_SESSION['login_user'])) { //ログインしてるとき
       // echo "login success";
       require('login_header.php');
     } else {// ログインしてないとき
@@ -91,7 +91,7 @@ if (!empty($_POST)) {
             <div class="row">
               <!-- <div class="col-lg-6" style="border: solid 1px black;"> -->
 
-              <div class="col-md-12 col-lg-6 center-block">
+              <div class="col-md-12 col-lg-12 text-center">
                 <!-- <h1 style="border: solid 1px black;">阪急電車</h1> -->
 
 <!--                 <figure class="imghvr-push-up">
@@ -102,12 +102,15 @@ if (!empty($_POST)) {
                   </figcaption>
                 </figure> -->
 
-                <h2 class="text-center your_name">お問い合わせフォーム</h2><br>
-                <h2 class="text-center your_name">本フォームでは、旅にもつウェブサイトに関するお客様からのお問い合わせをお受けしています。</h2>
+               <!--  <h2 class="text-center your_name">お問い合わせフォーム</h2><br> -->
+                <div class="font_size_explain">お客様からのお問い合わせをお受けしています</div>
 
+
+k
               </div>
-
-                <div class="col-md-12 col-lg-offset-1 col-lg-6 background_blue center-block"  id="border-space">
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-offset-3 col-lg-6 background_blue text-center"  id="border-space">
                 <!-- <div class="col-lg-6 background_blue"  id="border-space" style="border: solid 1px black;"> -->
                   <section id="contact" class="content-section text-center">
                     <div class="contact-section">
@@ -139,7 +142,7 @@ if (!empty($_POST)) {
 
 
                                 </div>
-                                <button type="submit" class="btn btn-success">送信</button>
+                                <button type="submit" class="btn btn_atom">送信</button>
 
 
 

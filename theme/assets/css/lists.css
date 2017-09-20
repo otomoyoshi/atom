@@ -1,5 +1,6 @@
 #img{
-	background: url(../img/beach_blur.jpg);
+/*	background: url(../img/beach_blur.jpg);
+*/	background-color:#f1f1f1 ;
 	background-size: cover;
 	background-repeat: no-repeat;
 	/*width:100%;
@@ -20,6 +21,116 @@
 
 #headerwrap{
 	padding-top: 20px;
+}
+
+
+/*test*/
+
+/*
+.box27 {
+    position: relative;
+    margin: 2em 0;
+    padding: 0.5em 1em;
+    border: solid 3px #0000B5;
+}
+.box27 .box-title {
+    position: absolute;
+    display: inline-block;
+    top: -27px;
+    left: -3px;k
+    padding: 0 9px;
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+    font-size: 17px;
+    background: #0000B5;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px 5px 0 0;
+}*/
+
+#box1 {
+    position: relative;
+    /*margin: 2em 0;*/
+    padding: 0.5em 0.5em;
+    border: solid 3px #0000B5;
+}
+
+#box2 {
+    position: relative;
+    /*margin: 2em 0;*/
+    padding: 0.5em 0.5em;
+    border: solid 3px #0000B5;
+}
+
+#box3 {
+    position: relative;
+    /*margin: 2em 0;*/
+    padding: 0.5em 0.5em;
+    border: solid 3px #0000B5;
+}
+
+#box1 p {
+    margin: 0; 
+    padding: 0;
+}
+
+#box2 p {
+    margin: 0; 
+    padding: 0;
+}
+
+#box3 p {
+    margin: 0; 
+    padding: 0;
+}
+
+#box1 .box-title{
+	position: absolute;
+    display: inline-block;
+    top: -27px;
+    left: -3px;
+    padding: 0 9px;
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+    font-size: 17px;
+    background: #0000B5;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px 5px 0 0;
+}
+
+#box2 .box-title{
+	position: absolute;
+    display: inline-block;
+    top: -27px;
+    left: -3px;
+    padding: 0 9px;
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+    font-size: 17px;
+    background: #0000B5;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px 5px 0 0;
+}
+
+#box3 .box-title{
+	position: absolute;
+    display: inline-block;
+    top: -27px;
+    left: -3px;
+    padding: 0 9px;
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+    font-size: 17px;
+    background: #0000B5;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px 5px 0 0;
 }
 
 .circle_border {
@@ -96,7 +207,7 @@ input #h3 {
 }
 
 .margin_top{
-	padding-top: 20px;
+	padding-top: 50px;
 	margin-bottom: 30px;
 }
 
@@ -122,15 +233,47 @@ input #h3 {
 
 
 .both_contents{
-	background-color: rgba(156,222,255,0.75);;
+	/*background-color: rgba(156,222,255,0.75);*/
+		/*background-color: #FFADBC;*/
+		/*background-color: #F79EBD;*/
+		/*background-color: #47A6FF;*/
+		/*background-color: #88E6FF;*/
+		/*background-color: #006BFF;*/
+		background-color: #3B8C93;
+
+
+
+}
+
+.both_contents_border {
+/*	border-color: red;
+	border-width: 20px;*/
+	border-bottom:3px solid #FFCFA8;
 }
 
 .carry_in{
-	background-color: rgba(190,255,161,0.85);;
+	/*background-color: rgba(190,255,161,0.85);*/
+		/*background-color: #FFFCF9;*/
+		/*background-color: #FFCFA8;*/
+		/*background-color: #2B8AFF;*/
+		/*background-color: #5ECFFF;*/
+		/*background-color: #0000B5;*/
+		background-color: #F988B6;
+
+
+
 }
 
 .azukeire{
-	background-color: rgba(100,230,80,0.8);
+	/*background-color: rgba(100,230,80,0.8);*/
+		/*background-color: #B1EDCA;*/
+		/*background-color: #FFF89F;*/
+		/*background-color: #266EFF;*/
+		/*background-color: #006BFF;*/
+		/*background-color: #000085;*/
+		background-color: #FCE492;
+
+
 }
 
 .checkbox {
@@ -157,8 +300,10 @@ input #h3 {
 }
 
 .sub_title {
-	color: black;
-	font-size: 20px;
+	/*color: #364958;*/
+	color: white;
+
+	font-size: 17px;
 }
 
 .sub_title {
@@ -191,10 +336,12 @@ input #h3 {
 #searchs{
 	display: inline;
 	margin-bottom: 20px;
+	/*color: #EA526F;*/
 }
 
 #search-btn{
-	display: inline;
+	background-color: #5EA1E5; 
+	border-color: #5EA1E5;
 	width: 70px;
 	margin-bottom: 20px;
 
@@ -330,3 +477,22 @@ input #h3 {
 	}
 
 }
+
+.form-control {
+	color: #29354F;
+}
+
+
+
+/*.btn-warning .hover{
+	color: #EA526F;
+	border-color: #EA526F;
+}*/
+
+/**/
+@media (min-width: 1200px){
+	.col-lg-4 {
+	width: 32.47%;
+	}
+}
+

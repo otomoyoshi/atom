@@ -19,7 +19,6 @@ if(isset($_GET['tab']) && $_GET['tab']=='tab3'){
   $search = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-
 //検索ボタンが押されたとき
 if (isset($_GET['list_search_id']) && $_GET['list_search_id'] != '') {
       $sql= 'INSERT INTO `atom_searched_words` SET `word` = ?,

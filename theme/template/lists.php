@@ -1,5 +1,4 @@
 <?php
-
   require('lists_sql.php');
 
   // ユーザーが新規でリストを作成する際
@@ -180,13 +179,15 @@
             <?php }}} ?>
 
         <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
-          <div class="both_contents well col-lg-4">
+
+          <!-- <div class="both_contents well col-lg-4 box27"> -->
+          <div class="col-lg-4" id="box1">
             <!-- BOTHの欄を作る -->
-            <strong>
-              <p class="sub_title fa fa-fighter-jet">
-                持ち込み・預け入れ
-              </p>
-            </strong>
+            <!-- <strong class = "both_contents_border"> -->
+            <span class="sub_title box-title">
+              持ち込み・預け入れ
+            </span>
+            <!-- </strong> -->
             <div>
               <ul class="list-group" id="list_design">
                 <?php foreach ($item_boths as $item_both) { ?>
@@ -210,12 +211,12 @@
             </div>
           </div>
           <!-- 持ち込みの欄を作る -->
-          <div class="carry_in well col-lg-4">
-            <strong>
-              <p class="sub_title fa fa-hand-o-right">
+          <div class="col-lg-4" id="box2">
+            <!-- <strong> -->
+              <span class="sub_title box-title">
                 持ち込み
-              </p>
-            </strong>
+              </span>
+            <!-- </strong> -->
             <div>
               <ul class="list-group">
                 <?php foreach ($item_carry_ins as $item_carry_in){ ?>
@@ -242,13 +243,13 @@
             </div>  
           </div>
 
-          <div class="azukeire well col-lg-4">
+          <div class="col-lg-4" id="box3">
             <!-- 持ち込みの欄を作る -->
-            <strong>
-              <p class="sub_title fa fa-suitcase ">
+            <!-- <strong> -->
+              <span class="box-title">
                 預け入れ
-              </p>
-            </strong>
+              </span>
+            <!-- </strong> -->
             <ul class="list-group">
               <?php foreach ($item_azukeires as $item_azukeire) { ?>
                 <label class="width">
@@ -284,7 +285,7 @@
             </div> -->
             <div class="keep">
 
-              <input class="btn btn-success keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの履歴やメールに送信できるよ" data-step="5">
+              <input class="btn btn_atom keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの履歴やメールに送信できるよ" data-step="5">
             </div>  
 
           </form>
