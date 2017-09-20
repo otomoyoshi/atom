@@ -2,14 +2,20 @@
 	background: url(../img/beach_blur.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
-	/*width:100%; 
+	/*width:100%;
 	/*max-width: 100%;*/
 	/*height: auto;*/
 }
 
+
+
 .undefined_word{
 	color: black;
 	margin-top: 20px;
+}
+
+#list_img{
+	cursor: pointer;
 }
 
 #headerwrap{
@@ -287,4 +293,40 @@ input #h3 {
 	width: auto;
 }
 
-/**/
+
+
+/*レスポンシブ*/
+
+#pos_btn{
+	margin: 20px 220px;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+	#pos_btn{
+		margin: 20px 200px;
+	}
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	#pos_btn{
+		margin: 20px 200px;
+	}
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+
+	#pos_btn{
+		margin: 20px 180px;
+	}
+
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+
+	#pos_btn{
+		margin: 20px 70px;
+	}
+
+}

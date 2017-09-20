@@ -9,6 +9,10 @@ body {
   background-color: #f1f1f1;
 }
 
+.home_to_list_btn{
+    width: 100%;
+    height: 7%;
+}
 #footer {
   width: 100%;
   background-color: #51a8ff;
@@ -191,25 +195,27 @@ li {
   }
 
 .moving_category{
-  margin-top: 15px;
+  margin-top: 10px;
   margin-bottom: 15px;
-  width: 90%;
+  width: 25%;
   height: 30px;
   font-size: 13px;
   text-align: center; 
 }
 
 .moving_list_direct{
-  width: 90%;
+  width: 25%;
   height: 30px;
   font-size: 13px;
+  margin-right: 15px;
+  margin-left: 15px;
 }
   .show_size{
   height: auto;
-  width: 32%;
+  width: 90%;
   margin: auto;
   text-align: center; 
-  margin-left: 34%;
+  margin-left: 4%;
   margin-right: 33%;
 }
 }
