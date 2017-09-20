@@ -457,7 +457,6 @@ if (!empty($_POST['user_lists_id'])) {
                   <label class="width list_searchs">
                     <h3 class="word_titles">複数件の結果が見つかりました</h3>
                     <li class="list-group-item word_list_design">
-                      <h2 class="judge_show_icon">もしかして？</h2><br>
                       <?php if(isset($vague_searchs)): ?>
                         <?php foreach($vague_searchs as $tss): ?>
                           <a href="home.php?id=<?php echo $tss['id'] ?>">
@@ -514,14 +513,28 @@ if (!empty($_POST['user_lists_id'])) {
 
               <!-- ユーザーが登録している複数のリストの表示 -->
               <?php if(isset($user_lists)): ?>
-                <?php foreach($user_lists as $ul): ?>
-                  <form method="POST" action="">
-                    <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
-                    <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
-                    <input type="hidden" name="user_lists_id" value="<?php echo $ul['id']; ?>">
-                    <input type="submit" name="" value="<?php echo $ul['name']; ?>">
-                  </form>
-                <?php endforeach; ?>
+                <div class="row">
+                  <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
+                    <ul class="list-group" id="list_design">
+                      <label class="width list_searchs">
+                        <h3 class="word_titles">どのリストに追加しますか？</h3>
+                        <li class="list-group-item word_list_design">
+                          <?php foreach($user_lists as $ul): ?>
+                            <form method="POST" action="">
+                              <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
+                              <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
+                              <input type="hidden" name="user_lists_id" value="<?php echo $ul['id']; ?>">
+                              <div class="row">
+                                <input type="submit" class="col-lg-4 col-xs-4 col-lg-offset-4 col-lg-offset-4" name="" value="<?php echo $ul['name']; ?>">
+                              </div>
+                            </form>
+                          <?php endforeach; ?>
+                        </li>
+                      </label>
+                    </ul>
+                  </div>
+                </div>
+                
               <?php endif; ?>
               
             </div> <!-- 右半分を表示するdivタグの終わり -->
