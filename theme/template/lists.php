@@ -127,7 +127,7 @@
           <div class="row">
             <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding vargues_position">
               <h5 class="undefined_word">検索結果が見つかりませんでした</h5>
-              <h7 class= "undefined_category">(検索ワード：<?php echo $_POST['list_search']?>)</h7><br>
+              <h7 class= "undefined_category">(検索ワード：<?php echo htmlspecialchars($_POST['list_search'])?>)</h7><br>
               <input type="submit" class = "moving_category btn btn_atom" value="カテゴリーから探す" name=""><br>
               <input type="hidden" name="undefined_to_lists" value="<?php echo $_POST['list_search'] ?>">
               <input type="submit" class = "moving_list_direct btn btn_atom" value="”持ち込み・預け入れリスト”に追加する" name="move_both">
@@ -176,7 +176,7 @@
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_both['id']?>">
                         <span class="checkbox-icon"></span>
                       <?php } ?>
-                      <?php echo $item_both['content'];?>
+                      <?php echo htmlspecialchars($item_both['content']);?>
                         <!-- 削除処理を書いていく -->
                         <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_both['id'];?>">
                           <i class="fa fa-trash right_position"></i>
@@ -212,7 +212,7 @@
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_carry_in['id']?>">
                         <span class="checkbox-icon"></span>
                       <?php } ?>                      <span class="checkbox-icon"></span>
-                      <?php  echo $item_carry_in['content']; ?>
+                      <?php  echo htmlspecialchars($item_carry_in['content']); ?>
                       <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_carry_in['id'];?>">
                         <i class="fa fa-trash right_position"></i>
                       </a>
@@ -249,7 +249,7 @@
                         <span class="checkbox-icon"></span>
                       <?php } ?>
                       <span class="checkbox-icon"></span>
-                      <span class="list_content"><?php echo $item_azukeire['content']; ?></span>
+                      <span class="list_content"><?php echo htmlspecialchars($item_azukeire['content']); ?></span>
                         <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
                           <i class="fa fa-trash right_position"></i>
                         </a>
