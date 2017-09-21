@@ -108,7 +108,6 @@
 
             <!-- 画像がデータベースに登録されてないとき -->
             <?php } else {?>
-            <a id="list_img" data-remodal-target="modal">
               <div >デフォルト画像を表示</div>
             </a>
             <?php } ?>
