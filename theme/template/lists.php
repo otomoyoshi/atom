@@ -52,18 +52,14 @@
   ?>
 <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
     <button data-remodal-action="close" class="remodal-close"></button>
-  <!-- <form id="img_form"> -->
-
       <h1>画像変更</h1>
-      <!-- <p>コンテンツを記述します。</p> -->
+
       <form id="my_form">
         <input id="pos_btn" type="file" name="image" data-url="../../list_image_path/" >
         <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
         <Button type="button" data-remodal-action="confirm" class="remodal-confirm" onclick="file_upload()">画像変更</Button>
       </form>
-      <!-- <button data-remodal-action="confirm" class="remodal-confirm">OK</button> -->
-      <!-- <button type="button" data-remodal-action="confirm" class="remodal-confirm">画像の変更</button> -->
-  <!-- </form> -->
+
 </div>
 
 

@@ -98,6 +98,7 @@ while(1){
     }
   ?>
 
+
     <div id="headerwrap" style="padding-top: 100px">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
       <!-- 薄い白で囲まれてるメインのディブ -->

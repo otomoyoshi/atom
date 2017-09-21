@@ -22,6 +22,72 @@ if ($_SESSION['login_user']['age'] != '') {
       $registered_age = $_SESSION['login_user']['age'];
     }
 
+  // 画像アップロード処理
+  if(isset($_FILES['image'])){
+    echo "ファイルが存在します" .'<br>';
+   $info = new SplFileInfo($_FILES['image']['name']);
+   $extension = strtolower($info->getExtension());
+
+   if($extension != 'png' && $extension != 'jpg' && $extension != 'gif' && $extension != 'jpeg') {
+    echo '拡張子が異なります' .'<br>';
+      $errors['extension'] = 'blank';
+   }
+  
+    $file_name = date('YmdHis') . $_FILES['image']['name'];
+    // $file_name = $_FILES['image']['name'] . $date->format('YmdHisu');;
+    $file_path = '../../list_image_path/' . $file_name;
+    $tmp_name = $_FILES['image']['tmp_name'];
+
+
+    // 画像をサーバに保存
+    if (move_uploaded_file($tmp_name, $file_path)) { //サーバに画像保存が成功したら
+      echo $file_name . "をサーバに保存しました" .'<br>';
+
+      // リストデータを取得
+      $sql= 'SELECT * FROM `atom_lists` WHERE `id`=?';
+      $data = array($_GET['id']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+      $is_image = $stmt->fetch(PDO::FETCH_ASSOC);
+      echo "元の画像" . $is_image['list_image_path'] .'<br>';
+
+      if($is_image['list_image_path'] == NULL) { //サーバに画像が登録されていないとき
+          echo "null" . '<br>';
+
+          // 画像名をデータベースに登録する
+          $sql= 'UPDATE `atom_lists` SET `list_image_path` =?,`modified`=NOW() WHERE `id`=?';
+          $data = array($file_name,$_GET['id']);
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute($data);
+          header('Location: lists.php?id='. $_GET['id']);
+          exit();
+      } elseif($is_image['list_image_path'] == $file_name){
+        echo "一緒だよ" .'<br>';
+      } else { //データベースにすでに画像が登録されていて、登録されている画像名が新しく入力された画像名と異なるとき
+        echo "登録" . '<br>';
+        $is_image_path = '../../list_image_path/' . $is_image['list_image_path'];
+        if(file_exists($is_image_path)){
+          // 既存に指定されていた画像をサーバから削除
+          $file_delpath = '../../list_image_path/' . $is_image['list_image_path'];
+          unlink($file_delpath);
+        }
+
+        // 画像名をデータベースに登録
+        $sql= 'UPDATE `atom_lists` SET `list_image_path`=?,`modified`=NOW() WHERE `id`=?';
+        $data = array($file_name,$_GET['id']);
+        $stmt = $dbh->prepare($sql);
+        $stmt ->execute($data);
+        header('Location: lists.php?id='. $_GET['id']);
+        exit();
+
+      }
+      // header('Location : lists.php');
+      // exit();
+
+    } else {
+      echo "アップロードに失敗しました";
+    }
+  }
 
 if (!empty($_POST)) {
     $account_name = $_POST['account_name'];
@@ -110,7 +176,20 @@ if (!empty($_POST)) {
     }
   ?>
 
-    <div class="container">
+<div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
+    <button data-remodal-action="close" class="remodal-close"></button>
+      <h1>画像変更</h1>
+
+      <form id="my_form">
+        <input id="pos_btn" type="file" name="image" data-url="../../list_image_path/" >
+        <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+        <Button type="button" data-remodal-action="confirm" class="remodal-confirm" onclick="file_upload()">画像変更</Button>
+      </form>
+
+</div>
+
+
+<div class="container">
 
 <div class="row">
     <div class="col-xs-10 col-sm-8 col-md-8 col-xs-offset-1 col-sm-offset-2 col-md-offset-2 tabinimotsu_main_div" style="padding:0px 60px 30px 60px; margin-bottom: 50px; margin-top: 50px">
@@ -284,7 +363,50 @@ if (!empty($_POST)) {
 </div><!-- container ends-->
 
 
-      <?php require('../footer.php'); ?>
-      <?php require('../child_load_js.php'); ?>
+    <?php require('../footer.php'); ?>
+    <?php require('../child_load_js.php'); ?>
+    <!-- 画像変更処理 -->
+    <script type="text/javascript">
+      function file_upload()
+        {
+            // フォームデータを取得
+            var formdata = new FormData($('#my_form').get(0));
+
+            // GETでid取得
+            var arg  = new Object;
+             url = location.search.substring(1).split('&');
+
+            for(i=0; url[i]; i++) {
+                var k = url[i].split('=');
+                arg[k[0]] = k[1];
+            }
+
+            var get_id = arg.id;
+            console.log(get_id);
+
+            // window.sessionStorage.setItem('lists_id',get_id);
+
+            // POSTでアップロード
+            $.ajax({
+                url  : "http://localhost/atom/theme/template/get_image.php",
+                type : "POST",
+                data : formdata,
+                cache       : false,
+                contentType : false,
+                processData : false,
+                dataType    : "html"
+            })
+            .done(function(data, textStatus, jqXHR){
+                // alert(data);
+                var imgArea = $('<div/>').append($.parseHTML(data)).find('#list_img');
+               // alert(imgArea);
+                // $("#output").html(imgArea);
+                $("#list_img").html(imgArea);
+            })
+            .fail(function(jqXHR, textStatus, errorThrown){
+                alert("fail");
+            });
+        }
+    </script>
   </body>
 </html>

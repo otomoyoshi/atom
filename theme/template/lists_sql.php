@@ -60,8 +60,8 @@
     echo "sendが押されました" .'<br>';
     date_default_timezone_set('Asia/Tokyo'); //date()用
     // $date = new DateTime(time, 'Asia/Tokyo');
-    
     // echo date('YmdHis');
+
     // 画像アップロード処理
     if(isset($_FILES['image'])){
       echo "ファイルが存在します" .'<br>';
