@@ -8,6 +8,10 @@
   $list_name = '';
   $vargues = array();
   $check_confirm = array();
+  $item_both = '';
+  $item_azukeire = '';
+  $item_carry_in = '';
+
   //$banned_baggage = '';
   // $_GET['id'] = '3'; //リストid
   
@@ -138,7 +142,7 @@
           if (isset($_POST['che'])) {
               $c = count($_POST['che']);
               $check_items = $_POST['che'];
-              var_dump($check_items);
+              // var_dump($check_items);
           // $sql= 'UPDATE `atom_items`(`item_check`) VALUES';
               for ($i=0; $i < $c ; $i++) { 
                   // $data = '(' . 1 . ')';
@@ -164,7 +168,7 @@
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
       $search = $stmt->fetch(PDO::FETCH_ASSOC); //判定結果を取得
-      var_dump($search);
+      // var_dump($search);
 
       $sql = 'SELECT * FROM `atom_searchs` WHERE `word` LIKE ?';
       $data = array('%' . $_POST['list_search'] . '%');
@@ -248,7 +252,7 @@
         if (isset($_POST['che'])) {
           $c = count($_POST['che']);
           $check_items = $_POST['che'];
-          var_dump($check_items);
+          // var_dump($check_items);
           
           // $sql= 'UPDATE `atom_items`(`item_check`) VALUES';
 
