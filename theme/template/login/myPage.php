@@ -8,12 +8,21 @@ if(!empty($_POST)){
   // echo "post" . '<br>';
   // 新規リストを作成
   if(isset($_POST['new'])){
-    $sql = 'INSERT `atom_lists` SET `members_id` = ?,
-                                     -- `name` = ?,
-                                     -- `list_image_path` = ?,
-                                     `created` = NOW()';
-    // $data = array($_SESSION['login_user']['id'], $_POST['list_name']);
+      // ユーザーが新規でリストを作成する際に、すでに作っているリストの数を取得
+    $sql = 'SELECT COUNT(*) FROM `atom_lists` WHERE `members_id`=?';
     $data = array($_SESSION['login_user']['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+    // ログインしているユーザーが作成しているリストの数を取得
+    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+    $list_amount = $rec['COUNT(*)'] + 1;
+
+    $sql = 'INSERT INTO `atom_lists` SET  `members_id` = ?,
+                                          `name` = ?,
+                                     --   `list_image_path` = ?,
+                                          `created` = NOW()';
+    // $data = array($_SESSION['login_user']['id'], $_POST['list_name']);
+    $data = array($_SESSION['login_user']['id'],'リスト '.$list_amount);
     $stmt = $dbh->prepare($sql);
     $stmt ->execute($data);
 
@@ -30,21 +39,6 @@ if(!empty($_POST)){
   }
 
 }
-
-
-// ユーザがリスト作成ページで戻るボタンで戻って来た場合
-$sql = 'SELECT * FROM `atom_lists` WHERE `name`=""';
-$stmt = $dbh->prepare($sql);
-$stmt->execute();
-
-$empty_name_list = $stmt->fetch(PDO::FETCH_ASSOC);
-// var_dump($empty_name_list);
-
-// 名前が空のデータをDBから削除
-$sql = 'DELETE FROM `atom_lists` WHERE `id`=?';
-$data = array($empty_name_list['id']);
-$stmt = $dbh->prepare($sql);
-$stmt->execute($data);
 
 // ユーザが持つリストを全て取得
 $sql = 'SELECT * FROM `atom_lists` WHERE `members_id`=?';
@@ -174,7 +168,7 @@ while(1){
                         <?php echo $list['name']; 
                         $_SESSION['list_info']['list_name'] = $list['name']; ?></h4>
                       <?php else: ?>
-                        <h4 style="text-align: center; padding: 10px 0px 0px 20px">LIST NAME</h4>
+                        <h4 style="text-align: center; padding: 10px 0px 0px 20px">NAME EMPTY</h4>
                       <?php endif; ?>
                         <h5 style="text-align: center; padding: 0px 0px 0px 20px">
                           <?php echo $list['modified']; ?>
@@ -211,7 +205,6 @@ while(1){
                         <a href="../myPage_function/list_copy.php?id=<?php echo $list['id']; ?>">
                           <!-- <span class="tooltip" title="ダウンロード"></span> -->
                           <button name="list_copy" type="button" class="col-md-4 col-xs-4" data-intro="持ち物リストを複製できるよ" data-step="2" title="持ち物リストを複製できるよ"><i class="glyphicon glyphicon-file" title="持ち物リストを複製できるよ"></i></button>
-                          
                         </a>
                         <!-- <a href="../function/list_email.php"> -->
                           <button name="list_email" type="button" class="col-md-4 col-xs-4" data-intro="メールで持ち物リストを送信できるよ" data-step="3" title="ダウンロード"><i class="glyphicon glyphicon-envelope"></i></button>

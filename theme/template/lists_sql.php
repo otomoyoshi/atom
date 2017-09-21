@@ -185,13 +185,9 @@
       // echo count($tmp_searchs);
 
       if (isset($tmp_searchs)) { // 検索結果が存在する時
-
-        if (count($tmp_searchs) == 1) { // 曖昧検索の結果がひとつのみの場合
-          foreach($tmp_searchs as $ts){
-            $search[] = $ts;
-            $search = $search[0];
-          }
-        }elseif(count($tmp_searchs) > 1){ // 曖昧検索の結果が複数存在する場合
+        if(count($tmp_searchs) == 1){ // 検索結果が一つだけの時
+          $search = $tmp_searchs[0];
+        }else{ // 検索結果が複数ある時
           foreach($tmp_searchs as $ts){
             $vague_searchs[] = $ts;
           }
