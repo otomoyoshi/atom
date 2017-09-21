@@ -450,16 +450,19 @@ if (!empty($_POST['user_lists_id'])) {
             </div>
             <input id="search-btn1" type="submit" class="btn btn_atom btn-lg" value="検索">
           </form>
+
         </div><!-- /col-lg-6 -->
 
-        <!-- 検索結果が見つからない時 -->
-        <?php if($no_result == 'no_result'): ?>
-          <h5>検索結果が見つかりませんでした</h5>
-        <?php endif; ?>
+
 
         <!-- 検索結果を表示していく -->
 
         <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 div_bottom">
+
+          <!-- 検索結果が見つからない時 -->
+          <?php if($no_result == 'no_result'): ?>
+            <h5 class="alert alert-danger col-lg-6">検索結果が見つかりませんでした</h5>
+          <?php endif; ?>
 
           <!-- 曖昧検索表示 -->
           <?php if(isset($vague_searchs)): ?>
