@@ -106,7 +106,7 @@
           </div>
 
         </div>
-        <?php if(isset($tmp_searchs) && !empty($_POST['list_search_btn'])){ ?>
+        <?php if(isset($vague_searchs) && !empty($_POST['list_search_btn'])){ ?>
           <div class="row">
             <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
               <ul class="list-group" id="list_design">

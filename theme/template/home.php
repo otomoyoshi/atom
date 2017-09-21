@@ -47,18 +47,21 @@ if (isset($_GET['list_search_id']) && $_GET['list_search_id'] != '') {
       // echo count($tmp_searchs);
 
       if (isset($tmp_searchs)) { // 検索結果が存在する時
-        foreach($tmp_searchs as $ts){
-          $vague_searchs[] = $ts;
-          var_dump($vague_searchs);
+        if(count($tmp_searchs) == 1){ // 検索結果が一つだけの時
+          $search = $tmp_searchs[0];
+        }else{ // 検索結果が複数ある時
+          foreach($tmp_searchs as $ts){
+            $vague_searchs[] = $ts;
+          }
         }
       }else{ // 検索結果が存在しない時
         $no_result = 'no_result';//ここにカテゴリーの裏を書く
       }
 
-    // フォームの空チェック 
-    } elseif (isset($_POST['list_search']) && $_POST['list_search'] == '') {
-      $errors['word'] = 'blank';
-    }
+// フォームの空チェック 
+} elseif (isset($_POST['list_search']) && $_POST['list_search'] == '') {
+  $errors['word'] = 'blank';
+}
 
 // <<<<<<< HEAD
 //     if(isset($_POST['to_lists'])){
@@ -66,67 +69,66 @@ if (isset($_GET['list_search_id']) && $_GET['list_search_id'] != '') {
 //     }
 // =======
 
-    // リストへ追加ボタンが押された時
-    if (isset($_POST['baggage_classify'])) { 
-      if (!isset($_SESSION['login_user'])) { // ユーザーがログインしていない時
-        // 新規登録画面に飛ばす けどまだポップアップなどつけてない
-        header('Location: un_login/sign_up.php');
-        exit();
-      }else{ // ユーザーがログインしている時
-        $sql = 'SELECT COUNT(*) FROM `atom_lists` WHERE `members_id`=?';
-        $data = array($_SESSION['login_user']['id']);
-        $stmt = $dbh->prepare($sql);
-        $stmt->execute($data);
-        // ログインしているユーザーが作成しているリストの数を取得
-        $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-        $list_amount = $rec['COUNT(*)'];
+// リストへ追加ボタンが押された時
+if (isset($_POST['baggage_classify'])) { 
+  if (!isset($_SESSION['login_user'])) { // ユーザーがログインしていない時
+    // 新規登録画面に飛ばす けどまだポップアップなどつけてない
+    header('Location: un_login/sign_up.php');
+    exit();
+  }else{ // ユーザーがログインしている時
+    $sql = 'SELECT COUNT(*) FROM `atom_lists` WHERE `members_id`=?';
+    $data = array($_SESSION['login_user']['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+    // ログインしているユーザーが作成しているリストの数を取得
+    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+    $list_amount = $rec['COUNT(*)'];
 
 
-        if($list_amount == 0) { // ユーザーが作成しているリストの数がゼロの時
-          // 新しいリストを一つ作成
-          $sql = 'INSERT `atom_lists` SET `members_id` = ?,
-                                          `name`=? ,
-                                          `created` = NOW()';
-          $data = array($_SESSION['login_user']['id'],'リスト 1');
-          $stmt = $dbh->prepare($sql);
-          $stmt ->execute($data);
+    if($list_amount == 0) { // ユーザーが作成しているリストの数がゼロの時
+      // 新しいリストを一つ作成
+      // $sql = 'INSERT `atom_lists` SET `members_id` = ?,
+      //                                 `name`=? ,
+      //                                 `created` = NOW()';
+      // $data = array($_SESSION['login_user']['id'],'リスト 1');
+      // $stmt = $dbh->prepare($sql);
+      // $stmt ->execute($data);
 
-          $sql = 'SELECT `id` FROM `atom_lists` WHERE `members_id`=?';
-          $data = array($_SESSION['login_user']['id']);
-          $stmt = $dbh->prepare($sql);
-          $stmt->execute($data);
+      // $sql = 'SELECT `id` FROM `atom_lists` WHERE `members_id`=?';
+      // $data = array($_SESSION['login_user']['id']);
+      // $stmt = $dbh->prepare($sql);
+      // $stmt->execute($data);
 
-          $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-          $created_list_id = $rec['id']; // ユーザーが作成しているリストのIDを取得
+      // $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+      // $created_list_id = $rec['id']; // ユーザーが作成しているリストのIDを取得
 
-          // ログインユーザーの唯一作っているリストに検索結果のワードを登録
-          $sql= 'INSERT INTO `atom_items` SET `lists_id`=?,
-                                              `content`=?,
-                                              `categories_id` =?';
-          $data = array($created_list_id,$_POST['word'],$_POST['baggage_classify']);
-          $stmt = $dbh->prepare($sql);
-          $stmt ->execute($data);
-
-          header('Location: home.php');
-          exit();
+      // // ログインユーザーの唯一作っているリストに検索結果のワードを登録
+      // $sql= 'INSERT INTO `atom_items` SET `lists_id`=?,
+      //                                     `content`=?,
+      //                                     `categories_id` =?';
+      // $data = array($created_list_id,$_POST['word'],$_POST['baggage_classify']);
+      // $stmt = $dbh->prepare($sql);
+      // $stmt ->execute($data);
+      $user_lists = 'no_lists';
 
 
-        }else{ // ユーザーが作成しているリストが存在する時
-          $sql = 'SELECT * FROM `atom_lists` WHERE `members_id`=?';
-          $data = array($_SESSION['login_user']['id']);
-          $stmt = $dbh->prepare($sql);
-          $stmt->execute($data);
+    }else{ // ユーザーが作成しているリストが存在する時
+      $sql = 'SELECT * FROM `atom_lists` WHERE `members_id`=?';
+      $data = array($_SESSION['login_user']['id']);
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute($data);
 
-          while (1) {
-          $rec = $stmt->fetch(PDO::FETCH_ASSOC); //ユーザーが作成している複数のリストのじょうほうを取得
-          if ($rec == false) {
-            break;
-          }
-          $user_lists[] = $rec;
-          }
-        }
+      while (1) {
+      $rec = $stmt->fetch(PDO::FETCH_ASSOC); //ユーザーが作成している複数のリストのじょうほうを取得
+      if ($rec == false) {
+        break;
+      }
+      $user_lists[] = $rec;
       }
     }
+  }
+}
+
 
 // 曖昧検索の結果からなにかしらが選択された時
 if (isset($_GET['id']) && !isset($tmp_searchs) && empty($no_result)) {
@@ -139,7 +141,6 @@ if (isset($_GET['id']) && !isset($tmp_searchs) && empty($no_result)) {
   $search = $stmt->fetch(PDO::FETCH_ASSOC);
 
 }
-
 
 //1階層目のデータを全件表示する
 $sql = 'SELECT * FROM `atom_categories_l1` WHERE 1' ;
@@ -252,87 +253,124 @@ foreach ($results_l3 as $result_l3) {
 
 
 
-      if (isset($search)) {
-        if ($search['baggage_classify'] == '0') {
-            //両方持ち込みの場合
-           $word = $search['word'];
-           $classify = '機内への持ち込み・預け入れ共に可能です';
-           $condition_carry_in = $search['condition_carry_in'];
-           $condition_azukeire = $search['condition_azukeire'];
-           if ($condition_carry_in == '') {
-              $judge_carry_in = '<i class="fa fa-circle-o"></i>';
-           } else{
-              $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
-           }
-           if ($condition_azukeire == '') {
-              $judge_azukeire = '<i class="fa fa-circle-o"></i>';
-           } else{
-              $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
-           }
-        }
-        // 持ち込みの場合
-        elseif ($search['baggage_classify'] == '1') {
-          $word = $search['word'];
-          $classify = '機内持ち込みのみ可能です';
-          $condition_carry_in = $search['condition_carry_in'];
-          $condition_azukeire = $search['condition_azukeire'];
-           if ($condition_carry_in == '') {
-              $judge_carry_in = '<i class="fa fa-circle-o"></i>';
-           } else{
-              $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
-           }
-           if ($condition_azukeire == '') {
-              $judge_azukeire = '<i class="fa fa-close"></i>';
-           } else{
-              $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
-           }
+if (isset($search)) {
+  if ($search['baggage_classify'] == '0') {
+      //両方持ち込みの場合
+     $word = $search['word'];
+     $classify = '機内への持ち込み・預け入れ共に可能です';
+     $condition_carry_in = $search['condition_carry_in'];
+     $condition_azukeire = $search['condition_azukeire'];
+     if ($condition_carry_in == '') {
+        $judge_carry_in = '<i class="fa fa-circle-o"></i>';
+     } else{
+        $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+     }
+     if ($condition_azukeire == '') {
+        $judge_azukeire = '<i class="fa fa-circle-o"></i>';
+     } else{
+        $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+     }
+  }
+  // 持ち込みの場合
+  elseif ($search['baggage_classify'] == '1') {
+    $word = $search['word'];
+    $classify = '機内持ち込みのみ可能です';
+    $condition_carry_in = $search['condition_carry_in'];
+    $condition_azukeire = $search['condition_azukeire'];
+     if ($condition_carry_in == '') {
+        $judge_carry_in = '<i class="fa fa-circle-o"></i>';
+     } else{
+        $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+     }
+     if ($condition_azukeire == '') {
+        $judge_azukeire = '<i class="fa fa-close"></i>';
+     } else{
+        $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+     }
 
-        }
-        //預け入れの場合
-        elseif ($search['baggage_classify'] == '2') {
-          $word = $search['word'];
-          $classify = 'お荷物預け入れのみ可能です';
-          $condition_carry_in = $search['condition_carry_in'];
-          $condition_azukeire = $search['condition_azukeire'];
-           if ($condition_carry_in == '') {
-              $judge_carry_in = '<i class="fa fa-close"></i>';
-           } else{
-              $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
-           }
-           if ($condition_azukeire == '') {
-              $judge_azukeire = '<i class="fa fa-circle-o"></i>';
-           } else{
-              $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
-           }
-        }
+  }
+  //預け入れの場合
+  elseif ($search['baggage_classify'] == '2') {
+    $word = $search['word'];
+    $classify = 'お荷物預け入れのみ可能です';
+    $condition_carry_in = $search['condition_carry_in'];
+    $condition_azukeire = $search['condition_azukeire'];
+     if ($condition_carry_in == '') {
+        $judge_carry_in = '<i class="fa fa-close"></i>';
+     } else{
+        $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+     }
+     if ($condition_azukeire == '') {
+        $judge_azukeire = '<i class="fa fa-circle-o"></i>';
+     } else{
+        $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+     }
+  }
 
-        //持ち込めない場合
-        elseif ($search['baggage_classify'] == '3'){
-          $word = $search['word'];
-          $classify = '機内への持ち込み・預け入れ共にできません';
-          $condition_carry_in = $search['condition_carry_in'];
-          $condition_azukeire = $search['condition_azukeire'];
-          if ($condition_carry_in == '') {
-              $judge_carry_in = '<i class="fa fa-close"></i>';
-           } else{
-              $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
-           }
-           if ($condition_azukeire == '') {
-              $judge_azukeire = '<i class="fa fa-close"></i>';
-           } else{
-              $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
-           }
-        } 
+  //持ち込めない場合
+  elseif ($search['baggage_classify'] == '3'){
+    $word = $search['word'];
+    $classify = '機内への持ち込み・預け入れ共にできません';
+    $condition_carry_in = $search['condition_carry_in'];
+    $condition_azukeire = $search['condition_azukeire'];
+    if ($condition_carry_in == '') {
+        $judge_carry_in = '<i class="fa fa-close"></i>';
+     } else{
+        $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+     }
+     if ($condition_azukeire == '') {
+        $judge_azukeire = '<i class="fa fa-close"></i>';
+     } else{
+        $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
+     }
+  } 
 
-      } //アイテムにデータがない時
-      else{
-          //カテゴリー表示
-      }
+} //アイテムにデータがない時
+else{
+    //カテゴリー表示
+}
 
+// リストに追加を押した後、ユーザーが新しいリストを選択した時
+if (isset($_POST['add_new_list'])) {
+  $sql = 'SELECT COUNT(*) FROM `atom_lists` WHERE `members_id`=?';
+  $data = array($_SESSION['login_user']['id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+  // ログインしているユーザーが作成しているリストの数を取得
+  $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+  $list_amount = $rec['COUNT(*)'] + 1;
 
-// ユーザーが複数作成しているリストのどのリストに項目を追加するか選んだ時
+  // 新しい空のリストを作成する
+  $sql = 'INSERT INTO `atom_lists` SET  `members_id` = ?,
+                                        `name` = ?,
+                                        `created` = NOW()';
+  $data = array($_SESSION['login_user']['id'],'リスト '.$list_amount);
+  $stmt = $dbh->prepare($sql);
+  $stmt ->execute($data);
+
+  // 新しく作ったリストのIDを取得する
+  $sql = 'SELECT `id` FROM `atom_lists` WHERE `members_id`=? ORDER BY `id` DESC';
+  $data = array($_SESSION['login_user']['id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+
+  $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+  $new_list_id = $rec['id']; // 新しく作ったリストのIDを取得する
+
+  // 検索された項目を新しいリストに登録する
+  $sql= 'INSERT INTO `atom_items` SET `lists_id`=?,
+                                      `content`=?,
+                                      `categories_id` =?';
+  $data = array($new_list_id,$_POST['word'],$_POST['baggage_classify']);
+  $stmt = $dbh->prepare($sql);
+  $stmt ->execute($data);
+
+  header('Location: login/myPage.php');
+  exit();
+}
+
+// リストに追加を押してからユーザーが複数作成しているリストのどのリストに項目を追加するか選んだ時
 if (!empty($_POST['user_lists_id'])) {
-  var_dump($_POST['baggage_classify']);
   $sql= 'INSERT INTO `atom_items` SET `lists_id`=?,
                                       `content`=?,
                                       `categories_id` =?';
@@ -340,8 +378,8 @@ if (!empty($_POST['user_lists_id'])) {
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
 
-  // header('Location: home.php');
-  // exit();
+  header('Location: login/myPage.php');
+  exit();
 }
 
 
@@ -484,28 +522,35 @@ if (!empty($_POST['user_lists_id'])) {
               </div>
 
               <!-- ユーザーが登録している複数のリストの表示 -->
-              <?php if(isset($user_lists)): ?>
                 <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
                   <div class="row">
-            <!--         <ul class="list-group" id="list_design"> -->
+                    <?php if(isset($user_lists)): ?>
                       <label class="width list_searchs" style="padding: 15px;">
-                        <h3 class="word_titles">どのリストに追加しますか？</h3>
+                        <h3 class="word_titles">追加したいリストを選んでください</h3>
                         <div class="user_lists_select">
-                          <?php foreach($user_lists as $ul): ?>
-                            <form method="POST" action="">
-                              <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
-                              <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
-                              <input type="hidden" name="user_lists_id" value="<?php echo $ul['id']; ?>">
-                              <input type="submit" class="col-lg-4 col-xs-4 btn btn_atom" style="border: 2px solid white; border-bottom: 7px solid white;" name="" value="<?php echo $ul['name']; ?>">
-                            </form>
-                          <?php endforeach; ?>
+                          <form method="POST" action="">
+                            <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
+                            <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
+                            <input type="hidden" name="add_new_list" value="add_new_list">
+                            <input type="submit" class="col-lg-4 col-xs-4 btn btn-default" style="border: 1px solid black; border-bottom: 1px solid black; margin-top: 1px" name="" value="新しいリストに追加する">
+                          </form>
+                          <?php if($user_lists != 'no_lists'): ?>
+                            <?php foreach($user_lists as $ul): ?>
+                              <form method="POST" action="">
+                                <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
+                                <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
+                                <input type="hidden" name="user_lists_id" value="<?php echo $ul['id']; ?>">
+                                <input type="submit" class="col-lg-4 col-xs-4 btn btn_atom" style="border: 2px solid white; border-bottom: 7px solid white;" name="" value="<?php echo $ul['name']; ?>">
+                              </form>
+                            <?php endforeach; ?>
+                          <?php endif; ?>
                         </div>
                       </label>
-                <!--     </ul> -->
+                    <?php endif; ?>
                   </div>
                 </div>
                 
-              <?php endif; ?>
+              
               
             </div> <!-- 右半分を表示するdivタグの終わり -->
           <?php } ?>

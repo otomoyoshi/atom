@@ -40,21 +40,6 @@ if(!empty($_POST)){
 
 }
 
-
-// ユーザがリスト作成ページで戻るボタンで戻って来た場合
-$sql = 'SELECT * FROM `atom_lists` WHERE `name`=""';
-$stmt = $dbh->prepare($sql);
-$stmt->execute();
-
-$empty_name_list = $stmt->fetch(PDO::FETCH_ASSOC);
-// var_dump($empty_name_list);
-
-// 名前が空のデータをDBから削除
-$sql = 'DELETE FROM `atom_lists` WHERE `id`=?';
-$data = array($empty_name_list['id']);
-$stmt = $dbh->prepare($sql);
-$stmt->execute($data);
-
 // ユーザが持つリストを全て取得
 $sql = 'SELECT * FROM `atom_lists` WHERE `members_id`=?';
 $data = array($_SESSION['login_user']['id']);
@@ -182,7 +167,7 @@ while(1){
                         <?php echo $list['name']; 
                         $_SESSION['list_info']['list_name'] = $list['name']; ?></h4>
                       <?php else: ?>
-                        <h4 style="text-align: center; padding: 10px 0px 0px 20px">LIST NAME</h4>
+                        <h4 style="text-align: center; padding: 10px 0px 0px 20px">NAME EMPTY</h4>
                       <?php endif; ?>
                         <h5 style="text-align: center; padding: 0px 0px 0px 20px">
                           <?php echo $list['modified']; ?>
