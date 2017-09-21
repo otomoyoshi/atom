@@ -24,6 +24,11 @@ body {
 	padding-bottom: 50px;
 }
 
+#move_header{
+padding-top: 2px;
+padding-bottom: 0px;
+}
+
 
 .background_white {
   /*background-color: rgba(81,168,255,0.7);*/
