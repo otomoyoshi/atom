@@ -6,10 +6,20 @@
 /*  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
 */}
 
+.label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
 body {
   /*background: url(../img/dark_beach1.jpg);*/
   background-repeat: no-repeat;
   background-size: cover;
+  /*background-color:#FAFAFA;*/
+  /*background-color:white;*/
+  background-color:#f1f1f1;
+
 }
 
 .background_dark {
@@ -49,6 +59,8 @@ body {
 	    padding: 5%;
 	    /*margin: 5%;*/
 	    /*width: 100%;*/
+      /*background-color: #FAFAFA;*/
+      background-color: #FFFFFF;
 	}
 
 }
@@ -67,7 +79,15 @@ body {
 	div#border-space {
     	padding: 5%;
     	margin: 5%;
+      background-color: #FFFFFF;
     	/*width: 100%;*/
   	}
 
 }
+
+
+/*.label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}*/
