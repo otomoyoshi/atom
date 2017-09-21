@@ -92,6 +92,24 @@ padding-bottom: 0px;
   
 }
 
+.result_show_title{
+  color: blue;
+  margin-bottom: 0px;
+}
+
+.length_line{
+  border-style: dashed;
+  width: 69%;
+  margin-top: 20px; 
+
+}
+
+.per_something{
+  margin-bottom: 0px;
+  color: blue;
+
+}
+
 .font_size {
   font-size: 30px;
 }
@@ -189,6 +207,7 @@ li {
     font-size: 35px;
     display: list-item;
     padding-top: 0px;
+    margin-bottom: 0px;
   }
   .judge_show_icon, .judge_icon{
     display: inline;
@@ -302,6 +321,7 @@ li {
     font-size: 35px;
     display: list-item;
     padding-top: 0px;
+    margin-bottom: 0px;
   }
   .judge_show_icon, .judge_icon{
     display: inline;
@@ -408,6 +428,7 @@ li {
     font-size: 35px;
     display: list-item;
     padding-top: 0px;
+    margin-bottom: 0px;
   }
   .judge_show_icon, .judge_icon{
     display: inline;
@@ -519,6 +540,7 @@ li {
     font-size: 35px;
     display: list-item;
     padding-top: 0px;
+    margin-bottom: 0px;
   }
   .judge_show_icon, .judge_icon{
     display: inline;
@@ -627,6 +649,7 @@ li {
     font-size: 35px;
     display: list-item;
     padding-top: 0px;
+    margin-bottom: 0px;
   }
   .judge_show_icon, .judge_icon{
     display: inline;
