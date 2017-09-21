@@ -255,7 +255,7 @@ while (1) {
   }
 
 
-  var_dump($results_l3);
+  // var_dump($results_l3);
 
 foreach ($results_l3 as $result_l3) {
   // echo $result_l3['word'] .'<br>';
@@ -454,7 +454,7 @@ if (!empty($_POST['user_lists_id'])) {
 
         <!-- 検索結果を表示していく -->
 
-        <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6">
+        <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 div_bottom">
 
           <!-- 曖昧検索表示 -->
           <?php if(isset($vague_searchs)): ?>
@@ -567,30 +567,29 @@ if (!empty($_POST['user_lists_id'])) {
           <?php } ?>
         </div>
 
-        <div class="col-xs-12 col-lg-6">
-          <div class="output">確認用</div>
-          <div id="add_btn" class="btn btn-success">表示・非表示</div>
-          <div id="tolists" style="background-color: rgb(0, 153, 255);">
+        <div class="col-xs-12 col-xs-12 col-md-6 col-lg-6 div_bottom">
+          <!-- <div class="output">確認用</div> -->
+          <!-- <div id="add_btn" class="btn btn-success">表示・非表示</div> -->
+<!--           <div id="tolists" style="background-color: rgb(0, 153, 255);">
             <form method="POST" action="">
               <input type="submit" name="to_lists" value="リスト1">
               <input type="submit" name="to_lists" value="リスト2">
             </form>
-          </div>
-          
+          </div> -->
 
           <div class='after_event'>
-            <ul class='horizontal btn_disabled'>
+            <ul class='horizontal btn_disabled row'>
               <?php if(!isset($_GET['tab'])){ ?>
-              <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">タブ１</a></li>
+                <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">タブ１</a></li>
               <?php }else { ?>
-              <li><a href="#tab-1" id="tab1" class="tab background_white font_size">タブ１</a></li>
+                <li><a href="#tab-1" id="tab1" class="tab background_white font_size">タブ１</a></li>
               <?php } ?>
 
               <?php if(isset($_GET['tab']) && $_GET['tab']=='tab1'){?>
-            <li><a href="#tab-2" id="tab2" class="tab background_white font_size div_border">タブ２</a></li>
-            <?php }else { ?>
-            <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
-            <?php } ?>
+                <li><a href="#tab-2" id="tab2" class="tab background_white font_size div_border">タブ２</a></li>
+              <?php }else { ?>
+                <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
+              <?php } ?>
 
             <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){?>
             <li><a href="#tab-3" id="tab3" class="tab background_white font_size div_border">タブ３</a></li>
@@ -599,103 +598,56 @@ if (!empty($_POST['user_lists_id'])) {
               <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
             </ul>
             <?php } ?>
+
             <?php if(!isset($_GET['tab'])){ ?>
               <div id='tab-1'>
 
-                <?php
-                  $i=0;
-                  for($j=0; $j<=$cnt_l1; $j++) {
-                    $div = (int)(($j+1) / ($DEV+1)); //商
-                    // echo "j: " . $j . '<br>';
-                    // echo "cnt_l1: " . $cnt_l1 . '<br>';
-                    // echo "cnt_l1_div: " . $cnt_l1_div . '<br>';
-                    // echo "cnt_l1_sur: " . $cnt_l1_sur . '<br>';
+                  <?php for($j=0; $j<$cnt_l1; $j++) { ?>
+                    <!-- <label> -->
+                      <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab1" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab1_<?php echo $j+1; ?>">
+                        <div class="all_center background_white">
+                          <?php echo $results_l1[$j]['category_l1']; ?>
+                        </div>
 
-                    if($j % $DEV == 0){ //rowタグの開始を出力するタイミングを制御
-                      $i = $j + $DEV - 1; //rowのタグの終了を出力するタイミングを制御
-                      // echo "i: " . $i . '<br>';
-
-                 ?>
-                  <div class="row dev_border">
-                    <?php } ?>
-
-                    <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab1" class="col-lg-2 text-center tabs" id="tab1_<?php echo $j+1; ?>">
-                      <?php echo $results_l1[$j]['category_l1']; ?>
-                    </a>
-
-                    <?php
-                      // rowの閉じタグを出力するタイミンを記述
-                      // 商-1までは６個のcolができたら、rowを出力
-                      // $jが商と一致するとき、剰余数のcolができたら、rowを出力
-                      if( ($j == $i && $div < $cnt_l1_div) || ($cnt_l1_sur == ($j % $DEV) && $div == $cnt_l1_div) ) {
-                        // echo "--j: " . $j . '<br>';
-                        // echo "--div: " . $div . '<br>';
-                    ?>
-
-                    </div><!-- row -->
-
-                  <?php } ?><!-- if -->
+                      </a>
+                    <!-- </label> -->
                 <?php } ?><!-- for -->
               </div>
             <?php } ?>
 
 
 
-            <?php if(isset($_GET['tab']) && $_GET['tab']=='tab1'){?>
-
+            <?php if(isset($_GET['tab']) && $_GET['tab']=='tab1'){ ?>
               <div id='tab-2'>
-                <?php
-                  $i=0;
-                  for($j=0; $j<=$cnt_l2; $j++) {
 
-                  $div = (int)(($j+1) / ($DEV+1));
-                  // echo "div-default: " . $j . '<br>';
-                  // echo "cnt_l2: " . $cnt_l2 . '<br>';
-                  // echo "cnt_l2_div: " . $cnt_l2_div . '<br>';
-                  // echo "cnt_l2_sur: " . $cnt_l2_sur . '<br>';
-                    if($j % $DEV == 0){
-                      $i = $j + $DEV - 1;
-                ?>
-                      <div class="row dev_border">
-                    <?php } ?>
+                  <?php for($j=0; $j<$cnt_l2; $j++) { ?>
+                    <!-- <label> -->
+                      <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab2" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab2_<?php echo $j+1; ?>">
+                        <div class="all_center background_white">
+                          <?php echo $results_l2[$j]['category_l2']; ?>
+                        </div>
 
-                    <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab2" class="col-lg-2 text-center tabs" id="tab2_<?php echo $j+1 ?>">
-                      <?php echo $results_l2[$j]['category_l2']; ?>
-                    </a>
-
-                   <?php if( ($j == $i && $div < $cnt_l2_div) || ($cnt_l2_sur == ($j % $DEV) && $div == $cnt_l2_div) ) { ?>
-                    </div><!-- row-->
-                  <?php } ?><!-- if -->
-
+                      </a>
+                    <!-- </label> -->
                 <?php } ?><!-- for -->
-              </div><!-- tab2 -->
-
+              </div>
             <?php } ?>
 
 
-            <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){?>
+            <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){ ?>
+              <div id='tab-3'>
 
-            <div id='tab-3'>
-                            <?php
-                $i=0;
-                for($j=0; $j<=$cnt_l3; $j++) {
-                  $div = (int)(($j+1) / ($DEV+1));
-                  if($j % $DEV == 0){
-                    $i = $j + $DEV -1;
-              ?>
-                    <div class="row dev_border">
-                  <?php } ?>
-                    <!-- <div class="col-lg-2 text-center tabs" id="tab3_<?php echo $i ?>"> -->
-                    <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab3" class="col-lg-2 text-center tabs" id="tab3_<?php echo $j+1 ?>">
-                      <?php echo $results_l3[$j]['word']; ?>
-                    </a>
+                  <?php for($j=0; $j<$cnt_l3; $j++) { ?>
+                    <!-- <label> -->
+                      <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab3" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab3_<?php echo $j+1; ?>">
+                        <div class="all_center background_white">
+                          <?php echo $results_l3[$j]['word']; ?>
+                        </div>
 
-                  <?php if( ($j == $i && $div < $cnt_l3_div) || ($cnt_l3_sur == ($j % $DEV) && $div == $cnt_l3_div)){ ?>
-                    </div>
-                  <?php } ?>
-              <?php } ?>
-
-            </div><!-- tab-3 -->
+                      </a>
+                    <!-- </label> -->
+                <?php } ?><!-- for -->
+              </div>
             <?php } ?>
 
 

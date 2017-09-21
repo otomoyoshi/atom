@@ -7,6 +7,10 @@
 	/*height: auto;*/
 }
 
+#move_header{
+padding-top: 2px;
+padding-bottom: 0px;
+}
 
 .undefined_word{
 	color: black;
@@ -249,7 +253,7 @@ input #h3 {
     margin: 0px;    
     color: #333;
     background-color: #fff;
-    border-color: #ccc;    
+    border-color: #ccc;
 }
 .image-preview-input input[type=file] {
   position: absolute;

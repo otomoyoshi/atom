@@ -30,6 +30,11 @@
 
 }
 
+#move_header{
+padding-top: 2px;
+padding-bottom: 0px;
+}
+
 body { 
 background: url(../img/dark_beach1.jpg);
   background-repeat: no-repeat;
