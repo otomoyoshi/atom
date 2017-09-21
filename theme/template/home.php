@@ -461,7 +461,83 @@ if (!empty($_POST['user_lists_id'])) {
 
           <!-- 検索結果が見つからない時 -->
           <?php if($no_result == 'no_result'): ?>
-            <h5 class="alert alert-danger col-lg-6">検索結果が見つかりませんでした</h5>
+            <div class="row">
+              <h5 class="alert alert-danger col-lg-6">検索結果が見つかりませんでした</h5><br>
+            </div>
+            <!-- カテゴリー表示 -->
+            <div class='after_event'>
+              <ul class='horizontal btn_disabled row'>
+                <?php if(!isset($_GET['tab'])){ ?>
+                  <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">タブ１</a></li>
+                <?php }else { ?>
+                  <li><a href="#tab-1" id="tab1" class="tab background_white font_size">タブ１</a></li>
+                <?php } ?>
+
+                <?php if(isset($_GET['tab']) && $_GET['tab']=='tab1'){?>
+                  <li><a href="#tab-2" id="tab2" class="tab background_white font_size div_border">タブ２</a></li>
+                <?php }else { ?>
+                  <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
+                <?php } ?>
+
+                <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){?>
+                <li><a href="#tab-3" id="tab3" class="tab background_white font_size div_border">タブ３</a></li>
+              </ul>
+              <?php }else{ ?>
+                <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
+              </ul>
+              <?php } ?>
+
+              <?php if(!isset($_GET['tab'])){ ?>
+                <div id='tab-1'>
+
+                    <?php for($j=0; $j<$cnt_l1; $j++) { ?>
+                      <!-- <label> -->
+                        <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab1" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab1_<?php echo $j+1; ?>">
+                          <div class="all_center background_white">
+                            <?php echo $results_l1[$j]['category_l1']; ?>
+                          </div>
+
+                        </a>
+                      <!-- </label> -->
+                  <?php } ?><!-- for -->
+                </div>
+              <?php } ?>
+
+
+
+              <?php if(isset($_GET['tab']) && $_GET['tab']=='tab1'){ ?>
+                <div id='tab-2'>
+
+                    <?php for($j=0; $j<$cnt_l2; $j++) { ?>
+                      <!-- <label> -->
+                        <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab2" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab2_<?php echo $j+1; ?>">
+                          <div class="all_center background_white">
+                            <?php echo $results_l2[$j]['category_l2']; ?>
+                          </div>
+
+                        </a>
+                      <!-- </label> -->
+                  <?php } ?><!-- for -->
+                </div>
+              <?php } ?>
+
+
+              <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){ ?>
+                <div id='tab-3'>
+
+                    <?php for($j=0; $j<$cnt_l3; $j++) { ?>
+                      <!-- <label> -->
+                        <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab3" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab3_<?php echo $j+1; ?>">
+                          <div class="all_center background_white">
+                            <?php echo $results_l3[$j]['word']; ?>
+                          </div>
+
+                        </a>
+                      <!-- </label> -->
+                  <?php } ?><!-- for -->
+                </div>
+              <?php } ?>
+            </div><!-- after_event -->
           <?php endif; ?>
 
           <!-- 曖昧検索表示 -->
@@ -573,101 +649,13 @@ if (!empty($_POST['user_lists_id'])) {
                     <?php endif; ?>
                   </div>
                 </div>
-                
-              
-              
+
             </div> <!-- 右半分を表示するdivタグの終わり -->
           <?php } ?>
         </div>
 
-        <div class="col-xs-12 col-xs-12 col-md-6 col-lg-6 div_bottom">
-          <!-- <div class="output">確認用</div> -->
-          <!-- <div id="add_btn" class="btn btn-success">表示・非表示</div> -->
-<!--           <div id="tolists" style="background-color: rgb(0, 153, 255);">
-            <form method="POST" action="">
-              <input type="submit" name="to_lists" value="リスト1">
-              <input type="submit" name="to_lists" value="リスト2">
-            </form>
-          </div> -->
-
-          <div class='after_event'>
-            <ul class='horizontal btn_disabled row'>
-              <?php if(!isset($_GET['tab'])){ ?>
-                <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">タブ１</a></li>
-              <?php }else { ?>
-                <li><a href="#tab-1" id="tab1" class="tab background_white font_size">タブ１</a></li>
-              <?php } ?>
-
-              <?php if(isset($_GET['tab']) && $_GET['tab']=='tab1'){?>
-                <li><a href="#tab-2" id="tab2" class="tab background_white font_size div_border">タブ２</a></li>
-              <?php }else { ?>
-                <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
-              <?php } ?>
-
-            <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){?>
-            <li><a href="#tab-3" id="tab3" class="tab background_white font_size div_border">タブ３</a></li>
-            </ul>
-            <?php }else{ ?>
-              <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
-            </ul>
-            <?php } ?>
-
-            <?php if(!isset($_GET['tab'])){ ?>
-              <div id='tab-1'>
-
-                  <?php for($j=0; $j<$cnt_l1; $j++) { ?>
-                    <!-- <label> -->
-                      <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab1" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab1_<?php echo $j+1; ?>">
-                        <div class="all_center background_white">
-                          <?php echo $results_l1[$j]['category_l1']; ?>
-                        </div>
-
-                      </a>
-                    <!-- </label> -->
-                <?php } ?><!-- for -->
-              </div>
-            <?php } ?>
-
-
-
-            <?php if(isset($_GET['tab']) && $_GET['tab']=='tab1'){ ?>
-              <div id='tab-2'>
-
-                  <?php for($j=0; $j<$cnt_l2; $j++) { ?>
-                    <!-- <label> -->
-                      <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab2" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab2_<?php echo $j+1; ?>">
-                        <div class="all_center background_white">
-                          <?php echo $results_l2[$j]['category_l2']; ?>
-                        </div>
-
-                      </a>
-                    <!-- </label> -->
-                <?php } ?><!-- for -->
-              </div>
-            <?php } ?>
-
-
-            <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){ ?>
-              <div id='tab-3'>
-
-                  <?php for($j=0; $j<$cnt_l3; $j++) { ?>
-                    <!-- <label> -->
-                      <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab3" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab3_<?php echo $j+1; ?>">
-                        <div class="all_center background_white">
-                          <?php echo $results_l3[$j]['word']; ?>
-                        </div>
-
-                      </a>
-                    <!-- </label> -->
-                <?php } ?><!-- for -->
-              </div>
-            <?php } ?>
-
-
-          </div><!-- after_event -->
-
-          <!-- </div> -->
-        </div><!-- /col-lg-6 -->
+<!--         <div class="col-xs-12 col-xs-12 col-md-6 col-lg-6 div_bottom">
+        </div> --><!-- /col-lg-6 -->
 
     </div><!-- /row -->
   </div><!-- /container -->
