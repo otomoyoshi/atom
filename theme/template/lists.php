@@ -69,7 +69,7 @@
             </div>
               <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 text-center">
 
-<!-- <<<<<<< HEAD -->
+
             <?php if (isset($errors['extension'])) { ?>
               <div class="alert alert-danger">
                 拡張子は、jpg,png,gifの画像を選択ください
@@ -87,8 +87,8 @@
 
             <!-- 画像がデータベースに登録されてないとき -->
             <?php } else {?>
-            <a id="list_img" data-remodal-target="modal">
               <img src="../assets/img/insert_image.png" class="img-circle" style="height: 120px; width: 120px">
+
             </a>
             <?php } ?>
 
@@ -171,9 +171,15 @@
                 <?php foreach ($item_boths as $item_both) { ?>
                   <label class="width">
                     <li class="list-group-item list_float">
+                      <?php if ($item_both['item_check'] == 1) { ?>
+                        <input type="hidden" name="check_judge" value="checked" checked>
+                        <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_both['id']?>" checked>
+                        <span class="checkbox-icon"></span>
+                      <?php } else { ?>
                         <input type="hidden" name="check_judge" value="checked">
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_both['id']?>">
-                      <span class="checkbox-icon"></span>
+                        <span class="checkbox-icon"></span>
+                      <?php } ?>
                       <?php echo $item_both['content'];?>
                         <!-- 削除処理を書いていく -->
                         <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_both['id'];?>">
@@ -201,9 +207,15 @@
                 <?php foreach ($item_carry_ins as $item_carry_in){ ?>
                   <label class="width">
                     <li class="list-group-item list_float">
+                      <?php if ($item_carry_in['item_check'] == 1) { ?>
+                        <input type="hidden" name="check_judge" value="checked">
+                        <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_carry_in['id']?>" checked>
+                        <span class="checkbox-icon"></span>
+                      <?php } else { ?>
                         <input type="hidden" name="check_judge" value="checked">
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_carry_in['id']?>">
-                      <span class="checkbox-icon"></span>
+                        <span class="checkbox-icon"></span>
+                      <?php } ?>                      <span class="checkbox-icon"></span>
                       <?php  echo $item_carry_in['content']; ?>
                       <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_carry_in['id'];?>">
                         <i class="fa fa-trash right_position"></i>
@@ -231,8 +243,15 @@
               <?php foreach ($item_azukeires as $item_azukeire) { ?>
                 <label class="width">
                     <li class="list-group-item list_float">
+                      <?php if ($item_azukeire['item_check'] == 1) { ?>
+                        <input type="hidden" name="check_judge" value="checked">
+                        <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_azukeire['id']?>" checked>
+                        <span class="checkbox-icon"></span>
+                      <?php } else { ?>
                         <input type="hidden" name="check_judge" value="checked">
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_azukeire['id']?>">
+                        <span class="checkbox-icon"></span>
+                      <?php } ?>
                       <span class="checkbox-icon"></span>
                       <span class="list_content"><?php echo $item_azukeire['content']; ?></span>
                         <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">

@@ -7,12 +7,29 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #f1f1f1;
+  color: #fff;
+}
+
+.box_bottom{
+    padding-bottom: 15px;
+  }
+.div_bottom{
+  padding-bottom: 30px;
+}
+.div_border{
+  border-bottom:5px solid #51a8ff;
 }
 
 .home_to_list_btn{
     width: 100%;
     height: 7%;
 }
+
+#move_header{
+padding-top: 2px;
+padding-bottom: 0px;
+}
+
 #footer {
   width: 100%;
   background-color: #51a8ff;
@@ -47,9 +64,21 @@ body {
   color: white;
 }
 
-.dev_border{
+.all_center{
+  margin: auto;
+  height: 100px;
+  width: 150px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
   border: solid 1px #51a8ff;
 }
+
+/*.dev_border{
+  border: solid 1px #51a8ff;
+  width: 150px;
+  height: 100px;
+}*/
 
 .background_white {
   /*background-color: rgba(81,168,255,0.7);*/
@@ -63,13 +92,31 @@ body {
   
 }
 
-.font_size {
-  font-size: 35px;
+.result_show_title{
+  color: blue;
+  margin-bottom: 0px;
 }
 
-.div_border {
-  border-bottom: solid 3px #51a8ff;
+.length_line{
+  border-style: dashed;
+  width: 69%;
+  margin-top: 20px; 
+
 }
+
+.per_something{
+  margin-bottom: 0px;
+  color: blue;
+
+}
+
+.font_size {
+  font-size: 30px;
+}
+
+/*.div_border {
+  border-bottom: solid 3px #51a8ff;
+}*/
 
 /*.background_atom {
   background-color: rgba(81,168,255,0.7);
@@ -160,6 +207,7 @@ li {
     font-size: 35px;
     display: list-item;
     padding-top: 0px;
+    margin-bottom: 0px;
   }
   .judge_show_icon, .judge_icon{
     display: inline;
@@ -218,6 +266,19 @@ li {
   margin-left: 4%;
   margin-right: 33%;
 }
+
+.all_center{
+  margin: auto;
+  height: 100px;
+  width: 150px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  border: solid 1px #51a8ff;
+}
+
+
+
 }
 
 
@@ -260,6 +321,7 @@ li {
     font-size: 35px;
     display: list-item;
     padding-top: 0px;
+    margin-bottom: 0px;
   }
   .judge_show_icon, .judge_icon{
     display: inline;
@@ -316,6 +378,15 @@ li {
     margin-left: 31%;
     margin-right: 50%;
   }
+  .all_center{
+    margin: auto;
+    height: 100px;
+    width: 150px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    border: solid 1px #51a8ff;
+  }
 }
 
 /* Portrait tablets and small desktops */
@@ -357,6 +428,7 @@ li {
     font-size: 35px;
     display: list-item;
     padding-top: 0px;
+    margin-bottom: 0px;
   }
   .judge_show_icon, .judge_icon{
     display: inline;
@@ -413,6 +485,18 @@ li {
     margin-left: 25%;
     margin-right: 50%;
   }
+  .all_center{
+  margin: auto;
+  height: 100px;
+  width: 150px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  border: solid 1px #51a8ff;
+  }
+
+
+
 }
 
 /* Landscape phones and portrait tablets */
@@ -456,6 +540,7 @@ li {
     font-size: 35px;
     display: list-item;
     padding-top: 0px;
+    margin-bottom: 0px;
   }
   .judge_show_icon, .judge_icon{
     display: inline;
@@ -512,6 +597,17 @@ li {
     margin-left: 21%;
     margin-right: 56%;
   }
+  .all_center{
+  margin: auto;
+  height: 100px;
+  width: 150px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  border: solid 1px #51a8ff;
+  }
+
+
 }
 
 /* Portrait phones and smaller */
@@ -553,6 +649,7 @@ li {
     font-size: 35px;
     display: list-item;
     padding-top: 0px;
+    margin-bottom: 0px;
   }
   .judge_show_icon, .judge_icon{
     display: inline;
@@ -587,6 +684,22 @@ li {
   .width{
     width:100%;
   }
+
+  .all_center{
+    margin: auto;
+    height: 100px;
+    width: 150px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    border: solid 1px #51a8ff;
+  }
+
+  .box_bottom{
+    padding-bottom: 15px;
+  }
+
+
 }
 
 .tabinimotsu_main_div{
