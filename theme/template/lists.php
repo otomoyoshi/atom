@@ -25,17 +25,17 @@
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
 
   <?php
-    // $ini = parse_ini_file("config.ini");
-    // $is_login = $ini['is_login'];
-    // $is_login = 0; //ログインしてるときを１とする（仮）
-    if (isset($_SESSION['login_user'])){ //ログインしてるとき
-      // echo "login success";
-      require('login_header.php');
+    // // $ini = parse_ini_file("config.ini");
+    // // $is_login = $ini['is_login'];
+    // // $is_login = 0; //ログインしてるときを１とする（仮）
+    // if (isset($_SESSION['login_user'])){ //ログインしてるとき
+    //   // echo "login success";
+    //   require('login_header.php');
 
-    } else {// ログインしてないとき
-      // echo "login fail";
-      require('header.php');
-    }
+    // } else {// ログインしてないとき
+    //   // echo "login fail";
+    //   require('header.php');
+    // }
   ?>
 <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
     <button data-remodal-action="close" class="remodal-close"></button>
@@ -171,7 +171,8 @@
                 <?php foreach ($item_boths as $item_both) { ?>
                   <label class="width">
                     <li class="list-group-item list_float">
-                      <input type="checkbox" name="che" class="left checkbox">
+                        <input type="hidden" name="check_judge" value="checked">
+                        <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_both['id']?>">
                       <span class="checkbox-icon"></span>
                       <?php echo $item_both['content'];?>
                         <!-- 削除処理を書いていく -->
@@ -200,12 +201,10 @@
                 <?php foreach ($item_carry_ins as $item_carry_in){ ?>
                   <label class="width">
                     <li class="list-group-item list_float">
-                      <input type="checkbox" name="che" class="left checkbox">
+                        <input type="hidden" name="check_judge" value="checked">
+                        <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_carry_in['id']?>">
                       <span class="checkbox-icon"></span>
                       <?php  echo $item_carry_in['content']; ?>
-                      <?php  ?>
-                      <!-- 削除処理を書いていく -->
-                      <!-- <a href="delete_category.php?id=<?php echo $item_carry_in['id'];?>"> -->
                       <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_carry_in['id'];?>">
                         <i class="fa fa-trash right_position"></i>
                       </a>
@@ -232,13 +231,10 @@
               <?php foreach ($item_azukeires as $item_azukeire) { ?>
                 <label class="width">
                     <li class="list-group-item list_float">
-                      <input type="checkbox" name="che" class="left checkbox">
+                        <input type="hidden" name="check_judge" value="checked">
+                        <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_azukeire['id']?>">
                       <span class="checkbox-icon"></span>
-                      <!-- <input type="text" class="list_input" name="" value="<?php echo $item_azukeire['content']; ?>"> -->
                       <span class="list_content"><?php echo $item_azukeire['content']; ?></span>
-                      
-                        <!-- 削除処理を書いていく -->
-                        <!-- <a href="delete_category.php?id=<?php echo $item_azukeire['id']; ?>"> -->
                         <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
                           <i class="fa fa-trash right_position"></i>
                         </a>

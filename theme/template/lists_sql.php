@@ -133,7 +133,6 @@
 
     //検索ボタンが押された時
   if (!empty($_POST['list_search']) && $_POST['list_search'] != ''){
-
       $sql = 'SELECT * FROM `atom_searchs` WHERE `word`= ?';
       $data = array($_POST['list_search']);
       $stmt = $dbh->prepare($sql);
@@ -210,6 +209,37 @@
 
   // 保存ボタンが押された時
   if (!empty($_POST['keep_btn'])) {
+          $sql= 'UPDATE `atom_items` SET `item_check`= 0 WHERE `lists_id`=?';
+          $data = array($_GET['id']);
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute($data);
+
+          $c = count($_POST['che']);
+          $check_items = $_POST['che'];
+          var_dump($check_items);
+          
+          // $sql= 'UPDATE `atom_items`(`item_check`) VALUES';
+
+          for ($i=0; $i < $c ; $i++) { 
+            // $data = '(' . 1 . ')';
+            // $s = '';
+            // if($i != 0){
+            //   $s = ',';
+            // }
+            // $sql .= $s . $data;
+
+            $sql= 'UPDATE `atom_items` SET `item_check`= 1 WHERE `id`=?';
+            $data = array($check_items[$i]);
+            $stmt = $dbh->prepare($sql);
+            $stmt ->execute($data);
+          }
+
+          // $sql .= 'WHERE `id`=?';
+          // echo $sql .'<br>';
+          // $stmt = $dbh->prepare($sql);
+          // $stmt ->execute($data);
+      
+        /////////////////////////////
 
     if(isset($_POST['list_name'])) {
       $list_name = $_POST['list_name'];
@@ -225,8 +255,8 @@
     $stmt = $dbh->prepare($sql);
     $stmt ->execute($data);
 
-    header('Location: login/myPage.php');
-    exit();
+    // header('Location: login/myPage.php');
+    // exit();
   }
 
   $is_image = ''; //画像が存在するか確認する
