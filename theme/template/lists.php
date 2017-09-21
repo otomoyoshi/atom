@@ -2,19 +2,6 @@
 
   require('lists_sql.php');
 
-  // ユーザーが新規でリストを作成する際
-  if ($is_image['name'] == '') {
-
-    $sql = 'SELECT COUNT(*) FROM `atom_lists` WHERE `members_id`=?';
-    $data = array($_SESSION['login_user']['id']);
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute($data);
-    // ログインしているユーザーが作成しているリストの数を取得
-    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-    $list_amount = $rec['COUNT(*)'];
-  }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -76,17 +63,9 @@
           <div class="col-lg-offset-2 col-lg-5 col-md-12 col-sm-12 col-xs-12">
             <form action="" method="POST">
 
-            <?php if($is_image['name'] != ''): ?>
-              <!-- リスト名が登録されている場合、そのリスト名を表示する -->
               <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
               data-intro="リスト名を入力してね" data-step="1" value="<?php echo $is_image['name']; ?>">
 
-            <?php else: ?>
-              <!-- リスト名が登録されていない場合、自動的にリスト名がvalueに入る -->
-              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
-              data-intro="リスト名を入力してね" data-step="1" value="リスト  <?php echo $list_amount; ?>">
-
-            <?php endif; ?>
             </div>
               <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 text-center">
 
@@ -109,7 +88,7 @@
             <!-- 画像がデータベースに登録されてないとき -->
             <?php } else {?>
             <a id="list_img" data-remodal-target="modal">
-              <div >デフォルト画像を表示</div>
+              <img src="../assets/img/insert_image.png" class="img-circle" style="height: 120px; width: 120px">
             </a>
             <?php } ?>
 
@@ -127,12 +106,12 @@
           </div>
 
         </div>
-        <?php if(isset($tmp_searchs) && !empty($_POST['list_search_btn']) && count($tmp_searchs) > 1){ ?>
+        <?php if(isset($tmp_searchs) && !empty($_POST['list_search_btn'])){ ?>
           <div class="row">
             <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
               <ul class="list-group" id="list_design">
                 <label class="width list_searchs">
-                  <h3 class="word_titles">複数件の結果が見つかりました</h3>
+                  <h3 class="word_titles">検索結果が見つかりました</h3>
                   <li class="list-group-item list_property">
                     <?php if(isset($vague_searchs)): ?>
                       <?php foreach($vague_searchs as $tss): ?>
@@ -410,25 +389,6 @@
           });
       }
   </script>
-  <!-- 戻るときだけコンファームを出すためのjs -->
-  <script type="text/javascript">
-  // console.log(test);
-  $(document).ready(function(){
-
-    $(window).on('beforeunload', function() {
-      //個々の変数をクリックしたオブジェクトで変更できれば実装できそう
-      var test = 0;
-      function linkCheck(btn){
-        if (btn == 1) {
-          var test = 1;
-        }
-      }
-      console.log(test);
-        if(test == 0){
-          return "このページを離れると、入力したデータが削除されます。\n修正したい場合には、「マイページへ登録」ボタンをクリックしてください。";
-        }
-    });
-});
 
 </script>
 </body>

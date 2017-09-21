@@ -8,12 +8,21 @@ if(!empty($_POST)){
   // echo "post" . '<br>';
   // 新規リストを作成
   if(isset($_POST['new'])){
-    $sql = 'INSERT `atom_lists` SET `members_id` = ?,
-                                     -- `name` = ?,
-                                     -- `list_image_path` = ?,
-                                     `created` = NOW()';
-    // $data = array($_SESSION['login_user']['id'], $_POST['list_name']);
+      // ユーザーが新規でリストを作成する際に、すでに作っているリストの数を取得
+    $sql = 'SELECT COUNT(*) FROM `atom_lists` WHERE `members_id`=?';
     $data = array($_SESSION['login_user']['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+    // ログインしているユーザーが作成しているリストの数を取得
+    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+    $list_amount = $rec['COUNT(*)'] + 1;
+
+    $sql = 'INSERT INTO `atom_lists` SET  `members_id` = ?,
+                                          `name` = ?,
+                                     --   `list_image_path` = ?,
+                                          `created` = NOW()';
+    // $data = array($_SESSION['login_user']['id'], $_POST['list_name']);
+    $data = array($_SESSION['login_user']['id'],'リスト '.$list_amount);
     $stmt = $dbh->prepare($sql);
     $stmt ->execute($data);
 
@@ -210,7 +219,6 @@ while(1){
                         <a href="../myPage_function/list_copy.php?id=<?php echo $list['id']; ?>">
                           <!-- <span class="tooltip" title="ダウンロード"></span> -->
                           <button name="list_copy" type="button" class="col-md-4 col-xs-4" data-intro="持ち物リストを複製できるよ" data-step="2" title="持ち物リストを複製できるよ"><i class="glyphicon glyphicon-file" title="持ち物リストを複製できるよ"></i></button>
-                          
                         </a>
                         <!-- <a href="../function/list_email.php"> -->
                           <button name="list_email" type="button" class="col-md-4 col-xs-4" data-intro="メールで持ち物リストを送信できるよ" data-step="3" title="ダウンロード"><i class="glyphicon glyphicon-envelope"></i></button>

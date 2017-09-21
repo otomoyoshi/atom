@@ -47,16 +47,9 @@ if (isset($_GET['list_search_id']) && $_GET['list_search_id'] != '') {
       // echo count($tmp_searchs);
 
       if (isset($tmp_searchs)) { // 検索結果が存在する時
-
-        if (count($tmp_searchs) == 1) { // 曖昧検索の結果がひとつのみの場合
-          foreach($tmp_searchs as $ts){
-            $search[] = $ts;
-            $search = $search[0];
-          }
-        }elseif(count($tmp_searchs) > 1){ // 曖昧検索の結果が複数存在する場合
-          foreach($tmp_searchs as $ts){
-            $vague_searchs[] = $ts;
-          }
+        foreach($tmp_searchs as $ts){
+          $vague_searchs[] = $ts;
+          var_dump($vague_searchs);
         }
       }else{ // 検索結果が存在しない時
         $no_result = 'no_result';//ここにカテゴリーの裏を書く
@@ -118,28 +111,7 @@ if (isset($_GET['list_search_id']) && $_GET['list_search_id'] != '') {
           exit();
 
 
-        }elseif ($list_amount == 1) { // ユーザーが作成しているリストの数が一つの時
-          $sql = 'SELECT `id` FROM `atom_lists` WHERE `members_id`=?';
-          $data = array($_SESSION['login_user']['id']);
-          $stmt = $dbh->prepare($sql);
-          $stmt->execute($data);
-
-          $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-          $created_list_id = $rec['id'];  // ユーザーが作成しているリストのIDを取得
-          // echo $created_list_id;
-
-          // ログインユーザーの唯一作っているリストに検索結果のワードを登録
-          $sql= 'INSERT INTO `atom_items` SET `lists_id`=?,
-                                              `content`=?,
-                                              `categories_id` =?';
-          $data = array($created_list_id,$_POST['word'],$_POST['baggage_classify']);
-          $stmt = $dbh->prepare($sql);
-          $stmt ->execute($data);
-
-          header('Location: home.php');
-          exit();
-
-        }else{ // ユーザーが作成しているリストの数が複数ある時
+        }else{ // ユーザーが作成しているリストが存在する時
           $sql = 'SELECT * FROM `atom_lists` WHERE `members_id`=?';
           $data = array($_SESSION['login_user']['id']);
           $stmt = $dbh->prepare($sql);
@@ -455,7 +427,7 @@ if (!empty($_POST['user_lists_id'])) {
               <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
                 <ul class="list-group" id="list_design">
                   <label class="width list_searchs">
-                    <h3 class="word_titles">複数件の結果が見つかりました</h3>
+                    <h3 class="word_titles">検索結果が見つかりました</h3>
                     <li class="list-group-item word_list_design">
                       <?php if(isset($vague_searchs)): ?>
                         <?php foreach($vague_searchs as $tss): ?>
@@ -513,25 +485,23 @@ if (!empty($_POST['user_lists_id'])) {
 
               <!-- ユーザーが登録している複数のリストの表示 -->
               <?php if(isset($user_lists)): ?>
-                <div class="row">
-                  <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
-                    <ul class="list-group" id="list_design">
-                      <label class="width list_searchs">
+                <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
+                  <div class="row">
+            <!--         <ul class="list-group" id="list_design"> -->
+                      <label class="width list_searchs" style="padding: 15px;">
                         <h3 class="word_titles">どのリストに追加しますか？</h3>
-                        <li class="list-group-item word_list_design">
+                        <div class="user_lists_select">
                           <?php foreach($user_lists as $ul): ?>
                             <form method="POST" action="">
                               <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
                               <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
                               <input type="hidden" name="user_lists_id" value="<?php echo $ul['id']; ?>">
-                              <div class="row">
-                                <input type="submit" class="col-lg-4 col-xs-4 col-lg-offset-4 col-lg-offset-4" name="" value="<?php echo $ul['name']; ?>">
-                              </div>
+                              <input type="submit" class="col-lg-4 col-xs-4 btn btn_atom" style="border: 2px solid white; border-bottom: 7px solid white;" name="" value="<?php echo $ul['name']; ?>">
                             </form>
                           <?php endforeach; ?>
-                        </li>
+                        </div>
                       </label>
-                    </ul>
+                <!--     </ul> -->
                   </div>
                 </div>
                 
