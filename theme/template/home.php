@@ -8,6 +8,8 @@ $condition_azukeire = '';
 $judge_azukeire = '';
 $judge_carry_in = '';
 $no_result = '';
+$per_person = '';
+$per_container = '';
 
 // カテゴリーの3階層目を押したとき
 if(isset($_GET['tab']) && $_GET['tab']=='tab3'){
@@ -297,6 +299,8 @@ foreach ($results_l3 as $result_l3) {
            } else{
               $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
            }
+           $per_container = $searcch['per_container'];
+           $per_person = $search['per_person'];
         }
         // 持ち込みの場合
         elseif ($search['baggage_classify'] == '1') {
@@ -314,7 +318,8 @@ foreach ($results_l3 as $result_l3) {
            } else{
               $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
            }
-
+           $per_container = $searcch['per_container'];
+           $per_person = $search['per_person'];
         }
         //預け入れの場合
         elseif ($search['baggage_classify'] == '2') {
@@ -350,6 +355,8 @@ foreach ($results_l3 as $result_l3) {
            } else{
               $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
            }
+           $per_container = $search['per_container'];
+           $per_person = $search['per_person'];
         } 
 
       } //アイテムにデータがない時
@@ -484,23 +491,42 @@ if (!empty($_POST['user_lists_id'])) {
                     <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
                     <h3 class="word_titles"><?php echo $word; ?></h3>
                     <li class="list-group-item list_property">
-                      <h2 class="judge_show_icon">機内持ち込み：</h2>
+                      <h2 class="judge_show_icon">機内持ち込み</h2>
                       <p class="judge_icon">
                         <?php echo $judge_carry_in ?>
                       </p>
                       <p class="conditions">
-                        機内持ち込み条件：<br>
-                        <?php echo $condition_carry_in; ?>
-                      </p>
+                        <p class="result_show_title">条件：</p><br>
+                        <p><?php echo $condition_carry_in; ?></p>
+                        <?php if (isset($per_person) && $per_person != '') {?>
+                          <hr class="length_line">
+                        <p class="per_something">1人当たり：</p><br>
+                        <p><?php echo $per_person.'<br>'; ?></p>
+                        <?php } ?>
+                        <?php if ( isset($per_container) && $per_container != '') {?>
+                          <hr class="length_line">
+                          <p lass="per_something">１容器あたり：</p>
+                          <p><?php echo $per_container.'<br>'; ?></p>
+                        <?php } ?>
+                     </p>
                     </li>
                     <li class="list-group-item">
-                      <h2 class="judge_show_icon">預け入れ：</h2>
+                      <h2 class="judge_show_icon">預け入れ</h2>
                       <p class="judge_icon">
                         <?php echo $judge_azukeire ?>
                       </p>
                       <p class="conditions">
-                        機内預け入れ条件：<br>
-                        <?php echo $condition_azukeire; ?>
+                        <p class="result_show_title">条件：</p><br>
+                        <p><?php echo $condition_azukeire; ?></p>
+                        <?php if (isset($per_person) && $per_person != '') {?>
+                          <hr class="length_line">
+                          <p class="per_something">1人当たり：</p><br>
+                          <?php echo $per_person.'<br>'; ?>
+                        <?php } ?>
+                        <?php if (isset($per_container) && $per_container != '') {?>
+                          <hr class="length_line">
+                          <p lass="result_show_title per_something">１容器あたり:</p><?php echo $per_container.'<br>'; ?>
+                        <?php } ?>
                       </p>
                     </li>
                   </label>
