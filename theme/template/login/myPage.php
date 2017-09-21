@@ -41,7 +41,7 @@ if(!empty($_POST)){
 }
 
 // ユーザが持つリストを全て取得
-$sql = 'SELECT * FROM `atom_lists` WHERE `members_id`=?';
+$sql = 'SELECT * FROM `atom_lists` WHERE `members_id`=? ORDER BY `id` DESC';
 $data = array($_SESSION['login_user']['id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
