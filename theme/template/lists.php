@@ -127,12 +127,13 @@
           <div class="row">
             <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding vargues_position">
               <h5 class="undefined_word">検索結果が見つかりませんでした</h5>
-              <h7 class= "undefined_category">(検索ワード：<?php echo htmlspecialchars($_POST['list_search'])?>)</h7><br>
-              <input type="submit" class = "moving_category btn btn_atom" value="カテゴリーから探す" name=""><br>
+              <h7 class= "undefined_category">(検索ワード：<?php echo htmlspecialchars($_POST['list_search'])?>)</h7>
               <input type="hidden" name="undefined_to_lists" value="<?php echo $_POST['list_search'] ?>">
-              <input type="submit" class = "moving_list_direct btn btn_atom" value="”持ち込み・預け入れリスト”に追加する" name="move_both">
-              <input type="submit" class = "moving_list_direct btn btn_atom" value="”持ち込みリスト”に追加する" name="move_carry_in">
-              <input type="submit" class = "moving_list_direct btn btn_atom" value="”預け入れリスト”に追加する" name="move_azukeire">
+              <div class="list_add_btn">
+                <input type="submit" class = "moving_list_direct btn btn_atom" value="”持ち込み・預け入れリスト”に追加する" name="move_both">
+                <input type="submit" class = "moving_list_direct btn btn_atom" value="”持ち込みリスト”に追加する" name="move_carry_in">
+                <input type="submit" class = "moving_list_direct btn btn_atom" value="”預け入れリスト”に追加する" name="move_azukeire">
+              </div>
             </div>
           </div>
             <?php } ?>
