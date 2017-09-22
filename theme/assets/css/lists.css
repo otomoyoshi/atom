@@ -12,6 +12,10 @@ padding-top: 2px;
 padding-bottom: 0px;
 }
 
+.span_color{
+	color: blue;
+}
+
 .undefined_word{
 	color: black;
 	margin-top: 20px;
