@@ -6,19 +6,28 @@
 	/*max-width: 100%;*/
 	/*height: auto;*/
 }
+.list_add_btn{
+	margin-top: 20px;
+}
 
 #move_header{
 padding-top: 2px;
 padding-bottom: 0px;
 }
 
+
 .span_color{
 	color: blue;
 }
 
+
+.moving_list_direct{
+	margin-bottom: 5px;
+}
+
 .undefined_word{
 	color: black;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 #list_img{
@@ -85,6 +94,7 @@ padding-bottom: 0px;
 
 .undefined_category{
 	color: #666;
+	margin-bottom: 15px;
 }
 
 input #h3 {
