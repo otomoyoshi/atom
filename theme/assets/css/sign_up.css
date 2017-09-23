@@ -5,6 +5,10 @@ body {
   background-size: cover;
 }
 
+.text_loc{
+	margin-bottom: 20px;
+}
+
 .font_title {
 	/*color: #FFFFFF; */
 	color: #555;
@@ -29,6 +33,7 @@ body {
 #move_header{
 padding-top: 2px;
 padding-bottom: 0px;
+height: 100%;
 }
 
 
@@ -51,6 +56,7 @@ padding-bottom: 0px;
 	    padding: 5%;
 	    /*margin: 5%;*/
 	    /*width: 100%;*/
+	    height: 100%;
 	}
 
 }
@@ -69,6 +75,7 @@ padding-bottom: 0px;
 	div#space {
     	padding: 5%;
     	margin: 5%;
+    	/*height: 100%;*/
     	/*width: 100%;*/
   	}
 }

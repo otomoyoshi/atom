@@ -152,7 +152,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
 
   <form method="POST" action="">
       <div class="col-lg-5 background_white" id="space"> 
-        <div class="row">
+        <div class="row text_loc">
           <div class="col-lg-12">
             
              <div class="text-center">
@@ -170,8 +170,8 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
         </div>
 
 
-        <br>
-        <div class="row">
+        <!-- <br> -->
+        <div class="row text_loc">
           <div class="col-lg-12">
            <div class="text-center">
               <label><i></i>メールアドレス </label><br>
@@ -193,8 +193,8 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
         </div>
 
 
-        <br>
-        <div class="row">
+        <!-- <br> -->
+        <div class="row text_loc">
           <div class="col-lg-12">
            <div class="text-center">
                 <label><i  aria-hidden="true"></i>パスワード </label><br>
@@ -210,8 +210,8 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
           </div>
         </div>
 
-        <br>
-        <div class="row">
+        <!-- <br> -->
+        <div class="row text_loc">
           <div class="col-lg-12">
             <div class="text-center">
               <label><i  aria-hidden="true"></i>確認用パスワード </label><br>
@@ -232,13 +232,13 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
           </div>
         </div>
 
-        <br>
+        <!-- <br> -->
         <div class="row">
           <!-- <div class="col-lg-12 text-center">
             全て必須項目です
           </div> -->
         </div>
-          <br>
+          <!-- <br> -->
 
         <div class="row">
           <div class="col-lg-12">
