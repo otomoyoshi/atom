@@ -249,7 +249,7 @@ if (!empty($_POST)) {
             <?php endif; ?>
             <!-- ログアウトボタン -->
             <div style="text-align: right;">
-              <a href="../setting_function/logout.php" class="btn btn-danger">ログアウト</a>
+              <a href="../setting_function/logout.php">ログアウト</a>
             </div>
           </div>
         </div>
@@ -263,7 +263,7 @@ if (!empty($_POST)) {
         <!-- <hr color="blue"> -->
         <hr>
         <div class="row">
-          <div class="col-xs-12 col-md-12"><input type="submit" value="登録" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+          <div class="col-xs-12 col-md-12"><input type="submit" value="登録" class="btn btn_atom btn-block btn-lg" tabindex="7"></div>
         </div>
       </form>
     </div>
