@@ -1,6 +1,13 @@
 <?php 
 session_start();
 require('../../../developer/dbconnect.php');
+
+//ログインチェック
+if (!isset($_SESSION['login_user']['id'])) {
+    header('Location: ../un_login/sign_in.php');
+    exit();
+}
+
 $errors = array();
 $account_name = '';
 $email = '';
@@ -238,7 +245,7 @@ if (!empty($_POST)) {
             <?php endif; ?>
             <!-- ログアウトボタン -->
             <div style="text-align: right;">
-              <a href="../setting_function/logout.php" class="btn btn-danger">ログアウト</a>
+              <a href="../setting_function/logout.php" class="btn btn-danger" onClick="return confirm('ログアウトします。\nよろしいですか？');">ログアウト</a>
             </div>
           </div>
         </div>
