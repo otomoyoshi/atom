@@ -128,6 +128,7 @@
             <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding vargues_position">
               <h5 class="undefined_word">検索結果が見つかりませんでした</h5>
               <h7 class= "undefined_category">(検索ワード：<?php echo htmlspecialchars($_POST['list_search'])?>)</h7>
+              <!-- <h7 class= "undefined_category">(検索ワード：<?php //echo $_POST['list_search']?>)</h7> -->
               <input type="hidden" name="undefined_to_lists" value="<?php echo $_POST['list_search'] ?>">
               <div class="list_add_btn">
                 <input type="submit" class = "moving_list_direct btn btn_atom" value="”持ち込み・預け入れリスト”に追加する" name="move_both">
@@ -177,7 +178,11 @@
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_both['id']?>">
                         <span class="checkbox-icon"></span>
                       <?php } ?>
-                      <?php echo htmlspecialchars($item_both['content']);?>
+                      <span class="text_overflow">
+                        <?php  echo htmlspecialchars($item_both['content']);?>
+                        <?php //echo $item_both['content'];?>
+                      </span>
+
                         <!-- 削除処理を書いていく -->
                         <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_both['id'];?>">
                           <i class="fa fa-trash right_position"></i>
@@ -216,7 +221,11 @@
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_carry_in['id']?>">
                         <span class="checkbox-icon"></span>
                       <?php } ?>                      <span class="checkbox-icon"></span>
+
+                      <span class="text_overflow">
                       <?php  echo htmlspecialchars($item_carry_in['content']); ?>
+                      <?php  //echo $item_carry_in['content'] ?>
+                      </span>
                       <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_carry_in['id'];?>">
                         <i class="fa fa-trash right_position"></i>
                       </a>
@@ -255,6 +264,7 @@
                         <span class="checkbox-icon"></span>
                       <?php } ?>
                       <span class="checkbox-icon"></span>
+                      
                       <span class="list_content"><?php echo htmlspecialchars($item_azukeire['content']); ?></span>
                       <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
                         <i class="fa fa-trash right_position"></i>
@@ -266,6 +276,7 @@
                           </a>
                         <?php } ?>
                       <?php } ?>
+
                     </li>
                 </label>
               <?php } ?>
@@ -366,7 +377,7 @@
     });
   </script> -->
 
-<!-- btnが押されたとき -->
+  <!-- 画像変更 -->
   <script type="text/javascript">
     function file_upload()
       {
@@ -410,6 +421,58 @@
       }
   </script>
 
+<!-- more -->
+<script type="text/javascript">
+  $(function() {
+  var count = 20;
+  // console.log('more_start');
+  $('.text_overflow').each(function() {
+    var thisText = $(this).text().replace(/\s+/g, '');
+    // console.log(thisText);
+    var textLength = thisText.length;
+    console.log('textLength: %s' , textLength);
+    if (textLength > count) {
+      var showText = thisText.substring(0, count);
+      var hideText = thisText.substring(count, textLength);
+      var insertText = showText;
+      console.log('hideText: %s' , hideText);
+      insertText += '<span class="hide_str">' + hideText + '</span>';
+      insertText += '<span class="omit span_color">…</span>';
+      insertText += '<span class="more span_color">more</span>';
+      insertText += '<span class="close_str span_color">close</span>';
+
+      $(this).html(insertText);
+    };
+  });
+
+
+  $('.text_overflow .hide_str').hide();
+  $('.text_overflow .close_str').hide();
+
+  $('.text_overflow .more').click(function() {
+      console.log('more');
+      $(this).hide()
+      .prev('.omit').hide()
+      .prev('.hide_str').fadeIn()
+      .siblings('.close_str').fadeIn();
+
+    return false;
+  });
+    $('.text_overflow .close_str').click(function() {
+      console.log('close');
+      $(this).hide();
+      // .prev('.omit').fadeIn()
+      // .prev('.hide_str').hide()
+      // .prev('.more').fadeIn();
+
+      // $('.more').fadeIn();
+      $('.omit').fadeIn();
+      $('.hide_str').hide();
+      $('.more').fadeIn(); // close
+
+    return false;
+  });
+});
 </script>
 </body>
 </html>

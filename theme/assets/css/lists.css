@@ -15,9 +15,16 @@ padding-top: 2px;
 padding-bottom: 0px;
 }
 
+
+.span_color{
+	color: blue;
+}
+
+
 .moving_list_direct{
 	margin-bottom: 5px;
 }
+
 .undefined_word{
 	color: black;
 	margin-top: 10px;
