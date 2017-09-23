@@ -1,4 +1,3 @@
-
 <?php
   session_start();
   require('../../developer/dbconnect.php');
@@ -8,6 +7,7 @@
   $item_carry_ins = array();
   $list_name = '';
   $vargues = array();
+  $check_confirm = array();
   //$banned_baggage = '';
   // $_GET['id'] = '3'; //リストid
   
@@ -60,8 +60,8 @@
     echo "sendが押されました" .'<br>';
     date_default_timezone_set('Asia/Tokyo'); //date()用
     // $date = new DateTime(time, 'Asia/Tokyo');
-    
     // echo date('YmdHis');
+
     // 画像アップロード処理
     if(isset($_FILES['image'])){
       echo "ファイルが存在します" .'<br>';
@@ -130,6 +130,32 @@
     }
 
   }
+  if (!empty($_POST['list_search_btn'])){
+          $sql= 'UPDATE `atom_items` SET `item_check`= 0 WHERE `lists_id`=?';
+          $data = array($_GET['id']);
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute($data);
+          if (isset($_POST['che'])) {
+              $c = count($_POST['che']);
+              $check_items = $_POST['che'];
+              var_dump($check_items);
+          // $sql= 'UPDATE `atom_items`(`item_check`) VALUES';
+              for ($i=0; $i < $c ; $i++) { 
+                  // $data = '(' . 1 . ')';
+                  // $s = '';
+                  // if($i != 0){
+                  //   $s = ',';
+                  // }
+                  // $sql .= $s . $data;
+
+                  $sql= 'UPDATE `atom_items` SET `item_check`= 1 WHERE `id`=?';
+                  $data = array($check_items[$i]);
+                  $stmt = $dbh->prepare($sql);
+                  $stmt ->execute($data);
+                  // $check_confirm = $stmt->fetch(PDO::FETCH_ASSOC);
+              }
+        }
+  }
 
     //検索ボタンが押された時
   if (!empty($_POST['list_search']) && $_POST['list_search'] != ''){
@@ -159,13 +185,9 @@
       // echo count($tmp_searchs);
 
       if (isset($tmp_searchs)) { // 検索結果が存在する時
-
-        if (count($tmp_searchs) == 1) { // 曖昧検索の結果がひとつのみの場合
-          foreach($tmp_searchs as $ts){
-            $search[] = $ts;
-            $search = $search[0];
-          }
-        }elseif(count($tmp_searchs) > 1){ // 曖昧検索の結果が複数存在する場合
+        if(count($tmp_searchs) == 1){ // 検索結果が一つだけの時
+          $search = $tmp_searchs[0];
+        }else{ // 検索結果が複数ある時
           foreach($tmp_searchs as $ts){
             $vague_searchs[] = $ts;
           }
@@ -188,6 +210,7 @@
           $stmt ->execute($data);
 
       }
+
 
       //検索収集用テーブルに登録
       $sql= 'INSERT INTO `atom_searched_words` SET `word` = ?,
@@ -217,11 +240,12 @@
 
   // 保存ボタンが押された時
   if (!empty($_POST['keep_btn'])) {
+
           $sql= 'UPDATE `atom_items` SET `item_check`= 0 WHERE `lists_id`=?';
           $data = array($_GET['id']);
           $stmt = $dbh->prepare($sql);
           $stmt ->execute($data);
-
+        if (isset($_POST['che'])) {
           $c = count($_POST['che']);
           $check_items = $_POST['che'];
           var_dump($check_items);
@@ -240,7 +264,9 @@
             $data = array($check_items[$i]);
             $stmt = $dbh->prepare($sql);
             $stmt ->execute($data);
+            // $check_confirm = $stmt->fetch(PDO::FETCH_ASSOC);
           }
+        }
 
           // $sql .= 'WHERE `id`=?';
           // echo $sql .'<br>';

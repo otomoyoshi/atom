@@ -137,7 +137,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
       <div class="col-lg-6">
          <div class="row">
             <br>
-            <div class="text-center font_title">新規登録</div>
+            <!-- <div class="text-center font_title">新規登録</div> -->
             <!-- <div class="col-lg-12 font_title">旅にもつ</div> -->
         </div>
 
@@ -159,8 +159,8 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
 
 
              
-              <label><i class="fa fa-user" aria-hidden="true"></i>アカウント名 </label><br>
-                <input type="text" name="account_name" placeholder="アカウント名" maxlength="15" autofocus value="<?php echo $account_name; ?>">
+              <label><i  aria-hidden="true"></i>アカウント名 </label><br>
+                <input type="text"  class="form-control" name="account_name" placeholder="アカウント名" maxlength="15" autofocus value="<?php echo $account_name; ?>">
 
               <?php if (isset($errors['account_name']) && $errors['account_name'] == 'blank') {?>
               <div class="alert alert-danger">アカウント名を入力してください</div>
@@ -174,8 +174,8 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
         <div class="row">
           <div class="col-lg-12">
            <div class="text-center">
-              <label><i class="fa fa-envelope-o"></i>メールアドレス </label><br>
-                <input type="email" name="email" placeholder="tabi@example.com" maxlength="50" value="<?php echo $email; ?>">
+              <label><i></i>メールアドレス </label><br>
+                <input type="email"  class="form-control" name="email" placeholder="tabi@example.com" maxlength="50" value="<?php echo $email; ?>">
 
               <?php if (isset($errors['email']) && $errors['email'] == 'blank'): ?>
                <!--  <span style="color:red:">メールアドレスを入力してください</span> -->
@@ -197,8 +197,8 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
         <div class="row">
           <div class="col-lg-12">
            <div class="text-center">
-                <label><i class="fa fa-unlock-alt" aria-hidden="true"></i>パスワード </label><br>
-              <input type="password" name="password" maxlength="8">
+                <label><i  aria-hidden="true"></i>パスワード </label><br>
+              <input type="password" name="password" maxlength="8"  class="form-control">
               <?php if (isset($errors['password']) && $errors['password'] == 'blank') {?>
               <div class="alert alert-danger">パスワードを入力してください</div>
               <?php } ?>
@@ -214,8 +214,8 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
         <div class="row">
           <div class="col-lg-12">
             <div class="text-center">
-              <label><i class="fa fa-unlock-alt" aria-hidden="true"></i>確認用パスワード </label><br>
-              <input type="password" name="comfirm_password" maxlength="8">
+              <label><i  aria-hidden="true"></i>確認用パスワード </label><br>
+              <input type="password" name="comfirm_password" maxlength="8"  class="form-control">
               <?php if (isset($errors['comfirm_password']) && $errors['comfirm_password'] == 'blank') {?>
               <div class="alert alert-danger">確認用パスワードを入力してください</div>
               <?php } ?>
@@ -234,9 +234,9 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
 
         <br>
         <div class="row">
-          <div class="col-lg-12 text-center">
+          <!-- <div class="col-lg-12 text-center">
             全て必須項目です
-          </div>
+          </div> -->
         </div>
           <br>
 

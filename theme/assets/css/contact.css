@@ -22,6 +22,11 @@ body {
 
 }
 
+#move_header{
+padding-top: 2px;
+padding-bottom: 0px;
+}
+
 .background_dark {
   background-color: rgba(3,98,158,0.7);
   transform: rotate(-50deg);
@@ -86,11 +91,11 @@ body {
 }
 
 #headerwrap{
-  padding-top: 90px;
+  padding-top: 60px;
 }
 
 .div_top {
-  padding-top:20px;
+  padding-top:10px;
 }
 /*.label {
     display: inline-block;

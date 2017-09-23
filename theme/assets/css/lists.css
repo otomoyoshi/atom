@@ -7,6 +7,21 @@
 	/*max-width: 100%;*/
 	/*height: auto;*/
 }
+.list_add_btn{
+	margin-top: 20px;
+}
+
+#move_header{
+padding-top: 2px;
+padding-bottom: 0px;
+}
+
+
+.span_color{
+	color: blue;
+}
+
+
 
 .erase_input_border {
   border: none;
@@ -17,9 +32,13 @@
   border-bottom: 1px solid #ccc;
 }
 
+.moving_list_direct{
+	margin-bottom: 5px;
+}
+
 .undefined_word{
 	color: black;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 #list_img{
@@ -203,6 +222,7 @@
 
 .undefined_category{
 	color: #666;
+	margin-bottom: 15px;
 }
 
 input #h3 {
@@ -410,7 +430,7 @@ input #h3 {
     margin: 0px;    
     color: #333;
     background-color: #fff;
-    border-color: #ccc;    
+    border-color: #ccc;
 }
 .image-preview-input input[type=file] {
   position: absolute;

@@ -22,7 +22,6 @@ if ($_SESSION['login_user']['age'] != '') {
       $registered_age = $_SESSION['login_user']['age'];
     }
 
-
 if (!empty($_POST)) {
     $account_name = $_POST['account_name'];
     $email = $_POST['email'];
@@ -110,7 +109,7 @@ if (!empty($_POST)) {
     }
   ?>
 
-    <div class="container">
+<div class="container">
 
 <div class="row">
     <div class="col-xs-10 col-sm-8 col-md-8 col-xs-offset-1 col-sm-offset-2 col-md-offset-2 tabinimotsu_main_div" style="padding:0px 60px 30px 60px; margin-bottom: 50px; margin-top: 50px">
@@ -286,7 +285,8 @@ if (!empty($_POST)) {
 </div><!-- container ends-->
 
 
-      <?php require('../footer.php'); ?>
-      <?php require('../child_load_js.php'); ?>
+    <?php require('../footer.php'); ?>
+    <?php require('../child_load_js.php'); ?>
+
   </body>
 </html>
