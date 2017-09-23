@@ -220,8 +220,7 @@
                         <input type="hidden" name="check_judge" value="checked">
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_carry_in['id']?>">
                         <span class="checkbox-icon"></span>
-                      <?php } ?>                      <span class="checkbox-icon"></span>
-
+                      <?php } ?>
                       <span class="text_overflow">
                       <?php  echo htmlspecialchars($item_carry_in['content']); ?>
                       <?php  //echo $item_carry_in['content'] ?>
@@ -263,9 +262,7 @@
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_azukeire['id']?>">
                         <span class="checkbox-icon"></span>
                       <?php } ?>
-                      <span class="checkbox-icon"></span>
-                      
-                      <span class="list_content"><?php echo htmlspecialchars($item_azukeire['content']); ?></span>
+                      <span class="text_overflow"><?php echo htmlspecialchars($item_azukeire['content']); ?></span>
                       <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
                         <i class="fa fa-trash right_position"></i>
                       </a>
