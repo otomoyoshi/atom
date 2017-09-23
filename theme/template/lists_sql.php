@@ -81,7 +81,7 @@
 
       // 画像をサーバに保存
       if (move_uploaded_file($tmp_name, $file_path)) { //サーバに画像保存が成功したら
-        echo $file_name . "をサーバに保存しました" .'<br>';
+        // echo $file_name . "をサーバに保存しました" .'<br>';
 
         // リストデータを取得
         $sql= 'SELECT * FROM `atom_lists` WHERE `id`=?';
@@ -89,10 +89,10 @@
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
         $is_image = $stmt->fetch(PDO::FETCH_ASSOC);
-        echo "元の画像" . $is_image['list_image_path'] .'<br>';
+        // echo "元の画像" . $is_image['list_image_path'] .'<br>';
 
         if($is_image['list_image_path'] == NULL) { //サーバに画像が登録されていないとき
-            echo "null" . '<br>';
+            // echo "null" . '<br>';
 
             // 画像名をデータベースに登録する
             $sql= 'UPDATE `atom_lists` SET `list_image_path` =?,`modified`=NOW() WHERE `id`=?';
@@ -102,9 +102,9 @@
             header('Location: lists.php?id='. $_GET['id']);
             exit();
         } elseif($is_image['list_image_path'] == $file_name){
-          echo "一緒だよ" .'<br>';
+          // echo "一緒だよ" .'<br>';
         } else { //データベースにすでに画像が登録されていて、登録されている画像名が新しく入力された画像名と異なるとき
-          echo "登録" . '<br>';
+          // echo "登録" . '<br>';
           $is_image_path = '../../list_image_path/' . $is_image['list_image_path'];
           if(file_exists($is_image_path)){
             // 既存に指定されていた画像をサーバから削除
@@ -125,7 +125,7 @@
         // exit();
 
       } else {
-        echo "アップロードに失敗しました";
+        // echo "アップロードに失敗しました";
       }
     }
 
@@ -252,7 +252,7 @@
     if(isset($_POST['list_name'])) {
       $list_name = $_POST['list_name'];
     }
-    echo "list_name :" . $list_name . '<br>';
+    // echo "list_name :" . $list_name . '<br>';
     // リストを保存
     $sql = 'UPDATE `atom_lists` SET `members_id` = ?,
                                     `name` = ?,
@@ -345,7 +345,7 @@
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
   $is_image = $stmt->fetch(PDO::FETCH_ASSOC);
-  echo "出力画像" . $is_image['list_image_path'].'<br>';
+  // echo "出力画像" . $is_image['list_image_path'].'<br>';
 
   //キャンセルボタンが押された時
   if (!empty($_POST['can_btn'])) {
@@ -355,7 +355,7 @@
       $stmt ->execute($data);
       // header('Location:lists.php');
       // exit();
-      echo $_GET['id'];
+      // echo $_GET['id'];
   }
 
 ?>

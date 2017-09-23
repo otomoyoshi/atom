@@ -8,6 +8,14 @@
 	/*height: auto;*/
 }
 
+.erase_input_border {
+  border: none;
+  box-shadow: none;
+}
+
+.div_border {
+  border-bottom: 1px solid #ccc;
+}
 
 .undefined_word{
 	color: black;
@@ -22,7 +30,9 @@
 	padding-top: 20px;
 }
 
-
+/*#serchs {*/
+   /*padding-bottom: 30px;*/
+/*}*/
 /*test*/
 
 /*
@@ -51,22 +61,26 @@
 #box1 {
     position: relative;
     /*margin: 2em 0;*/
-    padding: 0.5em 0.5em;
-    border: solid 3px #0000B5;
+    /*padding: 0.5em 0.5em;*/
+    /*margin: 0 0 0 2.5%;*/
+    /*padding: 1em 2em;*/
+    /*border: solid 3px #0000B5;*/
 }
 
 #box2 {
     position: relative;
     /*margin: 2em 0;*/
-    padding: 0.5em 0.5em;
-    border: solid 3px #0000B5;
+    /*padding: 0.5em 0.5em;*/
+    /*margin: 0 2.5% ;*/
+    /*padding: 1em 2em;*/
+    /*border: solid 3px #0000B5;*/
 }
 
 #box3 {
     position: relative;
-    /*margin: 2em 0;*/
-    padding: 0.5em 0.5em;
-    border: solid 3px #0000B5;
+    /*margin: 0 2.5% 0 0;*/
+    /*padding: 1em 2em;*/
+    /*border: solid 3px #0000B5;*/
 }
 
 #box1 p {
@@ -88,7 +102,7 @@
 	position: absolute;
     display: inline-block;
     top: -27px;
-    left: -3px;
+    /*left: -3px;*/
     padding: 0 9px;
     height: 25px;
     line-height: 25px;
@@ -104,7 +118,7 @@
 	position: absolute;
     display: inline-block;
     top: -27px;
-    left: -3px;
+    /*left: -3px;*/
     padding: 0 9px;
     height: 25px;
     line-height: 25px;
@@ -120,7 +134,7 @@
 	position: absolute;
     display: inline-block;
     top: -27px;
-    left: -3px;
+    /*left: -3px;*/
     padding: 0 9px;
     height: 25px;
     line-height: 25px;
@@ -130,6 +144,7 @@
     color: #ffffff;
     font-weight: bold;
     border-radius: 5px 5px 0 0;
+
 }
 
 .circle_border {
@@ -325,6 +340,9 @@ input #h3 {
 	margin-bottom: 10px;
 }
 
+.straight {
+  display: inline-flex;
+}
 
 .well{
 	border-radius: 0;
@@ -334,7 +352,7 @@ input #h3 {
 
 #searchs{
 	display: inline;
-	margin-bottom: 20px;
+	/*margin-bottom: 60px;*/
 	/*color: #EA526F;*/
 }
 
@@ -342,16 +360,12 @@ input #h3 {
 	background-color: #5EA1E5; 
 	border-color: #5EA1E5;
 	width: 70px;
-	margin-bottom: 20px;
+	/*margin-bottom: 60px;*/
 
 }
 
 .border{
 	padding: 20px;
-}
-
-.col-lg-4{
-	margin-right: 10px;
 }
 
 .under_line1 {
@@ -479,6 +493,9 @@ input #h3 {
 
 .form-control {
 	color: #29354F;
+   margin-left: auto;
+    /*margin-right: auto;*/
+
 }
 
 
@@ -489,9 +506,17 @@ input #h3 {
 }*/
 
 /**/
-@media (min-width: 1200px){
+/*@media (min-width: 1200px){
 	.col-lg-4 {
 	width: 32.47%;
 	}
+}*/
+
+
+div.container {
+  /*border: 1px solid #000;*/
+  background-color:white;
 }
+
+
 

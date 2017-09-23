@@ -88,7 +88,11 @@ if (!empty($_POST)) {
         <div class="row" id="adjustment">
           <!-- <div class="col-lg-12" style="border: solid 1px black;"> -->
           <div class="col-lg-12">
-            <div class="row">
+<div class="row">
+  <div class="col-lg-12 text-center"><i class="fa fa-envelope-o" style="font-size: -webkit-xxx-large;"></i></div>
+</div>
+
+            <div class="row div_top" >
               <!-- <div class="col-lg-6" style="border: solid 1px black;"> -->
 
               <div class="col-md-12 col-lg-12 text-center">
@@ -122,7 +126,7 @@ if (!empty($_POST)) {
                               <form method="POST" action="">
 
                                 <div class="form-group">
-                                  <label for="exampleInputEmail2"><i class="fa fa-envelope-o"></i>メールアドレス</label>
+                                  <label for="exampleInputEmail2">メールアドレス</label>
                                   <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com" maxlength="50" autofocus>
 
                                     <?php if (isset($errors['email']) && $errors['email'] == 'blank') {?>

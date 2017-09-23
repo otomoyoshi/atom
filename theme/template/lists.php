@@ -71,25 +71,11 @@
     <div id="headerwrap" class="back">
       <div class="container">
         <!-- リストの情報画面を書いていく -->
+
+
+  
         <div class="row height">
-          <div class="col-lg-offset-2 col-lg-5 col-md-12 col-sm-12 col-xs-12">
-            <form action="" method="POST">
-
-            <?php if($is_image['name'] != ''): ?>
-              <!-- リスト名が登録されている場合、そのリスト名を表示する -->
-              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
-              data-intro="リスト名を入力してね" data-step="1" value="<?php echo $is_image['name']; ?>">
-
-            <?php else: ?>
-              <!-- リスト名が登録されていない場合、自動的にリスト名がvalueに入る -->
-              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
-              data-intro="リスト名を入力してね" data-step="1" value="リスト  <?php echo $list_amount; ?>">
-
-            <?php endif; ?>
-            </div>
-              <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 text-center">
-
-<!-- <<<<<<< HEAD -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
             <?php if (isset($errors['extension'])) { ?>
               <div class="alert alert-danger">
                 拡張子は、jpg,png,gifの画像を選択ください
@@ -108,24 +94,45 @@
             <!-- 画像がデータベースに登録されてないとき -->
             <?php } else {?>
             <a id="list_img" data-remodal-target="modal">
-              <div >デフォルト画像を表示</div>
+              <div class="list_name_location col-lg-4">デフォルト画像を表示</div>
             </a>
             <?php } ?>
 
             </label>
-          </div>
-        </div>
-        <div class="row">
-        </div>
-        <!-- リストの大枠を作って行く -->
-        <div class="row height_fix">
-          <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center fix_to_search">
-            <hr class="under_line1">
-            <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
-            <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索" name="list_search_btn" onClick="linkCheck(1)">
-          </div>
+          </div><!-- div -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <form action="" method="POST" class="div_border">
 
-        </div>
+            <?php if($is_image['name'] != ''): ?>
+              <!-- リスト名が登録されている場合、そのリスト名を表示する -->
+              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control erase_input_border" 
+              data-intro="リスト名を入力してね" data-step="1" value="<?php echo $is_image['name']; ?>">
+
+            <?php else: ?>
+              <!-- リスト名が登録されていない場合、自動的にリスト名がvalueに入る -->
+              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location erase_input_border" 
+              data-intro="リスト名を入力してね" data-step="1" value="リスト  <?php echo $list_amount; ?>">
+
+            <?php endif; ?>
+          </div><!-- div -->
+
+        <!-- </div>row -->
+
+        <!-- リストの大枠を作って行く -->
+        <!-- <div class="row height_fix"> -->
+
+          <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12 fix_to_search straight">
+            <!-- <hr class="under_line1"> -->
+            <!-- <div class="form-inline"> -->
+              <input id="searchs" type="text" name = "list_search" class="form-control" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
+
+              <input id="search-btn" type="submit" class="btn btn_atom  btn-lg btn_width" value="検索" name="list_search_btn" onClick="linkCheck(1)">  
+            <!-- </div> -->
+            
+          </div>
+        <!-- </div> -->
+
+          </div>
         <?php if(isset($tmp_searchs) && !empty($_POST['list_search_btn']) && count($tmp_searchs) > 1){ ?>
           <div class="row">
             <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
@@ -184,9 +191,9 @@
           <div class="col-lg-4" id="box1">
             <!-- BOTHの欄を作る -->
             <!-- <strong class = "both_contents_border"> -->
-            <span class="sub_title box-title">
+            <div class="sub_title box-title">
               持ち込み・預け入れ
-            </span>
+            </div>
             <!-- </strong> -->
             <div>
               <ul class="list-group" id="list_design">
@@ -269,6 +276,7 @@
               <?php } ?>
             </ul>
           </div>
+
         </div>
         <!-- リストの保存機能たち -->
 
