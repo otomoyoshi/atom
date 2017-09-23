@@ -37,6 +37,8 @@
     //   require('header.php');
     // }
   ?>
+
+<!-- 画像変更popup -->
 <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
     <button data-remodal-action="close" class="remodal-close"></button>
       <h1>画像変更</h1>
@@ -46,9 +48,38 @@
         <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
         <Button type="button" data-remodal-action="confirm" class="remodal-confirm" onclick="file_upload()">画像変更</Button>
       </form>
-
 </div>
 
+<!--   <div id="condition">
+    <div class="remodal" data-remodal-id="modal-condition" data-remodal-options="hashTracking:false">
+      <button data-remodal-action="close" class="remodal-close"></button>
+
+    <h2>機内持ち込み条件</h2>
+          <span>長さ15cm以下のものは持込可能</span>
+        <hr>
+    <h2>お預け条件</h2>
+          <span></span>
+    </div>
+</div> -->
+
+  <!-- 条件表示 pop-->
+<div class="remodal" data-remodal-id="modal-condition" data-remodal-options="hashTracking:false">
+ <button data-remodal-action="close" class="remodal-close"></button>
+   <div class="output">
+    
+  </div>
+</div>
+
+<!-- リスト移動popup -->
+<!-- <div class="remodal" data-remodal-id="modal_edit" data-remodal-options="hashTracking:false">
+    <button data-remodal-action="close" class="remodal-close"></button>
+      <h1>リスト移動</h1>
+      <p>どのカテゴリーに移動させますか？</p>
+
+      <button data-remodal-action="confirm" class="remodal_atom item_id" onclick="show_both()">持ち込み・預け入れ</button>
+      <button data-remodal-action="confirm" class="remodal_atom item_id" onclick="show_carry()">持ち込み</button>
+      <Button type="button" data-remodal-action="confirm" class="remodal_atom item_id" onclick="show_deposit()">預け入れ</Button>
+</div> -->
 
 
  <div id="img">
@@ -72,7 +103,7 @@
               </div>
             <?php } ?>
 
-            <!-- <div id="output"></div> -->
+            <div id="output"></div>
             <label>
 
               <a id="list_img" data-remodal-target="modal">
@@ -112,7 +143,7 @@
                     <?php if(isset($vague_searchs)): ?>
                       <?php foreach($vague_searchs as $tss): ?>
                         <input type="hidden" name="vague_search_content" value="<?php echo $tss['word'] ?>">
-                        <input type="submit" name="vague_search_result" value="<?php echo $tss['word'] ?>" 
+                        <input type="submit" name="vague_search_result" value="<?php echo $tss['word'] ?>"
                         class ="vanish_border"><br>
                       <?php endforeach; ?>
                     <?php endif; ?>
@@ -141,15 +172,15 @@
 
             <?php
             if (isset($_POST['vague_search_result'])) {
-              if (isset($vargues['baggage_classify'])) {       
+              if (isset($vargues['baggage_classify'])) {
                 if ($vargues['baggage_classify'] == '3') { ?>
                 <div class="alert alert-danger text_position">
                   <?php echo '"'.$_POST['vague_search_result'].'"'; ?><span class="banned_explanation">は持ち込み・預け入れ共に不可です。</span>
                 </div>
             <?php }}} ?>
-            <?php 
+            <?php
             if (isset($_POST['list_search'])) {
-              if (isset($search['baggage_classify'])) {       
+              if (isset($search['baggage_classify'])) {
                 if ($search['baggage_classify'] == '3') { ?>
                 <div class="alert alert-danger text_position">
                   <?php echo '"'.($_POST['list_search']).'"' ?><span class="banned_explanation">は持ち込み・預け入れ共に不可です。</span>
@@ -158,6 +189,13 @@
 
         <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
           <div class="both_contents well col-lg-4">
+
+            <!-- <output class="output"> -->
+              <a data-remodal-target="modal-condition">
+                <i class="modal_triger">hehe</i>
+              </a>
+            <!-- </output> -->
+
             <!-- BOTHの欄を作る -->
             <strong>
               <p class="sub_title fa fa-fighter-jet">
@@ -171,11 +209,11 @@
                     <li class="list-group-item list_float">
                       <?php if ($item_both['item_check'] == 1) { ?>
                         <input type="hidden" name="check_judge" value="checked" checked>
-                        <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_both['id']?>" checked>
+                        <input type="checkbox" name="che[]" class="left checkbox laggage_both" value="<?php echo $item_both['id']?>" checked>
                         <span class="checkbox-icon"></span>
                       <?php } else { ?>
                         <input type="hidden" name="check_judge" value="checked">
-                        <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_both['id']?>">
+                        <input type="checkbox" name="che[]" class="left checkbox laggage_both" value="<?php echo $item_both['id']?>">
                         <span class="checkbox-icon"></span>
                       <?php } ?>
                       <span class="text_overflow">
@@ -187,10 +225,13 @@
                         <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_both['id'];?>">
                           <i class="fa fa-trash right_position"></i>
                         </a>
-                    <!--編集ボタン
-                        <span>
-                         <i class="fa fa-pencil-square-o right"></i>
-                        </span> -->
+                    <!-- 編集ボタン -->
+
+                        <!-- リスト移動 -->
+                        <!-- <a data-remodal-target="modal_edit" class="edit"> -->
+                         <i class="fa fa-pencil-square-o right edit" value="<?php echo $item_both['id'];?>"></i>
+                        <!-- </a> -->
+
                     </li>
                   </label>
                 <?php }?>
@@ -235,7 +276,7 @@
                   </label>
                 <?php  } ?>
               </ul>
-            </div>  
+            </div>
           </div>
 
           <div class="azukeire well col-lg-4">
@@ -268,9 +309,12 @@
                         <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
                           <i class="fa fa-trash right_position"></i>
                         </a>
-                     <!--  編集ボタン  <span>
-                         <i class="fa fa-pencil-square-o right"></i>
-                        </span> -->
+
+                        <!-- 編集ボタン -->
+                        <span>
+                         <i class="fa fa-pencil-square-o right" value="1"></i>
+                        </span>
+
                       <?php  ?>
                     </li>
                 </label>
@@ -290,12 +334,12 @@
             <div class="keep">
 
               <input class="btn btn-success keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの履歴やメールに送信できるよ" data-step="5">
-            </div>  
+            </div>
 
           </form>
         </div>
         <div>
-          
+
 
         </div>
       </div>
@@ -319,58 +363,201 @@
     });
   </script> -->
 
-    <!-- remodal -->
-<!--   <script type="text/javascript">
-    $(document).on('opening', '.remodal', function () {
-      console.log('Modal is opening');
+<!-- 条件表示 -->
+<script type="text/javascript">
+  var item_id = '';
+  $('.edit').on('click', function(){
+    var item_id = $(this).attr('value');
+    // var edit = $(this).attr('value');
+    // var item_id =  $('.item_id').attr('value', edit);
+    alert(item_id);
+
+    // POSTでアップロード
+    $.ajax({
+        url : "http://localhost/atom/theme/template/get_condition.php",
+        type : "POST",
+        data : {'id' : item_id},
+    })
+    .done(function(data, textStatus, jqXHR){
+        alert(data);
+        var imgArea = $('<div/>').append($.parseHTML(data)).find('#condition');
+        // alert(imgArea);
+        $(".output").html(imgArea);
+        $(".modal_triger").click();
+        // $(".output").html(imgArea);
+    })
+    .fail(function(jqXHR, textStatus, errorThrown){
+        alert("fail");
     });
+  });
 
-    $(document).on('opened', '.remodal', function () {
-      console.log('Modal is opened');
+  // function show_both()
+  // {
+  //     var item_id = $('.item_id').attr('value');
+  //     console.log('show_both');
+  //     alert(item_id);
+
+  //     // POSTでアップロード
+  //     $.ajax({
+  //         url : "http://localhost/atom/theme/template/get_both.php",
+  //         type : "POST",
+  //         data : {'id' : item_id},
+  //     })
+  //     .done(function(data, textStatus, jqXHR){
+  //         alert(data);
+  //         var imgArea = $('<div/>').append($.parseHTML(data)).find('#condition');
+  //         // $("#list_img").html(imgArea);
+  //         // $(".output").html(imgArea);
+  //         $('.edit').click();
+  //     })
+  //     .fail(function(jqXHR, textStatus, errorThrown){
+  //         alert("fail");
+  //     });
+  // }
+</script>
+
+<!-- リスト移動 -->
+<!-- <script type="text/javascript">
+  var item_id = '';
+  $('.edit').on('click', function(){
+    var item_id = $(this).attr('value');
+    // var edit = $(this).attr('value');
+    // var item_id =  $('.item_id').attr('value', edit);
+    alert(item_id);
+
+    // POSTでアップロード
+    $.ajax({
+        url : "http://localhost/atom/theme/template/get_both.php",
+        type : "POST",
+        data : {'id' : item_id},
+    })
+    .done(function(data, textStatus, jqXHR){
+        alert(data);
+        var imgArea = $('<div/>').append($.parseHTML(data)).find('#condition');
+        // alert(imgArea);
+        $(".output").html(imgArea);
+        $(".modal_triger").click();
+        // $(".output").html(imgArea);
+    })
+    .fail(function(jqXHR, textStatus, errorThrown){
+        alert("fail");
     });
+  });
 
-    $(document).on('closing', '.remodal', function (e) {
+  // function show_both()
+  // {
+  //     var item_id = $('.item_id').attr('value');
+  //     console.log('show_both');
+  //     alert(item_id);
 
-      // Reason: 'confirmation', 'cancellation'
-      console.log('Modal is closing' + (e.reason ? ', reason: ' + e.reason : ''));
-    });
+  //     // POSTでアップロード
+  //     $.ajax({
+  //         url : "http://localhost/atom/theme/template/get_both.php",
+  //         type : "POST",
+  //         data : {'id' : item_id},
+  //     })
+  //     .done(function(data, textStatus, jqXHR){
+  //         alert(data);
+  //         var imgArea = $('<div/>').append($.parseHTML(data)).find('#condition');
+  //         // $("#list_img").html(imgArea);
+  //         // $(".output").html(imgArea);
+  //         $('.edit').click();
+  //     })
+  //     .fail(function(jqXHR, textStatus, errorThrown){
+  //         alert("fail");
+  //     });
+  // }
+</script> -->
 
-    $(document).on('closed', '.remodal', function (e) {
+  <!-- リスト移動 持ち込み・預け入れ -->
+  <script type="text/javascript">
+    function show_both()
+      {
+        var item_id =  $('#item_id').;
+        alert(item_id);
 
-      // Reason: 'confirmation', 'cancellation'
-      console.log('Modal is closed' + (e.reason ? ', reason: ' + e.reason : ''));
-    });
-
-    $(document).on('confirmation', '.remodal', function () {
-      console.log('Confirmation button is clicked');
-       var formdata = new FormData($('#fileupload').get(0));
-       console.log(formdata);
-
+        console.log('show_both');
+        console.log(item_id);
 
 
-     // GETでid取得
-      var arg  = new Object;
-       url = location.search.substring(1).split('&');
-
-      for(i=0; url[i]; i++) {
-          var k = url[i].split('=');
-          arg[k[0]] = k[1];
       }
+  </script>
 
-      var get_id = arg.id;
-      console.log(get_id);
+ <!-- リスト移動 持ち込み -->
+  <script type="text/javascript">
+    function show_carry()
+      {
+          // GETでid取得
+          var arg  = new Object;
+           url = location.search.substring(1).split('&');
 
+          for(i=0; url[i]; i++) {
+              var k = url[i].split('=');
+              arg[k[0]] = k[1];
+          }
 
-      // alert("ajax_finish");
-      // window.location.href='';
+          var get_id = arg.id;
+          console.log('show_carry');
+          console.log(get_id);
 
-    });
+          // window.sessionStorage.setItem('lists_id',get_id);
 
-    $(document).on('cancellation', '.remodal', function () {
-      console.log('Cancel button is clicked');
+          // POSTでアップロード
+          $.ajax({
+              url  : "http://localhost/atom/theme/template/get_carry.php",
+              type : "POST",
+              data : {'id' : get_id},
 
-    });
-  </script> -->
+          })
+          .done(function(data, textStatus, jqXHR){
+              alert(data);
+              // var imgArea = $('<div/>').append($.parseHTML(data)).find('#list_img');
+              // $("#list_img").html(imgArea);
+          })
+          .fail(function(jqXHR, textStatus, errorThrown){
+              alert("fail");
+          });
+      }
+  </script>
+
+ <!-- リスト移動 預け入れ -->
+  <script type="text/javascript">
+    function show_deposit()
+      {
+
+          // GETでid取得
+          // var arg  = new Object;
+          //  url = location.search.substring(1).split('&');
+
+          // for(i=0; url[i]; i++) {
+          //     var k = url[i].split('=');
+          //     arg[k[0]] = k[1];
+          // }
+
+          // var get_id = arg.id;
+          console.log('show_deposit');
+          // console.log(get_id);
+          var item_id = $(this).attr("value");
+          console.log(item_id);
+
+          // window.sessionStorage.setItem('lists_id',get_id);
+
+          // POSTでアップロード
+          $.ajax({
+              url  : "http://localhost/atom/theme/template/get_deposit.php",
+              type : "POST",
+              data : {'id' : item_id},
+          })
+          .done(function(data, textStatus, jqXHR){
+              alert(data);
+              // var imgArea = $('<div/>').append($.parseHTML(data)).find('#list_img');
+              // $("#list_img").html(imgArea);
+          })
+          .fail(function(jqXHR, textStatus, errorThrown){
+              alert("fail");
+          });
+      }
+  </script>
 
   <!-- 画像変更 -->
   <script type="text/javascript">
@@ -416,59 +603,59 @@
       }
   </script>
 
-<!-- more -->
-<script type="text/javascript">
-  $(function() {
-  var count = 20;
-  // console.log('more_start');
-  $('.text_overflow').each(function() {
-    var thisText = $(this).text().replace(/\s+/g, '');
-    // console.log(thisText);
-    var textLength = thisText.length;
-    console.log('textLength: %s' , textLength);
-    if (textLength > count) {
-      var showText = thisText.substring(0, count);
-      var hideText = thisText.substring(count, textLength);
-      var insertText = showText;
-      console.log('hideText: %s' , hideText);
-      insertText += '<span class="hide_str">' + hideText + '</span>';
-      insertText += '<span class="omit span_color">…</span>';
-      insertText += '<span class="more span_color">more</span>';
-      insertText += '<span class="close_str span_color">close</span>';
+  <!-- more -->
+  <script type="text/javascript">
+    $(function() {
+    var count = 20;
+    // console.log('more_start');
+    $('.text_overflow').each(function() {
+      var thisText = $(this).text().replace(/\s+/g, '');
+      // console.log(thisText);
+      var textLength = thisText.length;
+      console.log('textLength: %s' , textLength);
+      if (textLength > count) {
+        var showText = thisText.substring(0, count);
+        var hideText = thisText.substring(count, textLength);
+        var insertText = showText;
+        console.log('hideText: %s' , hideText);
+        insertText += '<span class="hide_str">' + hideText + '</span>';
+        insertText += '<span class="omit span_color">…</span>';
+        insertText += '<span class="more span_color">more</span>';
+        insertText += '<span class="close_str span_color">close</span>';
 
-      $(this).html(insertText);
-    };
+        $(this).html(insertText);
+      };
+    });
+
+
+    $('.text_overflow .hide_str').hide();
+    $('.text_overflow .close_str').hide();
+
+    $('.text_overflow .more').click(function() {
+        console.log('more');
+        $(this).hide()
+        .prev('.omit').hide()
+        .prev('.hide_str').fadeIn()
+        .siblings('.close_str').fadeIn();
+
+      return false;
+    });
+      $('.text_overflow .close_str').click(function() {
+        console.log('close');
+        $(this).hide();
+        // .prev('.omit').fadeIn()
+        // .prev('.hide_str').hide()
+        // .prev('.more').fadeIn();
+
+        // $('.more').fadeIn();
+        $('.omit').fadeIn();
+        $('.hide_str').hide();
+        $('.more').fadeIn(); // close
+
+      return false;
+    });
   });
-
-
-  $('.text_overflow .hide_str').hide();
-  $('.text_overflow .close_str').hide();
-
-  $('.text_overflow .more').click(function() {
-      console.log('more');
-      $(this).hide()
-      .prev('.omit').hide()
-      .prev('.hide_str').fadeIn()
-      .siblings('.close_str').fadeIn();
-
-    return false;
-  });
-    $('.text_overflow .close_str').click(function() {
-      console.log('close');
-      $(this).hide();
-      // .prev('.omit').fadeIn()
-      // .prev('.hide_str').hide()
-      // .prev('.more').fadeIn();
-
-      // $('.more').fadeIn();
-      $('.omit').fadeIn();
-      $('.hide_str').hide();
-      $('.more').fadeIn(); // close
-
-    return false;
-  });
-});
-</script>
+  </script>
 </body>
 </html>
 
