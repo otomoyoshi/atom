@@ -419,7 +419,7 @@
 <!-- more -->
 <script type="text/javascript">
   $(function() {
-  var count = 20;
+  var count = 10;
   // console.log('more_start');
   $('.text_overflow').each(function() {
     var thisText = $(this).text().replace(/\s+/g, '');
