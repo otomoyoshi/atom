@@ -71,7 +71,7 @@ if (!empty($_POST)) {
     // $ini = parse_ini_file("../config.ini");
     // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    if (isset($_SESSION['login_user']) && $_SESSION['login_user']['new_user'] != 'yes') { //ログインしてるとき
+    if (isset($_SESSION['login_user']['new_user']) && $_SESSION['login_user']['new_user'] != 'yes') { //ログインしてるとき
       // echo "login success";
       require('../child_login_header.php');
     } else {// ログインしてないとき
@@ -110,11 +110,13 @@ if (!empty($_POST)) {
                   <label>メールアドレス </label><br>
 
                   <?php if(isset($_SESSION['login_user']['new_email']) && !empty($_SESSION['login_user']['new_email'])): ?>
-                    <input type="email"  name="email" 　placeholder="tabi@example.com" maxlength="50" autofocus value="<?php echo $_SESSION['login_user']['new_email']; ?>">
+                    <input type="email"  name="email" placeholder="tabi@example.com" maxlength="50" autofocus value="<?php echo $_SESSION['login_user']['new_email']; ?>">
                     <?php $_SESSION['login_user']['new_email'] = ''; ?>
                   <?php else: ?>
-                    <input type="email" class="form-control" name="email"　placeholder="tabi@example.com" maxlength="50" autofocus value="<?php echo $email; ?>">
+                    <input type="email" class="form-control" name="email" placeholder="tabi@example.com" maxlength="50" autofocus value="<?php echo $email; ?>">
                   <?php endif; ?>
+
+
 
                   <!-- メールアドレスが入力されていない時 -->
                   <?php if (isset($errors['email']) && $errors['email'] == 'blank'): ?>
