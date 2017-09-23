@@ -121,8 +121,13 @@ if (!empty($_POST)) {
         <div class="row">
           <div class="col-xs-12 col-sm-6 col-md-6">
             <div class="form-group">
-              <label style="font-size: 18px">アカウント名変更</label>
-                <input type="text" name="account_name" id="first_name" class="form-control input-lg" placeholder="<?php echo $_SESSION['login_user']['account_name'];?>" tabindex="1">
+              <label style="font-size: 18px">アカウント名</label>
+                <input type="text" name="account_name" id="first_name" class="form-control input-lg" placeholder="<?php if(isset($_SESSION['login_user']['account_name'])) {
+                  echo $_SESSION['login_user']['account_name'];
+                  } else{
+                    echo "アカウント名";
+                  }
+                ?>" tabindex="1">
             </div>
           </div>
         </div>
@@ -132,8 +137,13 @@ if (!empty($_POST)) {
         <div class="row">
           <div class="col-xs-12 col-sm-6 col-md-6">
             <div class="form-group">
-              <label style="font-size: 18px">メールアドレス変更</label>
-              <input type="email" name="email" id="last_name" class="form-control input-lg" placeholder="<?php echo $_SESSION['login_user']['email'];?>" tabindex="2">
+              <label style="font-size: 18px">メールアドレス</label>
+              <input type="email" name="email" id="last_name" class="form-control input-lg" placeholder="<?php if(isset($_SESSION['login_user']['email'])) {
+                  echo $_SESSION['login_user']['email'];
+                  } else{
+                    echo "メールアドレス";
+                  }
+                ?>" tabindex="2">
               <?php if(isset($errors['email']) && $errors['email'] == 'duplicate'): ?>
                 <div class="alert alert-danger">既に使用されているメールアドレスです</div>
               <?php endif; ?>
@@ -146,7 +156,7 @@ if (!empty($_POST)) {
         <div class="row" style="height: 88px">
 
               <div class="col-xs-12 col-md-4" style="margin-right: 0px;">
-                <label style="font-size: 18px">パスワード変更</label>
+                <label style="font-size: 18px">パスワード</label>
                 <input type="password" name="now_password" id="" style="margin: 5px 0px;" class="form-control input-lg" placeholder="現在のパスワード" tabindex="3"><br>
                 <?php if(isset($errors['now_password']) && $errors['now_password'] == 'blank'): ?>
                   <div class="alert alert-danger">現在のパスワードを入力してください</div>
