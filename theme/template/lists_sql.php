@@ -1,4 +1,3 @@
-
 <?php
   session_start();
   require('../../developer/dbconnect.php');
@@ -8,6 +7,7 @@
   $item_carry_ins = array();
   $list_name = '';
   $vargues = array();
+  $check_confirm = array();
   //$banned_baggage = '';
   // $_GET['id'] = '3'; //リストid
   
@@ -60,8 +60,8 @@
     echo "sendが押されました" .'<br>';
     date_default_timezone_set('Asia/Tokyo'); //date()用
     // $date = new DateTime(time, 'Asia/Tokyo');
-    
     // echo date('YmdHis');
+
     // 画像アップロード処理
     if(isset($_FILES['image'])){
       echo "ファイルが存在します" .'<br>';
@@ -81,7 +81,7 @@
 
       // 画像をサーバに保存
       if (move_uploaded_file($tmp_name, $file_path)) { //サーバに画像保存が成功したら
-        echo $file_name . "をサーバに保存しました" .'<br>';
+        // echo $file_name . "をサーバに保存しました" .'<br>';
 
         // リストデータを取得
         $sql= 'SELECT * FROM `atom_lists` WHERE `id`=?';
@@ -89,10 +89,10 @@
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
         $is_image = $stmt->fetch(PDO::FETCH_ASSOC);
-        echo "元の画像" . $is_image['list_image_path'] .'<br>';
+        // echo "元の画像" . $is_image['list_image_path'] .'<br>';
 
         if($is_image['list_image_path'] == NULL) { //サーバに画像が登録されていないとき
-            echo "null" . '<br>';
+            // echo "null" . '<br>';
 
             // 画像名をデータベースに登録する
             $sql= 'UPDATE `atom_lists` SET `list_image_path` =?,`modified`=NOW() WHERE `id`=?';
@@ -102,9 +102,9 @@
             header('Location: lists.php?id='. $_GET['id']);
             exit();
         } elseif($is_image['list_image_path'] == $file_name){
-          echo "一緒だよ" .'<br>';
+          // echo "一緒だよ" .'<br>';
         } else { //データベースにすでに画像が登録されていて、登録されている画像名が新しく入力された画像名と異なるとき
-          echo "登録" . '<br>';
+          // echo "登録" . '<br>';
           $is_image_path = '../../list_image_path/' . $is_image['list_image_path'];
           if(file_exists($is_image_path)){
             // 既存に指定されていた画像をサーバから削除
@@ -125,10 +125,36 @@
         // exit();
 
       } else {
-        echo "アップロードに失敗しました";
+        // echo "アップロードに失敗しました";
       }
     }
 
+  }
+  if (!empty($_POST['list_search_btn'])){
+          $sql= 'UPDATE `atom_items` SET `item_check`= 0 WHERE `lists_id`=?';
+          $data = array($_GET['id']);
+          $stmt = $dbh->prepare($sql);
+          $stmt ->execute($data);
+          if (isset($_POST['che'])) {
+              $c = count($_POST['che']);
+              $check_items = $_POST['che'];
+              var_dump($check_items);
+          // $sql= 'UPDATE `atom_items`(`item_check`) VALUES';
+              for ($i=0; $i < $c ; $i++) { 
+                  // $data = '(' . 1 . ')';
+                  // $s = '';
+                  // if($i != 0){
+                  //   $s = ',';
+                  // }
+                  // $sql .= $s . $data;
+
+                  $sql= 'UPDATE `atom_items` SET `item_check`= 1 WHERE `id`=?';
+                  $data = array($check_items[$i]);
+                  $stmt = $dbh->prepare($sql);
+                  $stmt ->execute($data);
+                  // $check_confirm = $stmt->fetch(PDO::FETCH_ASSOC);
+              }
+        }
   }
 
     //検索ボタンが押された時
@@ -159,13 +185,9 @@
       // echo count($tmp_searchs);
 
       if (isset($tmp_searchs)) { // 検索結果が存在する時
-
-        if (count($tmp_searchs) == 1) { // 曖昧検索の結果がひとつのみの場合
-          foreach($tmp_searchs as $ts){
-            $search[] = $ts;
-            $search = $search[0];
-          }
-        }elseif(count($tmp_searchs) > 1){ // 曖昧検索の結果が複数存在する場合
+        if(count($tmp_searchs) == 1){ // 検索結果が一つだけの時
+          $search = $tmp_searchs[0];
+        }else{ // 検索結果が複数ある時
           foreach($tmp_searchs as $ts){
             $vague_searchs[] = $ts;
           }
@@ -188,6 +210,7 @@
           $stmt ->execute($data);
 
       }
+
 
       //検索収集用テーブルに登録
       $sql= 'INSERT INTO `atom_searched_words` SET `word` = ?,
@@ -217,11 +240,12 @@
 
   // 保存ボタンが押された時
   if (!empty($_POST['keep_btn'])) {
+
           $sql= 'UPDATE `atom_items` SET `item_check`= 0 WHERE `lists_id`=?';
           $data = array($_GET['id']);
           $stmt = $dbh->prepare($sql);
           $stmt ->execute($data);
-
+        if (isset($_POST['che'])) {
           $c = count($_POST['che']);
           $check_items = $_POST['che'];
           var_dump($check_items);
@@ -240,7 +264,9 @@
             $data = array($check_items[$i]);
             $stmt = $dbh->prepare($sql);
             $stmt ->execute($data);
+            // $check_confirm = $stmt->fetch(PDO::FETCH_ASSOC);
           }
+        }
 
           // $sql .= 'WHERE `id`=?';
           // echo $sql .'<br>';
@@ -252,7 +278,7 @@
     if(isset($_POST['list_name'])) {
       $list_name = $_POST['list_name'];
     }
-    echo "list_name :" . $list_name . '<br>';
+    // echo "list_name :" . $list_name . '<br>';
     // リストを保存
     $sql = 'UPDATE `atom_lists` SET `members_id` = ?,
                                     `name` = ?,
@@ -345,7 +371,7 @@
   $stmt = $dbh->prepare($sql);
   $stmt ->execute($data);
   $is_image = $stmt->fetch(PDO::FETCH_ASSOC);
-  echo "出力画像" . $is_image['list_image_path'].'<br>';
+  // echo "出力画像" . $is_image['list_image_path'].'<br>';
 
   //キャンセルボタンが押された時
   if (!empty($_POST['can_btn'])) {
@@ -355,7 +381,7 @@
       $stmt ->execute($data);
       // header('Location:lists.php');
       // exit();
-      echo $_GET['id'];
+      // echo $_GET['id'];
   }
 
 ?>

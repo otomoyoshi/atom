@@ -1,19 +1,6 @@
 <?php
   require('lists_sql.php');
 
-  // ユーザーが新規でリストを作成する際
-  if ($is_image['name'] == '') {
-
-    $sql = 'SELECT COUNT(*) FROM `atom_lists` WHERE `members_id`=?';
-    $data = array($_SESSION['login_user']['id']);
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute($data);
-    // ログインしているユーザーが作成しているリストの数を取得
-    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-    $list_amount = $rec['COUNT(*)'];
-  }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -25,12 +12,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="../favicon.png./assets/img/">
+    <?php require('icon.php'); ?>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
     <title>旅にもつ</title>
     <?php require('load_css.php'); ?>
+    <!-- <link rel="stylesheet" type="text/css" href="../../assets/css/lists.css"> -->
     <link rel="stylesheet" type="text/css" href="../assets/css/lists.css">
+
 
   </head>
   <body>
@@ -51,18 +41,13 @@
   ?>
 <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
     <button data-remodal-action="close" class="remodal-close"></button>
-  <!-- <form id="img_form"> -->
-
       <h1>画像変更</h1>
-      <!-- <p>コンテンツを記述します。</p> -->
+
       <form id="my_form">
         <input id="pos_btn" type="file" name="image" data-url="../../list_image_path/" >
         <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
         <Button type="button" data-remodal-action="confirm" class="remodal-confirm" onclick="file_upload()">画像変更</Button>
       </form>
-      <!-- <button data-remodal-action="confirm" class="remodal-confirm">OK</button> -->
-      <!-- <button type="button" data-remodal-action="confirm" class="remodal-confirm">画像の変更</button> -->
-  <!-- </form> -->
 </div>
 
 
@@ -71,25 +56,10 @@
     <div id="headerwrap" class="back">
       <div class="container">
         <!-- リストの情報画面を書いていく -->
+
         <div class="row height">
-          <div class="col-lg-offset-2 col-lg-5 col-md-12 col-sm-12 col-xs-12">
-            <form action="" method="POST">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 
-            <?php if($is_image['name'] != ''): ?>
-              <!-- リスト名が登録されている場合、そのリスト名を表示する -->
-              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
-              data-intro="リスト名を入力してね" data-step="1" value="<?php echo $is_image['name']; ?>">
-
-            <?php else: ?>
-              <!-- リスト名が登録されていない場合、自動的にリスト名がvalueに入る -->
-              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
-              data-intro="リスト名を入力してね" data-step="1" value="リスト  <?php echo $list_amount; ?>">
-
-            <?php endif; ?>
-            </div>
-              <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 text-center">
-
-<!-- <<<<<<< HEAD -->
             <?php if (isset($errors['extension'])) { ?>
               <div class="alert alert-danger">
                 拡張子は、jpg,png,gifの画像を選択ください
@@ -97,7 +67,7 @@
             <?php } ?>
 
             <!-- <div id="output"></div> -->
-            <label>
+            <!-- <label> -->
 
               <a id="list_img" data-remodal-target="modal">
               <!-- 画像がデータベースに登録されているとき -->
@@ -107,31 +77,50 @@
 
             <!-- 画像がデータベースに登録されてないとき -->
             <?php } else {?>
-            <a id="list_img" data-remodal-target="modal">
-              <div >デフォルト画像を表示</div>
+
+              <img id="list_img" data-remodal-target="modal"　src="../../list_image_path/20170910191855dog_.png" class="img-circle list_name_location" style="height: 120px; width: 120px">
+
+
             </a>
             <?php } ?>
 
-            </label>
-          </div>
+            <!-- </label> -->
+          </div><!-- div -->
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <form action="" method="POST" class="div_border">
+
+            <?php if($is_image['name'] != ''): ?>
+              <!-- リスト名が登録されている場合、そのリスト名を表示する -->
+              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control erase_input_border" 
+              data-intro="リスト名を入力してね" data-step="1" value="<?php echo $is_image['name']; ?>">
+
+            <?php else: ?>
+              <!-- リスト名が登録されていない場合、自動的にリスト名がvalueに入る -->
+              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location erase_input_border" 
+              data-intro="リスト名を入力してね" data-step="1" value="リスト  <?php echo $list_amount; ?>">
+
+            <?php endif; ?>
+          </div><!-- div -->
         </div>
         <div class="row">
-        </div>
-        <!-- リストの大枠を作って行く -->
-        <div class="row height_fix">
-          <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center fix_to_search">
-            <hr class="under_line1">
-            <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
-            <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索" name="list_search_btn" onClick="linkCheck(1)">
-          </div>
+          <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12 fix_to_search straight">
+            <!-- <hr class="under_line1"> -->
+            <!-- <div class="form-inline"> -->
+              <input id="searchs" type="text" name = "list_search" class="form-control" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
 
+              <input id="search-btn" type="submit" class="btn btn_atom  btn-lg btn_width" value="検索" name="list_search_btn" onClick="linkCheck(1)">  
+            <!-- </div> --> 
+          </div>
         </div>
-        <?php if(isset($tmp_searchs) && !empty($_POST['list_search_btn']) && count($tmp_searchs) > 1){ ?>
+
+        <?php if(isset($vague_searchs) && !empty($_POST['list_search_btn']) && count($tmp_searchs) > 1){ ?>
+
           <div class="row">
             <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
               <ul class="list-group" id="list_design">
                 <label class="width list_searchs">
-                  <h3 class="word_titles">複数件の結果が見つかりました</h3>
+                  <h3 class="word_titles">検索結果が見つかりました</h3>
                   <li class="list-group-item list_property">
                     <?php if(isset($vague_searchs)): ?>
                       <?php foreach($vague_searchs as $tss): ?>
@@ -151,12 +140,13 @@
           <div class="row">
             <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding vargues_position">
               <h5 class="undefined_word">検索結果が見つかりませんでした</h5>
-              <h7 class= "undefined_category">(検索ワード：<?php echo $_POST['list_search']?>)</h7><br>
-              <input type="submit" class = "moving_category btn btn_atom" value="カテゴリーから探す" name=""><br>
+              <h7 class= "undefined_category">(検索ワード：<?php echo htmlspecialchars($_POST['list_search'])?>)</h7>
               <input type="hidden" name="undefined_to_lists" value="<?php echo $_POST['list_search'] ?>">
-              <input type="submit" class = "moving_list_direct btn btn_atom" value="”持ち込み・預け入れリスト”に追加する" name="move_both">
-              <input type="submit" class = "moving_list_direct btn btn_atom" value="”持ち込みリスト”に追加する" name="move_carry_in">
-              <input type="submit" class = "moving_list_direct btn btn_atom" value="”預け入れリスト”に追加する" name="move_azukeire">
+              <div class="list_add_btn">
+                <input type="submit" class = "moving_list_direct btn btn_atom" value="”持ち込み・預け入れリスト”に追加する" name="move_both">
+                <input type="submit" class = "moving_list_direct btn btn_atom" value="”持ち込みリスト”に追加する" name="move_carry_in">
+                <input type="submit" class = "moving_list_direct btn btn_atom" value="”預け入れリスト”に追加する" name="move_azukeire">
+              </div>
             </div>
           </div>
             <?php } ?>
@@ -178,25 +168,35 @@
                 </div>
             <?php }}} ?>
 
+
         <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
 
           <!-- <div class="both_contents well col-lg-4 box27"> -->
           <div class="col-lg-4" id="box1">
             <!-- BOTHの欄を作る -->
             <!-- <strong class = "both_contents_border"> -->
-            <span class="sub_title box-title">
+            <div class="sub_title box-title">
               持ち込み・預け入れ
-            </span>
+            </div>
             <!-- </strong> -->
             <div>
               <ul class="list-group" id="list_design">
                 <?php foreach ($item_boths as $item_both) { ?>
                   <label class="width">
                     <li class="list-group-item list_float">
+                      <?php if ($item_both['item_check'] == 1) { ?>
+                        <input type="hidden" name="check_judge" value="checked" checked>
+                        <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_both['id']?>" checked>
+                        <span class="checkbox-icon"></span>
+                      <?php } else { ?>
                         <input type="hidden" name="check_judge" value="checked">
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_both['id']?>">
-                      <span class="checkbox-icon"></span>
-                      <?php echo $item_both['content'];?>
+                        <span class="checkbox-icon"></span>
+                      <?php } ?>
+                      <span class="text_overflow">
+                        <?php echo htmlspecialchars($item_both['content']);?>
+                      </span>
+
                         <!-- 削除処理を書いていく -->
                         <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_both['id'];?>">
                           <i class="fa fa-trash right_position"></i>
@@ -223,10 +223,19 @@
                 <?php foreach ($item_carry_ins as $item_carry_in){ ?>
                   <label class="width">
                     <li class="list-group-item list_float">
+                      <?php if ($item_carry_in['item_check'] == 1) { ?>
+                        <input type="hidden" name="check_judge" value="checked">
+                        <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_carry_in['id']?>" checked>
+                        <span class="checkbox-icon"></span>
+                      <?php } else { ?>
                         <input type="hidden" name="check_judge" value="checked">
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_carry_in['id']?>">
-                      <span class="checkbox-icon"></span>
-                      <?php  echo $item_carry_in['content']; ?>
+                        <span class="checkbox-icon"></span>
+                      <?php } ?>                      <span class="checkbox-icon"></span>
+
+                      <span class="text_overflow">
+                      <?php  echo htmlspecialchars($item_carry_in['content']); ?>
+                      </span>
                       <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_carry_in['id'];?>">
                         <i class="fa fa-trash right_position"></i>
                       </a>
@@ -253,10 +262,21 @@
               <?php foreach ($item_azukeires as $item_azukeire) { ?>
                 <label class="width">
                     <li class="list-group-item list_float">
+                      <?php if ($item_azukeire['item_check'] == 1) { ?>
+                        <input type="hidden" name="check_judge" value="checked">
+                        <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_azukeire['id']?>" checked>
+                        <span class="checkbox-icon"></span>
+                      <?php } else { ?>
                         <input type="hidden" name="check_judge" value="checked">
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_azukeire['id']?>">
+                        <span class="checkbox-icon"></span>
+                      <?php } ?>
                       <span class="checkbox-icon"></span>
-                      <span class="list_content"><?php echo $item_azukeire['content']; ?></span>
+                      <!-- <span class="list_content"> -->
+                        <span class="text_overflow">
+                        <?php echo htmlspecialchars($item_azukeire['content']); ?>
+                          </span>
+                        <!-- </span> -->
                         <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
                           <i class="fa fa-trash right_position"></i>
                         </a>
@@ -273,23 +293,13 @@
         <!-- リストの保存機能たち -->
 
           <div class="list_contents text-center">
-<!--               <div class="tmp_keep">
-                <input class="btn btn-info tmp_btn" value="一時保存" type="submit" name="tmp_btn" data-intro="作成の続きからリストが作れるよ" data-step="4">
-              </div> -->
-<!--             <div class="cansel">
-              <input value="キャンセル" class="btn btn-warning can_btn" type="submit" name="can_btn">
-            </div> -->
             <div class="keep">
-
               <input class="btn btn_atom keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの履歴やメールに送信できるよ" data-step="5">
             </div>  
 
-          </form>
+            </form>
         </div>
-        <div>
-          
 
-        </div>
       </div>
     </div>
   </div>
@@ -407,26 +417,59 @@
           });
       }
   </script>
-  <!-- 戻るときだけコンファームを出すためのjs -->
-  <script type="text/javascript">
-  // console.log(test);
-  $(document).ready(function(){
 
-    $(window).on('beforeunload', function() {
-      //個々の変数をクリックしたオブジェクトで変更できれば実装できそう
-      var test = 0;
-      function linkCheck(btn){
-        if (btn == 1) {
-          var test = 1;
-        }
-      }
-      console.log(test);
-        if(test == 0){
-          return "このページを離れると、入力したデータが削除されます。\n修正したい場合には、「マイページへ登録」ボタンをクリックしてください。";
-        }
-    });
+<!-- more -->
+<script type="text/javascript">
+  $(function() {
+  var count = 55;
+  // console.log('more_start');
+  $('.text_overflow').each(function() {
+    var thisText = $(this).text();
+    // console.log(thisText);
+    var textLength = thisText.length;
+    console.log('textLength: %s' , textLength);
+    if (textLength > count) {
+      var showText = thisText.substring(0, count);
+      var hideText = thisText.substring(count, textLength);
+      var insertText = showText;
+      console.log('hideText: %s' , hideText);
+      insertText += '<span class="hide_str">' + hideText + '</span>';
+      insertText += '<span class="omit span_color">…</span>';
+      insertText += '<span class="more span_color">more</span>';
+      insertText += '<span class="close_str span_color">close</span>';
+
+      $(this).html(insertText);
+    };
+  });
+
+
+  $('.text_overflow .hide_str').hide();
+  $('.text_overflow .close_str').hide();
+
+  $('.text_overflow .more').click(function() {
+      console.log('more');
+      $(this).hide()
+      .prev('.omit').hide()
+      .prev('.hide_str').fadeIn()
+      .siblings('.close_str').fadeIn();
+
+    return false;
+  });
+    $('.text_overflow .close_str').click(function() {
+      console.log('close');
+      $(this).hide();
+      // .prev('.omit').fadeIn()
+      // .prev('.hide_str').hide()
+      // .prev('.more').fadeIn();
+
+      // $('.more').fadeIn();
+      $('.omit').fadeIn();
+      $('.hide_str').hide();
+      $('.more').fadeIn(); // close
+
+    return false;
+  });
 });
-
 </script>
 </body>
 </html>

@@ -15,7 +15,8 @@
 }
 
 .flame{
-	background-color: rgba(255,255,255,0.5); 
+	/*background-color: rgba(255,255,255,0.5); */
+	background-color: white; 
 	padding: 50px
 }
 
@@ -25,13 +26,24 @@
 
 .font_content {
 	color: #FFFFFF; 
-	text-shadow: 0px 0px 10px rgba(255,255,255,1);
+	/*text-shadow: 0px 0px 10px rgba(255,255,255,1);*/
+
 	font-size: 40px;
 
 }
 
+#move_header{
+padding-top: 2px;
+padding-bottom: 0px;
+}
+
 body { 
-background: url(../img/dark_beach1.jpg);
+/*background: url(../img/dark_beach1.jpg);*/
   background-repeat: no-repeat;
   background-size: cover; 
+}
+
+.form-control {
+	border:0.01px solid #cccccc;
+	border-radius:7px;
 }

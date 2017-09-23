@@ -107,13 +107,13 @@ if (!empty($_POST)) {
             <div class="row email_input">
               <div class="col-lg-12">
                 <div class="text-center text_loc">
-                  <label>メールアドレス ※</label><br>
+                  <label>メールアドレス </label><br>
 
                   <?php if(isset($_SESSION['login_user']['new_email']) && !empty($_SESSION['login_user']['new_email'])): ?>
-                    <input type="email" name="email"　placeholder="tabi@example.com" maxlength="50" autofocus value="<?php echo $_SESSION['login_user']['new_email']; ?>">
+                    <input type="email"  name="email" 　placeholder="tabi@example.com" maxlength="50" autofocus value="<?php echo $_SESSION['login_user']['new_email']; ?>">
                     <?php $_SESSION['login_user']['new_email'] = ''; ?>
                   <?php else: ?>
-                    <input type="email" name="email"　placeholder="tabi@example.com" maxlength="50" autofocus value="<?php echo $email; ?>">
+                    <input type="email" class="form-control" name="email"　placeholder="tabi@example.com" maxlength="50" autofocus value="<?php echo $email; ?>">
                   <?php endif; ?>
 
                   <!-- メールアドレスが入力されていない時 -->
@@ -131,8 +131,8 @@ if (!empty($_POST)) {
             <div class="row password_input">
               <div class="col-lg-12">
                 <div class="text-center text_loc">
-                  <label>パスワード ※</label><br>
-                  <input type="password" name="password" maxlength="8">
+                  <label>パスワード </label><br>
+                  <input type="password" class="form-control" name="password" maxlength="8">
                   <!-- アドレス、パスワードのいずれかが間違っている時 -->
                   <?php if (isset($errors['password']) && $errors['password'] == 'mistake'): ?>
                     <br><br><span class="alert alert-danger">

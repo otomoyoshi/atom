@@ -22,6 +22,11 @@ body {
 
 }
 
+#move_header{
+padding-top: 2px;
+padding-bottom: 0px;
+}
+
 .background_dark {
   background-color: rgba(3,98,158,0.7);
   transform: rotate(-50deg);
@@ -56,7 +61,7 @@ body {
 @media (min-width: 1200px) {
 
 	div#border-space {
-	    padding: 5%;
+	    padding: 3% 3% 0 3%;
 	    /*margin: 5%;*/
 	    /*width: 100%;*/
       /*background-color: #FAFAFA;*/
@@ -68,7 +73,7 @@ body {
 /* Landscape tablets and medium desktops */
 @media (min-width: 768px) and (max-width: 1199px) {
 	div#border-space {
-    	padding: 5%;
+    	padding:3% 3% 0 3%;
     	/*margin: 5%;*/
     	/*width: 100%;*/
   	}
@@ -77,7 +82,7 @@ body {
 
 @media (max-width: 767px){
 	div#border-space {
-    	padding: 5%;
+    	padding: 3% 3% 0 3%;
     	margin: 5%;
       background-color: #FFFFFF;
     	/*width: 100%;*/
@@ -85,9 +90,19 @@ body {
 
 }
 
+#headerwrap{
+  padding-top: 60px;
+}
 
+.div_top {
+  padding-top:10px;
+}
 /*.label {
     display: inline-block;
     margin-bottom: 5px;
     font-weight: 500;
 }*/
+
+textarea.form-control {
+    height: 150px;
+}
