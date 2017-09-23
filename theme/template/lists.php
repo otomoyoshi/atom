@@ -128,6 +128,7 @@
             <div class = "col-lg-12 col-md-12  col-sm-12 show_size backgrounding vargues_position">
               <h5 class="undefined_word">検索結果が見つかりませんでした</h5>
               <h7 class= "undefined_category">(検索ワード：<?php echo htmlspecialchars($_POST['list_search'])?>)</h7>
+              <!-- <h7 class= "undefined_category">(検索ワード：<?php //echo $_POST['list_search']?>)</h7> -->
               <input type="hidden" name="undefined_to_lists" value="<?php echo $_POST['list_search'] ?>">
               <div class="list_add_btn">
                 <input type="submit" class = "moving_list_direct btn btn_atom" value="”持ち込み・預け入れリスト”に追加する" name="move_both">
@@ -178,7 +179,8 @@
                         <span class="checkbox-icon"></span>
                       <?php } ?>
                       <span class="text_overflow">
-                        <?php echo htmlspecialchars($item_both['content']);?>
+                        <?php  echo htmlspecialchars($item_both['content']);?>
+                        <?php //echo $item_both['content'];?>
                       </span>
 
                         <!-- 削除処理を書いていく -->
@@ -219,6 +221,7 @@
 
                       <span class="text_overflow">
                       <?php  echo htmlspecialchars($item_carry_in['content']); ?>
+                      <?php  //echo $item_carry_in['content'] ?>
                       </span>
                       <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_carry_in['id'];?>">
                         <i class="fa fa-trash right_position"></i>
@@ -259,6 +262,7 @@
                       <!-- <span class="list_content"> -->
                         <span class="text_overflow">
                         <?php echo htmlspecialchars($item_azukeire['content']); ?>
+                        <?php //echo $item_azukeire['content']; ?>
                           </span>
                         <!-- </span> -->
                         <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
@@ -368,7 +372,7 @@
     });
   </script> -->
 
-<!-- btnが押されたとき -->
+  <!-- 画像変更 -->
   <script type="text/javascript">
     function file_upload()
       {
@@ -415,10 +419,10 @@
 <!-- more -->
 <script type="text/javascript">
   $(function() {
-  var count = 55;
+  var count = 20;
   // console.log('more_start');
   $('.text_overflow').each(function() {
-    var thisText = $(this).text();
+    var thisText = $(this).text().replace(/\s+/g, '');
     // console.log(thisText);
     var textLength = thisText.length;
     console.log('textLength: %s' , textLength);
