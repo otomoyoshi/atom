@@ -71,9 +71,7 @@ if (!empty($_POST)) {
     // $ini = parse_ini_file("../config.ini");
     // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    if (isset($_SESSION['login_user']['new_user']) && $_SESSION['login_user']['new_user'] != 'yes') { //ログインしてるとき
-      // echo "login success";
-      require('../child_login_header.php');
+    if (isset($_SESSION['login_user']['new_user']) && $_SESSION['login_user']['new_user'] != 'yes'){      require('../child_login_header.php');
     } else {// ログインしてないとき
       // echo "login fail";
       require('../child_header.php');
@@ -82,20 +80,23 @@ if (!empty($_POST)) {
 
     <div id="headerwrap">
       <div class="container">
-        <div class="row" id="adjustment">
-          <div class="col-lg-6">
-            <div class="row">
-              <div class="text-center title_show">ログイン</div>
-            </div>
-            <div class="row">
-              <div class="col-lg-12 font_content">
+        <!-- <div class="row" id="adjustment"> -->
+          <!-- <div class="col-lg-6"> -->
+            <!-- <div class="row"> -->
+              <!-- <div class="text-center title_show">ログイン</div> -->
+            <!-- </div> -->
+            <!-- <div class="row"> -->
+              <!-- <div class="col-lg-12 font_content">
                 検索窓に入力するだけで旅行に持っていける荷物がすぐにわかる！
-              </div>
-            </div>
-          </div>
+              </div> -->
+            <!-- </div> -->
+          <!-- </div> -->
+
+
+
 
         <form method="POST" action="">
-          <div class="col-lg-6 flame">
+          <div class="col-md-12 col-lg-offset-3 col-lg-6 text-center" id="border-space">
 
           <?php if((isset($_SESSION['login_user']['new_user'])) && $_SESSION['login_user']['new_user'] == 'yes'): ?>
             <div class="row text-center">
@@ -153,19 +154,23 @@ if (!empty($_POST)) {
 
             <div class="row">
               <div class="col-lg-12">
+                <div class="text-center btn_location">
+                 <input type="submit" value="ログイン" class="btn btn_atom" >
+                </div>
+              </div>
+            </div>     
+
+            <br>
+
+            <div class="row">
+              <div class="col-lg-12">
                 <div class="text-center">
-                  <a href="" class="forget_passwprd"><u>パスワードを忘れた場合</u></a>
+                  <a href="" class="forget_passwprd">パスワードを忘れた場合</a>
                 </div>
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="text-center btn_location">
-                 <input type="submit" value="ログイン" class="btn btn-success" >
-                </div>
-              </div>
-            </div>         
+                
           </div>
         </div>    
       </div>
