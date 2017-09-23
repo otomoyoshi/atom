@@ -80,7 +80,6 @@
 
               <img id="list_img" data-remodal-target="modal"　src="../../list_image_path/20170910191855dog_.png" class="img-circle list_name_location" style="height: 120px; width: 120px">
 
-
             </a>
             <?php } ?>
 
