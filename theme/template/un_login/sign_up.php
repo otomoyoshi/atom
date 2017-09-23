@@ -142,24 +142,37 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
         </div>
 
         <div class="row">
-          <div class="col-lg-12 font_content">
+          <!-- <img src="../../assets/img/tabinimotsu_v1.png" class="img-responsive text_loc" style="margin: auto; height: 50px; width: 50px;"> -->
+          <img src="../../assets/img/tabinimotsu_v1.png" class="img-responsive text_loc" style="margin: auto; height: 200px; width: 200px;">
+
+          <!-- <div class="col-lg-12 font_content">
           <br>
           旅にもつ会員になって、あなたの旅行をもっと便利にもっと快適に
-          </div>
+          </div> -->
         </div>
 
       </div>
 
   <form method="POST" action="">
-      <div class="col-lg-5 background_white" id="space"> 
+      <div class="col-lg-5 background_white" id="space">
+
         <div class="row text_loc">
           <div class="col-lg-12">
-            
+           <!--  <img src="../../assets/img/tabinimotsu_v1.png" class="img-responsive text_loc" style="margin: auto; height: 50px; width: 50px;"> -->
+            <div class="col-lg-12 font_content">
+            <!-- <br> -->
+              旅にもつを使おう
+            </div>
+          </div>
+        </div>
+
+        <div class="row text_loc">
+          <div class="col-lg-12">            
              <div class="text-center">
 
+              <!-- <label><i  aria-hidden="true"></i>アカウント名 </label><br> -->
 
-             
-              <label><i  aria-hidden="true"></i>アカウント名 </label><br>
+
                 <input type="text"  class="form-control" name="account_name" placeholder="アカウント名" maxlength="15" autofocus value="<?php echo $account_name; ?>">
 
               <?php if (isset($errors['account_name']) && $errors['account_name'] == 'blank') {?>
@@ -174,8 +187,8 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
         <div class="row text_loc">
           <div class="col-lg-12">
            <div class="text-center">
-              <label><i></i>メールアドレス </label><br>
-                <input type="email"  class="form-control" name="email" placeholder="tabi@example.com" maxlength="50" value="<?php echo $email; ?>">
+              <!-- <label><i></i>メールアドレス </label><br> -->
+                <input type="email"  class="form-control" name="email" placeholder="メールアドレス" maxlength="50" value="<?php echo $email; ?>">
 
               <?php if (isset($errors['email']) && $errors['email'] == 'blank'): ?>
                <!--  <span style="color:red:">メールアドレスを入力してください</span> -->
@@ -197,8 +210,9 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
         <div class="row text_loc">
           <div class="col-lg-12">
            <div class="text-center">
-                <label><i  aria-hidden="true"></i>パスワード </label><br>
-              <input type="password" name="password" maxlength="8"  class="form-control">
+                <!-- <label><i  aria-hidden="true"></i>パスワード </label><br> -->
+              <input type="password" name="password" placeholder="パスワード"　maxlength="50"  class="form-control"　>
+              <!-- <input type="password" 　placeholder="パスワード"　> -->
               <?php if (isset($errors['password']) && $errors['password'] == 'blank') {?>
               <div class="alert alert-danger">パスワードを入力してください</div>
               <?php } ?>
@@ -214,8 +228,9 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
         <div class="row text_loc">
           <div class="col-lg-12">
             <div class="text-center">
-              <label><i  aria-hidden="true"></i>確認用パスワード </label><br>
-              <input type="password" name="comfirm_password" maxlength="8"  class="form-control">
+              <!-- <label><i  aria-hidden="true"></i>確認用パスワード </label><br> -->
+
+              <input type="password" name="comfirm_password" placeholder="確認用パスワード"　maxlength="50"  class="form-control">
               <?php if (isset($errors['comfirm_password']) && $errors['comfirm_password'] == 'blank') {?>
               <div class="alert alert-danger">確認用パスワードを入力してください</div>
               <?php } ?>
@@ -243,7 +258,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
         <div class="row">
           <div class="col-lg-12">
             <div class="text-center">
-             <input type="submit" value="新規登録" class="btn btn-info" >
+             <input type="submit" value="新規登録" class="btn btn_atom" >
             </div>
           </div>      
         </div>
