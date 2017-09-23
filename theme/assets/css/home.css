@@ -130,7 +130,7 @@ li {
 
   h2 {
     width: 100%;
-    color: navy;
+    color:#364958;
   }
 
 
@@ -423,7 +423,7 @@ li {
   }
 
   h2 {
-    color: blue;
+    color: #364958;
     font-size: 27px;
   }
 
@@ -590,6 +590,7 @@ li {
 }
 
 .tabinimotsu_main_div{
-background-color: rgba(255,255,255,0.6);
-box-shadow: 10px 10px 5px rgba( 0 , 0 , 0 , 0.3 );
+/*background-color: rgba(255,255,255,0.6);*/
+/*box-shadow: 10px 10px 5px rgba( 0 , 0 , 0 , 0.3 );*/
+background-color: #FFFFFF;
 }

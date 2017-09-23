@@ -106,7 +106,8 @@ if (!empty($_POST)) {
                 <div class="font_size_explain">お客様からのお問い合わせをお受けしています</div>
 
 
-k
+                <br>
+
               </div>
             </div>
             <div class="row">
@@ -129,6 +130,10 @@ k
                                     <?php } ?>
                                                         <!-- </div>
                                 <div class="form-group "> -->
+
+
+                                <br>
+
                                   <label for="exampleInputText">お問い合わせ内容</label>
                                  <textarea name="content" class="form-control" placeholder="メッセージをご記入ください" maxlength="1000"></textarea>
 
@@ -142,6 +147,9 @@ k
 
 
                                 </div>
+
+                                <br>
+
                                 <button type="submit" class="btn btn_atom">送信</button>
 
 

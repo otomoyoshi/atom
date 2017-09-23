@@ -127,7 +127,8 @@ while(1){
           </div>
 
           <div>
-            <hr color="blue">
+            <!-- <hr color="blue"> -->
+            <hr>
           </div>
 
         </div>
@@ -209,14 +210,14 @@ while(1){
                         </a> -->
                         <a href="../myPage_function/list_copy.php?id=<?php echo $list['id']; ?>">
                           <!-- <span class="tooltip" title="ダウンロード"></span> -->
-                          <button name="list_copy" type="button" class="col-md-4 col-xs-4" data-intro="持ち物リストを複製できるよ" data-step="2" title="持ち物リストを複製できるよ"><i class="glyphicon glyphicon-file" title="持ち物リストを複製できるよ"></i></button>
+                          <button name="list_copy" type="button" class="col-md-4 col-xs-4 btn btn-default btn-sm" data-intro="持ち物リストを複製できるよ" data-step="2" title="持ち物リストを複製できるよ"><i class="glyphicon glyphicon-file" title="持ち物リストを複製できるよ"></i></button>
                           
                         </a>
                         <!-- <a href="../function/list_email.php"> -->
-                          <button name="list_email" type="button" class="col-md-4 col-xs-4" data-intro="メールで持ち物リストを送信できるよ" data-step="3" title="ダウンロード"><i class="glyphicon glyphicon-envelope"></i></button>
+                          <button name="list_email" type="button" class="col-md-4 col-xs-4 btn btn-default btn-sm" data-intro="メールで持ち物リストを送信できるよ" data-step="3" title="ダウンロード"><i class="glyphicon glyphicon-envelope"></i></button>
                         <!-- </a> -->
                         <a href="../myPage_function/list_delete.php?id=<?php echo $list['id']; ?>" onClick="return confirm('削除します。\nよろしいですか？');">
-                          <button name="list_delete" type="button" class="col-md-4 col-xs-4" title="削除" data-intro="削除はここで" data-step="4"><i class="glyphicon glyphicon-trash"></i></button>
+                          <button name="list_delete" type="button" class="col-md-4 col-xs-4 btn btn-default btn-sm" title="削除" data-intro="削除はここで" data-step="4"><i class="glyphicon glyphicon-trash"></i></button>
                         </a>
 
                       </div>
@@ -229,7 +230,7 @@ while(1){
             </div>
 
           <div>
-            <hr color="blue">
+            <!-- <hr color="blue"> -->
           </div>
 
           <div style="padding-bottom: 6px">

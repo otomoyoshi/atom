@@ -116,7 +116,8 @@ if (!empty($_POST)) {
     <div class="col-xs-10 col-sm-8 col-md-8 col-xs-offset-1 col-sm-offset-2 col-md-offset-2 tabinimotsu_main_div" style="padding:0px 60px 30px 60px; margin-bottom: 50px; margin-top: 50px">
 
       <h2>会員情報設定</h2>
-      <hr color="blue">
+      <!-- <hr color="blue"> -->
+      <hr>
       <form method="POST" action="" enctype="multipart/form-data">
         <div class="row">
           <div class="col-xs-12 col-sm-6 col-md-6">
@@ -250,7 +251,8 @@ if (!empty($_POST)) {
             </div>
           </div> -->
       
-        <hr color="blue">
+        <!-- <hr color="blue"> -->
+        <hr>
         <div class="row">
           <div class="col-xs-12 col-md-12"><input type="submit" value="登録" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
         </div>
