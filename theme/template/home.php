@@ -480,29 +480,29 @@ if (!empty($_POST['user_lists_id'])) {
                 <?php } ?>
 
                 <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){?>
-                <li><a href="#tab-3" id="tab3" class="tab background_white font_size div_border">タブ３</a></li>
-              </ul>
-              <?php }else{ ?>
-                <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
-              </ul>
-              <?php } ?>
+                  <li><a href="#tab-3" id="tab3" class="tab background_white font_size div_border">タブ３</a></li>
+                  </ul>
+                <?php }else{ ?>
+                  <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
+                  </ul>
+                <?php } ?>
 
-              <?php if(!isset($_GET['tab'])){ ?>
-                <div id='tab-1'>
+                <?php if(!isset($_GET['tab'])){ ?>
+                  <div id='tab-1'>
 
                     <?php for($j=0; $j<$cnt_l1; $j++) { ?>
                       <!-- <label> -->
-                        <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab1" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab1_<?php echo $j+1; ?>">
-                          <div class="all_center background_white">
-                            <?php echo $results_l1[$j]['category_l1']; ?>
-                          </div>
+                      <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab1" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab1_<?php echo $j+1; ?>">
+                        <div class="all_center background_white">
+                        <?php echo $results_l1[$j]['category_l1']; ?>
+                        </div>
 
-                        </a>
+                      </a>
                       <!-- </label> -->
-                  <?php } ?><!-- for -->
-                </div>
-              <?php } ?>
-
+                    <?php } ?><!-- for -->
+                  </div>
+                <?php } ?>
+              <?php endif; ?>
 
 
               <?php if(isset($_GET['tab']) && $_GET['tab']=='tab1'){ ?>
@@ -538,12 +538,12 @@ if (!empty($_POST['user_lists_id'])) {
                 </div>
               <?php } ?>
             </div><!-- after_event -->
-          <?php endif; ?>
+
 
           <!-- 曖昧検索表示 -->
           <?php if(isset($vague_searchs)): ?>
             <div class="row">
-              <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
+              <div class ="col-lg-6 col-md-12  col-sm-12 backgrounding">
                 <ul class="list-group" id="list_design">
                   <label class="width list_searchs">
                     <h3 class="word_titles">検索結果が見つかりました</h3>
@@ -563,92 +563,93 @@ if (!empty($_POST['user_lists_id'])) {
           <?php endif; ?>
           <!-- 曖昧検索表示終わり -->
 
+          <!-- 検索結果の表示 -->
           <?php if (isset($search)) {?>
             <div class="row">
               <form method="POST" action=""> <!-- リストへ追加を押したときに値を取得するフォーム -->
               <!-- 検索結果をリストへ追加するときに、検索結果の分類を$_POST['baggage_classify']に入れる -->
-              <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
-              <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
-                <ul class="list-group" id="list_design">
-                  <label class="width list_searchs">
-                    <!-- 検索結果をリストへ追加するときに、検索結果の品目名を$_POST['word']に入れる -->
-                    <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
-                    <h3 class="word_titles"><?php echo $word; ?></h3>
-                    <li class="list-group-item list_property">
-                      <h2 class="judge_show_icon">機内持ち込み</h2>
-                      <p class="judge_icon">
-                        <?php echo $judge_carry_in ?>
-                      </p>
-                      <p class="conditions">
-                        <p class="result_show_title">条件：</p><br>
-                        <p><?php echo $condition_carry_in; ?></p>
-                        <?php if (isset($per_person) && $per_person != '') {?>
-                          <hr class="length_line">
-                        <p class="per_something">1人当たり：</p><br>
-                        <p><?php echo $per_person.'<br>'; ?></p>
-                        <?php } ?>
-                        <?php if ( isset($per_container) && $per_container != '') {?>
-                          <hr class="length_line">
-                          <p lass="per_something">１容器あたり：</p>
-                          <p><?php echo $per_container.'<br>'; ?></p>
-                        <?php } ?>
-                     </p>
-                    </li>
-                    <li class="list-group-item">
-                      <h2 class="judge_show_icon">預け入れ</h2>
-                      <p class="judge_icon">
-                        <?php echo $judge_azukeire ?>
-                      </p>
-                      <p class="conditions">
-                        <p class="result_show_title">条件：</p><br>
-                        <p><?php echo $condition_azukeire; ?></p>
-                        <?php if (isset($per_person) && $per_person != '') {?>
-                          <hr class="length_line">
+                <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
+                <div class ="col-lg-12 col-md-12  col-sm-12 backgrounding">
+                  <ul class="list-group" id="list_design">
+                    <label class="width list_searchs">
+                      <!-- 検索結果をリストへ追加するときに、検索結果の品目名を$_POST['word']に入れる -->
+                      <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
+                      <h3 class="word_titles"><?php echo $word; ?></h3>
+                      <li class="list-group-item list_property">
+                        <h2 class="judge_show_icon">機内持ち込み</h2>
+                        <p class="judge_icon">
+                          <?php echo $judge_carry_in ?>
+                        </p>
+                        <p class="conditions">
+                          <p class="result_show_title">条件：</p><br>
+                          <p><?php echo $condition_carry_in; ?></p>
+                          <?php if (isset($per_person) && $per_person != '') {?>
+                            <hr class="length_line">
                           <p class="per_something">1人当たり：</p><br>
-                          <?php echo $per_person.'<br>'; ?>
-                        <?php } ?>
-                        <?php if (isset($per_container) && $per_container != '') {?>
-                          <hr class="length_line">
-                          <p lass="result_show_title per_something">１容器あたり:</p><?php echo $per_container.'<br>'; ?>
-                        <?php } ?>
-                      </p>
-                    </li>
-                  </label>
-                </ul>
+                          <p><?php echo $per_person.'<br>'; ?></p>
+                          <?php } ?>
+                          <?php if ( isset($per_container) && $per_container != '') {?>
+                            <hr class="length_line">
+                            <p lass="per_something">１容器あたり：</p>
+                            <p><?php echo $per_container.'<br>'; ?></p>
+                          <?php } ?>
+                       </p>
+                      </li>
+                      <li class="list-group-item">
+                        <h2 class="judge_show_icon">預け入れ</h2>
+                        <p class="judge_icon">
+                          <?php echo $judge_azukeire ?>
+                        </p>
+                        <p class="conditions">
+                          <p class="result_show_title">条件：</p><br>
+                          <p><?php echo $condition_azukeire; ?></p>
+                          <?php if (isset($per_person) && $per_person != '') {?>
+                            <hr class="length_line">
+                            <p class="per_something">1人当たり：</p><br>
+                            <?php echo $per_person.'<br>'; ?>
+                          <?php } ?>
+                          <?php if (isset($per_container) && $per_container != '') {?>
+                            <hr class="length_line">
+                            <p lass="result_show_title per_something">１容器あたり:</p><?php echo $per_container.'<br>'; ?>
+                          <?php } ?>
+                        </p>
+                      </li>
+                    </label>
+                  </ul>
 
-                <form method="POST" action="">
-                  <input type="submit" name="list_move" value="リストへ追加" class = "btn btn_atom home_to_list_btn" >
-                </form>
-              </div>
+                  <form method="POST" action="">
+                    <input type="submit" name="list_move" value="リストへ追加" class = "btn btn_atom home_to_list_btn" >
+                  </form>
+                </div>
 
               <!-- ユーザーが登録している複数のリストの表示 -->
-                <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
-                  <div class="row">
-                    <?php if(isset($user_lists)): ?>
-                      <label class="width list_searchs" style="padding: 15px;">
-                        <h3 class="word_titles">追加したいリストを選んでください</h3>
-                        <div class="user_lists_select">
-                          <form method="POST" action="">
-                            <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
-                            <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
-                            <input type="hidden" name="add_new_list" value="add_new_list">
-                            <input type="submit" class="col-lg-4 col-xs-4 btn btn-default" style="border: 1px solid black; border-bottom: 1px solid black; margin-top: 1px" name="" value="新しいリストに追加する">
-                          </form>
-                          <?php if($user_lists != 'no_lists'): ?>
-                            <?php foreach($user_lists as $ul): ?>
-                              <form method="POST" action="">
-                                <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
-                                <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
-                                <input type="hidden" name="user_lists_id" value="<?php echo $ul['id']; ?>">
-                                <input type="submit" class="col-lg-4 col-xs-4 btn btn_atom" style="border: 2px solid white; border-bottom: 7px solid white;" name="" value="<?php echo $ul['name']; ?>">
-                              </form>
-                            <?php endforeach; ?>
-                          <?php endif; ?>
-                        </div>
-                      </label>
-                    <?php endif; ?>
-                  </div>
+              <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
+                <div class="row">
+                  <?php if(isset($user_lists)): ?>
+                    <label class="width list_searchs" style="padding: 15px;">
+                      <h3 class="word_titles">追加したいリストを選んでください</h3>
+                      <div class="user_lists_select">
+                        <form method="POST" action="">
+                          <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
+                          <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
+                          <input type="hidden" name="add_new_list" value="add_new_list">
+                          <input type="submit" class="col-lg-4 col-xs-4 btn btn-default" style="border: 1px solid black; border-bottom: 1px solid black; margin-top: 1px" name="" value="新しいリストに追加する">
+                        </form>
+                        <?php if($user_lists != 'no_lists'): ?>
+                          <?php foreach($user_lists as $ul): ?>
+                            <form method="POST" action="">
+                              <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
+                              <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
+                              <input type="hidden" name="user_lists_id" value="<?php echo $ul['id']; ?>">
+                              <input type="submit" class="col-lg-4 col-xs-4 btn btn_atom" style="border: 2px solid white; border-bottom: 7px solid white;" name="" value="<?php echo $ul['name']; ?>">
+                            </form>
+                          <?php endforeach; ?>
+                        <?php endif; ?>
+                      </div>
+                    </label>
+                  <?php endif; ?>
                 </div>
+              </div>
 
             </div> <!-- 右半分を表示するdivタグの終わり -->
           <?php } ?>
