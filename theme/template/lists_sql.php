@@ -310,7 +310,7 @@
     $sql= 'INSERT INTO `atom_items` SET `categories_id` =0,
                                     `content` = ?,
                                     `lists_id` = ?';
-    $data = array($_POST['undefined_to_lists'], $_GET['id']);
+    $data = array(htmlspecialchars($_POST['undefined_to_lists']), $_GET['id']);
     $stmt = $dbh->prepare($sql);
     $stmt ->execute($data);
     header('Location: lists.php?id='. $_GET['id']);
@@ -321,7 +321,7 @@
     $sql= 'INSERT INTO `atom_items` SET `categories_id` =1,
                                     `content` = ?,
                                     `lists_id` = ?';
-    $data = array($_POST['undefined_to_lists'], $_GET['id']);
+    $data = array(htmlspecialchars($_POST['undefined_to_lists']), $_GET['id']);
     $stmt = $dbh->prepare($sql);
     $stmt ->execute($data);
     header('Location: lists.php?id='. $_GET['id']);
@@ -332,7 +332,7 @@
     $sql= 'INSERT INTO `atom_items` SET `categories_id` =2,
                                     `content` = ?,
                                     `lists_id` = ?';
-    $data = array($_POST['undefined_to_lists'], $_GET['id']);
+    $data = array(htmlspecialchars($_POST['undefined_to_lists']), $_GET['id']);
     $stmt = $dbh->prepare($sql);
     $stmt ->execute($data);
     header('Location: lists.php?id='. $_GET['id']);
