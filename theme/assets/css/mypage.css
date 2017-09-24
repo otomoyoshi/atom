@@ -70,3 +70,13 @@ a.wrimagecard:hover, .wrimagecard-topimage:hover {
     text-align: center;
 }
 
+.how_to_use{
+    text-align: right;
+    font-size:15px;
+}
+
+a{
+    /*text-align: right;*/
+    color: gray;
+}
+
