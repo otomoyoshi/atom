@@ -400,6 +400,7 @@ if (!empty($_POST['user_lists_id'])) {
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!-- <link rel="shortcut icon" href="../..assets/img/favicon.png"> -->
     <!-- <link rel="shortcut icon" href="../assets/img/tabinimotsu_v1.png"> -->
+    <?php require('icon.php'); ?>
     <?php require('header.php'); ?>
 
     <title>旅にもつ</title>
