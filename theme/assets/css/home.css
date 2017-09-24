@@ -296,9 +296,6 @@ li {
   border: solid 0.5px #cccccc;
 }
 
-
-
-
 }
 
 
@@ -409,6 +406,13 @@ li {
     text-align: center;
     border: solid 1px #51a8ff;
   }
+  .for_responsive{
+    margin-top: 5px;
+  }
+  .responsive_position{
+    margin-bottom: 30px;
+  }
+
 }
 
 /* Portrait tablets and small desktops */
@@ -520,6 +524,9 @@ li {
   vertical-align: middle;
   text-align: center;
   border: solid 1px #51a8ff;
+  }
+  .responsive_position{
+    margin-bottom: 30px;
   }
 
 
@@ -638,6 +645,10 @@ li {
   text-align: center;
   border: solid 1px #51a8ff;
   }
+  .responsive_position{
+    margin-bottom: 30px;
+  }
+
 
 
 }
@@ -737,8 +748,9 @@ li {
   .box_bottom{
     padding-bottom: 15px;
   }
-
-
+  .responsive_position{
+    margin-bottom: 30px;
+  }
 }
 
 .tabinimotsu_main_div{

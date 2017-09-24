@@ -5,16 +5,16 @@ require('../../../developer/dbconnect.php');
 session_start();
 
 // ログインしてるかのチェック
-// if (!isset($_SESSION['login']['id'])) {
-// 	header('Location: ../unlogin/sign_in.php');
-// 	exit();
-// }
+if (!isset($_SESSION['login_user'])) {
+	header('Location: ../un_login/sign_in.php');
+	exit();
+}
 
 // パラメータが存在するかチェック
-// if (!isset($_GET['id'])) {
-// 	header('Location: ../login/myPage.php');
-// 	exit();
-// }
+if (!isset($_GET['id'])) {
+	header('Location: ../login/myPage.php');
+	exit();
+}
 
 
 $sql = 'DELETE FROM `atom_lists` WHERE `id`=?';

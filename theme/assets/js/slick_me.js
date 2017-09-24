@@ -2,7 +2,7 @@ $(function(){
   $('.single-item').slick({
     accessibility: true,
     autoplay: true,
-    autoplaySpeed: 1000,
+    autoplaySpeed: 3000,
     dots: true,
     fade: true,
   });

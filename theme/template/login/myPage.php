@@ -2,7 +2,12 @@
 session_start();
 require('../../../developer/dbconnect.php');
 
-// var_dump($_SESSION['user_info']);
+//ログインチェック
+if (!isset($_SESSION['login_user']['id'])) {
+    header('Location: ../un_login/sign_in.php');
+    exit();
+}
+
 
 if(!empty($_POST)){
   // echo "post" . '<br>';
