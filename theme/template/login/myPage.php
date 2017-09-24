@@ -137,7 +137,7 @@ while(1){
           <div class="row">
               
                 <!-- 追加ボタン -->
-              <div class="col-md-4 col-sm-4" data-intro="新しい持ち物リストを作成できるよ" data-step="1">
+              <div class="col-lg-4 col-md-6 col-sm-6" data-intro="新しい持ち物リストを作成できるよ" data-step="1">
                 <div class="wrimagecard wrimagecard-topimage lists_margin">
 
                   <form method="POST" action="">
@@ -162,7 +162,7 @@ while(1){
 
           <!-- 個々のリスト -->
           <?php foreach($lists as $list): ?>
-            <div class="col-md-4 col-sm-4 border">
+            <div class="col-lg-4 col-md-6 col-sm-6 border">
               <div class="wrimagecard wrimagecard-topimage lists_margin">
                 <a href="../lists.php?id=<?php echo $list['id']; ?>">
                   <div class="wrimagecard-topimage_header" style="background-color: rgba(60, 216, 255, 0.2)">
