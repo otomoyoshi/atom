@@ -399,6 +399,7 @@ if (!empty($_POST['user_lists_id'])) {
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!-- <link rel="shortcut icon" href="../..assets/img/favicon.png"> -->
     <!-- <link rel="shortcut icon" href="../assets/img/tabinimotsu_v1.png"> -->
+    <?php require('icon.php'); ?>
     <?php require('header.php'); ?>
 
     <title>旅にもつ</title>
@@ -409,135 +410,171 @@ if (!empty($_POST['user_lists_id'])) {
 
 
   </head>
-
   <body>
 
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
-  <?php
-    // $ini = parse_ini_file("config.ini");
-    // $is_login = $ini['is_login'];
-    // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($_SESSION['login_user']) { //ログインしてるとき
-      // echo "login success";
-      require('login_header.php');
-    } else {// ログインしてないとき
-      // echo "login fail";
-      require('header.php');
-    }
-  ?>
-  <div id="headerwrap">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
-          <h2 id ="catch_copy">「荷造りの悩み」ここに置いて行きませんか？</h2>
+    <?php
+      // $ini = parse_ini_file("config.ini");
+      // $is_login = $ini['is_login'];
+      // $is_login = 0; //ログインしてるときを１とする（仮）
+      if ($_SESSION['login_user']) { //ログインしてるとき
+        // echo "login success";
+        require('login_header.php');
+      } else {// ログインしてないとき
+        // echo "login fail";
+        require('header.php');
+      }
+    ?>
+    <div id="headerwrap">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <h2 id ="catch_copy">「荷造りの悩み」ここに置いて行きませんか？</h2>
          
-          <form method="GET" action="">
-            <div class="form-group">
-              <!-- <label for="sel1"></label> -->
-              <select class="form-control" id="sel1" data-intro="航空会社をお選びください" data-step="1">
-                <option>JetStar</option>
-              </select>
-            </div>
+            <form method="GET" action="">
+              <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <!-- <label for="sel1"></label> -->
+                <select class="form-control" data-intro="航空会社をお選びください" data-step="1">
+                  <option>JetStar</option>
+                </select>
+              </div>
 
-            <div class="form-group">
+              <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: inline-flex;">
 
-              <input type="text" id="search" class="form-control" placeholder="例：液体物" name = "home_search_word" maxlength=20 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
+                <input type="text" id="search" class="form-control" placeholder="例：液体物" name = "home_search_word" maxlength=20 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
 
-               <?php if (isset($errors['word'])  == 'blank') {?>
+                <?php if (isset($errors['word'])  == 'blank') {?>
                   <div class="alert alert-danger error_search">検索ワードを入力してください</div>
                 <?php } ?>
 
-            </div>
-            <input id="search-btn1" type="submit" class="btn btn_atom btn-lg" value="検索">
-          </form>
+            
+              <input id="search-btn1" type="submit" class="btn btn_atom btn-lg" value="検索">
+              </div>
+            </form>
 
-        </div><!-- /col-lg-6 -->
-
-
-
-        <!-- 検索結果を表示していく -->
-
-        <div class="col-xs-12 col-lg-6 col-sm-6 col-md-6 div_bottom">
-
+          </div> <!-- /col-lg-6 -->
           <!-- 検索結果が見つからない時 -->
           <!-- 一階層目の表示 -->
           <?php if($no_result == 'no_result'): ?>
+            <!-- 検索結果を表示していく -->
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 div_bottom">
+
             <div class="row">
-              <h5 class="alert alert-danger col-lg-8 col-lg-offset-2" style="text-align: center;">'<?php echo $_SESSION['home']['home_search_word'] ?>' という検索結果は見つかりませんでした</h5><br>
+              <div class="alert alert-danger col-lg-8" style="text-align: center;">'<?php echo $_SESSION['home']['home_search_word'] ?>'</div>
+
             </div>
-            <!-- カテゴリー表示 -->
+              <!-- カテゴリー表示 -->
             <div class='after_event'>
-              <ul class='horizontal btn_disabled row'>
+              <ul class='ul_adjust horizontal btn_disabled row'>
                 <?php if(!isset($_GET['tab'])){ ?>
-                  <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">タブ１</a></li>
+                  <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">選択１</a></li>
                 <?php }else { ?>
-                  <li><a href="#tab-1" id="tab1" class="tab background_white font_size">タブ１</a></li>
+                  <li><a href="#tab-1" id="tab1" class="tab background_white font_size">選択１</a></li>
                 <?php } ?>
 
                 <?php if(isset($_GET['tab']) && $_GET['tab']=='tab1'){?>
-                  <li><a href="#tab-2" id="tab2" class="tab background_white font_size div_border">タブ２</a></li>
+                  <li><a href="#tab-2" id="tab2" class="tab background_white font_size div_border">選択２</a></li>
                 <?php }else { ?>
-                  <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
+                  <li><a href="#tab-2" id="tab2" class="tab background_white font_size">選択２</a></li>
                 <?php } ?>
 
                 <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){?>
-                  <li><a href="#tab-3" id="tab3" class="tab background_white font_size div_border">タブ３</a></li>
+                  <li><a href="#tab-3" id="tab3" class="tab background_white font_size div_border">選択３</a></li>
                   </ul>
                 <?php }else{ ?>
-                  <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
+                  <li><a href="#tab-3" id="tab3" class="tab background_white font_size">選択３</a></li>
                   </ul>
                 <?php } ?>
 
                 <?php if(!isset($_GET['tab'])){ ?>
                   <div id='tab-1'>
-
                     <?php for($j=0; $j<$cnt_l1; $j++) { ?>
-                      <!-- <label> -->
+                        <!-- <label> -->
                       <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab1" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab1_<?php echo $j+1; ?>">
                         <div class="all_center background_white">
                         <?php echo $results_l1[$j]['category_l1']; ?>
                         </div>
 
                       </a>
-                      <!-- </label> -->
+                        <!-- </label> -->
                     <?php } ?><!-- for -->
                   </div>
                 <?php } ?>
-              <?php endif; ?>
+          <?php endif; ?>
 
 
               <?php if(isset($_GET['tab']) && $_GET['tab']=='tab1'){ ?>
-              <div class="row">
-                <h5 class="alert alert-danger col-lg-8 col-lg-offset-2" style="text-align: center;">'<?php echo $_SESSION['home']['home_search_word'] ?>' という検索結果は見つかりませんでした</h5><br>
-              </div>
+                <div class="row">
+                  <h5 class="alert alert-danger col-lg-8 col-lg-offset-2" style="text-align: center;">'<?php echo $_SESSION['home']['home_search_word'] ?>' という検索結果は見つかりませんでした</h5><br>
+                </div>
+                  <div class='after_event'>
+                    <ul class='ul_adjust horizontal btn_disabled row'>
+                      <?php if(!isset($_GET['tab'])){ ?>
+                        <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">選択１</a></li>
+                      <?php }else { ?>
+                        <li><a href="#tab-1" id="tab1" class="tab background_white font_size">選択１</a></li>
+                      <?php } ?>
+
+                      <?php if(isset($_GET['tab']) && $_GET['tab']=='tab1'){?>
+                        <li><a href="#tab-2" id="tab2" class="tab background_white font_size div_border">選択２</a></li>
+                      <?php }else { ?>
+                        <li><a href="#tab-2" id="tab2" class="tab background_white font_size">選択２</a></li>
+                      <?php } ?>
+
+                      <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){?>
+                        <li><a href="#tab-3" id="tab3" class="tab background_white font_size div_border">選択３</a></li>
+                        </ul>
+                      <?php }else{ ?>
+                        <li><a href="#tab-3" id="tab3" class="tab background_white font_size">選択３</a></li>
+                        </ul>
+                      <?php } ?>
+                      <!-- 二回層目の表示 -->
+                      <div id='tab-2'>
+                        <?php for($j=0; $j<$cnt_l2; $j++) { ?>
+                          <!-- <label> -->
+                            <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab2" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab2_<?php echo $j+1; ?>">
+                              <div class="all_center background_white">
+                                <?php echo $results_l2[$j]['category_l2']; ?>
+                              </div>
+
+                            </a>
+                          <!-- </label> -->
+                      <?php } ?><!-- for -->
+                    </div>
+                  <?php } ?>
+
+                  <!-- 三階層目の表示 -->
+                <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){ ?>
+                <div class="row">
+                  <h5 class="alert alert-danger col-lg-8 col-lg-offset-2" style="text-align: center;">'<?php echo $_SESSION['home']['home_search_word']; ?>' という検索結果は見つかりませんでした</h5><br>
+                </div>
                 <div class='after_event'>
-                  <ul class='horizontal btn_disabled row'>
+                  <ul class='ul_adjust horizontal btn_disabled row'>
                     <?php if(!isset($_GET['tab'])){ ?>
-                      <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">タブ１</a></li>
+                      <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">選択１</a></li>
                     <?php }else { ?>
-                      <li><a href="#tab-1" id="tab1" class="tab background_white font_size">タブ１</a></li>
+                      <li><a href="#tab-1" id="tab1" class="tab background_white font_size">選択１</a></li>
                     <?php } ?>
 
                     <?php if(isset($_GET['tab']) && $_GET['tab']=='tab1'){?>
-                      <li><a href="#tab-2" id="tab2" class="tab background_white font_size div_border">タブ２</a></li>
+                      <li><a href="#tab-2" id="tab2" class="tab background_white font_size div_border">選択２</a></li>
                     <?php }else { ?>
-                      <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
+                      <li><a href="#tab-2" id="tab2" class="tab background_white font_size">選択２</a></li>
                     <?php } ?>
 
                     <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){?>
-                      <li><a href="#tab-3" id="tab3" class="tab background_white font_size div_border">タブ３</a></li>
+                      <li><a href="#tab-3" id="tab3" class="tab background_white font_size div_border">選択３</a></li>
                       </ul>
                     <?php }else{ ?>
-                      <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
+                      <li><a href="#tab-3" id="tab3" class="tab background_white font_size">選択３</a></li>
                       </ul>
                     <?php } ?>
-                    <!-- 二回層目の表示 -->
-                    <div id='tab-2'>
-                      <?php for($j=0; $j<$cnt_l2; $j++) { ?>
+                    <div id='tab-3'>
+                      <?php for($j=0; $j<$cnt_l3; $j++) { ?>
                         <!-- <label> -->
-                          <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab2" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab2_<?php echo $j+1; ?>">
+                          <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab3" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab3_<?php echo $j+1; ?>">
                             <div class="all_center background_white">
-                              <?php echo $results_l2[$j]['category_l2']; ?>
+                              <?php echo $results_l3[$j]['word']; ?>
                             </div>
 
                           </a>
@@ -545,53 +582,13 @@ if (!empty($_POST['user_lists_id'])) {
                     <?php } ?><!-- for -->
                   </div>
                 <?php } ?>
-
-                <!-- 三階層目の表示 -->
-              <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){ ?>
-              <div class="row">
-                <h5 class="alert alert-danger col-lg-8 col-lg-offset-2" style="text-align: center;">'<?php echo $_SESSION['home']['home_search_word']; ?>' という検索結果は見つかりませんでした</h5><br>
-              </div>
-              <div class='after_event'>
-                <ul class='horizontal btn_disabled row'>
-                  <?php if(!isset($_GET['tab'])){ ?>
-                    <li><a href="#tab-1" id="tab1" class="tab background_white font_size div_border">タブ１</a></li>
-                  <?php }else { ?>
-                    <li><a href="#tab-1" id="tab1" class="tab background_white font_size">タブ１</a></li>
-                  <?php } ?>
-
-                  <?php if(isset($_GET['tab']) && $_GET['tab']=='tab1'){?>
-                    <li><a href="#tab-2" id="tab2" class="tab background_white font_size div_border">タブ２</a></li>
-                  <?php }else { ?>
-                    <li><a href="#tab-2" id="tab2" class="tab background_white font_size">タブ２</a></li>
-                  <?php } ?>
-
-                  <?php if(isset($_GET['tab']) && $_GET['tab']=='tab2'){?>
-                    <li><a href="#tab-3" id="tab3" class="tab background_white font_size div_border">タブ３</a></li>
-                    </ul>
-                  <?php }else{ ?>
-                    <li><a href="#tab-3" id="tab3" class="tab background_white font_size">タブ３</a></li>
-                    </ul>
-                  <?php } ?>
-                  <div id='tab-3'>
-                    <?php for($j=0; $j<$cnt_l3; $j++) { ?>
-                      <!-- <label> -->
-                        <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab3" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab3_<?php echo $j+1; ?>">
-                          <div class="all_center background_white">
-                            <?php echo $results_l3[$j]['word']; ?>
-                          </div>
-
-                        </a>
-                      <!-- </label> -->
-                  <?php } ?><!-- for -->
-                </div>
-              <?php } ?>
-            </div><!-- after_event -->
+              <!-- </div> --><!-- after_event -->
 
 
           <!-- 曖昧検索表示 -->
           <?php if(isset($vague_searchs)): ?>
-            <div class="row">
-              <div class ="col-lg-6 col-md-12  col-sm-12 backgrounding">
+            <!-- <div class="row"> -->
+              <div class ="col-lg-6 col-md-6 col-sm-12 col-xs-12 backgrounding">
                 <ul class="list-group" id="list_design">
                   <label class="width list_searchs">
                     <h3 class="word_titles">検索結果が見つかりました</h3>
@@ -607,17 +604,17 @@ if (!empty($_POST['user_lists_id'])) {
                   </label>
                 </ul>
               </div>
-            </div>
+            <!-- </div> -->
           <?php endif; ?>
           <!-- 曖昧検索表示終わり -->
 
           <!-- 検索結果の表示 -->
           <?php if (isset($search)) {?>
-            <div class="row">
+            <!-- <div class="row"> -->
               <form method="POST" action=""> <!-- リストへ追加を押したときに値を取得するフォーム -->
               <!-- 検索結果をリストへ追加するときに、検索結果の分類を$_POST['baggage_classify']に入れる -->
                 <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
-                <div class ="col-lg-12 col-md-12  col-sm-12 backgrounding">
+                <div class ="col-lg-6 col-md-6  col-sm-12 col-xs-12 backgrounding">
                   <ul class="list-group" id="list_design">
                     <label class="width list_searchs">
                       <!-- 検索結果をリストへ追加するときに、検索結果の品目名を$_POST['word']に入れる -->
@@ -699,7 +696,7 @@ if (!empty($_POST['user_lists_id'])) {
                 </div>
               </div>
 
-            </div> <!-- 右半分を表示するdivタグの終わり -->
+            <!-- </div> --> <!-- 右半分を表示するdivタグの終わり -->
           <?php } ?>
         </div>
 

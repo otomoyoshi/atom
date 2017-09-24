@@ -6,6 +6,16 @@
 /*  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
 */}
 
+.text_loc{
+  margin-bottom: 20px;
+}
+
+.text_left{
+  padding: 0;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 .label {
     display: inline-block;
     margin-bottom: 5px;
@@ -22,10 +32,6 @@ body {
 
 }
 
-#move_header{
-padding-top: 2px;
-padding-bottom: 0px;
-}
 
 .background_dark {
   background-color: rgba(3,98,158,0.7);
@@ -49,7 +55,7 @@ padding-bottom: 0px;
 }
 
 .form-control {
-  border: 0.01px solid #cccccc;
+  border: 0.5px solid #cccccc;
   border-radius: 7px;
 }
 
@@ -91,7 +97,7 @@ padding-bottom: 0px;
 }
 
 #headerwrap{
-  padding-top: 60px;
+  padding-top: 10px;
 }
 
 .div_top {
@@ -106,3 +112,8 @@ padding-bottom: 0px;
 textarea.form-control {
     height: 150px;
 }
+
+#headerwrap{
+  padding-top: 60px;
+}
+

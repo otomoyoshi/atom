@@ -5,6 +5,10 @@ body {
   background-size: cover;
 }
 
+.text_loc{
+	margin-bottom: 20px;
+}
+
 .font_title {
 	/*color: #FFFFFF; */
 	color: #555;
@@ -16,19 +20,22 @@ body {
 	/*color: #FFFFFF; */
 	color: #555;
 	text-shadow: 0px 0px 10px rgba(255,255,255,1);
-	font-size: 40px;
+	font-size: 20px;
+	font-weight:bold;
+	padding: 0;
 
 }
 
 #headerwrap{
 	min-height :0px ;
-	padding-top: 30px ;
+	padding-top:60px ;
 	padding-bottom: 50px;
 }
 
 #move_header{
 padding-top: 2px;
 padding-bottom: 0px;
+height: 100%;
 }
 
 
@@ -48,9 +55,10 @@ padding-bottom: 0px;
 @media (min-width: 1200px) {
 
 	div#space {
-	    padding: 5%;
+	    padding: 3%;
 	    /*margin: 5%;*/
 	    /*width: 100%;*/
+	    height: 100%;
 	}
 
 }
@@ -58,7 +66,7 @@ padding-bottom: 0px;
 /* Landscape tablets and medium desktops */
 @media (min-width: 768px) and (max-width: 1199px) {
 	div#space {
-    	padding: 5%;
+    	padding: 3%;
     	/*margin: 5%;*/
     	/*width: 100%;*/
   	}
@@ -67,13 +75,14 @@ padding-bottom: 0px;
 
 @media (max-width: 767px){
 	div#space {
-    	padding: 5%;
-    	margin: 5%;
+    	padding: 3%;
+    	margin: 3%;
+    	/*height: 100%;*/
     	/*width: 100%;*/
   	}
 }
 
 .form-control {
-	border:0.01px solid #cccccc;
+	border:0.5px solid #cccccc;
 	border-radius:7px;
 }

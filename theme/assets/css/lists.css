@@ -10,6 +10,47 @@
 .list_add_btn{
 	margin-top: 20px;
 }
+/* remodal css */
+.list_border_top{
+	border-top: 2.5px solid #0000B5;
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+
+.remodal_atom {
+  font: inherit;
+
+  display: inline-block;
+  overflow: visible;
+
+  min-width: 110px;
+  margin: 0;
+  padding: 12px 0;
+
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+
+  border: 0;
+  outline: 0;
+}
+
+.remodal_atom {
+  color: #fff;
+  font-weight: bold;
+  background: #0000B5;
+}
+
+.remodal_atom:hover,
+.remodal_atom:focus {
+  background: #51a8ff;
+}
+/*----------------*/
+
+
 
 #move_header{
 padding-top: 2px;
@@ -151,7 +192,7 @@ padding-bottom: 0px;
 }
 
 #headerwrap{
-	padding-top: 20px;
+	padding-top: 80px;
 }
 
 
@@ -251,7 +292,6 @@ input #h3 {
 .vargues_position{
 	text-align: center;
 
-
 }
 
 
@@ -317,7 +357,12 @@ input #h3 {
   color: #17bcdf;
 }
 
-
+.text_overflow{
+	width: 100%;
+}
+.hide_str{
+	
+}
 .padding {
 	margin-top: 30px; 
 }
@@ -369,6 +414,7 @@ input #h3 {
 	/*background-color: #5EA1E5;*/
 	border-color: #5EA1E5;
 	width: 70px;
+	margin-left: 20px;
 	/*margin-bottom: 60px;*/
 
 }
@@ -537,7 +583,7 @@ input #h3 {
 }
 
 
-div.container {
+.background-white {
   /*border: 1px solid #000;*/
   background-color:white;
 }
