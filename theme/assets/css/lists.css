@@ -151,7 +151,7 @@ padding-bottom: 0px;
 }
 
 #headerwrap{
-	padding-top: 20px;
+	padding-top: 80px;
 }
 
 
@@ -538,7 +538,7 @@ input #h3 {
 }
 
 
-div.container {
+.background-white {
   /*border: 1px solid #000;*/
   background-color:white;
 }

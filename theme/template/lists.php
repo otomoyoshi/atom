@@ -26,17 +26,17 @@
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
 
   <?php
-    // // $ini = parse_ini_file("config.ini");
-    // // $is_login = $ini['is_login'];
-    // // $is_login = 0; //ログインしてるときを１とする（仮）
-    // if (isset($_SESSION['login_user'])){ //ログインしてるとき
-    //   // echo "login success";
-    //   require('login_header.php');
+    // $ini = parse_ini_file("config.ini");
+    // $is_login = $ini['is_login'];
+    // $is_login = 0; //ログインしてるときを１とする（仮）
+    if (isset($_SESSION['login_user'])){ //ログインしてるとき
+      // echo "login success";
+      require('login_header.php');
 
-    // } else {// ログインしてないとき
-    //   // echo "login fail";
-    //   require('header.php');
-    // }
+    } else {// ログインしてないとき
+      // echo "login fail";
+      require('header.php');
+    }
   ?>
 <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
     <button data-remodal-action="close" class="remodal-close"></button>
@@ -53,7 +53,7 @@
 
  <div id="img">
     <div id="headerwrap" class="back">
-      <div class="container">
+      <div class="container background-white">
         <!-- リストの情報画面を書いていく -->
 
         <div class="row height">
