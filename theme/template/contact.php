@@ -73,7 +73,7 @@ if (!empty($_POST)) {
     // $ini = parse_ini_file("config.ini");
     // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    if ($_SESSION['login_user']) { //ログインしてるとき
+    if (isset($_SESSION['login_user'])) { //ログインしてるとき
       // echo "login success";
       require('login_header.php');
     } else {// ログインしてないとき
@@ -87,27 +87,14 @@ if (!empty($_POST)) {
       <div class="container">
         <div class="row" id="adjustment">
           <!-- <div class="col-lg-12" style="border: solid 1px black;"> -->
-          <div class="col-lg-12">
+          <div class="col-lg-12" style="margin-top: 20px">
+<div class="row text_loc">
+  <div class="col-lg-12 text-center"><i class="fa fa-envelope-o" style="font-size: -webkit-xxx-large;"></i></div>
+</div>
+
             <div class="row">
-              <!-- <div class="col-lg-6" style="border: solid 1px black;"> -->
-
-              <div class="col-md-12 col-lg-6 center-block">
-                <!-- <h1 style="border: solid 1px black;">阪急電車</h1> -->
-
-<!--                 <figure class="imghvr-push-up">
-                  <img src="../assets/img/tabinimotsu_v1.png" style="height: 342px;">
-                  <figcaption>
-                    <h1 class="text-center">阪急電車</h1>
-                    <h2 class="text-center">電車の乗客の人間関係にスポットを当てて進行していくストーリー。電車のように何度も会う関係ではないからこそ。</h2>
-                  </figcaption>
-                </figure> -->
-
-                <h2 class="text-center your_name">お問い合わせフォーム</h2><br>
-                <h2 class="text-center your_name">本フォームでは、旅にもつウェブサイトに関するお客様からのお問い合わせをお受けしています。</h2>
-
-              </div>
-
-                <div class="col-md-12 col-lg-offset-1 col-lg-6 background_blue center-block"  id="border-space">
+                <div class="col-md-12 col-lg-offset-3 col-lg-6 background_blue"  id="border-space">
+                <div class="col-lg-12 text_loc text_left">お客様からのお問い合わせをお受けしています</div>
                 <!-- <div class="col-lg-6 background_blue"  id="border-space" style="border: solid 1px black;"> -->
                   <section id="contact" class="content-section text-center">
                     <div class="contact-section">
@@ -118,15 +105,19 @@ if (!empty($_POST)) {
                               <form method="POST" action="">
 
                                 <div class="form-group">
-                                  <label for="exampleInputEmail2"><i class="fa fa-envelope-o"></i>メールアドレス</label>
-                                  <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com" maxlength="50" autofocus>
+                                  <!-- <label for="exampleInputEmail2">メールアドレス</label> -->
+                                  <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="メールアドレス" maxlength="50" autofocus>
 
                                     <?php if (isset($errors['email']) && $errors['email'] == 'blank') {?>
                                       <div class="alert alert-danger">メールアドレスを入力してください</div>
                                     <?php } ?>
                                                         <!-- </div>
                                 <div class="form-group "> -->
-                                  <label for="exampleInputText">お問い合わせ内容</label>
+
+
+                                <br>
+
+                                  <!-- <label for="exampleInputText">お問い合わせ内容</label> -->
                                  <textarea name="content" class="form-control" placeholder="メッセージをご記入ください" maxlength="1000"></textarea>
 
                                     <?php if (isset($errors['content']) && $errors['content'] == 'blank') { ?>
@@ -139,7 +130,10 @@ if (!empty($_POST)) {
 
 
                                 </div>
-                                <button type="submit" class="btn btn-success">送信</button>
+
+                                <br>
+
+                                <button type="submit" class="btn btn_atom">送信</button>
 
 
 

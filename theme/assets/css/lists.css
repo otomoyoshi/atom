@@ -1,5 +1,6 @@
 #img{
-	background: url(../img/beach_blur.jpg);
+/*	background: url(../img/beach_blur.jpg);
+*/	background-color:#f1f1f1 ;
 	background-size: cover;
 	background-repeat: no-repeat;
 	/*width:100%;
@@ -56,6 +57,16 @@ padding-bottom: 0px;
 }
 
 
+
+.erase_input_border {
+  border: none;
+  box-shadow: none;
+}
+
+.div_border {
+  border-bottom: 1px solid #ccc;
+}
+
 .moving_list_direct{
 	margin-bottom: 5px;
 }
@@ -72,6 +83,112 @@ padding-bottom: 0px;
 #headerwrap{
 	padding-top: 20px;
 }
+
+
+#box1 {
+    position: relative;
+    /*margin: 2em 0;*/
+    /*padding: 0.5em 0.5em;*/
+    /*margin: 0 0 0 2.5%;*/
+    /*padding: 1em 2em;*/
+    /*border: solid 3px #0000B5;*/
+}
+
+#box2 {
+    position: relative;
+    /*margin: 2em 0;*/
+    /*padding: 0.5em 0.5em;*/
+    /*margin: 0 2.5% ;*/
+    /*padding: 1em 2em;*/
+    /*border: solid 3px #0000B5;*/
+}
+
+#box3 {
+    position: relative;
+    /*margin: 0 2.5% 0 0;*/
+    /*padding: 1em 2em;*/
+    /*border: solid 3px #0000B5;*/
+}
+
+#box1 p {
+    margin: 0; 
+    padding: 0;
+}
+
+#box2 p {
+    margin: 0; 
+    padding: 0;
+}
+
+#box3 p {
+    margin: 0; 
+    padding: 0;
+}
+
+#box1 .box-title{
+	position: absolute;
+    display: inline-block;
+    top: -27px;
+    /*left: -3px;*/
+    padding: 0 9px;
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+    font-size: 17px;
+    background: #0000B5;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px 5px 0 0;
+}
+
+#box2 .box-title{
+	position: absolute;
+    display: inline-block;
+    top: -27px;
+    /*left: -3px;*/
+    padding: 0 9px;
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+    font-size: 17px;
+    background: #0000B5;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px 5px 0 0;
+}
+
+#box3 .box-title{
+	position: absolute;
+    display: inline-block;
+    top: -27px;
+    /*left: -3px;*/
+    padding: 0 9px;
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+    font-size: 17px;
+    background: #0000B5;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px 5px 0 0;
+
+}
+
+
+
+.undefined_word{
+	color: black;
+	margin-top: 20px;
+}
+
+#list_img{
+	cursor: pointer;
+}
+
+#headerwrap{
+	padding-top: 20px;
+}
+
 
 .circle_border {
   border: solid 5px black;
@@ -148,7 +265,7 @@ input #h3 {
 }
 
 .margin_top{
-	padding-top: 20px;
+	padding-top: 50px;
 	margin-bottom: 30px;
 }
 
@@ -173,15 +290,47 @@ input #h3 {
 
 
 .both_contents{
-	background-color: rgba(156,222,255,0.75);;
+	/*background-color: rgba(156,222,255,0.75);*/
+		/*background-color: #FFADBC;*/
+		/*background-color: #F79EBD;*/
+		/*background-color: #47A6FF;*/
+		/*background-color: #88E6FF;*/
+		/*background-color: #006BFF;*/
+		background-color: #3B8C93;
+
+
+
+}
+
+.both_contents_border {
+/*	border-color: red;
+	border-width: 20px;*/
+	border-bottom:3px solid #FFCFA8;
 }
 
 .carry_in{
-	background-color: rgba(190,255,161,0.85);;
+	/*background-color: rgba(190,255,161,0.85);*/
+		/*background-color: #FFFCF9;*/
+		/*background-color: #FFCFA8;*/
+		/*background-color: #2B8AFF;*/
+		/*background-color: #5ECFFF;*/
+		/*background-color: #0000B5;*/
+		background-color: #F988B6;
+
+
+
 }
 
 .azukeire{
-	background-color: rgba(100,230,80,0.8);
+	/*background-color: rgba(100,230,80,0.8);*/
+		/*background-color: #B1EDCA;*/
+		/*background-color: #FFF89F;*/
+		/*background-color: #266EFF;*/
+		/*background-color: #006BFF;*/
+		/*background-color: #000085;*/
+		background-color: #FCE492;
+
+
 }
 
 .checkbox {
@@ -213,8 +362,10 @@ input #h3 {
 }
 
 .sub_title {
-	color: black;
-	font-size: 20px;
+	/*color: #364958;*/
+	color: white;
+
+	font-size: 17px;
 }
 
 .sub_title {
@@ -237,6 +388,9 @@ input #h3 {
 	margin-bottom: 10px;
 }
 
+.straight {
+  display: inline-flex;
+}
 
 .well{
 	border-radius: 0;
@@ -246,22 +400,21 @@ input #h3 {
 
 #searchs{
 	display: inline;
-	margin-bottom: 20px;
+	/*margin-bottom: 60px;*/
+	/*color: #EA526F;*/
 }
 
 #search-btn{
-	display: inline;
+	background-color: #5EA1E5; 
+	border-color: #5EA1E5;
 	width: 70px;
-	margin-bottom: 20px;
+	margin-left: 20px;
+	/*margin-bottom: 60px;*/
 
 }
 
 .border{
 	padding: 20px;
-}
-
-.col-lg-4{
-	margin-right: 10px;
 }
 
 .under_line1 {
@@ -386,3 +539,47 @@ input #h3 {
 	}
 
 }
+
+.form-control {
+	color: #29354F;
+   margin-left: auto;
+    /*margin-right: auto;*/
+
+}
+
+
+
+/*.btn-warning .hover{
+	color: #EA526F;
+	border-color: #EA526F;
+}*/
+
+/**/
+/*@media (min-width: 1200px){
+	.col-lg-4 {
+	width: 32.47%;
+	}
+
+
+	#pos_btn{
+		margin: 20px 180px;
+	}
+
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+
+	#pos_btn{
+		margin: 20px 70px;
+	}
+
+}
+
+
+div.container {
+  /*border: 1px solid #000;*/
+  background-color:white;
+}
+
+

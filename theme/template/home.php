@@ -21,7 +21,6 @@ if(isset($_GET['tab']) && $_GET['tab']=='tab3'){
   $search = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-
 //検索ボタンが押されたとき
 if (isset($_GET['home_search_word']) && $_GET['home_search_word'] != '') {
       $_SESSION['home']['home_search_word'] = $_GET['home_search_word'];
@@ -441,7 +440,7 @@ if (!empty($_POST['user_lists_id'])) {
               </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="display: inline-flex;">
 
               <input type="text" id="search" class="form-control" placeholder="例：液体物" name = "home_search_word" maxlength=20 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
 
@@ -449,8 +448,9 @@ if (!empty($_POST['user_lists_id'])) {
                   <div class="alert alert-danger error_search">検索ワードを入力してください</div>
                 <?php } ?>
 
-            </div>
+            
             <input id="search-btn1" type="submit" class="btn btn_atom btn-lg" value="検索">
+            </div>
           </form>
 
         </div><!-- /col-lg-6 -->

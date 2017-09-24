@@ -137,4 +137,11 @@ p.copyright {
 }
 
 
+.btn-danger: . hover ,{
+    color:#5EA1E5;
+    background-color:#5EA1E5;
+    border-color:#5EA1E5;
+}
+
+
 

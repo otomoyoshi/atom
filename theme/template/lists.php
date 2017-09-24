@@ -1,5 +1,4 @@
 <?php
-
   require('lists_sql.php');
 
 ?>
@@ -12,13 +11,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../favicon.png./assets/img/">
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
     <title>旅にもつ</title>
     <?php require('load_css.php'); ?>
+    <!-- <link rel="stylesheet" type="text/css" href="../../assets/css/lists.css"> -->
     <link rel="stylesheet" type="text/css" href="../assets/css/lists.css">
+
 
   </head>
   <body>
@@ -48,6 +49,7 @@
         <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
         <Button type="button" data-remodal-action="confirm" class="remodal-confirm" onclick="file_upload()">画像変更</Button>
       </form>
+
 </div>
 
   <!-- 条件表示 pop-->
@@ -56,6 +58,7 @@
    <div class="output">
     
   </div>
+
 </div>
 
 <!-- リスト移動popup -->
@@ -74,16 +77,9 @@
     <div id="headerwrap" class="back">
       <div class="container">
         <!-- リストの情報画面を書いていく -->
+
         <div class="row height">
-          <div class="col-lg-offset-2 col-lg-5 col-md-12 col-sm-12 col-xs-12">
-            <form action="" method="POST">
-
-              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location" 
-              data-intro="リスト名を入力してね" data-step="1" value="<?php echo $is_image['name']; ?>">
-
-            </div>
-              <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 text-center">
-
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 
             <?php if (isset($errors['extension'])) { ?>
               <div class="alert alert-danger">
@@ -94,34 +90,53 @@
             <div id="output"></div>
             <label>
 
+
               <a id="list_img" data-remodal-target="modal">
               <!-- 画像がデータベースに登録されているとき -->
               <?php if ($is_image['list_image_path'] != NULL) { ?>
                 <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
               </a>
+            <!-- 画像がデータベースに登録されてないとき -->
+            <?php } else {?>
 
-              <!-- 画像がデータベースに登録されてないとき -->
-              <?php } else {?>
-                <img src="../assets/img/insert_image.png" class="img-circle" style="height: 120px; width: 120px">
+              <img id="list_img" data-remodal-target="modal"　src="../../list_image_path/20170910191855dog_.png" class="img-circle list_name_location" style="height: 120px; width: 120px">
+
 
               </a>
               <?php } ?>
 
-            </label>
-          </div>
+            <!-- </label> -->
+          </div><!-- div -->
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <form action="" method="POST" class="div_border">
+
+            <?php if($is_image['name'] != ''): ?>
+              <!-- リスト名が登録されている場合、そのリスト名を表示する -->
+              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control erase_input_border" 
+              data-intro="リスト名を入力してね" data-step="1" value="<?php echo $is_image['name']; ?>">
+
+            <?php else: ?>
+              <!-- リスト名が登録されていない場合、自動的にリスト名がvalueに入る -->
+              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location erase_input_border" 
+              data-intro="リスト名を入力してね" data-step="1" value="リスト  <?php echo $list_amount; ?>">
+
+            <?php endif; ?>
+          </div><!-- div -->
         </div>
         <div class="row">
-        </div>
-        <!-- リストの大枠を作って行く -->
-        <div class="row height_fix">
-          <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center fix_to_search">
-            <hr class="under_line1">
-            <input type="text" name = "list_search" id="searchs" class="form-control search_window_1" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
-            <input id="search-btn" type="submit" class="btn btn-warning  btn-lg btn_width" value="検索" name="list_search_btn" onClick="linkCheck(1)">
-          </div>
+          <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12 fix_to_search straight">
+            <!-- <hr class="under_line1"> -->
+            <!-- <div class="form-inline"> -->
+              <input id="searchs" type="text" name = "list_search" class="form-control" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
 
+              <input id="search-btn" type="submit" class="btn btn_atom  btn-lg btn_width" value="検索" name="list_search_btn" onClick="linkCheck(1)">  
+            <!-- </div> --> 
+          </div>
         </div>
-        <?php if(isset($vague_searchs) && !empty($_POST['list_search_btn'])){ ?>
+
+        <?php if(isset($vague_searchs) && !empty($_POST['list_search_btn']) && count($tmp_searchs) > 1){ ?>
+
           <div class="row">
             <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
               <ul class="list-group" id="list_design">
@@ -175,19 +190,25 @@
                 </div>
             <?php }}} ?>
 
+
         <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
-          <div class="both_contents well col-lg-4">
+
+          <!-- <div class="both_contents well col-lg-4"> -->
 
             <!-- <output class="output"> -->
 
             <!-- </output> -->
 
+
+          <!-- <div class="both_contents well col-lg-4 box27"> -->
+          <div class="col-lg-4" id="box1">
+
             <!-- BOTHの欄を作る -->
-            <strong>
-              <p class="sub_title fa fa-fighter-jet">
-                持ち込み・預け入れ
-              </p>
-            </strong>
+            <!-- <strong class = "both_contents_border"> -->
+            <div class="sub_title box-title">
+              持ち込み・預け入れ
+            </div>
+            <!-- </strong> -->
             <div>
               <ul class="list-group" id="list_both">
                 <?php foreach ($item_boths as $item_both) { ?>
@@ -238,12 +259,12 @@
             </div>
           </div>
           <!-- 持ち込みの欄を作る -->
-          <div class="carry_in well col-lg-4">
-            <strong>
-              <p class="sub_title fa fa-hand-o-right">
+          <div class="col-lg-4" id="box2">
+            <!-- <strong> -->
+              <span class="sub_title box-title">
                 持ち込み
-              </p>
-            </strong>
+              </span>
+            <!-- </strong> -->
             <div>
               <ul class="list-group" id="list_carry">
                 <?php foreach ($item_carry_ins as $item_carry_in){ ?>
@@ -279,14 +300,20 @@
             </div>
           </div>
 
-          <div class="azukeire well col-lg-4">
+          <div class="col-lg-4" id="box3">
             <!-- 持ち込みの欄を作る -->
-            <strong>
-              <p class="sub_title fa fa-suitcase ">
+            <!-- <strong> -->
+              <span class="box-title">
                 預け入れ
-              </p>
+<!-- <<<<<<< HEAD -->
+       <!--        </p>
             </strong>
-            <ul class="list-group" id="list_azukeire">
+            <ul class="list-group" id="list_azukeire"> -->
+<!-- ======= -->
+              </span>
+            <!-- </strong> -->
+            <ul class="list-group">
+<!-- >>>>>>> c2d455c2b0c2e9e14b7775b808965b20dae7368c -->
               <?php foreach ($item_azukeires as $item_azukeire) { ?>
                 <label class="width">
                     <li class="list-group-item list_float">
@@ -299,24 +326,7 @@
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_azukeire['id']?>">
                         <span class="checkbox-icon"></span>
                       <?php } ?>
-<!-- <<<<<<< HEAD
 
-                        <span class="text_overflow">
-                        <?php echo htmlspecialchars($item_azukeire['content']); ?>
-                        <?php //echo $item_azukeire['content']; ?>
-                          </span>
-
-                        <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
-                          <i class="fa fa-trash right_position"></i>
-                        </a>
-
-
-                        <span>
-                         <i class="fa fa-pencil-square-o right" value="1"></i>
-                        </span>
-
-                      <?php  ?>
-======= -->
                       <span class="text_overflow"><?php echo htmlspecialchars($item_azukeire['content']); ?></span>
                       <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
                         <i class="fa fa-trash right_position"></i>
@@ -329,7 +339,6 @@
                         <?php } ?>
                       <?php } ?>
 
-<!-- >>>>>>> 9403b97ed49f3e41c67f1250eac8665df68984bb -->
                     </li>
                 </label>
               <?php } ?>
@@ -339,23 +348,17 @@
         <!-- リストの保存機能たち -->
 
           <div class="list_contents text-center">
-<!--               <div class="tmp_keep">
-                <input class="btn btn-info tmp_btn" value="一時保存" type="submit" name="tmp_btn" data-intro="作成の続きからリストが作れるよ" data-step="4">
-              </div> -->
-<!--             <div class="cansel">
-              <input value="キャンセル" class="btn btn-warning can_btn" type="submit" name="can_btn">
-            </div> -->
             <div class="keep">
+              <input class="btn btn_atom keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの履歴やメールに送信できるよ" data-step="5">
+            </div>  
 
-              <input class="btn btn-success keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの履歴やメールに送信できるよ" data-step="5">
-            </div>
-
-          </form>
+            </form>
         </div>
-        <div>
+<!-- <<<<<<< HEAD -->
+        <!-- <div> -->
 
 
-        </div>
+
       </div>
     </div>
   </div>

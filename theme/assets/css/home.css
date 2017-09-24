@@ -63,6 +63,9 @@ padding-bottom: 0px;
 .btn_atom {
   background-color: #51a8ff;
   color: white;
+  font-weight: bold;
+  height: 42px;
+  font-size: 16px;
 }
 
 .all_center{
@@ -87,7 +90,7 @@ padding-bottom: 0px;
   /*background-color: rgba(0,0,0,0.7);*/
   /*border-radius: 8px;*/
   /*box-shadow: 4px 4px 4px rgba(0,0,0,0.05);*/
-  height: 300px;
+  height: 500px;
   color: #555;
   /*font-size: 35px;*/
   
@@ -178,7 +181,7 @@ li {
 
   h2 {
     width: 100%;
-    color: navy;
+    color:#364958;
   }
 
 
@@ -193,11 +196,17 @@ li {
     font-size:20px;
   }
 
+
   #search-btn1 {
     position: relative;
-    width: 12%;
-    margin-bottom: 20px;
+    width: 25%;
+    /* margin-bottom: 20px; */
+    margin: auto;
+    font-size: 14px;
+    margin-left: 20px;
   }
+
+
   .error_search{
     width:60%;
   }
@@ -508,7 +517,7 @@ li {
   }
 
   h2 {
-    color: blue;
+    color: #364958;
     font-size: 27px;
   }
 
@@ -704,8 +713,9 @@ li {
 }
 
 .tabinimotsu_main_div{
-background-color: rgba(255,255,255,0.6);
-box-shadow: 10px 10px 5px rgba( 0 , 0 , 0 , 0.3 );
+/*background-color: rgba(255,255,255,0.6);*/
+/*box-shadow: 10px 10px 5px rgba( 0 , 0 , 0 , 0.3 );*/
+background-color: #FFFFFF;
 }
 
 .user_lists_select{
