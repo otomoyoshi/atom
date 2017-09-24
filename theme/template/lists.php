@@ -135,7 +135,7 @@
           </div>
         </div>
 
-        <?php if(isset($vague_searchs) && !empty($_POST['list_search_btn']) && count($tmp_searchs) > 1){ ?>
+        <?php if(isset($vague_searchs) && !empty($_POST['list_search_btn'])){ ?>
 
           <div class="row">
             <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
@@ -186,7 +186,7 @@
               if (isset($search['baggage_classify'])) {
                 if ($search['baggage_classify'] == '3') { ?>
                 <div class="alert alert-danger text_position">
-                  <?php echo '"'.(htmlspecialchars($_POST['list_search'])).'"' ?><span class="banned_explanation">は持ち込み・預け入れ共に不可です。</span>
+                  <?php echo '"'.(htmlspecialchars($search['word'])).'"' ?><span class="banned_explanation">は持ち込み・預け入れ共に不可です。</span>
                 </div>
             <?php }}} ?>
 

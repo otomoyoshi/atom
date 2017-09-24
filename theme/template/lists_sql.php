@@ -175,7 +175,6 @@
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
       $search = $stmt->fetch(PDO::FETCH_ASSOC); //判定結果を取得
-      // var_dump($search);
 
       $sql = 'SELECT * FROM `atom_searchs` WHERE `word` LIKE ?';
       $data = array('%' . $_POST['list_search'] . '%');
@@ -196,13 +195,14 @@
       // echo count($tmp_searchs);
 
       if (isset($tmp_searchs)) { // 検索結果が存在する時
-        if(count($tmp_searchs) == 1){ // 検索結果が一つだけの時
-          $search = $tmp_searchs[0];
-        }else{ // 検索結果が複数ある時
+        // if(count($tmp_searchs) == 1){ // 検索結果が一つだけの時
+        //   $search = $tmp_searchs[0];
+        // }
+        // else{ // 検索結果が複数ある時
           foreach($tmp_searchs as $ts){
             $vague_searchs[] = $ts;
           }
-        }
+        // }
       }else{ // 検索結果が存在しない時
         $no_result = 'no_result';
       }
@@ -221,8 +221,6 @@
           $search['condition_carry_in']);
           $stmt = $dbh->prepare($sql);
           $stmt ->execute($data);
-          header('Location: lists.php?id='. $_GET['id']);
-          exit();
       }
   }
 
@@ -278,13 +276,6 @@
           }
         }
 
-          // $sql .= 'WHERE `id`=?';
-          // echo $sql .'<br>';
-          // $stmt = $dbh->prepare($sql);
-          // $stmt ->execute($data);
-      
-        /////////////////////////////
-
     if(isset($_POST['list_name'])) {
       $list_name = $_POST['list_name'];
     }
@@ -299,8 +290,8 @@
     $stmt = $dbh->prepare($sql);
     $stmt ->execute($data);
 
-    // header('Location: login/myPage.php');
-    // exit();
+    header('Location: login/myPage.php');
+    exit();
   }
 
   $is_image = ''; //画像が存在するか確認する
