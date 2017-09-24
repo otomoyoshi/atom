@@ -5,7 +5,7 @@ require('../../../developer/dbconnect.php');
 session_start();
 
 // ログインしてるかのチェック
-if (!isset($_SESSION['login']['id'])) {
+if (!isset($_SESSION['login_user'])) {
 	header('Location: ../un_login/sign_in.php');
 	exit();
 }
