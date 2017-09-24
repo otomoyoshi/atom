@@ -196,13 +196,13 @@
       // echo count($tmp_searchs);
 
       if (isset($tmp_searchs)) { // 検索結果が存在する時
-        if(count($tmp_searchs) == 1){ // 検索結果が一つだけの時
-          $search = $tmp_searchs[0];
-        }else{ // 検索結果が複数ある時
+        // if(count($tmp_searchs) == 1){ // 検索結果が一つだけの時
+        //   $search = $tmp_searchs[0];
+        // }else{ // 検索結果が複数ある時
           foreach($tmp_searchs as $ts){
             $vague_searchs[] = $ts;
           }
-        }
+        // }
       }else{ // 検索結果が存在しない時
         $no_result = 'no_result';
       }
