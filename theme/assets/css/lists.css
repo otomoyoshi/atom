@@ -169,7 +169,6 @@ input #h3 {
 .vargues_position{
 	text-align: center;
 
-
 }
 
 
@@ -203,7 +202,12 @@ input #h3 {
   color: #17bcdf;
 }
 
-
+.text_overflow{
+	width: 100%;
+}
+.hide_str{
+	
+}
 .padding {
 	margin-top: 30px; 
 }

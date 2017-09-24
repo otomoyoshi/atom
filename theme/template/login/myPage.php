@@ -2,7 +2,12 @@
 session_start();
 require('../../../developer/dbconnect.php');
 
-// var_dump($_SESSION['user_info']);
+//ログインチェック
+if (!isset($_SESSION['login_user']['id'])) {
+    header('Location: ../un_login/sign_in.php');
+    exit();
+}
+
 
 if(!empty($_POST)){
   // echo "post" . '<br>';
@@ -108,7 +113,7 @@ while(1){
                   <?php if(isset($_SESSION['login_user']['profile_image_path'])): ?>
                     <img class="media-object dp img-circle" src="../../../profile_image_path/<?php echo $_SESSION['login_user']['profile_image_path']; ?>" style="width: 80px;height:80px;">
                   <?php else: ?>
-                    <img class="media-object dp img-circle" src="../../../profile_image_path/masaki.png" style="width: 80px;height:80px;">
+                    <img class="media-object dp img-circle" src="../../assets/img/user_circle.png" style="width: 80px;height:80px;">
                   <?php endif; ?>
                   </a>
                   <div class="media-body">

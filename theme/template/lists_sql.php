@@ -8,6 +8,10 @@
   $list_name = '';
   $vargues = array();
   $check_confirm = array();
+  $item_both = '';
+  $item_azukeire = '';
+  $item_carry_in = '';
+
   //$banned_baggage = '';
   // $_GET['id'] = '3'; //リストid
   
@@ -138,7 +142,7 @@
           if (isset($_POST['che'])) {
               $c = count($_POST['che']);
               $check_items = $_POST['che'];
-              var_dump($check_items);
+              // var_dump($check_items);
           // $sql= 'UPDATE `atom_items`(`item_check`) VALUES';
               for ($i=0; $i < $c ; $i++) { 
                   // $data = '(' . 1 . ')';
@@ -159,12 +163,19 @@
 
     //検索ボタンが押された時
   if (!empty($_POST['list_search']) && $_POST['list_search'] != ''){
+      //検索収集用テーブルに登録
+      $sql= 'INSERT INTO `atom_searched_words` SET `word` = ?,
+                                      `created` = NOW()';
+      $data = array($_POST['list_search']);
+      $stmt = $dbh->prepare($sql);
+      $stmt ->execute($data);
+
       $sql = 'SELECT * FROM `atom_searchs` WHERE `word`= ?';
       $data = array($_POST['list_search']);
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
       $search = $stmt->fetch(PDO::FETCH_ASSOC); //判定結果を取得
-      var_dump($search);
+      // var_dump($search);
 
       $sql = 'SELECT * FROM `atom_searchs` WHERE `word` LIKE ?';
       $data = array('%' . $_POST['list_search'] . '%');
@@ -200,24 +211,19 @@
       // var_dump($search) .'<br>';
       // var_dump($_POST['list_search']) . '<br>';
       if ($search['word'] == $_POST['list_search']) {
-
         // アイテムに追加
           $sql= 'INSERT INTO `atom_items` SET `categories_id` =?,
                                               `content` = ?,
-                                              `lists_id` = ?';
-          $data = array($search['baggage_classify'], $_POST['list_search'], $_GET['id']);
+                                              `lists_id` = ?,
+                                              `condition_azukeire` =?,
+                                              `condition_carry_in` = ?';
+          $data = array($search['baggage_classify'], $_POST['list_search'], $_GET['id'], $search['condition_azukeire'], 
+          $search['condition_carry_in']);
           $stmt = $dbh->prepare($sql);
           $stmt ->execute($data);
-
+          header('Location: lists.php?id='. $_GET['id']);
+          exit();
       }
-
-
-      //検索収集用テーブルに登録
-      $sql= 'INSERT INTO `atom_searched_words` SET `word` = ?,
-                                      `created` = NOW()';
-      $data = array($_POST['list_search']);
-      $stmt = $dbh->prepare($sql);
-      $stmt ->execute($data);
   }
 
   //曖昧アイテムたちが押された時の処理を書いて行く
@@ -231,10 +237,14 @@
 
       $sql= 'INSERT INTO `atom_items` SET `categories_id` =?,
                                           `content` = ?,
-                                          `lists_id` = ?';
-      $data = array($vargues['baggage_classify'], $_POST['vague_search_result'], $_GET['id']);
+                                          `lists_id` = ?,
+                                          `condition_azukeire` =?,
+                                          `condition_carry_in` = ?';
+      $data = array($vargues['baggage_classify'], $_POST['vague_search_result'], $_GET['id'], $vargues['condition_azukeire'],$vargues['condition_carry_in']);
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
+      header('Location: lists.php?id='. $_GET['id']);
+      exit();
     }
   }
 
@@ -248,7 +258,7 @@
         if (isset($_POST['che'])) {
           $c = count($_POST['che']);
           $check_items = $_POST['che'];
-          var_dump($check_items);
+          // var_dump($check_items);
           
           // $sql= 'UPDATE `atom_items`(`item_check`) VALUES';
 
@@ -300,27 +310,33 @@
     $sql= 'INSERT INTO `atom_items` SET `categories_id` =0,
                                     `content` = ?,
                                     `lists_id` = ?';
-    $data = array($_POST['undefined_to_lists'], $_GET['id']);
+    $data = array(htmlspecialchars($_POST['undefined_to_lists']), $_GET['id']);
     $stmt = $dbh->prepare($sql);
     $stmt ->execute($data);
+    header('Location: lists.php?id='. $_GET['id']);
+    exit();
   }
   // 持ち込みに追加する場合
   if (!empty($_POST['move_carry_in'])) {
     $sql= 'INSERT INTO `atom_items` SET `categories_id` =1,
                                     `content` = ?,
                                     `lists_id` = ?';
-    $data = array($_POST['undefined_to_lists'], $_GET['id']);
+    $data = array(htmlspecialchars($_POST['undefined_to_lists']), $_GET['id']);
     $stmt = $dbh->prepare($sql);
     $stmt ->execute($data);
+    header('Location: lists.php?id='. $_GET['id']);
+    exit();
   }
   // 預け入れに追加する場合
   if (!empty($_POST['move_azukeire'])) {
     $sql= 'INSERT INTO `atom_items` SET `categories_id` =2,
                                     `content` = ?,
                                     `lists_id` = ?';
-    $data = array($_POST['undefined_to_lists'], $_GET['id']);
+    $data = array(htmlspecialchars($_POST['undefined_to_lists']), $_GET['id']);
     $stmt = $dbh->prepare($sql);
     $stmt ->execute($data);
+    header('Location: lists.php?id='. $_GET['id']);
+    exit();
   }
   // itemのデータを全て取得
   $sql = 'SELECT * FROM `atom_items` WHERE `lists_id` = ?';

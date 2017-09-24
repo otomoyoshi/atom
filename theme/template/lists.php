@@ -25,17 +25,17 @@
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
 
   <?php
-    // // $ini = parse_ini_file("config.ini");
-    // // $is_login = $ini['is_login'];
-    // // $is_login = 0; //ログインしてるときを１とする（仮）
-    // if (isset($_SESSION['login_user'])){ //ログインしてるとき
-    //   // echo "login success";
-    //   require('login_header.php');
+    // $ini = parse_ini_file("config.ini");
+    // $is_login = $ini['is_login'];
+    // $is_login = 0; //ログインしてるときを１とする（仮）
+    if (isset($_SESSION['login_user'])){ //ログインしてるとき
+      // echo "login success";
+      require('login_header.php');
 
-    // } else {// ログインしてないとき
-    //   // echo "login fail";
-    //   require('header.php');
-    // }
+    } else {// ログインしてないとき
+      // echo "login fail";
+      require('header.php');
+    }
   ?>
 
 <!-- 画像変更popup -->
@@ -156,14 +156,14 @@
               </div>
             </div>
           </div>
-            <?php } ?>
+        <?php } ?>
 
             <?php
             if (isset($_POST['vague_search_result'])) {
               if (isset($vargues['baggage_classify'])) {
                 if ($vargues['baggage_classify'] == '3') { ?>
                 <div class="alert alert-danger text_position">
-                  <?php echo '"'.$_POST['vague_search_result'].'"'; ?><span class="banned_explanation">は持ち込み・預け入れ共に不可です。</span>
+                  <?php echo '"'.htmlspecialchars($_POST['vague_search_result']).'"'; ?><span class="banned_explanation">は持ち込み・預け入れ共に不可です。</span>
                 </div>
             <?php }}} ?>
             <?php
@@ -171,7 +171,7 @@
               if (isset($search['baggage_classify'])) {
                 if ($search['baggage_classify'] == '3') { ?>
                 <div class="alert alert-danger text_position">
-                  <?php echo '"'.($_POST['list_search']).'"' ?><span class="banned_explanation">は持ち込み・預け入れ共に不可です。</span>
+                  <?php echo '"'.(htmlspecialchars($_POST['list_search'])).'"' ?><span class="banned_explanation">は持ち込み・預け入れ共に不可です。</span>
                 </div>
             <?php }}} ?>
 
@@ -179,9 +179,7 @@
           <div class="both_contents well col-lg-4">
 
             <!-- <output class="output"> -->
-              <a data-remodal-target="modal-condition">
-                <i class="modal_triger">hehe</i>
-              </a>
+
             <!-- </output> -->
 
             <!-- BOTHの欄を作る -->
@@ -213,6 +211,7 @@
                         <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_both['id'];?>">
                           <i class="fa fa-trash right_position"></i>
                         </a>
+<!-- <<<<<<< HEAD -->
                     <!-- 編集ボタン -->
 
                         <!-- 条件表示 -->
@@ -223,6 +222,15 @@
                          <i class="fa fa-handshake-o right edit" value="<?php echo $item_both['id'];?>"></i>
                         </a>
 
+<!-- ======= -->
+                        <?php if (isset($item_both['condition_azukeire']) || isset($item_both['condition_carry_in'])) { ?>
+                          <?php if ($item_both['condition_azukeire'] != '' || $item_both['condition_carry_in'] != '') { ?> 
+                            <a>
+                              <i class="fa fa-exclamation-triangle right_position"></i>
+                            </a>
+                          <?php } ?>
+                        <?php } ?>
+<!-- >>>>>>> 9403b97ed49f3e41c67f1250eac8665df68984bb -->
                     </li>
                   </label>
                 <?php }?>
@@ -249,8 +257,7 @@
                         <input type="hidden" name="check_judge" value="checked">
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_carry_in['id']?>">
                         <span class="checkbox-icon"></span>
-                      <?php } ?>                      <span class="checkbox-icon"></span>
-
+                      <?php } ?>
                       <span class="text_overflow">
                       <?php  echo htmlspecialchars($item_carry_in['content']); ?>
                       <?php  //echo $item_carry_in['content'] ?>
@@ -258,11 +265,13 @@
                       <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_carry_in['id'];?>">
                         <i class="fa fa-trash right_position"></i>
                       </a>
-           <!--       編集ボタン
-                      <span>
-                       <i class="fa fa-pencil-square-o right"></i>
-                      </span> -->
-                      <?php  ?>
+                      <?php if (isset($item_carry_in['condition_azukeire']) || isset($item_carry_in['condition_carry_in'])) { ?>
+                        <?php if ($item_carry_in['condition_azukeire'] != '' || $item_carry_in['condition_carry_in'] != ''){ ?> 
+                          <a>
+                            <i class="fa fa-exclamation-triangle right_position"></i>
+                          </a>
+                        <?php } ?>
+                      <?php } ?>
                     </li>
                   </label>
                 <?php  } ?>
@@ -290,23 +299,37 @@
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_azukeire['id']?>">
                         <span class="checkbox-icon"></span>
                       <?php } ?>
-                      <span class="checkbox-icon"></span>
-                      <!-- <span class="list_content"> -->
+<!-- <<<<<<< HEAD
+
                         <span class="text_overflow">
                         <?php echo htmlspecialchars($item_azukeire['content']); ?>
                         <?php //echo $item_azukeire['content']; ?>
                           </span>
-                        <!-- </span> -->
+
                         <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
                           <i class="fa fa-trash right_position"></i>
                         </a>
 
-                        <!-- 編集ボタン -->
+
                         <span>
                          <i class="fa fa-pencil-square-o right" value="1"></i>
                         </span>
 
                       <?php  ?>
+======= -->
+                      <span class="text_overflow"><?php echo htmlspecialchars($item_azukeire['content']); ?></span>
+                      <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
+                        <i class="fa fa-trash right_position"></i>
+                      </a>
+                      <?php if (isset($item_azukeire['condition_azukeire']) || isset($item_azukeire['condition_carry_in'])){ ?>
+                        <?php if ($item_azukeire['condition_azukeire'] != '' || $item_azukeire['condition_carry_in'] != ''){ ?> 
+                          <a>
+                            <i class="fa fa-exclamation-triangle right_position"></i>
+                          </a>
+                        <?php } ?>
+                      <?php } ?>
+
+<!-- >>>>>>> 9403b97ed49f3e41c67f1250eac8665df68984bb -->
                     </li>
                 </label>
               <?php } ?>
@@ -587,29 +610,31 @@
       }
   </script>
 
+
   <!-- more -->
   <script type="text/javascript">
-    $(function() {
-    var count = 20;
-    // console.log('more_start');
-    $('.text_overflow').each(function() {
-      var thisText = $(this).text().replace(/\s+/g, '');
-      // console.log(thisText);
-      var textLength = thisText.length;
-      console.log('textLength: %s' , textLength);
-      if (textLength > count) {
-        var showText = thisText.substring(0, count);
-        var hideText = thisText.substring(count, textLength);
-        var insertText = showText;
-        console.log('hideText: %s' , hideText);
-        insertText += '<span class="hide_str">' + hideText + '</span>';
-        insertText += '<span class="omit span_color">…</span>';
-        insertText += '<span class="more span_color">more</span>';
-        insertText += '<span class="close_str span_color">close</span>';
+  $(function() {
+  var count = 10;
+  // console.log('more_start');
+  $('.text_overflow').each(function() {
+    var thisText = $(this).text().replace(/\s+/g, '');
+    // console.log(thisText);
+    var textLength = thisText.length;
+    console.log('textLength: %s' , textLength);
+    if (textLength > count) {
+      var showText = thisText.substring(0, count);
+      var hideText = thisText.substring(count, textLength);
+      var insertText = showText;
+      console.log('hideText: %s' , hideText);
+      insertText += '<span class="hide_str">' + hideText + '</span>';
+      insertText += '<span class="omit span_color">…</span>';
+      insertText += '<span class="more span_color">more</span>';
+      insertText += '<span class="close_str span_color">close</span>';
 
-        $(this).html(insertText);
-      };
-    });
+      $(this).html(insertText);
+    };
+  });
+// >>>>>>> 9403b97ed49f3e41c67f1250eac8665df68984bb
 
 
     $('.text_overflow .hide_str').hide();
@@ -642,28 +667,3 @@
   </script>
 </body>
 </html>
-
-
-<?php
-// // 条件用
-
-      // INSERT INTO `searchs` SET `word` = 'まさきっき',
-      //                           `condition` = 'ほげ',
-      //                           `baggage_classify` = 2, // 1:両方 2:機内 3:預け 4:不可
-      //                           `aviation_id` = 1,
-      //                           `categoryies_l2_id` =3, 
-      //                           `created` = NOW()
-      //                           // aviation_id  categoryies_l2_id 
-
-// listsにデータを挿入するためのsql
-// INSERT INTO `lists`(`members_id`, `name`, `created`) VALUES (1,"a",NOW())
-
-      // INSERT INTO `atom_searchs` SET `word` = 'くり',
-      //                           `condition` = 'ほげ',
-      //                           `baggage_classify` = 2, // 1:両方 2:機内 3:預け 4:不可
-      //                           `aviation_id` = 1,
-      //                           `categories_l2_id` =3, 
-      //                           `created` = NOW()
-                                // aviation_id  categories_l2_id 
- ?>
-
