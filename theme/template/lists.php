@@ -201,16 +201,15 @@
 
 
           <!-- <div class="both_contents well col-lg-4 box27"> -->
-          <div class="col-lg-4" id="box1">
+          <div class="col-lg-4 " id="box1">
 
             <!-- BOTHの欄を作る -->
             <!-- <strong class = "both_contents_border"> -->
             <div class="sub_title box-title">
               持ち込み・預け入れ
             </div>
-            <!-- </strong> -->
             <div>
-              <ul class="list-group" id="list_both">
+              <ul class="list-group responsive_position" id="list_both">
                 <?php foreach ($item_boths as $item_both) { ?>
                   <label class="width">
                     <li class="list-group-item list_float" id="<?php echo $item_both['id'];?>">
@@ -261,12 +260,12 @@
           <!-- 持ち込みの欄を作る -->
           <div class="col-lg-4" id="box2">
             <!-- <strong> -->
-              <span class="sub_title box-title">
+              <div class="sub_title box-title for_responsive">
                 持ち込み
-              </span>
+              </div>
             <!-- </strong> -->
             <div>
-              <ul class="list-group" id="list_carry">
+              <ul class="list-group responsive_position" id="list_carry">
                 <?php foreach ($item_carry_ins as $item_carry_in){ ?>
                   <label class="width">
                     <li class="list-group-item list_float">
@@ -301,18 +300,18 @@
           </div>
 
           <div class="col-lg-4" id="box3">
-            <!-- 持ち込みの欄を作る -->
+            <!-- 持ち込みの欄を作る  -->
             <!-- <strong> -->
-              <span class="box-title">
+              <div class="box-title for_responsive">
                 預け入れ
 <!-- <<<<<<< HEAD -->
        <!--        </p>
             </strong>
             <ul class="list-group" id="list_azukeire"> -->
 <!-- ======= -->
-              </span>
+              </div>
             <!-- </strong> -->
-            <ul class="list-group">
+            <ul class="list-group responsive_position">
 <!-- >>>>>>> c2d455c2b0c2e9e14b7775b808965b20dae7368c -->
               <?php foreach ($item_azukeires as $item_azukeire) { ?>
                 <label class="width">

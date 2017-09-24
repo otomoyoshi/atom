@@ -11,6 +11,12 @@
 	margin-top: 20px;
 }
 /* remodal css */
+.list_border_top{
+	border-top: 2.5px solid #0000B5;
+	width: 100%;
+	margin-bottom: 5px;
+}
+
 
 .remodal_atom {
   font: inherit;
