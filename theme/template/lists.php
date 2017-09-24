@@ -50,18 +50,6 @@
       </form>
 </div>
 
-<!--   <div id="condition">
-    <div class="remodal" data-remodal-id="modal-condition" data-remodal-options="hashTracking:false">
-      <button data-remodal-action="close" class="remodal-close"></button>
-
-    <h2>機内持ち込み条件</h2>
-          <span>長さ15cm以下のものは持込可能</span>
-        <hr>
-    <h2>お預け条件</h2>
-          <span></span>
-    </div>
-</div> -->
-
   <!-- 条件表示 pop-->
 <div class="remodal" data-remodal-id="modal-condition" data-remodal-options="hashTracking:false">
  <button data-remodal-action="close" class="remodal-close"></button>
@@ -71,15 +59,15 @@
 </div>
 
 <!-- リスト移動popup -->
-<!-- <div class="remodal" data-remodal-id="modal_edit" data-remodal-options="hashTracking:false">
+<div class="remodal" data-remodal-id="modal_edit" data-remodal-options="hashTracking:false">
     <button data-remodal-action="close" class="remodal-close"></button>
       <h1>リスト移動</h1>
       <p>どのカテゴリーに移動させますか？</p>
 
-      <button data-remodal-action="confirm" class="remodal_atom item_id" onclick="show_both()">持ち込み・預け入れ</button>
-      <button data-remodal-action="confirm" class="remodal_atom item_id" onclick="show_carry()">持ち込み</button>
-      <Button type="button" data-remodal-action="confirm" class="remodal_atom item_id" onclick="show_deposit()">預け入れ</Button>
-</div> -->
+      <button id="1" data-remodal-action="confirm" class="remodal_atom item_id" onclick="show_both()">持ち込み・預け入れ</button>
+      <button id="2" data-remodal-action="confirm" class="remodal_atom item_id" onclick="show_both()">持ち込み</button>
+      <Button id="3" type="button" data-remodal-action="confirm" class="remodal_atom item_id" onclick="show_both()">預け入れ</Button>
+</div>
 
 
  <div id="img">
@@ -112,12 +100,12 @@
                 <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
               </a>
 
-            <!-- 画像がデータベースに登録されてないとき -->
-            <?php } else {?>
-              <img src="../assets/img/insert_image.png" class="img-circle" style="height: 120px; width: 120px">
+              <!-- 画像がデータベースに登録されてないとき -->
+              <?php } else {?>
+                <img src="../assets/img/insert_image.png" class="img-circle" style="height: 120px; width: 120px">
 
-            </a>
-            <?php } ?>
+              </a>
+              <?php } ?>
 
             </label>
           </div>
@@ -203,17 +191,17 @@
               </p>
             </strong>
             <div>
-              <ul class="list-group" id="list_design">
+              <ul class="list-group" id="list_both">
                 <?php foreach ($item_boths as $item_both) { ?>
                   <label class="width">
-                    <li class="list-group-item list_float">
+                    <li class="list-group-item list_float" id="<?php echo $item_both['id'];?>">
                       <?php if ($item_both['item_check'] == 1) { ?>
                         <input type="hidden" name="check_judge" value="checked" checked>
-                        <input type="checkbox" name="che[]" class="left checkbox laggage_both" value="<?php echo $item_both['id']?>" checked>
+                        <input type="checkbox" name="che[]" class="left checkbox laggage_both" value="<?php echo $item_both['id'];?>" checked>
                         <span class="checkbox-icon"></span>
                       <?php } else { ?>
                         <input type="hidden" name="check_judge" value="checked">
-                        <input type="checkbox" name="che[]" class="left checkbox laggage_both" value="<?php echo $item_both['id']?>">
+                        <input type="checkbox" name="che[]" class="left checkbox laggage_both" value="<?php echo $item_both['id'];?>">
                         <span class="checkbox-icon"></span>
                       <?php } ?>
                       <span class="text_overflow">
@@ -227,10 +215,13 @@
                         </a>
                     <!-- 編集ボタン -->
 
-                        <!-- リスト移動 -->
-                        <!-- <a data-remodal-target="modal_edit" class="edit"> -->
-                         <i class="fa fa-pencil-square-o right edit" value="<?php echo $item_both['id'];?>"></i>
-                        <!-- </a> -->
+                        <!-- 条件表示 -->
+                         <i class="fa fa-pencil-square-o right con" value="<?php echo $item_both['id'];?>"></i>
+
+                        <!-- リスト移動で必要なitemのidを -->
+                        <a data-remodal-target="modal_edit" class="edit">
+                         <i class="fa fa-handshake-o right edit" value="<?php echo $item_both['id'];?>"></i>
+                        </a>
 
                     </li>
                   </label>
@@ -246,7 +237,7 @@
               </p>
             </strong>
             <div>
-              <ul class="list-group">
+              <ul class="list-group" id="list_carry">
                 <?php foreach ($item_carry_ins as $item_carry_in){ ?>
                   <label class="width">
                     <li class="list-group-item list_float">
@@ -286,7 +277,7 @@
                 預け入れ
               </p>
             </strong>
-            <ul class="list-group">
+            <ul class="list-group" id="list_azukeire">
               <?php foreach ($item_azukeires as $item_azukeire) { ?>
                 <label class="width">
                     <li class="list-group-item list_float">
@@ -365,8 +356,8 @@
 
 <!-- 条件表示 -->
 <script type="text/javascript">
-  var item_id = '';
-  $('.edit').on('click', function(){
+  // var item_id = '';
+  $('.con').on('click', function(){
     var item_id = $(this).attr('value');
     // var edit = $(this).attr('value');
     // var item_id =  $('.item_id').attr('value', edit);
@@ -416,75 +407,68 @@
   // }
 </script>
 
-<!-- リスト移動 -->
-<!-- <script type="text/javascript">
-  var item_id = '';
-  $('.edit').on('click', function(){
+<!-- 移動後を表示 -->
+<script type="text/javascript">
+  $('.item_id').on('click', function(){
+    var category_id = $(this).attr('id');
     var item_id = $(this).attr('value');
-    // var edit = $(this).attr('value');
-    // var item_id =  $('.item_id').attr('value', edit);
+    var remove_id = '#'+item_id;
+    $(remove_id).remove();
+    alert(remove_id);
+    alert(category_id);
     alert(item_id);
 
-    // POSTでアップロード
+    // 移動する先のリストを指定
+    switch(category_id){
+      case '1':
+        var add_list = '#list_both';
+        break;
+      case '2':
+        var add_list = '#list_carry';
+        break;
+      case '3':
+        var add_list = '#list_azukeire';
+        break;
+      default:
+        alert('fault');
+    }
+
+ // POSTでアップロード
     $.ajax({
         url : "http://localhost/atom/theme/template/get_both.php",
         type : "POST",
-        data : {'id' : item_id},
+        data : {'item_id' : item_id,'category_id' : category_id},
     })
     .done(function(data, textStatus, jqXHR){
         alert(data);
         var imgArea = $('<div/>').append($.parseHTML(data)).find('#condition');
+        $(add_list).append(imgArea);
         // alert(imgArea);
-        $(".output").html(imgArea);
-        $(".modal_triger").click();
+        // $(".output").html(imgArea);
+        // $(".modal_triger").click();
         // $(".output").html(imgArea);
     })
     .fail(function(jqXHR, textStatus, errorThrown){
         alert("fail");
     });
+
+  });
+</script>
+
+<!-- リスト移動 持ち込み・預け入れ -->
+<script type="text/javascript">
+  // var item_id = '';
+  $('.edit').on('click', function(){
+    var edit = $(this).attr('value');
+    $('.item_id').attr('value', edit);
+    // alert(edit);
   });
 
-  // function show_both()
-  // {
-  //     var item_id = $('.item_id').attr('value');
-  //     console.log('show_both');
-  //     alert(item_id);
+</script>
 
-  //     // POSTでアップロード
-  //     $.ajax({
-  //         url : "http://localhost/atom/theme/template/get_both.php",
-  //         type : "POST",
-  //         data : {'id' : item_id},
-  //     })
-  //     .done(function(data, textStatus, jqXHR){
-  //         alert(data);
-  //         var imgArea = $('<div/>').append($.parseHTML(data)).find('#condition');
-  //         // $("#list_img").html(imgArea);
-  //         // $(".output").html(imgArea);
-  //         $('.edit').click();
-  //     })
-  //     .fail(function(jqXHR, textStatus, errorThrown){
-  //         alert("fail");
-  //     });
-  // }
-</script> -->
-
-  <!-- リスト移動 持ち込み・預け入れ -->
-  <script type="text/javascript">
-    function show_both()
-      {
-        var item_id =  $('#item_id').;
-        alert(item_id);
-
-        console.log('show_both');
-        console.log(item_id);
-
-
-      }
-  </script>
 
  <!-- リスト移動 持ち込み -->
-  <script type="text/javascript">
+<!--   <script type="text/javascript">
     function show_carry()
       {
           // GETでid取得
@@ -518,10 +502,10 @@
               alert("fail");
           });
       }
-  </script>
+  </script> -->
 
  <!-- リスト移動 預け入れ -->
-  <script type="text/javascript">
+<!--   <script type="text/javascript">
     function show_deposit()
       {
 
@@ -557,7 +541,7 @@
               alert("fail");
           });
       }
-  </script>
+  </script> -->
 
   <!-- 画像変更 -->
   <script type="text/javascript">
