@@ -299,6 +299,9 @@ li {
   text-align: center;
   border: solid 0.5px #cccccc;
 }
+  .top_images{
+    height: 550px;
+  }
 
 }
 
@@ -416,6 +419,9 @@ li {
   .responsive_position{
     margin-bottom: 30px;
   }
+  .top_images{
+  height: 400px;
+}
 
 }
 
@@ -533,6 +539,9 @@ li {
     margin-bottom: 30px;
   }
 
+.top_images{
+  height: 300px;
+}
 
 
 }
@@ -652,8 +661,9 @@ li {
   .responsive_position{
     margin-bottom: 30px;
   }
-
-
+  .top_images{
+    height: 250px;
+  }
 
 }
 
@@ -755,6 +765,10 @@ li {
   .responsive_position{
     margin-bottom: 30px;
   }
+  .top_images{
+    height: 200px;
+  }
+
 }
 
 .tabinimotsu_main_div{
