@@ -430,7 +430,7 @@ if (!empty($_POST['user_lists_id'])) {
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <h2 id ="catch_copy">「荷造りの悩み」ここに置いて行きませんか？</h2>
-         
+
             <form method="GET" action="">
               <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <!-- <label for="sel1"></label> -->

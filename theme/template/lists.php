@@ -52,7 +52,7 @@
 <div class="remodal" data-remodal-id="modal-condition" data-remodal-options="hashTracking:false">
  <button data-remodal-action="close" class="remodal-close"></button>
    <div class="output">
-    
+
   </div>
 
 </div>
@@ -83,19 +83,19 @@
               </div>
             <?php } ?>
 
-            <div id="output"></div>
+            <!-- <div id="output"></div> -->
             <label>
 
 
               <a id="list_img" data-remodal-target="modal">
-              <!-- 画像がデータベースに登録されているとき -->
-              <?php if ($is_image['list_image_path'] != NULL) { ?>
-                <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
+                <!-- 画像がデータベースに登録されているとき -->
+                <?php if ($is_image['list_image_path'] != NULL) { ?>
+                  <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
               </a>
             <!-- 画像がデータベースに登録されてないとき -->
             <?php } else {?>
 
-              <img id="list_img" data-remodal-target="modal"　src="../../list_image_path/20170910191855dog_.png" class="img-circle list_name_location" style="height: 120px; width: 120px">
+              <img id="list_img" data-remodal-target="modal" src="../assets/img/user_circle.png" class="img-circle list_name_location" style="height: 120px; width: 120px">
 
 
               </a>
@@ -476,7 +476,7 @@
 
           // POSTでアップロード
           $.ajax({
-              url  : "http://localhost/atom/theme/template/get_image.php",
+              url  : "http://localhost/atom_newdesign_v1/theme/template/get_image.php",
               type : "POST",
               data : formdata,
               cache       : false,
