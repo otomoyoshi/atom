@@ -126,9 +126,9 @@
 }
 
 #box1 .box-title{
-	position: absolute;
+	position: relative;
     display: inline-block;
-    top: -27px;
+    /*top: -27px;*/
     /*left: -3px;*/
     padding: 0 9px;
     height: 25px;
@@ -142,9 +142,9 @@
 }
 
 #box2 .box-title{
-	position: absolute;
+	position: relative;
     display: inline-block;
-    top: -27px;
+    /*top: -27px;*/
     /*left: -3px;*/
     padding: 0 9px;
     height: 25px;
@@ -158,9 +158,9 @@
 }
 
 #box3 .box-title{
-	position: absolute;
+	position: relative;
     display: inline-block;
-    top: -27px;
+    /*top: -27px;*/
     /*left: -3px;*/
     padding: 0 9px;
     height: 25px;

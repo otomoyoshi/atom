@@ -10,6 +10,10 @@ body {
   /*color: #fff;*/
 }
 
+.pos_adjust{
+  padding-left: 0px;
+}
+
 .box_bottom{
     padding-bottom: 15px;
   }
@@ -21,7 +25,7 @@ body {
 }
 
 .ul_adjust{
-  padding-left: 30px;
+  padding-left: 0px;
 }
 
 .home_to_list_btn{

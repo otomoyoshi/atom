@@ -443,11 +443,11 @@
   $('.edit').on('click', function(){
     var edit = $(this).attr('value');
     $('.item_id').attr('value', edit);
-    // var isChecked = "'#"+edit+"_l'";
+    var isChecked = "#"+edit+"_l";
     // alert(isChecked);
-    // var area_val = $(isChecked).is(':checked');
+    var area_val = $(isChecked).is(':checked');
     // alert(edit);
-    // alert(area_val);
+    alert(area_val);
   });
 
 </script>
