@@ -11,13 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-
     <title>旅にもつ</title>
     <?php require('load_css.php'); ?>
-    <!-- <link rel="stylesheet" type="text/css" href="../../assets/css/lists.css"> -->
     <link rel="stylesheet" type="text/css" href="../assets/css/lists.css">
 
 
@@ -67,9 +63,9 @@
       <h1>リスト移動</h1>
       <p>どのカテゴリーに移動させますか？</p>
 
-      <button id="1" data-remodal-action="confirm" class="remodal_atom item_id" onclick="show_both()">持ち込み・預け入れ</button>
-      <button id="2" data-remodal-action="confirm" class="remodal_atom item_id" onclick="show_both()">持ち込み</button>
-      <Button id="3" type="button" data-remodal-action="confirm" class="remodal_atom item_id" onclick="show_both()">預け入れ</Button>
+      <button id="0" data-remodal-action="confirm" class="remodal_atom item_id"">持ち込み・預け入れ</button>
+      <button id="1" data-remodal-action="confirm" class="remodal_atom item_id"">持ち込み</button>
+      <Button id="2" type="button" data-remodal-action="confirm" class="remodal_atom item_id">預け入れ</Button>
 </div>
 
 
@@ -193,18 +189,9 @@
 
         <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
 
-          <!-- <div class="both_contents well col-lg-4"> -->
-
-            <!-- <output class="output"> -->
-
-            <!-- </output> -->
-
-
-          <!-- <div class="both_contents well col-lg-4 box27"> -->
           <div class="col-lg-4 col-md-4" id="box1">
 
             <!-- BOTHの欄を作る -->
-            <!-- <strong class = "both_contents_border"> -->
             <div class="sub_title box-title">
               持ち込み・預け入れ
             </div>
@@ -214,11 +201,11 @@
                   <label class="width">
                     <li class="list-group-item list_float" id="<?php echo $item_both['id'];?>">
                       <?php if ($item_both['item_check'] == 1) { ?>
-                        <input type="hidden" name="check_judge" value="checked" checked>
+                        <input id="<?php echo $item_both['id'];?>_l" type="hidden" name="check_judge" value="checked" checked>
                         <input type="checkbox" name="che[]" class="left checkbox laggage_both" value="<?php echo $item_both['id'];?>" checked>
                         <span class="checkbox-icon"></span>
                       <?php } else { ?>
-                        <input type="hidden" name="check_judge" value="checked">
+                        <input id="<?php echo $item_both['id'];?>_l" type="hidden" name="check_judge" value="checked">
                         <input type="checkbox" name="che[]" class="left checkbox laggage_both" value="<?php echo $item_both['id'];?>">
                         <span class="checkbox-icon"></span>
                       <?php } ?>
@@ -231,26 +218,27 @@
                         <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_both['id'];?>">
                           <i class="fa fa-trash right_position"></i>
                         </a>
-<!-- <<<<<<< HEAD -->
-                    <!-- 編集ボタン -->
+
 
                         <!-- 条件表示 -->
-                         <i class="fa fa-pencil-square-o right con" value="<?php echo $item_both['id'];?>"></i>
+                           <!-- <i class="fa fa-pencil-square-o right con" value="<?php //echo $item_both['id'];?>"></i> -->
+                           <a data-remodal-target="modal-condition" class="show_condition">
+                           </a>
 
                         <!-- リスト移動で必要なitemのidを -->
                         <a data-remodal-target="modal_edit" class="edit">
                          <i class="fa fa-handshake-o right edit" value="<?php echo $item_both['id'];?>"></i>
                         </a>
 
-<!-- ======= -->
                         <?php if (isset($item_both['condition_azukeire']) || isset($item_both['condition_carry_in'])) { ?>
                           <?php if ($item_both['condition_azukeire'] != '' || $item_both['condition_carry_in'] != '') { ?> 
                             <a>
-                              <i class="fa fa-exclamation-triangle right_position"></i>
+                              <!-- 条件マーク表示 -->
+                              <i class="fa fa-exclamation-triangle right_position con" value="<?php echo $item_both['id'];?>"></i>
                             </a>
                           <?php } ?>
                         <?php } ?>
-<!-- >>>>>>> 9403b97ed49f3e41c67f1250eac8665df68984bb -->
+
                     </li>
                   </label>
                 <?php }?>
@@ -268,13 +256,13 @@
               <ul class="list-group responsive_position" id="list_carry">
                 <?php foreach ($item_carry_ins as $item_carry_in){ ?>
                   <label class="width">
-                    <li class="list-group-item list_float">
+                    <li class="list-group-item list_float" id="<?php echo $item_carry_in['id'];?>">
                       <?php if ($item_carry_in['item_check'] == 1) { ?>
-                        <input type="hidden" name="check_judge" value="checked">
+                        <input id="<?php echo $item_both['id'];?>_l" type="hidden" name="check_judge" value="checked">
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_carry_in['id']?>" checked>
                         <span class="checkbox-icon"></span>
                       <?php } else { ?>
-                        <input type="hidden" name="check_judge" value="checked">
+                        <input id="<?php echo $item_both['id'];?>_l" type="hidden" name="check_judge" value="checked">
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_carry_in['id']?>">
                         <span class="checkbox-icon"></span>
                       <?php } ?>
@@ -285,6 +273,12 @@
                       <a href="delete_category.php?id=<?php echo $_GET['id']?>&item_id=<?php echo $item_carry_in['id'];?>">
                         <i class="fa fa-trash right_position"></i>
                       </a>
+
+                        <!-- リスト移動で必要なitemのidを -->
+                        <a data-remodal-target="modal_edit" class="edit">
+                         <i class="fa fa-handshake-o right edit" value="<?php echo $item_carry_in['id'];?>"></i>
+                        </a>
+
                       <?php if (isset($item_carry_in['condition_azukeire']) || isset($item_carry_in['condition_carry_in'])) { ?>
                         <?php if ($item_carry_in['condition_azukeire'] != '' || $item_carry_in['condition_carry_in'] != ''){ ?> 
                           <a>
@@ -301,27 +295,19 @@
 
           <div class="col-lg-4 col-md-4" id="box3">
             <!-- 持ち込みの欄を作る  -->
-            <!-- <strong> -->
               <div class="box-title for_responsive">
                 預け入れ
-<!-- <<<<<<< HEAD -->
-       <!--        </p>
-            </strong>
-            <ul class="list-group" id="list_azukeire"> -->
-<!-- ======= -->
               </div>
-            <!-- </strong> -->
-            <ul class="list-group responsive_position">
-<!-- >>>>>>> c2d455c2b0c2e9e14b7775b808965b20dae7368c -->
+            <ul class="list-group responsive_position" id="list_azukeire">
               <?php foreach ($item_azukeires as $item_azukeire) { ?>
                 <label class="width">
-                    <li class="list-group-item list_float">
+                    <li class="list-group-item list_float" id="<?php echo $item_azukeire['id'];?>">
                       <?php if ($item_azukeire['item_check'] == 1) { ?>
-                        <input type="hidden" name="check_judge" value="checked">
+                        <input id="<?php echo $item_both['id'];?>_l" type="hidden" name="check_judge" value="checked">
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_azukeire['id']?>" checked>
                         <span class="checkbox-icon"></span>
                       <?php } else { ?>
-                        <input type="hidden" name="check_judge" value="checked">
+                        <input id="<?php echo $item_both['id'];?>_l" type="hidden" name="check_judge" value="checked">
                         <input type="checkbox" name="che[]" class="left checkbox" value="<?php echo $item_azukeire['id']?>">
                         <span class="checkbox-icon"></span>
                       <?php } ?>
@@ -330,6 +316,11 @@
                       <a href="delete_category.php?id=<?php echo $_GET['id']; ?>&item_id=<?php echo $item_azukeire['id'];?>">
                         <i class="fa fa-trash right_position"></i>
                       </a>
+
+                      <a data-remodal-target="modal_edit" class="edit">
+                        <i class="fa fa-handshake-o right edit" value="<?php echo $item_azukeire['id'];?>"></i>
+                      </a>
+
                       <?php if (isset($item_azukeire['condition_azukeire']) || isset($item_azukeire['condition_carry_in'])){ ?>
                         <?php if ($item_azukeire['condition_azukeire'] != '' || $item_azukeire['condition_carry_in'] != ''){ ?> 
                           <a>
@@ -353,10 +344,6 @@
 
             </form>
         </div>
-<!-- <<<<<<< HEAD -->
-        <!-- <div> -->
-
-
 
       </div>
     </div>
@@ -372,12 +359,6 @@
     </script>
   <?php } ?>
   <script type="text/javascript" src="../assets/js/lists.js"></script>
-  
-<!--   <script>
-   $(window).on('beforeunload', function(e) {
-    return '保存されていない内容は破棄されます。 本当によろしいですか？ ';
-    });
-  </script> -->
 
 <!-- 条件表示 -->
 <script type="text/javascript">
@@ -390,7 +371,7 @@
 
     // POSTでアップロード
     $.ajax({
-        url : "http://localhost/atom/theme/template/get_condition.php",
+        url : "http://localhost/atom_newdesign_v1/theme/template/get_condition.php",
         type : "POST",
         data : {'id' : item_id},
     })
@@ -399,59 +380,36 @@
         var imgArea = $('<div/>').append($.parseHTML(data)).find('#condition');
         // alert(imgArea);
         $(".output").html(imgArea);
-        $(".modal_triger").click();
+        $(".show_condition").click();
         // $(".output").html(imgArea);
     })
     .fail(function(jqXHR, textStatus, errorThrown){
         alert("fail");
     });
   });
-
-  // function show_both()
-  // {
-  //     var item_id = $('.item_id').attr('value');
-  //     console.log('show_both');
-  //     alert(item_id);
-
-  //     // POSTでアップロード
-  //     $.ajax({
-  //         url : "http://localhost/atom/theme/template/get_both.php",
-  //         type : "POST",
-  //         data : {'id' : item_id},
-  //     })
-  //     .done(function(data, textStatus, jqXHR){
-  //         alert(data);
-  //         var imgArea = $('<div/>').append($.parseHTML(data)).find('#condition');
-  //         // $("#list_img").html(imgArea);
-  //         // $(".output").html(imgArea);
-  //         $('.edit').click();
-  //     })
-  //     .fail(function(jqXHR, textStatus, errorThrown){
-  //         alert("fail");
-  //     });
-  // }
 </script>
 
-<!-- 移動後を表示 -->
+<!-- リスト移動 表示 -->
 <script type="text/javascript">
   $('.item_id').on('click', function(){
     var category_id = $(this).attr('id');
     var item_id = $(this).attr('value');
     var remove_id = '#'+item_id;
     $(remove_id).remove();
+
     alert(remove_id);
     alert(category_id);
     alert(item_id);
 
     // 移動する先のリストを指定
     switch(category_id){
-      case '1':
+      case '0':
         var add_list = '#list_both';
         break;
-      case '2':
+      case '1':
         var add_list = '#list_carry';
         break;
-      case '3':
+      case '2':
         var add_list = '#list_azukeire';
         break;
       default:
@@ -460,7 +418,7 @@
 
  // POSTでアップロード
     $.ajax({
-        url : "http://localhost/atom/theme/template/get_both.php",
+        url : "http://localhost/atom_newdesign_v1/theme/template/get_both.php",
         type : "POST",
         data : {'item_id' : item_id,'category_id' : category_id},
     })
@@ -480,93 +438,20 @@
   });
 </script>
 
-<!-- リスト移動 持ち込み・預け入れ -->
+<!-- リスト移動 -->
 <script type="text/javascript">
   // var item_id = '';
   $('.edit').on('click', function(){
     var edit = $(this).attr('value');
     $('.item_id').attr('value', edit);
+    // var isChecked = "'#"+edit+"_l'";
+    // alert(isChecked);
+    // var area_val = $(isChecked).is(':checked');
     // alert(edit);
+    // alert(area_val);
   });
 
 </script>
-
-
- <!-- リスト移動 持ち込み -->
-<!--   <script type="text/javascript">
-    function show_carry()
-      {
-          // GETでid取得
-          var arg  = new Object;
-           url = location.search.substring(1).split('&');
-
-          for(i=0; url[i]; i++) {
-              var k = url[i].split('=');
-              arg[k[0]] = k[1];
-          }
-
-          var get_id = arg.id;
-          console.log('show_carry');
-          console.log(get_id);
-
-          // window.sessionStorage.setItem('lists_id',get_id);
-
-          // POSTでアップロード
-          $.ajax({
-              url  : "http://localhost/atom/theme/template/get_carry.php",
-              type : "POST",
-              data : {'id' : get_id},
-
-          })
-          .done(function(data, textStatus, jqXHR){
-              alert(data);
-              // var imgArea = $('<div/>').append($.parseHTML(data)).find('#list_img');
-              // $("#list_img").html(imgArea);
-          })
-          .fail(function(jqXHR, textStatus, errorThrown){
-              alert("fail");
-          });
-      }
-  </script> -->
-
- <!-- リスト移動 預け入れ -->
-<!--   <script type="text/javascript">
-    function show_deposit()
-      {
-
-          // GETでid取得
-          // var arg  = new Object;
-          //  url = location.search.substring(1).split('&');
-
-          // for(i=0; url[i]; i++) {
-          //     var k = url[i].split('=');
-          //     arg[k[0]] = k[1];
-          // }
-
-          // var get_id = arg.id;
-          console.log('show_deposit');
-          // console.log(get_id);
-          var item_id = $(this).attr("value");
-          console.log(item_id);
-
-          // window.sessionStorage.setItem('lists_id',get_id);
-
-          // POSTでアップロード
-          $.ajax({
-              url  : "http://localhost/atom/theme/template/get_deposit.php",
-              type : "POST",
-              data : {'id' : item_id},
-          })
-          .done(function(data, textStatus, jqXHR){
-              alert(data);
-              // var imgArea = $('<div/>').append($.parseHTML(data)).find('#list_img');
-              // $("#list_img").html(imgArea);
-          })
-          .fail(function(jqXHR, textStatus, errorThrown){
-              alert("fail");
-          });
-      }
-  </script> -->
 
   <!-- 画像変更 -->
   <script type="text/javascript">
@@ -615,28 +500,28 @@
 
   <!-- more -->
   <script type="text/javascript">
-  $(function() {
-  var count = 10;
-  // console.log('more_start');
-  $('.text_overflow').each(function() {
-    var thisText = $(this).text().replace(/\s+/g, '');
-    // console.log(thisText);
-    var textLength = thisText.length;
-    console.log('textLength: %s' , textLength);
-    if (textLength > count) {
-      var showText = thisText.substring(0, count);
-      var hideText = thisText.substring(count, textLength);
-      var insertText = showText;
-      console.log('hideText: %s' , hideText);
-      insertText += '<span class="hide_str">' + hideText + '</span>';
-      insertText += '<span class="omit span_color">…</span>';
-      insertText += '<span class="more span_color">more</span>';
-      insertText += '<span class="close_str span_color">close</span>';
+    $(function() {
+       var count = 10;
+      // console.log('more_start');
+        $('.text_overflow').each(function() {
+        var thisText = $(this).text().replace(/\s+/g, '');
+        // console.log(thisText);
+        var textLength = thisText.length;
+        console.log('textLength: %s' , textLength);
+        if (textLength > count) {
+          var showText = thisText.substring(0, count);
+          var hideText = thisText.substring(count, textLength);
+          var insertText = showText;
+          console.log('hideText: %s' , hideText);
+          insertText += '<span class="hide_str">' + hideText + '</span>';
+          insertText += '<span class="omit span_color">…</span>';
+          insertText += '<span class="more span_color">more</span>';
+          insertText += '<span class="close_str span_color">close</span>';
 
-      $(this).html(insertText);
-    };
-  });
-// >>>>>>> 9403b97ed49f3e41c67f1250eac8665df68984bb
+          $(this).html(insertText);
+        };
+      });
+
 
 
     $('.text_overflow .hide_str').hide();

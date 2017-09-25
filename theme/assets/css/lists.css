@@ -52,12 +52,6 @@
 
 
 
-#move_header{
-padding-top: 2px;
-padding-bottom: 0px;
-}
-
-
 .span_color{
 	color: blue;
 }
@@ -411,7 +405,7 @@ input #h3 {
 }
 
 #search-btn{
-	background-color: #5EA1E5; 
+	/*background-color: #5EA1E5;*/
 	border-color: #5EA1E5;
 	width: 70px;
 	margin-left: 20px;
