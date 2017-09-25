@@ -226,7 +226,7 @@
 
                         <!-- リスト移動で必要なitemのidを -->
                         <a data-remodal-target="modal_edit" class="edit">
-                         <i class="fa fa-handshake-o right edit" value="<?php echo $item_both['id'];?>"></i>
+                         <i class="fa fa-tags right edit" value="<?php echo $item_both['id'];?>"></i>
                         </a>
 
                         <?php if (isset($item_both['condition_azukeire']) || isset($item_both['condition_carry_in'])) { ?>
@@ -275,7 +275,7 @@
 
                         <!-- リスト移動で必要なitemのidを -->
                         <a data-remodal-target="modal_edit" class="edit">
-                         <i class="fa fa-handshake-o right edit" value="<?php echo $item_carry_in['id'];?>"></i>
+                         <i class="fa fa-tags right edit" value="<?php echo $item_carry_in['id'];?>"></i>
                         </a>
 
                       <?php if (isset($item_carry_in['condition_azukeire']) || isset($item_carry_in['condition_carry_in'])) { ?>
@@ -317,7 +317,7 @@
                       </a>
 
                       <a data-remodal-target="modal_edit" class="edit">
-                        <i class="fa fa-handshake-o right edit" value="<?php echo $item_azukeire['id'];?>"></i>
+                        <i class="fa fa-tags right edit" value="<?php echo $item_azukeire['id'];?>"></i>
                       </a>
 
                       <?php if (isset($item_azukeire['condition_azukeire']) || isset($item_azukeire['condition_carry_in'])){ ?>

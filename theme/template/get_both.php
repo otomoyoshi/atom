@@ -69,7 +69,7 @@
 				</a>
 				<!-- アイテム移動ボタン -->
 				<a data-remodal-target="modal_edit" class="edit">
-					<i class="fa fa-handshake-o right edit" value="<?php echo $result['id'];?>"></i>
+					<i class="fa fa-tags right edit" value="<?php echo $result['id'];?>"></i>
 				</a>
 
 				<!-- 条件表示ボタン -->
