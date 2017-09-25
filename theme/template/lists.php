@@ -121,7 +121,7 @@
           </div><!-- div -->
         </div>
         <div class="row">
-          <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12 fix_to_search straight">
+          <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 fix_to_search straight">
             <!-- <hr class="under_line1"> -->
             <!-- <div class="form-inline"> -->
               <input id="searchs" type="text" name = "list_search" class="form-control" placeholder="「リストを追加してね！」" data-intro="ここに入力すると自動でリストが作成されるよ" data-step="3" autofocus>
@@ -188,7 +188,8 @@
 
 
         <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
-          <div class="col-lg-4 " id="box1">
+
+          <div class="col-lg-4 col-md-4" id="box1">
 
             <!-- BOTHの欄を作る -->
             <div class="sub_title box-title">
@@ -245,7 +246,7 @@
             </div>
           </div>
           <!-- 持ち込みの欄を作る -->
-          <div class="col-lg-4" id="box2">
+          <div class="col-lg-4 col-md-4" id="box2">
             <!-- <strong> -->
               <div class="sub_title box-title for_responsive">
                 持ち込み
@@ -292,7 +293,7 @@
             </div>
           </div>
 
-          <div class="col-lg-4" id="box3">
+          <div class="col-lg-4 col-md-4" id="box3">
             <!-- 持ち込みの欄を作る  -->
               <div class="box-title for_responsive">
                 預け入れ
