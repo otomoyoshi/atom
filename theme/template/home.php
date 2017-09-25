@@ -565,7 +565,7 @@ if (!empty($_POST['user_lists_id'])) {
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="alert alert-danger col-lg-8" style="text-align: center;">'<?php echo $_SESSION['home']['home_search_word']; ?>' という検索結果は見つかりませんでした
+                    <div class="alert alert-danger" style="text-align: center;">'<?php echo $_SESSION['home']['home_search_word']; ?>' という検索結果は見つかりませんでした
                     </div>
                   </div>
                 </div>
