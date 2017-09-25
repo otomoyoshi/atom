@@ -74,11 +74,11 @@
 
 				<!-- 条件表示ボタン -->
 				<?php if (isset($result['condition_azukeire']) || isset($result['condition_carry_in'])){ ?>
-				<?php if ($result['condition_azukeire'] != '' || $result['condition_carry_in'] != ''){ ?>
-				  <a>
-				    <i class="fa fa-exclamation-triangle right_position"></i>
-				  </a>
-				<?php } ?>
+					<?php if ($result['condition_azukeire'] != '' || $result['condition_carry_in'] != ''){ ?>
+					  <a data-remodal-target="modal-condition" class="show_condition">
+					    <i class="fa fa-exclamation-triangle right_position con" value="<?php echo $result['id'];?>"></i>
+					  </a>
+					<?php } ?>
 				<?php } ?>
 			</li>
 		</label>
