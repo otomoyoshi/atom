@@ -180,11 +180,13 @@
             <?php
             if (isset($_POST['list_search'])) {
               if (isset($search['baggage_classify'])) {
-                if ($search['baggage_classify'] == '3') { ?>
+                if ($search['baggage_classify'] == '3') { 
+                  if (!isset($vague_searchs)) {?>
+
                 <div class="alert alert-danger text_position">
                   <?php echo '"'.(htmlspecialchars($search['word'])).'"' ?><span class="banned_explanation">は持ち込み・預け入れ共に不可です。</span>
                 </div>
-            <?php }}} ?>
+            <?php }}}} ?>
 
 
         <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
