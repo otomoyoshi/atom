@@ -171,7 +171,7 @@
             <?php
             if (isset($_POST['list_search'])) {
               if (isset($search['baggage_classify'])) {
-                if ($search['baggage_classify'] == '3') { 
+                if ($search['baggage_classify'] == '3') {
                   if (!isset($vague_searchs)) {?>
 
                 <div class="alert alert-danger text_position">

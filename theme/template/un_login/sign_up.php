@@ -130,7 +130,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
 <div id="headerwrap">
   <div class="container">
     <div class="row" id="adjustment">
-      <div class="col-lg-3">
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
          <!-- <div class="row"> -->
             <!-- <br> -->
             <!-- <div class="text-center font_title">新規登録</div> -->
@@ -139,9 +139,9 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
 
         <!-- <div class="row"> -->
           <!-- <img src="../../assets/img/tabinimotsu_v1.png" class="img-responsive text_loc" style="margin: auto; height: 50px; width: 50px;"> -->
-          <img src="../../assets/img/phone_home_v1_fix.png" class="img-responsive" style="margin: auto; height: auto; width: 250px; margin-bottom: 30px;">
+          <img src="../../assets/img/phone_home_v1_fix.png" class="img-responsive" style="height: 430px; width: auto; margin-bottom: 30px; margin-left: 80px;">
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
           <img src="../../assets/img/phone_list_fix.png" class="img-responsive" style="margin: auto; height: auto; width: 250px;">
 
           <!-- <div class="col-lg-12 font_content">
@@ -152,7 +152,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
       </div>
 
   <form method="POST" action="">
-      <div class="col-lg-offset-1 col-lg-4 background_white" id="space">
+      <div class="col-lg-offset-1 col-lg-4 col-md-6 col-sm-12 col-xs-12 background_white" id="space">
 
         <div class="row text_loc">
           <div class="col-lg-12">
@@ -260,7 +260,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
 
        </div>
       </form>
-    </div>         
+    </div>
   </div>
 </div>
 
