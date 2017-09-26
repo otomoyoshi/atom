@@ -16,6 +16,10 @@
 	width: 100%;
 	margin-bottom: 5px;
 }
+.undefined_word{
+	color: black;
+	margin-top: 15px;
+}
 
 
 .remodal_atom {
@@ -68,12 +72,11 @@
 }
 
 .moving_list_direct{
-	margin-bottom: 5px;
+	margin-bottom: 15px;
 }
-
-.undefined_word{
-	color: black;
-	margin-top: 10px;
+.word_title{
+	text-align: center;
+	color: navy;
 }
 
 #headerwrap{
@@ -172,10 +175,6 @@
 
 
 
-.undefined_word{
-	color: black;
-	margin-top: 20px;
-}
 
 #list_img{
 	cursor: pointer;
@@ -281,7 +280,9 @@ input #h3 {
 
 .vargues_position{
 	text-align: center;
-
+	border: solid 1px #aaa;
+	border-radius: 13px;
+	margin-top: 25px;
 }
 
 

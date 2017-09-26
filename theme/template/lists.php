@@ -128,7 +128,7 @@
             <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
               <ul class="list-group" id="list_design">
                 <label class="width list_searchs">
-                  <h3 class="word_titles">検索結果が見つかりました</h3>
+                  <h3 class="word_title">検索結果が見つかりました</h3>
                   <li class="list-group-item list_property">
                     <?php if(isset($vague_searchs)): ?>
                       <?php foreach($vague_searchs as $tss): ?>
@@ -158,6 +158,7 @@
               </div>
             </div>
           </div>
+          <!-- <hr> -->
         <?php } ?>
 
             <?php
