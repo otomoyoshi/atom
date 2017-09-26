@@ -421,6 +421,7 @@ if (!empty($_POST['user_lists_id'])) {
         background-color: #f1f1f1;
         /*color: #fff;*/
       }
+      placeholder-shown: white;
 
     </style>
 
@@ -449,13 +450,13 @@ if (!empty($_POST['user_lists_id'])) {
             <form method="GET" action="">
               <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <!-- <label for="sel1"></label> -->
-                <select class="form-control" data-intro="航空会社をお選びください" data-step="1">
+                <select class="form-control" data-intro="航空会社をお選びください" data-step="1" style="background-color: rgba(0,0,0,0.2); border-color: rgba(0,0,0,0); color: white;">
                   <option>JetStar</option>
                 </select>
               </div>
 
               <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: inline-flex;">
-                <input type="text" id="search" class="form-control" placeholder="例：液体物" name = "home_search_word" maxlength=20 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
+                <input type="text" id="search" class="form-control" placeholder="例：液体" name = "home_search_word" maxlength=20 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus style="background-color: rgba(0,0,0,0); color: white;">
                 <?php if (isset($errors['word'])  == 'blank') {?>
                   <div class="alert alert-danger error_search">検索ワードを入力してください</div>
                 <?php } ?>
