@@ -216,17 +216,16 @@
 
                         <!-- 条件表示 -->
                            <!-- <i class="fa fa-pencil-square-o right con" value="<?php //echo $item_both['id'];?>"></i> -->
-                           <a data-remodal-target="modal-condition" class="show_condition">
-                           </a>
+                           
 
                         <!-- リスト移動で必要なitemのidを -->
                         <a data-remodal-target="modal_edit" class="edit">
-                         <i class="fa fa-handshake-o right edit" value="<?php echo $item_both['id'];?>"></i>
+                         <i class="fa fa-tags right edit" value="<?php echo $item_both['id'];?>"></i>
                         </a>
 
                         <?php if (isset($item_both['condition_azukeire']) || isset($item_both['condition_carry_in'])) { ?>
                           <?php if ($item_both['condition_azukeire'] != '' || $item_both['condition_carry_in'] != '') { ?> 
-                            <a>
+                            <a data-remodal-target="modal-condition" class="show_condition">
                               <!-- 条件マーク表示 -->
                               <i class="fa fa-exclamation-triangle right_position con" value="<?php echo $item_both['id'];?>"></i>
                             </a>
@@ -270,13 +269,13 @@
 
                         <!-- リスト移動で必要なitemのidを -->
                         <a data-remodal-target="modal_edit" class="edit">
-                         <i class="fa fa-handshake-o right edit" value="<?php echo $item_carry_in['id'];?>"></i>
+                         <i class="fa fa-tags right edit" value="<?php echo $item_carry_in['id'];?>"></i>
                         </a>
 
                       <?php if (isset($item_carry_in['condition_azukeire']) || isset($item_carry_in['condition_carry_in'])) { ?>
                         <?php if ($item_carry_in['condition_azukeire'] != '' || $item_carry_in['condition_carry_in'] != ''){ ?> 
                           <a>
-                            <i class="fa fa-exclamation-triangle right_position"></i>
+                            <i class="fa fa-exclamation-triangle right_position con" value="<?php echo $item_carry_in['id'];?>"></i>
                           </a>
                         <?php } ?>
                       <?php } ?>
@@ -312,13 +311,13 @@
                       </a>
 
                       <a data-remodal-target="modal_edit" class="edit">
-                        <i class="fa fa-handshake-o right edit" value="<?php echo $item_azukeire['id'];?>"></i>
+                        <i class="fa fa-tags right edit" value="<?php echo $item_azukeire['id'];?>"></i>
                       </a>
 
                       <?php if (isset($item_azukeire['condition_azukeire']) || isset($item_azukeire['condition_carry_in'])){ ?>
                         <?php if ($item_azukeire['condition_azukeire'] != '' || $item_azukeire['condition_carry_in'] != ''){ ?> 
                           <a>
-                            <i class="fa fa-exclamation-triangle right_position"></i>
+                            <i class="fa fa-exclamation-triangle right_position con" value="<?php echo $item_azukeire['id'];?>"></i>
                           </a>
                         <?php } ?>
                       <?php } ?>
