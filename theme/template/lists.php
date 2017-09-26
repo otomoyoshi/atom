@@ -27,14 +27,14 @@
     // $ini = parse_ini_file("config.ini");
     // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    if (isset($_SESSION['login_user'])){ //ログインしてるとき
-      // echo "login success";
-      require('login_header.php');
+    // if (isset($_SESSION['login_user'])){ //ログインしてるとき
+    //   // echo "login success";
+    //   require('login_header.php');
 
-    } else {// ログインしてないとき
-      // echo "login fail";
-      require('header.php');
-    }
+    // } else {// ログインしてないとき
+    //   // echo "login fail";
+    //   require('header.php');
+    // }
   ?>
 
 <!-- 画像変更popup -->
@@ -123,8 +123,7 @@
           </div>
         </div>
 
-        <?php if(isset($vague_searchs) && !empty($_POST['list_search_btn'])){ ?>
-
+        <?php if(isset($vague_searchs) && !empty($_POST['list_search_btn']) && $_POST['list_search'] != $search['word']){ ?>
           <div class="row">
             <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
               <ul class="list-group" id="list_design">

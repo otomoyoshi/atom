@@ -262,12 +262,14 @@ if (isset($search)) {
      $classify = '機内への持ち込み・預け入れ共に可能です';
      $condition_carry_in = $search['condition_carry_in'];
      $condition_azukeire = $search['condition_azukeire'];
-     if ($condition_carry_in == '') {
+     $per_person = $search['per_person'];
+     $per_container = $search['per_container'];
+     if ($condition_carry_in == '' && $per_container == '' && $per_person == '') {
         $judge_carry_in = '<i class="fa fa-circle-o"></i>';
      } else{
         $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
      }
-     if ($condition_azukeire == '') {
+     if ($condition_azukeire == '' && $per_container == '' && $per_person == '') {
         $judge_azukeire = '<i class="fa fa-circle-o"></i>';
      } else{
         $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
@@ -279,12 +281,14 @@ if (isset($search)) {
     $classify = '機内持ち込みのみ可能です';
     $condition_carry_in = $search['condition_carry_in'];
     $condition_azukeire = $search['condition_azukeire'];
-     if ($condition_carry_in == '') {
+    $per_person = $search['per_person'];
+    $per_container = $search['per_container'];
+     if ($condition_carry_in == '' && $per_container == '' && $per_person == '') {
         $judge_carry_in = '<i class="fa fa-circle-o"></i>';
      } else{
         $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
      }
-     if ($condition_azukeire == '') {
+     if ($condition_azukeire == '' && $per_container == '' && $per_person == '') {
         $judge_azukeire = '<i class="fa fa-close"></i>';
      } else{
         $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
@@ -297,12 +301,14 @@ if (isset($search)) {
     $classify = 'お荷物預け入れのみ可能です';
     $condition_carry_in = $search['condition_carry_in'];
     $condition_azukeire = $search['condition_azukeire'];
-     if ($condition_carry_in == '') {
+    $per_person = $search['per_person'];
+    $per_container = $search['per_container'];
+     if ($condition_carry_in == '' && $per_container == '' && $per_person == '') {
         $judge_carry_in = '<i class="fa fa-close"></i>';
      } else{
         $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
      }
-     if ($condition_azukeire == '') {
+     if ($condition_azukeire == '' && $per_container == '' && $per_person == '') {
         $judge_azukeire = '<i class="fa fa-circle-o"></i>';
      } else{
         $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
