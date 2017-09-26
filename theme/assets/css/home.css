@@ -10,6 +10,12 @@ body {
   /*color: #fff;*/
 }
 
+#setting_head{
+  height: 50px;
+  padding-top: 6px;
+}
+
+
 .pos_adjust{
   padding-left: 0px;
 }
@@ -33,10 +39,6 @@ body {
     height: 7%;
 }
 
-#move_header{
-padding-top: 2px;
-padding-bottom: 0px;
-}
 
 #footer {
   width: 100%;

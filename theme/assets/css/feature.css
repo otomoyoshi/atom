@@ -3,6 +3,12 @@ body {
   padding: 0;
 }
 
+#feature_head {
+  background-color: white;
+  color: #51a8ff;
+  font-weight: bold;
+}
+
 .center-block {
   margin-right: 0px; 
   margin-left: 0px; 

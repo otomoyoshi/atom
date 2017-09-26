@@ -7,6 +7,14 @@
 	/*max-width: 100%;*/
 	/*height: auto;*/
 }
+
+#list_head {
+  background-color: white;
+  color: #51a8ff;
+  font-weight: bold;
+}
+
+
 .list_add_btn{
 	margin-top: 20px;
 }

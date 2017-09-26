@@ -21,16 +21,16 @@ session_start();
   <body>
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
   <?php
-    // // $ini = parse_ini_file("config.ini");
-    // // $is_login = $ini['is_login'];
-    // // $is_login = 0; //ログインしてるときを１とする（仮）
-    // if (isset($_SESSION['login_user'])) { //ログインしてるとき
-    //   // echo "login success";
-    //   require('login_header.php');
-    // } else {// ログインしてないとき
-    //   // echo "login fail";
-    //   require('header.php');
-    // }
+    // $ini = parse_ini_file("config.ini");
+    // $is_login = $ini['is_login'];
+    // $is_login = 0; //ログインしてるときを１とする（仮）
+    if (isset($_SESSION['login_user'])) { //ログインしてるとき
+      // echo "login success";
+      require('login_header.php');
+    } else {// ログインしてないとき
+      // echo "login fail";
+      require('header.php');
+    }
   ?>
   
     <div class='single-item'>
