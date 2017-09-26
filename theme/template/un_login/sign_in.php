@@ -71,11 +71,11 @@ if (!empty($_POST)) {
     // $ini = parse_ini_file("../config.ini");
     // $is_login = $ini['is_login'];
     // $is_login = 0; //ログインしてるときを１とする（仮）
-    if (isset($_SESSION['login_user']['new_user']) && $_SESSION['login_user']['new_user'] != 'yes'){      require('../child_login_header.php');
-    } else {// ログインしてないとき
+    // if (isset($_SESSION['login_user']['new_user']) && $_SESSION['login_user']['new_user'] != 'yes'){      require('../child_login_header.php');
+    // } else {// ログインしてないとき
       // echo "login fail";
       require('../child_header.php');
-    }
+    // }
   ?>
 
     <div id="headerwrap">
@@ -116,7 +116,7 @@ if (!empty($_POST)) {
                   <!-- <label>メールアドレス </label><br> -->
 
                   <?php if(isset($_SESSION['login_user']['new_email']) && !empty($_SESSION['login_user']['new_email'])): ?>
-                    <input type="email"  name="email" placeholder="メールアドレス" maxlength="50" autofocus value="<?php echo $_SESSION['login_user']['new_email']; ?>">
+                    <input type="email" class="form-control"  name="email" placeholder="メールアドレス" maxlength="50" autofocus value="<?php echo $_SESSION['login_user']['new_email']; ?>">
                     <?php $_SESSION['login_user']['new_email'] = ''; ?>
                   <?php else: ?>
                     <input type="email" class="form-control" name="email" placeholder="メールアドレス" maxlength="50" autofocus value="<?php echo $email; ?>">

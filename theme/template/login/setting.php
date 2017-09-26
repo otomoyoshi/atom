@@ -257,7 +257,7 @@ if (!empty($_POST)) {
             <!-- ログアウトボタン -->
             <div style="text-align: right;">
 
-              <a href="../setting_function/logout.php">ログアウト</a>
+              <a href="../setting_function/logout.php" onClick="return confirm('ログアウトします。\nよろしいですか？')";>ログアウト</a>
 
             </div>
           </div>
