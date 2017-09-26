@@ -101,7 +101,7 @@ while(1){
     <div id="headerwrap" style="padding-top: 100px">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
       <!-- 薄い白で囲まれてるメインのディブ -->
-      <div class="col-md-8 col-sm-8 col-xs-10 col-md-offset-2 col-sm-offset-2 col-xs-offset-1 tabinimotsu_main_div" style="margin-bottom: 70px">
+      <div class="col-md-8 col-sm-8 col-xs-10 col-md-offset-2 col-sm-offset-2 col-xs-offset-1 tabinimotsu_main_div" style="margin-bottom: 70px;">
         <div class="container-fluid">
 
         <!-- ユーザーユーザー情報の表示 -->
@@ -170,14 +170,17 @@ while(1){
 
                       <div class="col-xs-8 col-lg-8" style="padding-right: 0px">
                       <?php if(isset($list['name']) && $list['name'] != ''): ?>
-                        <h4 style="text-align: center; padding: 10px 0px 0px 20px; font-size: 20px">
+                        <h4 style="text-align: center; padding: 10px 0px 1px 20px; font-size: 20px">
                         <?php echo $list['name']; 
                         $_SESSION['list_info']['list_name'] = $list['name']; ?></h4>
                       <?php else: ?>
                         <h4 style="text-align: center; padding: 10px 0px 0px 20px">NAME EMPTY</h4>
                       <?php endif; ?>
                         <h5 style="text-align: center; padding: 0px 0px 0px 20px">
-                          <?php echo $list['modified']; ?>
+                          <?php  $divide_str = explode(' ', $list['modified']);
+                            $data = $data = str_replace('-', '/', $divide_str[0]);
+                            echo $data; ?>
+                          <?php //echo $list['modified']; ?>
                         </h5>
                       </div>
                       <div class="col-xs-3 col-mlg-4" style="padding-left: 0px;">
@@ -233,9 +236,10 @@ while(1){
             <!-- <hr color="blue"> -->
           </div>
 
-          <div style="padding-bottom: 6px; text-align: right;">
+          <div style="padding-top: 15px; padding-bottom: 6px; text-align: right;">
             <!-- <h5 style="text-align: right;"><input type="button" name="how_to_use" class="fa fa-info" value="使い方はこちら"></h5> -->
-              <a href="" class="how_to_use">使い方はこちら</a>
+              <a href="" class="how_to_use"><i class="fa fa-question-circle" aria-hidden="true"></i>使い方はこちら
+                </a>
 
           </div>
 
