@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require('../../../developer/dbconnect.php');
 
@@ -69,7 +69,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
 
   }
 
-  if (empty($errors)) {   
+  if (empty($errors)) {
     $sql = 'INSERT INTO `atom_members` SET `account_name`=?,
                                       `email`=?,
                                       `password`=?,
@@ -89,8 +89,6 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
 
  ?>
 
- 
-
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -109,9 +107,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
 
   </head>
   <body>
-    
 
-  
 <br>
 <br>
 <br>
@@ -143,7 +139,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
 
         <div class="row">
           <!-- <img src="../../assets/img/tabinimotsu_v1.png" class="img-responsive text_loc" style="margin: auto; height: 50px; width: 50px;"> -->
-          <img src="../../assets/img/tabinimotsu_v1.png" class="img-responsive text_loc" style="margin: auto; height: 200px; width: 200px;">
+          <img src="../../assets/img/phone_home.png" class="img-responsive text_loc" style="margin: auto; height: auto; width: 200px;">
 
           <!-- <div class="col-lg-12 font_content">
           <br>

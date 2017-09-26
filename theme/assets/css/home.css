@@ -218,9 +218,6 @@ li {
   }
 
 
-
-
-
   #search {
     position: relative;
     width: 80%;
@@ -336,6 +333,10 @@ li {
     width: 80%;
   }
 
+  #catch_copy{
+    font-size:20px;
+  }
+
   #search {
     position: relative;
     width: 80%;
@@ -448,6 +449,10 @@ li {
 
   #sel1 {
     width: 100%;
+  }
+
+  #catch_copy{
+    font-size:20px;
   }
 
   #search {
@@ -566,6 +571,9 @@ li {
     width: 100%;
   }
 
+  #catch_copy{
+    font-size:20px;
+  }
 
   #search {
     position: relative;
@@ -682,6 +690,9 @@ li {
     width: 100%;
   }
 
+  #catch_copy{
+    font-size:16px;
+  }
 
   #search {
     position: relative;
