@@ -35,10 +35,18 @@
 			<?php if(isset($search['condition_carry_in'])) { ?>
 				<span><?php echo $search['condition_carry_in'];?></span>
 			<?php } ?>
+			<p class="per_something">一人当たり</p>
+			<?php if(isset($search['per_person'])) { ?>
+				<span><?php echo $search['per_person'];?></span>
+			<?php } ?>
 			<hr>
 			<h2>お預け条件</h2>
 			<?php if(isset($search['condition_azukeire'])){ ?>
 				<span><?php echo $search['condition_azukeire'];?></span>
+			<?php } ?>
+			<p class="per_something">一容器あたり</p>
+			<?php if(isset($search['per_container'])) { ?>
+				<span><?php echo $search['per_container'];?></span>
 			<?php } ?>
 		</div>
 	<? } ?>

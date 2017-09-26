@@ -14,6 +14,12 @@
   font-weight: bold;
 }
 
+.per_something{
+  margin-bottom: 0px;
+  color: blue;
+  font-weight: bold;
+  font-size: 20px;
+}
 
 .list_add_btn{
 	margin-top: 20px;
