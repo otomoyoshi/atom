@@ -406,7 +406,16 @@ if (!empty($_POST['user_lists_id'])) {
 
     <?php require('load_css.php');?>
     <link rel="stylesheet" type="text/css" href="../assets/css/home.css">
+    <style type="text/css">
+      body {
+        background: url(../assets/img/beach_blur.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: #f1f1f1;
+        /*color: #fff;*/
+      }
 
+    </style>
 
 
   </head>
