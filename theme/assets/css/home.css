@@ -10,11 +10,19 @@ body {
   /*color: #fff;*/
 }
 
+
 #setting_head{
   height: 50px;
   padding-top: 6px;
 }
 
+  #catch_copy{
+    color: white;
+  }
+
+.judge_show_icon{
+  color: navy;
+}
 
 .pos_adjust{
   padding-left: 0px;
@@ -179,6 +187,7 @@ li {
     padding-top: 6px;
     padding-bottom: 0px;
   }
+
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
   .header {
@@ -194,10 +203,6 @@ li {
 
 
 
-  h2 {
-    width: 100%;
-    color:#364958;
-  }
 
 
   #search {
@@ -240,7 +245,7 @@ li {
 
   .word_titles{
     text-align: center;
-    color: black;
+    color: white;
   }
 
   .lists_searchs{
@@ -313,11 +318,6 @@ li {
 
  #sel1 {
     width: 80%;
-  }
-
-  h2 {
-    width: 80%;
-    color: white;
   }
 
   #search {
@@ -434,11 +434,6 @@ li {
     width: 100%;
   }
 
-  h2 {
-    color: yellow;
-    font-size: 17px;
-
-  }
   #search {
     position: relative;
     width: 80%;
@@ -555,10 +550,6 @@ li {
     width: 100%;
   }
 
-  h2 {
-    color: #364958;
-    font-size: 27px;
-  }
 
   #search {
     position: relative;
@@ -675,11 +666,6 @@ li {
     width: 100%;
   }
 
-  h2 {
-    color: red;
-    font-size: 17px;
-
-  }
 
   #search {
     position: relative;
@@ -721,10 +707,6 @@ li {
     display: inline;
   }
 
-  .word_titles{
-    text-align: center;
-    color: black;
-  }
 
   .lists_searchs{
     height: 60%;
@@ -780,7 +762,7 @@ background-color: #FFFFFF;
 }
 
 .user_lists_select{
-  margin: 0px 15px;
+/*  margin: 0px 15px;*/
   /*height: 100%;*/
   padding-top: 5px;
   padding-bottom: 42px;

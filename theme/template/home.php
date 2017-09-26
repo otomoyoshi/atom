@@ -10,7 +10,7 @@ $judge_carry_in = '';
 $no_result = '';
 $per_person = '';
 $per_container = '';
-
+ 
 // カテゴリーの3階層目を押したとき
 if(isset($_GET['tab']) && $_GET['tab']=='tab3'){
 
@@ -72,8 +72,8 @@ if (isset($_GET['home_search_word']) && $_GET['home_search_word'] != '') {
 // =======
 
 // リストへ追加ボタンが押された時
-if (isset($_POST['baggage_classify'])) { 
-  if (!isset($_SESSION['login_user'])) { // ユーザーがログインしていない時
+if (isset($_POST['list_move'])) { 
+  if (!isset($_SESSION['login_user']['id'])) { // ユーザーがログインしていない時
     // 新規登録画面に飛ばす けどまだポップアップなどつけてない
     header('Location: un_login/sign_up.php');
     exit();
@@ -262,12 +262,14 @@ if (isset($search)) {
      $classify = '機内への持ち込み・預け入れ共に可能です';
      $condition_carry_in = $search['condition_carry_in'];
      $condition_azukeire = $search['condition_azukeire'];
-     if ($condition_carry_in == '') {
+     $per_person = $search['per_person'];
+     $per_container = $search['per_container'];
+     if ($condition_carry_in == '' && $per_container == '' && $per_person == '') {
         $judge_carry_in = '<i class="fa fa-circle-o"></i>';
      } else{
         $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
      }
-     if ($condition_azukeire == '') {
+     if ($condition_azukeire == '' && $per_container == '' && $per_person == '') {
         $judge_azukeire = '<i class="fa fa-circle-o"></i>';
      } else{
         $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
@@ -279,12 +281,14 @@ if (isset($search)) {
     $classify = '機内持ち込みのみ可能です';
     $condition_carry_in = $search['condition_carry_in'];
     $condition_azukeire = $search['condition_azukeire'];
-     if ($condition_carry_in == '') {
+    $per_person = $search['per_person'];
+    $per_container = $search['per_container'];
+     if ($condition_carry_in == '' && $per_container == '' && $per_person == '') {
         $judge_carry_in = '<i class="fa fa-circle-o"></i>';
      } else{
         $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
      }
-     if ($condition_azukeire == '') {
+     if ($condition_azukeire == '' && $per_container == '' && $per_person == '') {
         $judge_azukeire = '<i class="fa fa-close"></i>';
      } else{
         $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
@@ -297,12 +301,14 @@ if (isset($search)) {
     $classify = 'お荷物預け入れのみ可能です';
     $condition_carry_in = $search['condition_carry_in'];
     $condition_azukeire = $search['condition_azukeire'];
-     if ($condition_carry_in == '') {
+    $per_person = $search['per_person'];
+    $per_container = $search['per_container'];
+     if ($condition_carry_in == '' && $per_container == '' && $per_person == '') {
         $judge_carry_in = '<i class="fa fa-close"></i>';
      } else{
         $judge_carry_in = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
      }
-     if ($condition_azukeire == '') {
+     if ($condition_azukeire == '' && $per_container == '' && $per_person == '') {
         $judge_azukeire = '<i class="fa fa-circle-o"></i>';
      } else{
         $judge_azukeire = '<i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>';
@@ -407,6 +413,17 @@ if (!empty($_POST['user_lists_id'])) {
     <link rel="stylesheet" type="text/css" href="../assets/css/home.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/home_header.css">
 
+    <style type="text/css">
+      body {
+        background: url(../assets/img/beach_blur.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: #f1f1f1;
+        /*color: #fff;*/
+      }
+
+    </style>
+
   </head>
   <body>
 
@@ -415,7 +432,7 @@ if (!empty($_POST['user_lists_id'])) {
       // $ini = parse_ini_file("config.ini");
       // $is_login = $ini['is_login'];
       // $is_login = 0; //ログインしてるときを１とする（仮）
-      if ($_SESSION['login_user']) { //ログインしてるとき
+      if ($_SESSION['login_user']['id']) { //ログインしてるとき
         // echo "login success";
         require('login_header.php');
       } else {// ログインしてないとき
@@ -678,27 +695,25 @@ if (!empty($_POST['user_lists_id'])) {
                       </p>
                     </li>
                   </label>
+                  <?php if(!isset($_POST['list_move'])): ?>
+                    <form method="POST" action="">
+                      <input type="submit" name="list_move" value="リストへ追加" class ="btn btn_atom home_to_list_btn">
+                    </form>
+                  <?php endif; ?>
                 </ul>
-            </div>
-          </form>
-
-            <form method="POST" action="">
-              <input type="submit" name="list_move" value="リストへ追加" class = "btn btn_atom home_to_list_btn" >
-            </form>
-          <!-- </div> -->
 
           <!-- ユーザーが登録している複数のリストの表示 -->
-          <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
-            <div class="row">
+          <div class="row">
+            <div class = "col-lg-12 col-md-12  col-sm-12 backgrounding">
               <?php if(isset($user_lists)): ?>
-                <label class="width list_searchs" style="padding: 15px;">
+                <label class="width list_searchs">
                   <h3 class="word_titles">追加したいリストを選んでください</h3>
-                  <div class="user_lists_select">
+                  <div class="user_lists_select"  style="margin-bottom: 90px">
                     <form method="POST" action="">
                       <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
                       <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
                       <input type="hidden" name="add_new_list" value="add_new_list">
-                      <input type="submit" class="col-lg-4 col-xs-4 btn btn-default" style="border: 1px solid black; border-bottom: 1px solid black; margin-top: 1px" name="" value="新しいリストに追加する">
+                      <input type="submit" class="col-lg-4 col-xs-4 btn btn-default" style="border: 1px solid black; border-bottom: 1px solid black; margin-top: 2px" name="" value="新しいリストに追加する">
                     </form>
                     <?php if($user_lists != 'no_lists'): ?>
                       <?php foreach($user_lists as $ul): ?>
@@ -706,7 +721,7 @@ if (!empty($_POST['user_lists_id'])) {
                           <input type="hidden" name="word" value="<?php echo $search['word']; ?>">
                           <input type="hidden" name="baggage_classify" value="<?php echo $search['baggage_classify'];?>">
                           <input type="hidden" name="user_lists_id" value="<?php echo $ul['id']; ?>">
-                          <input type="submit" class="col-lg-4 col-xs-4 btn btn_atom" style="border: 2px solid white; border-bottom: 7px solid white;" name="" value="<?php echo $ul['name']; ?>">
+                          <input type="submit" class="col-lg-4 col-xs-4 btn btn_atom" style="border: 2px solid white; border-bottom: 6px solid white; border-radius: 0px;" name="" value="<?php echo $ul['name']; ?>">
                         </form>
                       <?php endforeach; ?>
                     <?php endif; ?>
@@ -715,6 +730,10 @@ if (!empty($_POST['user_lists_id'])) {
               <?php endif; ?>
             </div>
           </div>
+            </div>
+          </form>
+
+          <!-- </div> -->
 
           <?php } ?>
 

@@ -125,8 +125,8 @@
           exit();
 
         }
-        // header('Location : lists.php');
-        // exit();
+        header('Location : lists.php');
+        exit();
 
       } else {
         // echo "アップロードに失敗しました";
@@ -205,7 +205,7 @@
       }else{ // 検索結果が存在しない時
         $no_result = 'no_result';
       }
-
+// echo $_POST['list_search'];
       //①ユーザの検索と一致した場合 ：
       // var_dump($search) .'<br>';
       // var_dump($_POST['list_search']) . '<br>';
@@ -220,6 +220,8 @@
           $search['condition_carry_in']);
           $stmt = $dbh->prepare($sql);
           $stmt ->execute($data);
+          header('Location:lists.php?id='.$_GET['id']);
+          exit();
       }
   }
 
@@ -385,8 +387,8 @@
       $data = array($_GET['id']);
       $stmt = $dbh->prepare($sql);
       $stmt ->execute($data);
-      // header('Location:lists.php');
-      // exit();
+      header('Location:lists.php?id='.$_GET['id']);
+      exit();
       // echo $_GET['id'];
   }
 

@@ -15,7 +15,7 @@ session_start();
     <title>旅にもつ</title>
     <?php require('load_css.php'); ?>
     <link rel="stylesheet" type="text/css" href="../assets/css/feature.css">
-
+ 
   </head>
 
   <body>
@@ -33,48 +33,44 @@ session_start();
     }
   ?>
   
-    <div class='single-item'>
+<!--     <div class='single-item' style="padding-top: 50px;">
       <div>
         <img src="../assets/img/suitcase1 fixed.jpg" class="top_images center-block img-responsive">
       </div>
       <div>
-        <img src="../assets/img/flower1 fixed.jpg" class="top_images center-block img-responsive">
-      </div>
-      <div>
-        <img src="../assets/img/flower2 fixed.jpg" class="top_images center-block img-responsive">
-      </div>
+        <img src="../assets/img/flower1 fixed.jpg" class="center-block img-responsive">
+      </div> -->
+      <!-- <div>
+        <img src="../assets/img/flower2 fixed.jpg" class="center-block img-responsive">
+      </div> -->
 
     </div>
     <div id="headerwrap">
       <div class="container">
         <div class="row">
-          <div class="col-lg-12">
-            <div class='container'>
-<!--               <div class='single-item'>
-                <div>
-                  <img src="../assets/img/suitcase1 fixed.jpg" class="center-block img-responsive">
-                </div>
-                <div>
-                  <img src="../assets/img/flower1 fixed.jpg" class="center-block img-responsive">
-                </div>
-                <div>
-                  <img src="../assets/img/flower2 fixed.jpg" class="center-block img-responsive">
-                </div>
-
+          <div class="col-lg-10 col-lg-offset-1">
+            <div class='single-item'>
+              <div>
+                <img src="../assets/img/suitcase1 fixed.jpg" class="center-block img-responsive">
+              </div>
+              <div>
+                <img src="../assets/img/flower1 fixed.jpg" class="center-block img-responsive">
+              </div>
+              <!-- <div>
+                <img src="../assets/img/flower2 fixed.jpg" class="center-block img-responsive">
               </div> -->
             </div>
           </div>
-
         </div>
       </div>
     </div>
 
 
     <!-- <div id="headerwrap"> -->
-    <div class="container">
+    <div class="container col-lg-10 col-lg-offset-1">
         <!-- <div class="row"> -->
           <!-- <div class="col-lg-12"> -->
-            <div class="row">
+            <div class="row" style="width: 90%; margin-left: 30px;">
 
               <div class="col-lg-6">
                   <img src="../assets/img/beach.jpg" width="500" height="320" class="center-block img-responsive visible-sm visible-md visible-lg img_size">
