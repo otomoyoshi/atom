@@ -5,6 +5,12 @@ body {
   background-size: cover;
 }
 
+#sign_up_head {
+  background-color: white;
+  color: #51a8ff;
+  font-weight: bold;
+}
+
 .text_loc{
 	margin-bottom: 20px;
 }

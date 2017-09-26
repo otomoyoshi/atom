@@ -1,3 +1,6 @@
+<!-- header -->
+<link rel="stylesheet" type="text/css" href="../assets/css/header.css">
+
 <!-- アイコン画像 -->
 <link rel="shortcut icon" href="../assets/img/tabinimotsu_v1.png">
 

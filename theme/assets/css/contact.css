@@ -6,6 +6,12 @@
 /*  box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
 */}
 
+#contact_head {
+  background-color: white;
+  color: #51a8ff;
+  font-weight: bold;
+}
+
 .text_loc{
   margin-bottom: 20px;
 }

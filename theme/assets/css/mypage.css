@@ -5,6 +5,12 @@ label {
     display: block;
 }
 
+#mypage_head {
+  background-color: white;
+  color: #51a8ff;
+  font-weight: bold;
+}
+
 
 .wrimagecard{
 	margin-top: 0;

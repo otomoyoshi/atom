@@ -10,14 +10,19 @@ body {
   /*color: #fff;*/
 }
 
+
+#setting_head{
+  height: 50px;
+  padding-top: 6px;
+}
+
   #catch_copy{
     color: white;
   }
 
-  .judge_show_icon{
-    color: navy;
-  }
-
+.judge_show_icon{
+  color: navy;
+}
 
 .pos_adjust{
   padding-left: 0px;
@@ -43,10 +48,6 @@ body {
     margin-bottom: 40px;
 }
 
-#move_header{
-padding-top: 2px;
-padding-bottom: 0px;
-}
 
 #footer {
   width: 100%;
@@ -131,7 +132,6 @@ padding-bottom: 0px;
 .per_something{
   margin-bottom: 0px;
   color: blue;
-
 }
 
 .font_size {
