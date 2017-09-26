@@ -415,7 +415,7 @@ if (!empty($_POST['user_lists_id'])) {
 
     <style type="text/css">
       body {
-        background: url(../assets/img/beach_blur.jpg);
+        background: url(../assets/img/beach4.jpg);
         background-repeat: no-repeat;
         background-size: cover;
         background-color: #f1f1f1;
