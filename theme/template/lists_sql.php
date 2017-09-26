@@ -159,6 +159,16 @@
                   // $check_confirm = $stmt->fetch(PDO::FETCH_ASSOC);
               }
         }
+      if (!empty($_POST['list_name'])) {
+        $sql = 'UPDATE `atom_lists` SET `members_id` = ?,
+                                        `name` = ?,
+                                      -- `list_image_path` = ,
+                                        `created` = NOW()
+                                  WHERE `id`=?' ;
+        $data = array(($_SESSION['login_user']['id']), $_POST['list_name'], $_GET['id']);
+        $stmt = $dbh->prepare($sql);
+        $stmt ->execute($data);
+    }
   }
 
     //検索ボタンが押された時
