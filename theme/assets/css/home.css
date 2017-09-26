@@ -45,6 +45,7 @@ body {
 .home_to_list_btn{
     width: 100%;
     height: 7%;
+    margin-bottom: 40px;
 }
 
 
@@ -117,6 +118,8 @@ body {
 .result_show_title{
   color: blue;
   margin-bottom: 0px;
+  width: 70%;
+  height: 23px;
 }
 
 .length_line{
@@ -134,6 +137,11 @@ body {
 .font_size {
   font-size: 30px;
 }
+
+  .judge_icon{
+    width: 40px;
+    height: 40px;
+  }
 
 /*.div_border {
   border-bottom: solid 3px #51a8ff;
@@ -178,10 +186,19 @@ li {
   }
   .orange{
     color: orange;
+    margin-bottom: 0px;
   }
   .list_property{
     width: ;
   }
+  .conditions{
+    margin-bottom: 0px;
+  }
+
+  .removing_margin{
+    margin-bottom: 0px;
+  }
+
   #move_header{
     padding-top: 6px;
     padding-bottom: 0px;

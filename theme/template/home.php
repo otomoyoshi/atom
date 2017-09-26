@@ -661,19 +661,19 @@ if (!empty($_POST['user_lists_id'])) {
                         <?php echo $judge_carry_in ?>
                       </p>
                       <p class="conditions">
-                        <p class="result_show_title">条件：</p><br>
-                        <p><?php echo $condition_carry_in; ?></p>
+                        <p class="result_show_title">条件：</p>
+                        <p class="removing_margin"><?php echo $condition_carry_in; ?></p>
                         <?php if (isset($per_person) && $per_person != '') {?>
                           <hr class="length_line">
-                        <p class="per_something">1人当たり：</p><br>
-                        <p><?php echo $per_person.'<br>'; ?></p>
+                        <p class="per_something">1人当たり：</p>
+                        <p><?php echo $per_person; ?></p>
                         <?php } ?>
                         <?php if ( isset($per_container) && $per_container != '') {?>
                           <hr class="length_line">
-                          <p lass="per_something">１容器あたり：</p>
-                          <p><?php echo $per_container.'<br>'; ?></p>
+                          <p class="per_something">１容器あたり：</p>
+                          <p class="removing_margin"><?php echo $per_container; ?></p>
                         <?php } ?>
-                     </p>
+                     </p> 
                     </li>
                     <li class="list-group-item">
                       <h2 class="judge_show_icon">預け入れ</h2>
@@ -681,16 +681,17 @@ if (!empty($_POST['user_lists_id'])) {
                         <?php echo $judge_azukeire ?>
                       </p>
                       <p class="conditions">
-                        <p class="result_show_title">条件：</p><br>
-                        <p><?php echo $condition_azukeire; ?></p>
+                        <p class="result_show_title">条件：</p>
+                        <p class="removing_margin"><?php echo $condition_azukeire; ?></p>
                         <?php if (isset($per_person) && $per_person != '') {?>
                           <hr class="length_line">
-                          <p class="per_something">1人当たり：</p><br>
-                          <?php echo $per_person.'<br>'; ?>
+                          <p class="per_something">1人当たり：</p>
+                          <?php echo $per_person; ?>
                         <?php } ?>
                         <?php if (isset($per_container) && $per_container != '') {?>
                           <hr class="length_line">
-                          <p lass="result_show_title per_something">１容器あたり:</p><?php echo $per_container.'<br>'; ?>
+                          <p class="result_show_title per_something">１容器あたり:</p>
+                          <?php echo $per_container; ?>
                         <?php } ?>
                       </p>
                     </li>
