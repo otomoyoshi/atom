@@ -415,7 +415,7 @@ if (!empty($_POST['user_lists_id'])) {
 
     <style type="text/css">
       body {
-        background: url(../assets/img/beach_blur.jpg);
+        background: url(../assets/img/beach4.jpg);
         background-repeat: no-repeat;
         background-size: cover;
         background-color: #f1f1f1;
@@ -432,7 +432,7 @@ if (!empty($_POST['user_lists_id'])) {
       // $ini = parse_ini_file("config.ini");
       // $is_login = $ini['is_login'];
       // $is_login = 0; //ログインしてるときを１とする（仮）
-      if ($_SESSION['login_user']['id']) { //ログインしてるとき
+      if (isset($_SESSION['login_user']['id'])) { //ログインしてるとき
         // echo "login success";
         require('login_header.php');
       } else {// ログインしてないとき
