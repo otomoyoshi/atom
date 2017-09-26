@@ -11,8 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <title>旅にもつ</title>
+    <?php require('icon.php'); ?>
     <?php require('load_css.php'); ?>
     <link rel="stylesheet" type="text/css" href="../assets/css/lists.css">
 
@@ -37,69 +39,59 @@
 
 <!-- 画像変更popup -->
 <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking:false">
-    <button data-remodal-action="close" class="remodal-close"></button>
-      <h1>画像変更</h1>
-
+  <button data-remodal-action="close" class="remodal-close"></button>
+    <h1>画像変更</h1>
       <form id="my_form">
         <input id="pos_btn" type="file" name="image" data-url="../../list_image_path/" >
         <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
         <Button type="button" data-remodal-action="confirm" class="remodal-confirm" onclick="file_upload()">画像変更</Button>
       </form>
-
 </div>
 
   <!-- 条件表示 pop-->
 <div class="remodal" data-remodal-id="modal-condition" data-remodal-options="hashTracking:false">
  <button data-remodal-action="close" class="remodal-close"></button>
-   <div class="output">
+  <div class="output">
 
   </div>
-
 </div>
 
 <!-- リスト移動popup -->
 <div class="remodal" data-remodal-id="modal_edit" data-remodal-options="hashTracking:false">
-    <button data-remodal-action="close" class="remodal-close"></button>
-      <h1>リスト移動</h1>
-      <p>どのカテゴリーに移動させますか？</p>
+  <button data-remodal-action="close" class="remodal-close"></button>
+    <h1>リスト移動</h1>
+    <p>どのカテゴリーに移動させますか？</p>
 
-      <button id="0" data-remodal-action="confirm" class="remodal_atom item_id"">持ち込み・預け入れ</button>
-      <button id="1" data-remodal-action="confirm" class="remodal_atom item_id"">持ち込み</button>
-      <Button id="2" type="button" data-remodal-action="confirm" class="remodal_atom item_id">預け入れ</Button>
+    <button id="0" data-remodal-action="confirm" class="remodal_atom item_id"">持ち込み・預け入れ</button>
+    <button id="1" data-remodal-action="confirm" class="remodal_atom item_id"">持ち込み</button>
+    <Button id="2" type="button" data-remodal-action="confirm" class="remodal_atom item_id">預け入れ</Button>
 </div>
 
 
- <div id="img">
-    <div id="headerwrap" class="back">
-      <div class="container background-white">
-        <!-- リストの情報画面を書いていく -->
-
-        <div class="row height">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-
-            <?php if (isset($errors['extension'])) { ?>
-              <div class="alert alert-danger">
-                拡張子は、jpg,png,gifの画像を選択ください
-              </div>
-            <?php } ?>
-
+<div id="img">
+  <div id="headerwrap" class="back">
+    <div class="container background-white">
+      <!-- リストの情報画面を書いていく -->
+      <div class="row height">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+          <?php if (isset($errors['extension'])) { ?>
+          <div class="alert alert-danger">
+            拡張子は、jpg,png,gifの画像を選択ください
+          </div>
+          <?php } ?>
             <!-- <div id="output"></div> -->
-            <label>
-
-
-              <a id="list_img" data-remodal-target="modal">
-                <!-- 画像がデータベースに登録されているとき -->
-                <?php if ($is_image['list_image_path'] != NULL) { ?>
-                  <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
-              </a>
+          <label>
+            <a id="list_img" data-remodal-target="modal">
+              <!-- 画像がデータベースに登録されているとき -->
+            <?php if ($is_image['list_image_path'] != NULL) { ?>
+              <img src="../../list_image_path/<?php echo $is_image['list_image_path']?>" class="img-circle" width="150px" alt="画像を読み込んでいます" class="padding_img" data-intro="旅の思い出写真を登録してね" data-step="2"><br>
+            </a>
             <!-- 画像がデータベースに登録されてないとき -->
             <?php } else {?>
 
-              <img id="list_img" data-remodal-target="modal" src="../assets/img/user_circle.png" class="img-circle list_name_location" style="height: 120px; width: 120px">
-
-
-              </a>
-              <?php } ?>
+            <img id="list_img" data-remodal-target="modal" src="../assets/img/user_circle.png" class="img-circle list_name_location" style="height: 120px; width: 120px">
+            </a>
+            <?php } ?>
 
             <!-- </label> -->
           </div><!-- div -->
@@ -180,11 +172,13 @@
             <?php
             if (isset($_POST['list_search'])) {
               if (isset($search['baggage_classify'])) {
-                if ($search['baggage_classify'] == '3') { ?>
+                if ($search['baggage_classify'] == '3') { 
+                  if (!isset($vague_searchs)) {?>
+
                 <div class="alert alert-danger text_position">
                   <?php echo '"'.(htmlspecialchars($search['word'])).'"' ?><span class="banned_explanation">は持ち込み・預け入れ共に不可です。</span>
                 </div>
-            <?php }}} ?>
+            <?php }}}} ?>
 
 
         <div class="list_category margin_top row" data-intro="検索結果が自動でここに入るよ" data-step="4">
@@ -222,17 +216,16 @@
 
                         <!-- 条件表示 -->
                            <!-- <i class="fa fa-pencil-square-o right con" value="<?php //echo $item_both['id'];?>"></i> -->
-                           <a data-remodal-target="modal-condition" class="show_condition">
-                           </a>
+                           
 
                         <!-- リスト移動で必要なitemのidを -->
                         <a data-remodal-target="modal_edit" class="edit">
-                         <i class="fa fa-handshake-o right edit" value="<?php echo $item_both['id'];?>"></i>
+                         <i class="fa fa-tags right edit" value="<?php echo $item_both['id'];?>"></i>
                         </a>
 
                         <?php if (isset($item_both['condition_azukeire']) || isset($item_both['condition_carry_in'])) { ?>
                           <?php if ($item_both['condition_azukeire'] != '' || $item_both['condition_carry_in'] != '') { ?> 
-                            <a>
+                            <a data-remodal-target="modal-condition" class="show_condition">
                               <!-- 条件マーク表示 -->
                               <i class="fa fa-exclamation-triangle right_position con" value="<?php echo $item_both['id'];?>"></i>
                             </a>
@@ -276,13 +269,13 @@
 
                         <!-- リスト移動で必要なitemのidを -->
                         <a data-remodal-target="modal_edit" class="edit">
-                         <i class="fa fa-handshake-o right edit" value="<?php echo $item_carry_in['id'];?>"></i>
+                         <i class="fa fa-tags right edit" value="<?php echo $item_carry_in['id'];?>"></i>
                         </a>
 
                       <?php if (isset($item_carry_in['condition_azukeire']) || isset($item_carry_in['condition_carry_in'])) { ?>
                         <?php if ($item_carry_in['condition_azukeire'] != '' || $item_carry_in['condition_carry_in'] != ''){ ?> 
                           <a>
-                            <i class="fa fa-exclamation-triangle right_position"></i>
+                            <i class="fa fa-exclamation-triangle right_position con" value="<?php echo $item_carry_in['id'];?>"></i>
                           </a>
                         <?php } ?>
                       <?php } ?>
@@ -318,13 +311,13 @@
                       </a>
 
                       <a data-remodal-target="modal_edit" class="edit">
-                        <i class="fa fa-handshake-o right edit" value="<?php echo $item_azukeire['id'];?>"></i>
+                        <i class="fa fa-tags right edit" value="<?php echo $item_azukeire['id'];?>"></i>
                       </a>
 
                       <?php if (isset($item_azukeire['condition_azukeire']) || isset($item_azukeire['condition_carry_in'])){ ?>
                         <?php if ($item_azukeire['condition_azukeire'] != '' || $item_azukeire['condition_carry_in'] != ''){ ?> 
                           <a>
-                            <i class="fa fa-exclamation-triangle right_position"></i>
+                            <i class="fa fa-exclamation-triangle right_position con" value="<?php echo $item_azukeire['id'];?>"></i>
                           </a>
                         <?php } ?>
                       <?php } ?>
@@ -337,17 +330,16 @@
         </div>
         <!-- リストの保存機能たち -->
 
-          <div class="list_contents text-center">
+        <div class="list_contents text-center">
             <div class="keep">
               <input class="btn btn_atom keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの履歴やメールに送信できるよ" data-step="5">
-            </div>  
-
-            </form>
+            </div>
+          </form>
         </div>
-
       </div>
     </div>
   </div>
+
 
   <?php require('footer.php'); ?>
   <?php require('load_js.php'); ?>

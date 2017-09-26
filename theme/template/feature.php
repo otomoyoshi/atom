@@ -15,7 +15,7 @@ session_start();
     <title>旅にもつ</title>
     <?php require('load_css.php'); ?>
     <link rel="stylesheet" type="text/css" href="../assets/css/feature.css">
-
+ 
   </head>
 
   <body>
@@ -35,7 +35,7 @@ session_start();
   
 <!--     <div class='single-item' style="padding-top: 50px;">
       <div>
-        <img src="../assets/img/suitcase1 fixed.jpg" class="center-block img-responsive">
+        <img src="../assets/img/suitcase1 fixed.jpg" class="top_images center-block img-responsive">
       </div>
       <div>
         <img src="../assets/img/flower1 fixed.jpg" class="center-block img-responsive">
