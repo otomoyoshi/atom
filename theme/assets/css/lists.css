@@ -1,12 +1,26 @@
 #img{
-/*	background: url(../img/beach_blur.jpg);
-*/	background-color:#f1f1f1 ;
+	/*background: url(../img/beach_blur.jpg);*/
+	background-color:#f1f1f1 ;
 	background-size: cover;
 	background-repeat: no-repeat;
 	/*width:100%;
 	/*max-width: 100%;*/
 	/*height: auto;*/
 }
+
+#list_head {
+  background-color: white;
+  color: #51a8ff;
+  font-weight: bold;
+}
+
+.per_something{
+  margin-bottom: 0px;
+  color: blue;
+  font-weight: bold;
+  font-size: 20px;
+}
+
 .list_add_btn{
 	margin-top: 20px;
 }
@@ -15,6 +29,10 @@
 	border-top: 2.5px solid #0000B5;
 	width: 100%;
 	margin-bottom: 5px;
+}
+.undefined_word{
+	color: black;
+	margin-top: 15px;
 }
 
 
@@ -68,12 +86,11 @@
 }
 
 .moving_list_direct{
-	margin-bottom: 5px;
+	margin-bottom: 15px;
 }
-
-.undefined_word{
-	color: black;
-	margin-top: 10px;
+.word_title{
+	text-align: center;
+	color: navy;
 }
 
 #headerwrap{
@@ -172,10 +189,6 @@
 
 
 
-.undefined_word{
-	color: black;
-	margin-top: 20px;
-}
 
 #list_img{
 	cursor: pointer;
@@ -281,7 +294,9 @@ input #h3 {
 
 .vargues_position{
 	text-align: center;
-
+	border: solid 1px #aaa;
+	border-radius: 13px;
+	margin-top: 25px;
 }
 
 

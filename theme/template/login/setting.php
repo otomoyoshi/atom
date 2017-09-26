@@ -248,7 +248,7 @@ if (!empty($_POST)) {
             <?php if($_SESSION['login_user']['profile_image_path']): ?>
               <img class="media-object dp img-circle" src="../../../profile_image_path/<?php echo $_SESSION['login_user']['profile_image_path']; ?>" style="width: 80px;height:80px;">
             <?php else: ?>
-                    <img class="media-object dp img-circle" src="../../assets/img/insert_image.png" style="width: 80px;height:80px;">
+                    <img class="media-object dp img-circle" src="../../assets/img/user_circle.png" style="width: 80px;height:80px;">
             <?php endif; ?>
               <input type="file" name="profile_image">
             <?php if(isset($errors['profile_image']) && $errors['profile_image'] == 'type'): ?>
@@ -257,7 +257,7 @@ if (!empty($_POST)) {
             <!-- ログアウトボタン -->
             <div style="text-align: right;">
 
-              <a href="../setting_function/logout.php">ログアウト</a>
+              <a href="../setting_function/logout.php" onClick="return confirm('ログアウトします。\nよろしいですか？')";>ログアウト</a>
 
             </div>
           </div>

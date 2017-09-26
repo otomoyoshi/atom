@@ -15,63 +15,59 @@ session_start();
     <title>旅にもつ</title>
     <?php require('load_css.php'); ?>
     <link rel="stylesheet" type="text/css" href="../assets/css/feature.css">
-
+ 
   </head>
 
   <body>
   <!-- ログインをしてるときとそうでないときで読み込むヘッダを変える -->
   <?php
-    // // $ini = parse_ini_file("config.ini");
-    // // $is_login = $ini['is_login'];
-    // // $is_login = 0; //ログインしてるときを１とする（仮）
-    // if (isset($_SESSION['login_user'])) { //ログインしてるとき
-    //   // echo "login success";
-    //   require('login_header.php');
-    // } else {// ログインしてないとき
-    //   // echo "login fail";
-    //   require('header.php');
-    // }
+    // $ini = parse_ini_file("config.ini");
+    // $is_login = $ini['is_login'];
+    // $is_login = 0; //ログインしてるときを１とする（仮）
+    if (isset($_SESSION['login_user'])) { //ログインしてるとき
+      // echo "login success";
+      require('login_header.php');
+    } else {// ログインしてないとき
+      // echo "login fail";
+      require('header.php');
+    }
   ?>
   
-    <div class='single-item'>
+<!--     <div class='single-item' style="padding-top: 50px;">
       <div>
         <img src="../assets/img/suitcase1 fixed.jpg" class="top_images center-block img-responsive">
       </div>
       <div>
-        <img src="../assets/img/flower1 fixed.jpg" class="top_images center-block img-responsive">
-      </div>
-      <div>
-        <img src="../assets/img/flower2 fixed.jpg" class="top_images center-block img-responsive">
-      </div>
+        <img src="../assets/img/flower1 fixed.jpg" class="center-block img-responsive">
+      </div> -->
+      <!-- <div>
+        <img src="../assets/img/flower2 fixed.jpg" class="center-block img-responsive">
+      </div> -->
 
     </div>
     <div id="headerwrap">
       <div class="container">
         <div class="row">
-          <div class="col-lg-12">
-            <div class='container'>
-<!--               <div class='single-item'>
-                <div>
-                  <img src="../assets/img/suitcase1 fixed.jpg" class="center-block img-responsive">
-                </div>
-                <div>
-                  <img src="../assets/img/flower1 fixed.jpg" class="center-block img-responsive">
-                </div>
-                <div>
-                  <img src="../assets/img/flower2 fixed.jpg" class="center-block img-responsive">
-                </div>
-
-              </div> -->
+          <div class="col-lg-10 col-lg-offset-1">
+            <div class='single-item'>
+              <div>
+                <img src="../assets/img/suitcase1 fixed.jpg" class="center-block img-responsive">
+              </div>
+              <div>
+                <img src="../assets/img/flower1 fixed.jpg" class="center-block img-responsive">
+              </div>
+              <div>
+                <img src="../assets/img/kouyou1 fixed.png" class="center-block img-responsive">
+              </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
 
 
     <!-- <div id="headerwrap"> -->
-    <div class="container">
+    <div class="container col-lg-10 col-lg-offset-1">
         <!-- <div class="row"> -->
           <!-- <div class="col-lg-12"> -->
             <div class="row">

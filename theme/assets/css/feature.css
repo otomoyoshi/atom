@@ -1,6 +1,15 @@
 body {
   margin: 0;
   padding: 0;
+  background: url(../img/beach_blur.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#feature_head {
+  background-color: white;
+  color: #51a8ff;
+  font-weight: bold;
 }
 
 .center-block {

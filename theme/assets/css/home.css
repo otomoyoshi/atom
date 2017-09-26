@@ -10,6 +10,20 @@ body {
   /*color: #fff;*/
 }
 
+
+#setting_head{
+  height: 50px;
+  padding-top: 6px;
+}
+
+  #catch_copy{
+    color: white;
+  }
+
+.judge_show_icon{
+  color: navy;
+}
+
 .pos_adjust{
   padding-left: 0px;
 }
@@ -31,12 +45,9 @@ body {
 .home_to_list_btn{
     width: 100%;
     height: 7%;
+    margin-bottom: 40px;
 }
 
-#move_header{
-padding-top: 2px;
-padding-bottom: 0px;
-}
 
 #footer {
   width: 100%;
@@ -107,6 +118,8 @@ padding-bottom: 0px;
 .result_show_title{
   color: blue;
   margin-bottom: 0px;
+  width: 70%;
+  height: 23px;
 }
 
 .length_line{
@@ -119,12 +132,16 @@ padding-bottom: 0px;
 .per_something{
   margin-bottom: 0px;
   color: blue;
-
 }
 
 .font_size {
   font-size: 30px;
 }
+
+  .judge_icon{
+    width: 40px;
+    height: 40px;
+  }
 
 /*.div_border {
   border-bottom: solid 3px #51a8ff;
@@ -169,14 +186,24 @@ li {
   }
   .orange{
     color: orange;
+    margin-bottom: 0px;
   }
   .list_property{
     width: ;
   }
+  .conditions{
+    margin-bottom: 0px;
+  }
+
+  .removing_margin{
+    margin-bottom: 0px;
+  }
+
   #move_header{
     padding-top: 6px;
     padding-bottom: 0px;
   }
+
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
   .header {
@@ -192,10 +219,6 @@ li {
 
 
 
-  h2 {
-    width: 100%;
-    color:#364958;
-  }
 
 
   #search {
@@ -238,7 +261,7 @@ li {
 
   .word_titles{
     text-align: center;
-    color: black;
+    color: white;
   }
 
   .lists_searchs{
@@ -311,11 +334,6 @@ li {
 
  #sel1 {
     width: 80%;
-  }
-
-  h2 {
-    width: 80%;
-    color: white;
   }
 
   #search {
@@ -432,11 +450,6 @@ li {
     width: 100%;
   }
 
-  h2 {
-    color: yellow;
-    font-size: 17px;
-
-  }
   #search {
     position: relative;
     width: 80%;
@@ -553,10 +566,6 @@ li {
     width: 100%;
   }
 
-  h2 {
-    color: #364958;
-    font-size: 27px;
-  }
 
   #search {
     position: relative;
@@ -673,11 +682,6 @@ li {
     width: 100%;
   }
 
-  h2 {
-    color: red;
-    font-size: 17px;
-
-  }
 
   #search {
     position: relative;
@@ -719,10 +723,6 @@ li {
     display: inline;
   }
 
-  .word_titles{
-    text-align: center;
-    color: black;
-  }
 
   .lists_searchs{
     height: 60%;
@@ -778,7 +778,7 @@ background-color: #FFFFFF;
 }
 
 .user_lists_select{
-  margin: 0px 15px;
+/*  margin: 0px 15px;*/
   /*height: 100%;*/
   padding-top: 5px;
   padding-bottom: 42px;
