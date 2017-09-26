@@ -10,7 +10,7 @@ $judge_carry_in = '';
 $no_result = '';
 $per_person = '';
 $per_container = '';
-
+ 
 // カテゴリーの3階層目を押したとき
 if(isset($_GET['tab']) && $_GET['tab']=='tab3'){
 
@@ -403,8 +403,7 @@ if (!empty($_POST['user_lists_id'])) {
     <meta name="description" content="">
     <meta name="author" content="">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <!-- <link rel="shortcut icon" href="../..assets/img/favicon.png"> -->
-    <!-- <link rel="shortcut icon" href="../assets/img/tabinimotsu_v1.png"> -->
+
     <?php require('icon.php'); ?>
     <?php require('header.php'); ?>
 
@@ -412,6 +411,8 @@ if (!empty($_POST['user_lists_id'])) {
 
     <?php require('load_css.php');?>
     <link rel="stylesheet" type="text/css" href="../assets/css/home.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/home_header.css">
+
     <style type="text/css">
       body {
         background: url(../assets/img/beach_blur.jpg);
@@ -422,7 +423,6 @@ if (!empty($_POST['user_lists_id'])) {
       }
 
     </style>
-
 
   </head>
   <body>
@@ -455,14 +455,11 @@ if (!empty($_POST['user_lists_id'])) {
               </div>
 
               <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: inline-flex;">
-
                 <input type="text" id="search" class="form-control" placeholder="例：液体物" name = "home_search_word" maxlength=20 data-intro="調べたい荷物名を入力してください" data-step="2" autofocus>
-
                 <?php if (isset($errors['word'])  == 'blank') {?>
                   <div class="alert alert-danger error_search">検索ワードを入力してください</div>
                 <?php } ?>
-
-              <input id="search-btn1" type="submit" class="btn btn_atom btn-lg" value="検索">
+                <input id="search-btn1" type="submit" class="btn btn_atom btn-lg" value="検索">
               </div>
             </form>
           </div> <!-- /col-lg-6 -->
@@ -736,7 +733,6 @@ if (!empty($_POST['user_lists_id'])) {
             </div>
           </form>
 
-          
           <!-- </div> -->
 
           <?php } ?>
@@ -852,6 +848,15 @@ if (!empty($_POST['user_lists_id'])) {
       $("#tolists").slideToggle();
     });
   </script>
+
+  <!-- header -->
+<!--   <script type="text/javascript">
+    $('.nav').on('click', function () {
+      $(this).addClass('change_color');
+      // $('#tab1').removeClass('div_border');
+
+    });
+  </script> -->
 
   </body>
 </html>
