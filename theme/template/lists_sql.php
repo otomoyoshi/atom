@@ -190,7 +190,7 @@
         $tmp_searchs[] = $rec;
       }
 
-      // var_dump($search);
+      var_dump($search);
       // var_dump($tmp_searchs);
       // echo count($tmp_searchs);
 
@@ -205,7 +205,7 @@
       }else{ // 検索結果が存在しない時
         $no_result = 'no_result';
       }
-
+echo $_POST['list_search'];
       //①ユーザの検索と一致した場合 ：
       // var_dump($search) .'<br>';
       // var_dump($_POST['list_search']) . '<br>';
