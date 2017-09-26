@@ -73,7 +73,7 @@ if (!empty($_POST)) {
     // $is_login = 0; //ログインしてるときを１とする（仮）
     // if (isset($_SESSION['login_user']['new_user']) && $_SESSION['login_user']['new_user'] != 'yes'){      require('../child_login_header.php');
     // } else {// ログインしてないとき
-      // echo "login fail";
+    //   // echo "login fail";
       require('../child_header.php');
     // }
   ?>
@@ -96,16 +96,16 @@ if (!empty($_POST)) {
               <div class="col-lg-12 text-center"><img class="media-object dp img-circle" src="../../assets/img/user_circle.png " style="width: 80px;height:80px;"></div>
             </div>
 
+            <?php if((isset($_SESSION['login_user']['new_user'])) && $_SESSION['login_user']['new_user'] == 'yes'): ?>
+              <div class="row text-center">
+                <h3 style="text-align: center; margin-top:0px; margin-bottom: 20px; color: rgba(10,10,10,0.9);">新規登録ありがとうございます！</h3>
+              </div>
+            <?php $_SESSION['login_user']['new_user'] = ''; ?>
+            <?php endif; ?>
+
           <div class="col-md-12 col-lg-offset-3 col-lg-6 " id="border-space">
            <div class="col-lg-12 text_loc text_left">アカウントをお持ちの方はこちら</div>
             
-          
-            <?php if((isset($_SESSION['login_user']['new_user'])) && $_SESSION['login_user']['new_user'] == 'yes'): ?>
-              <!-- <div class="row text-center">
-                <h3 style="text-align: center; margin-top:0px; margin-bottom: 20px; color: rgba(10,10,10,0.9);">新規登録ありがとうございます！<br>以下からログインをお願いします</h3>
-              </div> -->
-            <?php $_SESSION['login_user']['new_user'] = ''; ?>
-            <?php endif; ?>
 
           
           <form method="POST" action="">

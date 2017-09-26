@@ -3,7 +3,7 @@
 }*/
 
 body {
-  background: url(../img/beach_blur.jpg);
+  /*background: url(../img/beach_blur.jpg);*/
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #f1f1f1;
@@ -238,7 +238,7 @@ li {
 
   .word_titles{
     text-align: center;
-    color: black;
+    color: white;
   }
 
   .lists_searchs{
@@ -719,11 +719,6 @@ li {
     display: inline;
   }
 
-  .word_titles{
-    text-align: center;
-    color: black;
-  }
-
   .lists_searchs{
     height: 60%;
   }
@@ -778,7 +773,7 @@ background-color: #FFFFFF;
 }
 
 .user_lists_select{
-  margin: 0px 15px;
+/*  margin: 0px 15px;*/
   /*height: 100%;*/
   padding-top: 5px;
   padding-bottom: 42px;

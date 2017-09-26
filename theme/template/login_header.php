@@ -3,10 +3,10 @@
 require('../../developer/dbconnect.php');
 
   //ログインチェック
-  if (!isset($_SESSION['login_user']['id'])) {
-      header('Location: un_login/sign_in.php');
-      exit();
-  }
+  // if (!isset($_SESSION['login_user']['id'])) {
+  //     header('Location: un_login/sign_in.php');
+  //     exit();
+  // }
   // ユーザID表示
   // echo "ユーザ： " . $_SESSION['login_user']['id'] .'<br>';
 
