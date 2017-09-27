@@ -70,7 +70,7 @@ session_start();
     <div class="container col-lg-10 col-lg-offset-1">
         <!-- <div class="row"> -->
           <!-- <div class="col-lg-12"> -->
-            <div class="row">
+<!--             <div class="row">
 
               <div class="col-lg-6">
                   <img src="../assets/img/beach.jpg" width="500" height="320" class="center-block img-responsive visible-sm visible-md visible-lg img_size">
@@ -97,7 +97,7 @@ session_start();
 
               </div>
 
-            </div>
+            </div> -->
 
 
             <div class="row">

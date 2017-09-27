@@ -88,7 +88,7 @@
             <!-- 画像がデータベースに登録されてないとき -->
             <?php } else {?>
 
-            <img id="list_img" data-remodal-target="modal" src="../assets/img/user_circle.png" class="img-circle list_name_location" style="height: 120px; width: 120px">
+            <img id="list_img" data-remodal-target="modal" src="../assets/img/insert_image.png" class="img-circle list_name_location" style="height: 120px; width: 120px">
             </a>
             <?php } ?>
 
