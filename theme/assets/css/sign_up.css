@@ -58,6 +58,8 @@ height: 100%;
 	height: 300px;
 	width: 450px;
 }
+
+
 @media (min-width: 1200px) {
 
 	div#space {
@@ -67,28 +69,99 @@ height: 100%;
 	    height: 100%;
 	}
 
+	.img_adj_slant {
+		height: 430px;
+		width: auto;
+		margin-bottom: 30px;
+		margin-left: 80px;
+	}
+
+	.img_adj_front {
+		margin: auto;
+		height: auto;
+		width: 250px;
+	}
+
+
+}
+
+@media (min-width: 1001px) and (max-width: 1199px) {
+
+	div#space {
+	    padding: 3%;
+	    /*margin: 5%;*/
+	    /*width: 100%;*/
+	    height: 100%;
+	}
+
+	.img_adj_slant {
+		height: 430px;
+		width: auto;
+	}
+
+	.img_adj_front {
+		margin-top: 70px;
+		height: auto;
+		width: 250px;
+	}
 }
 
 /* Landscape tablets and medium desktops */
-@media (min-width: 768px) and (max-width: 1199px) {
+@media (min-width: 768px) and (max-width: 1000px) {
 	div#space {
-    	padding: 3%;
-    	/*margin: 5%;*/
-    	/*width: 100%;*/
-  	}
+	    padding: 3%;
+	    /*margin: 5%;*/
+	    /*width: 100%;*/
+	    height: 100%;
+	}
+
+	.img_adj_slant {
+		height: 430px;
+		width: auto;
+		margin-left: 100px;
+	}
+
+	.img_adj_front {
+		margin: auto;
+		height: auto;
+		width: 250px;
+		margin-right: 250px;
+
+	}
 
 }
 
 @media (max-width: 767px){
 	div#space {
-    	padding: 3%;
-    	margin: 3%;
-    	/*height: 100%;*/
-    	/*width: 100%;*/
-  	}
+	    padding: 3%;
+	    /*margin: 5%;*/
+	    /*width: 100%;*/
+	    height: 100%;
+	}
+
+  	.img_adj_slant {
+		height: 430px;
+		width: auto;
+		margin-bottom: 30px;
+		margin-left: 80px;
+	}
+
+	.img_adj_front {
+		margin: auto;
+		height: auto;
+		width: 200px;
+		margin-bottom: 30px;
+	}
+
+	#headerwrap{
+		min-height :0px ;
+		padding-top:0px ;
+		padding-bottom: 50px;
+	}
 }
 
 .form-control {
 	border:0.5px solid #cccccc;
 	border-radius:7px;
 }
+

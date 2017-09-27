@@ -88,7 +88,7 @@
             <!-- 画像がデータベースに登録されてないとき -->
             <?php } else {?>
 
-            <img id="list_img" data-remodal-target="modal" src="../assets/img/user_circle.png" class="img-circle list_name_location" style="height: 120px; width: 120px">
+            <img id="list_img" data-remodal-target="modal" src="../assets/img/insert_image.png" class="img-circle list_name_location" style="height: 120px; width: 120px">
             </a>
             <?php } ?>
 
@@ -98,17 +98,10 @@
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <form action="" method="POST" class="div_border">
 
-            <?php if($is_image['name'] != ''): ?>
               <!-- リスト名が登録されている場合、そのリスト名を表示する -->
               <input type="text" name="list_name" placeholder="新しいリスト" class="form-control erase_input_border" 
               data-intro="リスト名を入力してね" data-step="1" value="<?php echo $is_image['name']; ?>">
 
-            <?php else: ?>
-              <!-- リスト名が登録されていない場合、自動的にリスト名がvalueに入る -->
-              <input type="text" name="list_name" placeholder="新しいリスト" class="form-control list_name_location erase_input_border" 
-              data-intro="リスト名を入力してね" data-step="1" value="リスト  <?php echo $list_amount; ?>">
-
-            <?php endif; ?>
           </div><!-- div -->
         </div>
         <div class="row">
@@ -171,7 +164,7 @@
             <?php
             if (isset($_POST['list_search'])) {
               if (isset($search['baggage_classify'])) {
-                if ($search['baggage_classify'] == '3') { 
+                if ($search['baggage_classify'] == '3') {
                   if (!isset($vague_searchs)) {?>
 
                 <div class="alert alert-danger text_position">

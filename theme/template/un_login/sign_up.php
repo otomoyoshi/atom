@@ -130,28 +130,30 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
 <div id="headerwrap">
   <div class="container">
     <div class="row" id="adjustment">
-      <div class="col-lg-6">
-         <div class="row">
-            <br>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 visible-sm visible-md visible-lg">
+         <!-- <div class="row"> -->
+            <!-- <br> -->
             <!-- <div class="text-center font_title">新規登録</div> -->
             <!-- <div class="col-lg-12 font_title">旅にもつ</div> -->
-        </div>
+        <!-- </div> -->
 
-        <div class="row">
+        <!-- <div class="row"> -->
           <!-- <img src="../../assets/img/tabinimotsu_v1.png" class="img-responsive text_loc" style="margin: auto; height: 50px; width: 50px;"> -->
-          <img src="../../assets/img/phone_home.png" class="img-responsive text_loc" style="margin: auto; height: auto; width: 200px;">
+          <img src="../../assets/img/phone_home_v1_fix.png" class="img-responsive img_adj_slant">
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <img src="../../assets/img/phone_list_fix.png" class="img-responsive img_adj_front">
 
           <!-- <div class="col-lg-12 font_content">
           <br>
           旅にもつ会員になって、あなたの旅行をもっと便利にもっと快適に
           </div> -->
-        </div>
-
+        <!-- </div> -->
       </div>
 
-  <form method="POST" action="">
-      <div class="col-lg-5 background_white" id="space">
-
+      
+      <div class="col-lg-offset-1 col-lg-4 col-md-6 col-sm-6 col-xs-offset-1 col-xs-10 background_white" id="space">
+        <form method="POST" action="">
         <div class="row text_loc">
           <div class="col-lg-12">
            <!--  <img src="../../assets/img/tabinimotsu_v1.png" class="img-responsive text_loc" style="margin: auto; height: 50px; width: 50px;"> -->
@@ -163,7 +165,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
         </div>
 
         <div class="row text_loc">
-          <div class="col-lg-12">            
+          <div class="col-lg-12">
              <div class="text-center">
 
               <!-- <label><i  aria-hidden="true"></i>アカウント名 </label><br> -->
@@ -193,9 +195,6 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
               <?php elseif (isset($errors['email']) && $errors['email'] == 'duplicate'): ?>
                 <div class="alert alert-danger">入力したメールアドレスは既に登録されています</div>
               <?php endif; ?>
-              
-
-
 
             </div>
           </div>
@@ -261,7 +260,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['acco
 
        </div>
       </form>
-    </div>         
+    </div>
   </div>
 </div>
 
