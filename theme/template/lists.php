@@ -351,7 +351,7 @@
     var item_id = $(this).attr('value');
     // var edit = $(this).attr('value');
     // var item_id =  $('.item_id').attr('value', edit);
-    alert(item_id);
+    // alert(item_id);
 
     // POSTでアップロード
     $.ajax({
@@ -360,7 +360,7 @@
         data : {'id' : item_id},
     })
     .done(function(data, textStatus, jqXHR){
-        alert(data);
+        // alert(data);
         var imgArea = $('<div/>').append($.parseHTML(data)).find('#condition');
         // alert(imgArea);
         $(".output").html(imgArea);
@@ -368,7 +368,7 @@
         // $(".output").html(imgArea);
     })
     .fail(function(jqXHR, textStatus, errorThrown){
-        alert("fail");
+        // alert("fail");
     });
   });
 </script>
@@ -381,9 +381,9 @@
     var remove_id = '#'+item_id;
     $(remove_id).remove();
 
-    alert(remove_id);
-    alert(category_id);
-    alert(item_id);
+    // alert(remove_id);
+    // alert(category_id);
+    // alert(item_id);
 
     // 移動する先のリストを指定
     switch(category_id){
@@ -397,7 +397,7 @@
         var add_list = '#list_azukeire';
         break;
       default:
-        alert('fault');
+        // alert('fault');
     }
 
  // POSTでアップロード
@@ -407,7 +407,7 @@
         data : {'item_id' : item_id,'category_id' : category_id},
     })
     .done(function(data, textStatus, jqXHR){
-        alert(data);
+        // alert(data);
         var imgArea = $('<div/>').append($.parseHTML(data)).find('#condition');
         $(add_list).append(imgArea);
         // alert(imgArea);
@@ -416,7 +416,7 @@
         // $(".output").html(imgArea);
     })
     .fail(function(jqXHR, textStatus, errorThrown){
-        alert("fail");
+        // alert("fail");
     });
 
   });
@@ -432,7 +432,7 @@
     // alert(isChecked);
     var area_val = $(isChecked).is(':checked');
     // alert(edit);
-    alert(area_val);
+    // alert(area_val);
   });
 
 </script>

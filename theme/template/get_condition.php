@@ -6,13 +6,12 @@
 		echo $_POST['id'];
 	}
 
-	$sql = 'SELECT * FROM `atom_searchs` WHERE `id`= ?';
+	$sql = 'SELECT * FROM `atom_items` WHERE `id`= ?';
+	// $sql = 'SELECT * FROM `atom_searchs` WHERE `id`= ?';
 	$data = array($_POST['id']);
 	$stmt = $dbh->prepare($sql);
 	$stmt ->execute($data);
 	$search = $stmt->fetch(PDO::FETCH_ASSOC); //判定結果を取得
-
-
 
 ?>
 
@@ -35,8 +34,9 @@
 			<?php if(isset($search['condition_carry_in'])) { ?>
 				<span><?php echo $search['condition_carry_in'];?></span>
 			<?php } ?>
-			<p class="per_something">一人当たり</p>
+			
 			<?php if(isset($search['per_person'])) { ?>
+				<p class="per_something">一人当たり</p>
 				<span><?php echo $search['per_person'];?></span>
 			<?php } ?>
 			<hr>
@@ -44,8 +44,9 @@
 			<?php if(isset($search['condition_azukeire'])){ ?>
 				<span><?php echo $search['condition_azukeire'];?></span>
 			<?php } ?>
-			<p class="per_something">一容器あたり</p>
+			
 			<?php if(isset($search['per_container'])) { ?>
+				<p class="per_something">一容器あたり</p>
 				<span><?php echo $search['per_container'];?></span>
 			<?php } ?>
 		</div>

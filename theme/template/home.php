@@ -475,7 +475,7 @@ if (!empty($_POST['user_lists_id'])) {
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <div class="alert alert-danger" style="text-align: center;">'<?php echo $_SESSION['home']['home_search_word'] ?>' という検索結果は見つかりませんでした</div>
+                  <div class="alert alert-danger not_match_error" style="text-align: center;">'<?php echo $_SESSION['home']['home_search_word'] ?>' という検索結果は見つかりませんでした</div>
                 </div>
                 </div>
               </div>
@@ -510,7 +510,7 @@ if (!empty($_POST['user_lists_id'])) {
                   <div class="col-lg-12">
                     <?php for($j=0; $j<$cnt_l1; $j++) { ?>
                         <!-- <label> -->
-                      <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab1" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab1_<?php echo $j+1; ?>">
+                      <a href="home.php?level_id=<?php echo $results_l1[$j]['id']; ?>&tab=tab1" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab1_<?php echo $results_l1[$j]['id']; ?>">
                         <div class="all_center background_white">
                         <?php echo $results_l1[$j]['category_l1']; ?>
                         </div>
@@ -531,7 +531,7 @@ if (!empty($_POST['user_lists_id'])) {
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="alert alert-danger" style="text-align: center;">'<?php echo $_SESSION['home']['home_search_word'] ?>' という検索結果は見つかりませんでした
+                    <div class="alert alert-danger not_match_error" style="text-align: center;">'<?php echo $_SESSION['home']['home_search_word'] ?>' という検索結果は見つかりませんでした
                     </div>
                   </div>
                 </div>
@@ -561,7 +561,7 @@ if (!empty($_POST['user_lists_id'])) {
                   <div id='tab-2'>
                     <?php for($j=0; $j<$cnt_l2; $j++) { ?>
                       <!-- <label> -->
-                        <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab2" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab2_<?php echo $j+1; ?>">
+                        <a href="home.php?level_id=<?php echo $results_l2[$j]['id']; ?>&tab=tab2" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab2_<?php echo $results_l2[$j]['id']; ?>">
                           <div class="all_center background_white">
                             <?php echo $results_l2[$j]['category_l2']; ?>
                           </div>
@@ -580,7 +580,7 @@ if (!empty($_POST['user_lists_id'])) {
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="alert alert-danger" style="text-align: center;">'<?php echo $_SESSION['home']['home_search_word']; ?>' という検索結果は見つかりませんでした
+                    <div class="alert alert-danger not_match_error" style="text-align: center;">'<?php echo $_SESSION['home']['home_search_word']; ?>' という検索結果は見つかりませんでした
                     </div>
                   </div>
                 </div>
@@ -609,7 +609,7 @@ if (!empty($_POST['user_lists_id'])) {
                   <div id='tab-3'>
                     <?php for($j=0; $j<$cnt_l3; $j++) { ?>
                       <!-- <label> -->
-                        <a href="home.php?level_id=<?php echo $j+1; ?>&tab=tab3" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab3_<?php echo $j+1; ?>">
+                        <a href="home.php?level_id=<?php echo $results_l3[$j]['id']; ?>&tab=tab3" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center tabs box_bottom" id="tab3_<?php echo $results_l3[$j]['id']; ?>">
                           <div class="all_center background_white">
                             <?php echo $results_l3[$j]['word']; ?>
                           </div>
@@ -768,8 +768,8 @@ if (!empty($_POST['user_lists_id'])) {
         var level = data[0];
         var level_id = data[1];
         
-        alert(level);
-        alert(level_id);
+        // alert(level);
+        // alert(level_id);
 
         if(level == 'tab1') {
           // $.get('home_function/get_home_l2.php',
@@ -836,7 +836,7 @@ if (!empty($_POST['user_lists_id'])) {
           // function changeHtml(result){
           //   $('.output').text(result);
           // }
-          alert("3階層目");
+          // alert("3階層目");
         }
 
       });
