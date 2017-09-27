@@ -32,7 +32,6 @@ session_start();
       require('header.php');
     }
   ?>
-  
 <!--     <div class='single-item' style="padding-top: 50px;">
       <div>
         <img src="../assets/img/suitcase1 fixed.jpg" class="top_images center-block img-responsive">
@@ -89,14 +88,9 @@ session_start();
                 <div class="row">
 
                   <div class="col-lg-12 font_cotent" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)" > 本サービスでは検索機能と持ち物リスト作成機能を用いて、空港を利用し旅行の前の荷造りにかかる時間や労力を減らして、”旅行をより楽しく、快適なもの”にすることができます。
-
-                  </div>                  
-
-
-                </div> 
-
+                  </div>
+                </div>
               </div>
-
             </div> -->
 
 
@@ -114,7 +108,7 @@ session_start();
                 <div class="row">
                   <div class="col-lg-12" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1)">  
                     航空会社を選択し、検索窓に持っていきたい持ちものを入力して検索するだけで、持ち物が機内持ち込み可能か、お預け入れのみ可能かの判断と持ち込み条件を一目で確認することができます。さらに、このページから検索した持ち物を持ち物リストへ直接追加することができます。この機能により、自分だけの持ち物リストが自動で作成されます。
-                  </div>                  
+                  </div>
                 </div> 
 
                 <!--   <div class="col-lg-6">
@@ -124,7 +118,9 @@ session_start();
 
               </div>
               <div class="col-lg-6">
-                <img src="../assets/img/beach.jpg" width="500" height="320" class="center-block img-responsive visible-sm visible-md visible-lg img_size">
+<!--                               <img src="../assets/img/beach4.jpg" width="500" height="320" class="center-block img-responsive visible-sm visible-md visible-lg img_size"> -->
+                <!-- スマホ画像投入 -->
+                <img src="../assets/img/phone_home_v1_fix_v2.png" style="height: 300px; width: auto; margin: auto;" class="center-block img-responsive visible-sm visible-md visible-lg img_size">
               </div>
 
             </div>
@@ -132,7 +128,9 @@ session_start();
             <div class="row">
 
               <div class="col-lg-6">
-                <img src="../assets/img/beach.jpg" width="500" height="320" class="center-block img-responsive visible-sm visible-md visible-lg img_size">
+<!--                 <img src="../assets/img/beach.jpg" width="500" height="320" class="center-block img-responsive visible-sm visible-md visible-lg img_size"> -->
+                <!-- スマホ画像投入 -->
+                <img src="../assets/img/phone_list_fix.png" style="height: 300px; width: auto; margin: auto;" class="center-block img-responsive visible-sm visible-md visible-lg img_size">
               </div>
 
               <div class="col-lg-6 text_loc">
