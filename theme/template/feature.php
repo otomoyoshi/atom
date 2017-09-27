@@ -128,7 +128,7 @@ session_start();
 
               </div>
               <div class="col-lg-6">
-                <img src="../assets/img/beach.jpg" width="500" height="320" class="center-block img-responsive visible-sm visible-md visible-lg img_size">
+                <img src="../assets/img/home_search.png" width="500" height="320" class="center-block img-responsive visible-sm visible-md visible-lg img_size">
               </div>
 
             </div>
