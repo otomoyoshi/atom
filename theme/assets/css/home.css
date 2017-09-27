@@ -35,7 +35,9 @@ body {
   padding-bottom: 30px;
 }
 .div_border{
-  border-bottom:3px solid #51a8ff;
+  /*border-bottom:7px solid #51a8ff;*/
+  border-bottom:7px solid #0000B5;
+
 }
 
 .ul_adjust{
@@ -94,7 +96,7 @@ body {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  border: solid 1px #51a8ff;
+  /*border: solid 1px #51a8ff;*/
 }
 
 /*.dev_border{
@@ -244,6 +246,7 @@ li {
     width:60%;
   }
 
+
   .judge_icon{
     float:right;
     font-weight: 300;
@@ -317,7 +320,7 @@ li {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  border: solid 0.5px #cccccc;
+  /*border: solid 0.5px #cccccc;*/
 }
   .top_images{
     height: 550px;
@@ -430,7 +433,7 @@ li {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    border: solid 1px #51a8ff;
+    /*border: solid 1px #51a8ff;*/
   }
   .for_responsive{
     margin-top: 5px;
@@ -551,7 +554,7 @@ li {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  border: solid 1px #51a8ff;
+  /*border: solid 1px #51a8ff;*/
   }
   .responsive_position{
     margin-bottom: 30px;
@@ -673,7 +676,7 @@ li {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  border: solid 1px #51a8ff;
+  /*border: solid 1px #51a8ff;*/
   }
   .responsive_position{
     margin-bottom: 30px;
@@ -767,7 +770,7 @@ li {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    border: solid 1px #51a8ff;
+    /*border: solid 1px #51a8ff;*/
   }
 
   .box_bottom{
@@ -778,6 +781,10 @@ li {
   }
   .top_images{
     height: 200px;
+  }
+
+  .not_match_error {
+    font-size: 12px;
   }
 
 }
