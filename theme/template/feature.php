@@ -48,7 +48,7 @@ session_start();
     <div id="headerwrap">
       <div class="container">
         <div class="row">
-          <div class="col-lg-10 col-lg-offset-1">
+          <div class="col-lg-10 col-lg-offset-1" style="padding-bottom: 20px">
             <div class='single-item'>
               <div>
                 <img src="../assets/img/suitcase1 fixed.jpg" class="center-block img-responsive">
@@ -100,13 +100,13 @@ session_start();
             </div> -->
 
 
-            <div class="row">
+            <div class="row" style="padding-bottom: 30px;">
               <div class="col-lg-6" >
 
                 <div class="row">
                   <div class="col-lg-12" style="position: relative;">
-                    <img src="../assets/img/search_function.png" style="width: 95%; height: auto; position: absolute; top: 40px;">
-                    <h1 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1); padding-top: 46px">検索機能</h1><br>
+                    <img src="../assets/img/search_function.png" style="width: 95%; height: auto; position: absolute; top: 25px;">
+                    <h1 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1); padding-top: 30px">検索機能</h1><br>
 
                   </div>
                 </div>
