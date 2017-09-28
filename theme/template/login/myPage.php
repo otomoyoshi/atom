@@ -170,7 +170,7 @@ while(1){
 
                       <div class="col-xs-8 col-lg-8" style="padding-right: 0px">
                       <?php if(isset($list['name']) && $list['name'] != ''): ?>
-                        <h4 style="text-align: center; padding: 10px 0px 1px 20px; font-size: 20px">
+                        <h4 style="text-align: center; padding: 10px 0px 1px 14px; font-size: 19px">
                         <?php echo $list['name']; 
                         $_SESSION['list_info']['list_name'] = $list['name']; ?></h4>
                       <?php else: ?>
