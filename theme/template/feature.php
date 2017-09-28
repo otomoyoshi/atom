@@ -135,13 +135,14 @@ session_start();
 <!--                 <img src="../assets/img/beach.jpg" width="500" height="320" class="center-block img-responsive visible-sm visible-md visible-lg img_size"> -->
                 <!-- スマホ画像投入 -->
                 <img src="../assets/img/phone_list_fix.png" style="height: 300px; width: auto; margin: auto;" class="center-block img-responsive visible-sm visible-md visible-lg img_size">
+
               </div>
 
               <div class="col-lg-6 text_loc">
 
                 <div class="row">
                   <div class="col-lg-12" style="position: relative;">
-                    <img src="../assets/img/list_of_baggage.png " style="width: 95%; height: auto; position: absolute; top: 40px;">
+                    <img src="../assets/img/list_of_baggage.png " style="width: 95%; height: 100%; position: absolute; top: 40px;">
                     <h1 class="text-center" style="color: #ffffff;text-shadow: 0px 0px 10px rgba(255,255,255,1); padding-top: 46px">持ち物リスト作成</h1><br>
 
                   </div>
