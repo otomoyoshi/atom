@@ -7,7 +7,7 @@ if (!isset($_SESSION['login_user']['id'])) {
     header('Location: ../un_login/sign_in.php');
     exit();
 }
-
+$intro = ""; //introjsのトリガー
 
 if(!empty($_POST)){
   // echo "post" . '<br>';
@@ -238,8 +238,9 @@ while(1){
 
           <div style="padding-top: 15px; padding-bottom: 6px; text-align: right;">
             <!-- <h5 style="text-align: right;"><input type="button" name="how_to_use" class="fa fa-info" value="使い方はこちら"></h5> -->
-              <a href="" class="how_to_use"><i class="fa fa-question-circle" aria-hidden="true"></i>使い方はこちら
-                </a>
+
+              <a href="myPage.php?des=show" class="how_to_use"><i class="fa fa-question-circle" aria-hidden="true"></i>使い方はこちら
+              </a>
 
           </div>
 
@@ -253,11 +254,12 @@ while(1){
   <script src="../../assets/js/lists.js"></script>
 
 
-  <?php if(!isset($lists)){ ?>
-  <script type="text/javascript"></script>
-  introJs().start();
-  </script>
+  <?php if(isset($_GET['des'])){ ?>
+    <script type="text/javascript">
+      introJs().start();
+    </script>
   <?php } ?>
+
   <script type="text/javascript">
     $(function(){
       $('.tooltip').tooltipster();

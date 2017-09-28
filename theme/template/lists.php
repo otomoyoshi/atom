@@ -56,14 +56,14 @@
 </div>
 
 <!-- リスト移動popup -->
-<div class="remodal" data-remodal-id="modal_edit" data-remodal-options="hashTracking:false">
+<div class="remodal row" data-remodal-id="modal_edit" data-remodal-options="hashTracking:false">
   <button data-remodal-action="close" class="remodal-close"></button>
     <h1>リスト移動</h1>
     <p>どのカテゴリーに移動させますか？</p>
 
-    <button id="0" data-remodal-action="confirm" class="remodal_atom item_id"">持ち込み・預け入れ</button>
-    <button id="1" data-remodal-action="confirm" class="remodal_atom item_id"">持ち込み</button>
-    <Button id="2" type="button" data-remodal-action="confirm" class="remodal_atom item_id">預け入れ</Button>
+    <button id="0" data-remodal-action="confirm" class="remodal_atom item_id col-xs-12">持ち込み・預け入れ</button>
+    <button id="1" data-remodal-action="confirm" class="remodal_atom item_id col-xs-12">持ち込み</button>
+    <Button id="2" type="button" data-remodal-action="confirm" class="remodal_atom item_id col-xs-12">預け入れ</Button>
 </div>
 
 
@@ -88,7 +88,7 @@
             <!-- 画像がデータベースに登録されてないとき -->
             <?php } else {?>
 
-            <img id="list_img" data-remodal-target="modal" src="../assets/img/insert_image.png" class="img-circle list_name_location" style="height: 120px; width: 120px">
+            <img id="list_img" data-remodal-target="modal" src="../assets/img/insert_image.png" class="img-circle list_name_location" style="height: 120px; width: 120px" data-intro="旅の思い出写真を登録してね" data-step="1">
             </a>
             <?php } ?>
 
@@ -100,7 +100,7 @@
 
               <!-- リスト名が登録されている場合、そのリスト名を表示する -->
               <input type="text" name="list_name" placeholder="新しいリスト" class="form-control erase_input_border" 
-              data-intro="リスト名を入力してね" data-step="1" value="<?php echo $is_image['name']; ?>">
+              data-intro="リスト名を入力してね" data-step="2" value="<?php echo $is_image['name']; ?>">
 
           </div><!-- div -->
         </div>
@@ -324,7 +324,7 @@
 
         <div class="list_contents text-center">
             <div class="keep">
-              <input class="btn btn_atom keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの履歴やメールに送信できるよ" data-step="5">
+              <input class="btn btn_atom keep_btn" value="マイページへ登録" type="submit" name="keep_btn" data-intro="リストの管理と送信もできるよ" data-step="5">
             </div>
           </form>
         </div>
@@ -355,7 +355,7 @@
 
     // POSTでアップロード
     $.ajax({
-        url : "http://localhost/atom_newdesign_v1/theme/template/get_condition.php",
+        url : "get_condition.php",
         type : "POST",
         data : {'id' : item_id},
     })
@@ -402,7 +402,7 @@
 
  // POSTでアップロード
     $.ajax({
-        url : "http://localhost/atom_newdesign_v1/theme/template/get_both.php",
+        url : "get_both.php",
         type : "POST",
         data : {'item_id' : item_id,'category_id' : category_id},
     })
@@ -460,7 +460,8 @@
 
           // POSTでアップロード
           $.ajax({
-              url  : "http://localhost/atom_newdesign_v1/theme/template/get_image.php",
+              // url  : "http://localhost/atom_newdesign_v1/theme/template/get_image.php",
+              url  : "get_image.php",
               type : "POST",
               data : formdata,
               cache       : false,
