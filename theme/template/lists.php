@@ -61,9 +61,9 @@
     <h1>リスト移動</h1>
     <p>どのカテゴリーに移動させますか？</p>
 
-    <button id="0" data-remodal-action="confirm" class="remodal_atom item_id col-xs-12">持ち込み・預け入れ</button>
-    <button id="1" data-remodal-action="confirm" class="remodal_atom item_id col-xs-12">持ち込み</button>
-    <Button id="2" type="button" data-remodal-action="confirm" class="remodal_atom item_id col-xs-12">預け入れ</Button>
+    <button id="0" data-remodal-action="confirm" class="remodal_atom item_id col-lg-3 col-xs-12 remoda_atom_pad">持ち込み・預け入れ</button>
+    <button id="1" data-remodal-action="confirm" class="remodal_atom item_id col-lg-3 col-xs-12 remoda_atom_pad">持ち込み</button>
+    <Button id="2" type="button" data-remodal-action="confirm" class="remodal_atom item_id col-lg-offset-1 col-lg-3 col-xs-12">預け入れ</Button>
 </div>
 
 

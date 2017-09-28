@@ -419,7 +419,7 @@ li {
     font-size: 13px;
   }
   .show_size{
-    height: 180px;
+    /*height: 180px;*/
     width: 38.5%;
     margin: auto;
     text-align: center; 
@@ -540,7 +540,7 @@ li {
     font-size: 13px;
   }
   .show_size{
-    height: 180px;
+    /*height: 180px;*/
     width: 50%;
     margin: auto;
     text-align: center; 
@@ -662,7 +662,7 @@ li {
     font-size: 13px;
   }
   .show_size{
-    height: 180px;
+    /*height: 180px;*/
     width: 59%;
     margin: auto;
     text-align: center; 
