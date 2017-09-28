@@ -34,7 +34,7 @@ $sql = 'INSERT INTO `atom_lists` SET `members_id`=?,
 								`list_image_path`=?;
 								`created`=NOW()';
 $data = array($copied_list[0]['members_id'],
-			  $copied_list[0]['name'],
+			  $copied_list[0]['name'].'のコピー',
 			  $copied_list[0]['list_image_path']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
